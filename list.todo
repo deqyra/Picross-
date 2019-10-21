@@ -48,10 +48,10 @@ User interaction:
                 -> save grid in state
             ✔ Menu command
             ✔ Command sequence
-            ☐ Load grid command
+            ✔ Load grid command 
                 -> grid file path?
                 -> read grid from file into state
-            ☐ Save grid command
+            ✔ Save grid command
                 -> grid file path?
                 -> save grid in state to file
             ☐ Solver command
