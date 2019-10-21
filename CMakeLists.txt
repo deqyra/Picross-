@@ -24,6 +24,10 @@ add_executable(picross  main.cpp
                         cli/cli_state.cpp                       cli/cli_state.hpp
                         cli/cli_menu.cpp                        cli/cli_menu.hpp
                         cli/commands/create_grid_command.cpp    cli/commands/create_grid_command.hpp
+                        cli/commands/load_grid_command.cpp      cli/commands/load_grid_command.hpp
+                        cli/commands/save_grid_command.cpp      cli/commands/save_grid_command.hpp
+                        cli/commands/modify_grid_command.cpp    cli/commands/modify_grid_command.hpp
+                        cli/commands/solve_grid_command.cpp     cli/commands/solve_grid_command.hpp
                         cli/commands/command_sequence.cpp       cli/commands/command_sequence.hpp
                         cli/commands/menu_command.cpp           cli/commands/menu_command.hpp)
 target_link_libraries(picross PUBLIC tinyxml2)
