@@ -27,7 +27,7 @@ namespace Picross
         state.out() << "Input all row hints, one row at a time, with space-separated values." << std::endl;
         std::vector<std::vector<int>> hHints = handleHintSequenceInput(height, "Row", state);
 
-        state.out() << "Input all row hints, one column at a time, with space-separated values." << std::endl;
+        state.out() << "Input all column hints, one column at a time, with space-separated values." << std::endl;
         std::vector<std::vector<int>> vHints = handleHintSequenceInput(width, "Column", state);
 
         state.grid() = Grid(width, height, hHints, vHints);
