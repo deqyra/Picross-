@@ -1,21 +1,21 @@
-#include "load_grid_command.hpp"
+#include "save_grid_command.hpp"
 #include "../cli_input.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
 namespace Picross
 {
-    LoadGridCommand::LoadGridCommand() :
+    SaveGridCommand::SaveGridCommand() :
         CLICommand()
     {
 
     }
 
-    std::string LoadGridCommand::getTooltip()
+    std::string SaveGridCommand::getTooltip()
     {
         return "Load a grid from disk";
     }
 
-    void LoadGridCommand::run(CLIState& state)
+    void SaveGridCommand::run(CLIState& state)
     {
         std::string path = CLIInput::askForInput<std::string>("Enter file path to save the XML grid to: ", state);
 
