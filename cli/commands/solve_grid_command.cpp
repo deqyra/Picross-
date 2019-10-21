@@ -1,4 +1,4 @@
-#include "solve_command.hpp"
+#include "solve_grid_command.hpp"
 #include "../cli_input.hpp"
 
 namespace Picross
