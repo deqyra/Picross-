@@ -1,0 +1,96 @@
+Picross:
+    Core stuff:
+        ☐ Cell state representation
+            -> Checked, crossed and empty states
+        ☐ Grid state representation
+            -> 1D array of cells
+            -> Horizontal and vertical hints
+            -> Row/column getters
+            -> Various checks
+        ☐ Grid/cell state manipulation
+            -> Change cell states
+            -> Change hints (autocheck valididty)
+        ☐ Hint generation from grid state
+        ☐ Is solvable and is solved checks
+    I/O:
+        ☐ Text grid formatter
+        ☐ XML grid serialization
+        ☐ XML grid deserialization
+    User interaction:
+        Interactive CLI app:
+            ☐ CLI app generic menu
+            ☐ CLI app generic command
+            ☐ CLI app state object
+            CLI app menus:
+                Structures created statically on command chain instanciation
+                ☐ Main menu
+                    -> Create a grid
+                        -> [Create grid command]
+                        -> [Manipulate grid menu]
+                    -> Open a grid from text file
+                        -> [Load grid command]
+                        -> [Manipulate grid menu]
+                    -> Quit
+                ☐ Manipulate grid menu
+                    -> Solve grid
+                        -> [Solver command]
+                    -> Modify grid
+                        -> [Modify grid command]
+                    -> Save grid to file
+                        -> [Save grid command]
+                    -> Close grid
+                        -> [Main menu]
+            CLI app commands:
+                ☐ Create grid command 
+                    -> grid width?
+                    -> grid height?
+                    -> input all hints
+                    -> save grid in state
+                ☐ Menu command
+                ☐ Command sequence
+                ☐ Load grid command
+                    -> grid file path?
+                    -> read grid from file into state
+                ☐ Save grid command
+                    -> grid file path?
+                    -> save grid in state to file
+                ☐ Solver command
+                    -> list solvers
+                    -> which solver?
+                    -> solve grid in state
+                ☐ Modify grid command
+                    Micro shell interpreting subcommands:
+                        ☐ $ check <x> <y>                           # Check cell at coordinates (x;y)
+                        ☐ $ cross <x> <y>                           # Cross cell at coordinates (x;y)
+                        ☐ $ clear <x> <y>                           # Clear cell at coordinates (x;y)
+                        ☐ $ <check|cross|clear> <x0:xn> <y0:xn>     # Check/cross/clear cells in coordinate range [x0 ; xn] × [y0 ; yn]
+                        ☐ $ display [nohints]                       # Display grid with hints by default, without them when nohints is specified
+                        ☐ $ hints <h|v> <n> <values>                # Set horizontal or vertical hints for row or column n to provided values 
+                        ☐ $ hints generate                          # Generate hints from grid state, overwriting current ones
+                        ☐ $ commit                                  # Write changes to current grid
+                        ☐ $ rollback                                # Discard changes and revert state back to last saved grid
+                        ☐ $ exit                                    # Exit
+        Shell toolkit:
+            ☐ Think about it
+    Solving:
+        ☐ Generic solver
+        ☐ Naive solver
+        ☐ Inference engine
+    Cleanup & enhancement:
+        Important:
+            ☐ Use smart pointers in ShellMenu and CommandSequence
+            ☐ Alternatively ensure ShellMenu and CommandSequence destructors don't leak
+            ☐ Also use smart pointers on instanciation of the main menu
+            ☐ Put comments here and there
+            ☐ Custom exceptions
+            ☐ Use std::string::operator+ instead of abusing stringstreams
+            ☐ CMake build
+        Nice:
+            ☐ Generalize bounded input method (used in ShellMenu)
+            ☐ Better usage of std::endl (new line vs. buffer flushing)
+            ☐ Cross-platform handling of new lines (+ fix the hardcoded \n in utility.cpp:multilineConcatenation)
+            ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
+    Project management:
+        ☐ Set up a git repo
+        ☐ Come up with tests
+        ☐ Set up continuous integration because why not
