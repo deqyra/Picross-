@@ -1,17 +1,17 @@
-#ifndef LOAD_GRID_COMMAND_HPP
-#define LOAD_GRID_COMMAND_HPP
+#ifndef SOLVE_COMMAND_HPP
+#define SOLVE_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
 namespace Picross
 {
-    class LoadGridCommand : public CLICommand
+    class SolveCommand : public CLICommand
     {
         public:
-            LoadGridCommand();
+            SolveCommand();
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
     };
 }
 
-#endif//LOAD_GRID_COMMAND_HPP
+#endif//SOLVE_COMMAND_HPP
