@@ -1,6 +1,5 @@
 #include "solve_command.hpp"
 #include "../cli_input.hpp"
-#include "../../io/xml_grid_serializer.hpp"
 
 namespace Picross
 {
