@@ -73,8 +73,8 @@ User interaction:
     Shell toolkit:
         ☐ Think about it
 Solving:
-    ☐ Generic solver
-    ☐ Naive solver
+    ✔ Generic solver
+    ☐ Ierative solver
     ☐ Inference engine
 Cleanup & enhancement:
     Important:
@@ -85,6 +85,7 @@ Cleanup & enhancement:
         ☐ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
         ✔ CMake build
+        ☐ Make sure all polymorphically derived classes have a virtual destructor
     Nice:
         ☐ Generalize bounded input method (used in ShellMenu)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
