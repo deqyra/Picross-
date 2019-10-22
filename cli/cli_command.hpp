@@ -12,8 +12,12 @@ namespace Picross
         public:
             virtual ~CLICommand();
             virtual std::string getTooltip() = 0;
-            virtual void run(CLIState& state) = 0;
+            virtual int run(CLIState& state) = 0;
     };
+
+    // Command exit codes
+    inline static const int COMMAND_SUCCESS = 0;
+    inline static const int COMMAND_FAILURE = -1;
 }
 
 #endif//CLI_COMMAND_HPP

@@ -22,15 +22,28 @@ namespace Picross
 
     std::string SaveGridCommand::getTooltip()
     {
-        return "Load a grid from disk";
+        return "Save grid to disk";
     }
 
-    void SaveGridCommand::run(CLIState& state)
+    int SaveGridCommand::run(CLIState& state)
     {
         std::string path = CLIInput::askForInput<std::string>("Enter file path to save the XML grid to: ", state);
 
         XMLGridSerialzer writer;
-        writer.saveGridToFile(state.grid(), path);
-        state.out() << "Grid successfully saved." << std::endl;
+        try
+        {
+            writer.saveGridToFile(state.grid(), path);
+            state.out() << "Grid successfully saved." << std::endl;
+
+            return COMMAND_SUCCESS;
+        }
+        catch(const std::exception& e)
+        {
+            state.err() << "Exception thrown:" << std::endl;
+            state.err() << e.what() << std::endl;
+            state.out() << "Grid could not saved." << std::endl;
+
+            return COMMAND_FAILURE;
+        }
     }
 }

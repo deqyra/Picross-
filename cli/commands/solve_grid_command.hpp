@@ -19,7 +19,7 @@ namespace Picross
             virtual ~SolveCommand();
 
             virtual std::string getTooltip();
-            virtual void run(CLIState& state);
+            virtual int run(CLIState& state);
 
         private:    // Private methods
             void showSolvers(CLIState& state, std::vector<std::shared_ptr<Solver>>& solvers);

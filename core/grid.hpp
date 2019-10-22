@@ -8,6 +8,8 @@
 
 namespace Picross
 {
+	inline static const int GRID_MAX_SIZE = 20;
+	
 	class Grid
 	{
 		private:	// Attributes

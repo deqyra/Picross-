@@ -7,6 +7,7 @@
 
 #include "cli_command.hpp"
 #include "cli_state.hpp"
+#include "cli_input.hpp"
 
 namespace Picross
 {

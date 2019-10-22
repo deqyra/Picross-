@@ -3,9 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <iostream>
 
-#include "cli_command.hpp"
 #include "cli_state.hpp"
 #include "cli_input.hpp"
 
@@ -30,14 +28,11 @@ namespace Picross
     {
         while (true)
         {
+        	_state.out() << getTooltip() << ":" << std::endl;
             showOptions();
 
-            int input = CLIInput::askForInput<int>("Please make a choice: ", _state);
-            if (input < 0 || input > _commands.size())
-            {
-                _state.err() << "Invalid input, please enter an integer between 0 and " << _commands.size() << "." << std::endl << std::endl; 
-                continue;
-            }
+            int nOptions = _commands.size();
+            int input = CLIInput::askForBoundedInput<int>("Please make a choice: ", _state, 0, nOptions);
 
             if (input == 0)
             {
@@ -47,6 +42,9 @@ namespace Picross
                 }
                 break;
             }
+
+            _state.out() << std::endl;
+            _state.out() << _commands[input - 1]->getTooltip() << ":" << std::endl;
             _commands[input - 1]->run(_state);
         }
     }

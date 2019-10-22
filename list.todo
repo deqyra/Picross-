@@ -90,7 +90,7 @@ Cleanup & enhancement:
         ✔ Inline fully specialized templates
         ✔ Make sure all polymorphically derived classes have a virtual destructor
     Nice:
-        ☐ Generalize bounded input method (used in CLIMenu and SolveCommand)
+        ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
         ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible

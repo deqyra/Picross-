@@ -21,7 +21,7 @@ namespace Picross
             virtual ~CommandSequence();
             
             virtual std::string getTooltip();
-            virtual void run(CLIState& state);
+            virtual int run(CLIState& state);
     };
 }
 

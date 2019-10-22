@@ -24,10 +24,10 @@
         string(CONCAT PROJECT_COPYRIGHT "(C) " ${PROJECT_START_YEAR})
         if(NOT CURRENT_YEAR EQUAL PROJECT_START_YEAR)
             # "(C) 2019-2020"
-            string(CONCAT PROJECT_COPYRIGHT PROJECT_COPYRIGHT "-" ${CURRENT_YEAR})
+            string(CONCAT PROJECT_COPYRIGHT ${PROJECT_COPYRIGHT} "-" ${CURRENT_YEAR})
         endif()
         # "(C) 2019[-2020] deqyra <deqyra@gmail.com>"
-        string(CONCAT PROJECT_COPYRIGHT PROJECT_COPYRIGHT " " ${PROJECT_MAINTAINER_NAME} " <" ${PROJECT_MAINTAINER_EMAIL} ">")
+        string(CONCAT PROJECT_COPYRIGHT ${PROJECT_COPYRIGHT} " " ${PROJECT_MAINTAINER_NAME} " <" ${PROJECT_MAINTAINER_EMAIL} ">")
 
 # Header configuration
 configure_file("cmake_defines.config.hpp" "${SOURCE_FROM_BUILD}/cmake_defines.hpp")

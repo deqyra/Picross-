@@ -1,6 +1,8 @@
 #ifndef CMAKE_DEFINES_HPP
 #define CMAKE_DEFINES_HPP
 
-#define VERSION "0.1"
+#define PROJECT_NAME "PICROSS ENGINE"
+#define PROJECT_VERSION "0.1"
+#define COPYRIGHT_NOTICE "(C) 2019 deqyra <deqyra@gmail.com>"
 
 #endif//CMAKE_DEFINES_HPP

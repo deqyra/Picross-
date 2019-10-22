@@ -46,13 +46,14 @@ void runCLIApp()
 	};
 
 	std::vector<std::shared_ptr<Picross::CLICommand>> mainMenuCommands = {
-		std::make_shared<Picross::CommandSequence>(newGridCommands, "Create a grid"),
-		std::make_shared<Picross::CommandSequence>(openGridCommands, "Open a grid from XML file")
+		std::make_shared<Picross::CommandSequence>(newGridCommands, "Create new grid"),
+		std::make_shared<Picross::CommandSequence>(openGridCommands, "Open grid from XML file")
 	};
 
 	Picross::CLIMenu mainMenu = Picross::CLIMenu(state, mainMenuCommands, "Main menu", "Exit", nullptr);
 
 	state.out() << PROJECT_NAME << " " << PROJECT_VERSION << " " << COPYRIGHT_NOTICE << std::endl << std::endl;
-	state.out() << mainMenu.getTooltip() << ":" << std::endl;
 	mainMenu.show();
+
+	state.out() << "Thank you for using Picross Engine. Bye!" << std::endl;
 }

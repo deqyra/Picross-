@@ -30,7 +30,7 @@ namespace Picross
         return "Solve grid";
     }
 
-    void SolveCommand::run(CLIState& state)
+    int SolveCommand::run(CLIState& state)
     {
         std::vector<std::shared_ptr<Solver>> solvers = instantiateAllSolvers();
 
@@ -39,12 +39,7 @@ namespace Picross
             while (true)
             {
                 showSolvers(state, solvers);
-                int input = CLIInput::askForInput<int>("Which one do you want to use? ", state);
-                if (input < 0 || input > solvers.size())
-                {
-                    state.err() << "Invalid input, please enter an integer between 0 and " << solvers.size() << "." << std::endl << std::endl; 
-                    continue;
-                }
+                int input = CLIInput::askForBoundedInput<int>("Please make a choice: ", state, 0, SOLVER_COUNT);
 
                 if (input == 0)
                 {
@@ -57,8 +52,10 @@ namespace Picross
         }
         else
         {
-            state.out() << "No solvers available!" << std::endl;
+            state.out() << "No solvers available!" << std::endl << std::endl;
         }
+
+        return COMMAND_SUCCESS;
     }
 
     void SolveCommand::showSolvers(CLIState& state, std::vector<std::shared_ptr<Solver>>& solvers)
@@ -69,7 +66,6 @@ namespace Picross
             state.out() << i + 1 << ". " << solvers[i]->name() << std::endl;
         }
         state.out() << "0. Exit" << std::endl;
-        state.out() << std::endl;
     }
 
     void SolveCommand::handleSolving(CLIState& state, std::shared_ptr<Solver> solver)

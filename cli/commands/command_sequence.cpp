@@ -31,11 +31,24 @@ namespace Picross
         return _commandList[0]->getTooltip();
     }
 
-    void CommandSequence::run(CLIState& state)
+    int CommandSequence::run(CLIState& state)
     {
         for (auto it = _commandList.begin(); it != _commandList.end(); it++)
         {
-            (*it)->run(state);
+            int status;
+            try
+            {
+                status = (*it)->run(state);
+            }
+            catch (const std::exception& e)
+            {
+                state.err() << "Exception thrown:" << std::endl;
+                state.err() << e.what() << std::endl;
+                return COMMAND_FAILURE;
+            }
+            if (status != COMMAND_SUCCESS) return status;
         }
+
+        return COMMAND_SUCCESS;
     }
 }

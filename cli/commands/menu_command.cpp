@@ -24,8 +24,9 @@ namespace Picross
         return _innerMenu.getTooltip();
     }
 
-    void MenuCommand::run(CLIState& state)
+    int MenuCommand::run(CLIState& state)
     {
         _innerMenu.show();
+        return COMMAND_SUCCESS;
     }
 }

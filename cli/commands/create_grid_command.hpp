@@ -17,10 +17,11 @@ namespace Picross
             virtual ~CreateGridCommand();
 
             virtual std::string getTooltip();
-            virtual void run(CLIState& state);
+            virtual int run(CLIState& state);
 
         private:    // Private methods
-            std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, std::string numberedPrefixNoun, CLIState& state);
+            std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, int maxHintSpace, std::string numberedPrefixNoun, CLIState& state);
+            bool hintsAreValid(std::vector<int>& hints);
     };
 }
 

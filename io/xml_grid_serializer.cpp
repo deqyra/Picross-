@@ -90,7 +90,7 @@ namespace Picross
         {
             std::vector<int> hints;
 
-            tinyxml2::XMLElement* hintValueElt = findFirstChildOrThrow(hintEntryElt, "hintValue");
+            tinyxml2::XMLElement* hintValueElt = hintEntryElt->FirstChildElement("hintValue");
             while (hintValueElt)
             {
                 hints.push_back(getValueFromText<int>(hintValueElt));
