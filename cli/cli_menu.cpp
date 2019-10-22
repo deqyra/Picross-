@@ -32,12 +32,11 @@ namespace Picross
 
     void CLIMenu::show()
     {
-        int input;        
         while (true)
         {
             showOptions();
 
-            input = CLIInput::waitForInput<int>(_state);
+            int input = CLIInput::waitForInput<int>(_state);
             if (input < 0 || input > _commands.size())
             {
                 _state.err() << "Invalid input, please enter an integer between 0 and " << _commands.size() << "." << std::endl << std::endl; 
@@ -50,7 +49,7 @@ namespace Picross
                 {
                     _exitCommand->run(_state);
                 }
-                return;
+                break;
             }
             _commands[input - 1]->run(_state);
         }

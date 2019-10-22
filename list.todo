@@ -54,10 +54,12 @@ User interaction:
             ✔ Save grid command
                 -> grid file path?
                 -> save grid in state to file
-            ☐ Solver command
+            ✔ Solve command
                 -> list solvers
                 -> which solver?
-                -> solve grid in state
+                -> copy grid and solve copy
+                -> display solved grid
+                -> ask to save in current state
             ☐ Modify grid command
                 Micro shell interpreting subcommands:
                     ☐ $ check <x> <y>                           # Check cell at coordinates (x;y)
@@ -87,7 +89,7 @@ Cleanup & enhancement:
         ✔ CMake build
         ☐ Make sure all polymorphically derived classes have a virtual destructor
     Nice:
-        ☐ Generalize bounded input method (used in ShellMenu)
+        ☐ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
         ☐ Cross-platform handling of new lines (+ fix the hardcoded \n in utility.cpp:multilineConcatenation)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible

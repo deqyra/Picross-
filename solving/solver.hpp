@@ -1,6 +1,8 @@
 #ifndef SOLVER_HPP
 #define SOLVER_HPP
 
+#include <string>
+
 #include "../core/grid.hpp"
 
 namespace Picross
@@ -9,6 +11,7 @@ namespace Picross
     {
         public:
             Solver();
+            virtual std::string name() = 0;
             virtual void solve(Grid& grid) = 0;
     };
 }
