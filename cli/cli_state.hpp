@@ -17,7 +17,7 @@ namespace Picross
             Grid _grid;
 
         public:
-            CLIState(std::istream &in, std::ostream &out, std::ostream &err);
+            CLIState(std::istream& in, std::ostream& out, std::ostream& err);
             ~CLIState();
 
             std::istream& in();

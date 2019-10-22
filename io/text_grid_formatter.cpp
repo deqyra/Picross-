@@ -22,7 +22,7 @@ namespace Picross
 
 	}
 
-	std::string TextGridFormatter::renderGrid(const Grid &grid, bool emptyCrossedCells)
+	std::string TextGridFormatter::renderGrid(const Grid& grid, bool emptyCrossedCells)
 	{
 		int width = grid.getWidth();
 		int height = grid.getHeight();
@@ -45,7 +45,7 @@ namespace Picross
 		return s.str();
 	}
 
-	std::string TextGridFormatter::renderGridWithHints(const Grid &grid, bool emptyCrossedCells)
+	std::string TextGridFormatter::renderGridWithHints(const Grid& grid, bool emptyCrossedCells)
 	{
 		int width = grid.getWidth();
 		int height = grid.getHeight();
@@ -97,7 +97,7 @@ namespace Picross
 		return s.str();
 	}
 
-	std::string TextGridFormatter::renderRow(const std::vector<cell_t> &row, bool emptyCrossedCells)
+	std::string TextGridFormatter::renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells)
 	{
 		std::stringstream s;
 		s << VERTICAL_CHAR;

@@ -15,7 +15,7 @@ namespace Picross
     std::vector<int> stringToHintVector(const std::string& str, char delimiter = ' ');
     std::vector<std::string> tokenizeString(const std::string& str, char delimiter);
     std::string multilineConcatenation(std::string first, std::string second);
-    cell_t mostPresentState(const Grid &grid);
+    cell_t mostPresentState(const Grid& grid);
 
     template<typename T>
     std::string vectorToString(const std::vector<T>& elements, std::string delimiter = " ", std::string opening = "", std::string closing = "")

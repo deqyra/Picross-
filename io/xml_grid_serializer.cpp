@@ -8,7 +8,7 @@ namespace Picross
 
     }
 
-    void XMLGridSerialzer::saveGridToFile(const Grid &grid, std::string path)
+    void XMLGridSerialzer::saveGridToFile(const Grid& grid, std::string path)
     {
         tinyxml2::XMLDocument xmlDoc;
 
@@ -64,7 +64,7 @@ namespace Picross
         return grid;
     }
 
-    void XMLGridSerialzer::loadXMLFile(std::string path, tinyxml2::XMLDocument &doc)
+    void XMLGridSerialzer::loadXMLFile(std::string path, tinyxml2::XMLDocument& doc)
     {
         tinyxml2::XMLError err = doc.LoadFile(path.c_str());
         if (err)
@@ -95,7 +95,7 @@ namespace Picross
         return allHints;
     }
 
-    void XMLGridSerialzer::parseGridContent(tinyxml2::XMLElement* contentElt, Grid &grid)
+    void XMLGridSerialzer::parseGridContent(tinyxml2::XMLElement* contentElt, Grid& grid)
     {
         std::string defaultStateStr = getValueFromAttribute<std::string>(contentElt, "default");
         cell_t defaultState = stringToCellState(defaultStateStr);
@@ -138,7 +138,7 @@ namespace Picross
         throw InvalidXMLGridError("String \"" + value + "\" cannot be bound to a cell_t value.");
     }
 
-    void XMLGridSerialzer::saveXMLFile(tinyxml2::XMLDocument &doc, std::string path)
+    void XMLGridSerialzer::saveXMLFile(tinyxml2::XMLDocument& doc, std::string path)
     {
         tinyxml2::XMLError err = doc.SaveFile(path.c_str());
         if (err)
@@ -147,7 +147,7 @@ namespace Picross
         }
     }
 
-    void XMLGridSerialzer::addXMLHints(tinyxml2::XMLDocument &sourceDoc, tinyxml2::XMLElement* root, const std::vector<std::vector<int>> &hints)
+    void XMLGridSerialzer::addXMLHints(tinyxml2::XMLDocument& sourceDoc, tinyxml2::XMLElement* root, const std::vector<std::vector<int>>& hints)
     {
         for (auto it = hints.begin(); it != hints.end(); it++)
         {
@@ -163,7 +163,7 @@ namespace Picross
         }
     }
 
-    void XMLGridSerialzer::addXMLGridContent(tinyxml2::XMLDocument &sourceDoc, tinyxml2::XMLElement* root, const Grid &grid)
+    void XMLGridSerialzer::addXMLGridContent(tinyxml2::XMLDocument& sourceDoc, tinyxml2::XMLElement* root, const Grid& grid)
     {
         int width = grid.getWidth();
         int height = grid.getHeight();

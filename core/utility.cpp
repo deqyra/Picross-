@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-static void removeCarriageReturnAtEnd(std::string &str)
+static void removeCarriageReturnAtEnd(std::string& str)
 {
     if (str.back() == '\r')
     {
@@ -12,7 +12,7 @@ static void removeCarriageReturnAtEnd(std::string &str)
 
 namespace Picross
 {
-    int minimumSpaceFromHints(const std::vector<int> &hints)
+    int minimumSpaceFromHints(const std::vector<int>& hints)
 	{
 		int space = 0;
 		for (auto it = hints.begin(); it != hints.end(); it++)
@@ -89,7 +89,7 @@ namespace Picross
         return s.str();
 	}
 
-    cell_t mostPresentState(const Grid &grid)
+    cell_t mostPresentState(const Grid& grid)
     {
         int counts[CELL_T_VALUE_COUNT] = {0};
 

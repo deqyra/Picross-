@@ -53,8 +53,8 @@ namespace Picross
 			bool isValidCell(int row, int col, bool throwOnFail = false) const;
 
 			// Useful tip-related checks and functions.
-			bool areValidRowHints(const std::vector<int> &hints, bool throwOnFail = false) const;
-			bool areValidColHints(const std::vector<int> &hints, bool throwOnFail = false) const;
+			bool areValidRowHints(const std::vector<int>& hints, bool throwOnFail = false) const;
+			bool areValidColHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 	};
 }
 

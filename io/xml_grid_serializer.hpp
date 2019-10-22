@@ -15,16 +15,16 @@ namespace Picross
     {
         private:
             // Reading utilities
-            void loadXMLFile(std::string path, tinyxml2::XMLDocument &doc);
+            void loadXMLFile(std::string path, tinyxml2::XMLDocument& doc);
             tinyxml2::XMLElement* findFirstChildOrThrow(tinyxml2::XMLElement* root, std::string name);
             std::vector<std::vector<int>> parseHintEntryCollection(tinyxml2::XMLElement* hintsElt);
-            void parseGridContent(tinyxml2::XMLElement* contentElt, Grid &grid);
+            void parseGridContent(tinyxml2::XMLElement* contentElt, Grid& grid);
             cell_t stringToCellState(std::string value);
 
             // Writing utilities
-            void saveXMLFile(tinyxml2::XMLDocument &doc, std::string path);
-            void addXMLHints(tinyxml2::XMLDocument &sourceDoc, tinyxml2::XMLElement* root, const std::vector<std::vector<int>> &hints);
-            void addXMLGridContent(tinyxml2::XMLDocument &sourceDoc, tinyxml2::XMLElement* root, const Grid &grid);
+            void saveXMLFile(tinyxml2::XMLDocument& doc, std::string path);
+            void addXMLHints(tinyxml2::XMLDocument& sourceDoc, tinyxml2::XMLElement* root, const std::vector<std::vector<int>>& hints);
+            void addXMLGridContent(tinyxml2::XMLDocument& sourceDoc, tinyxml2::XMLElement* root, const Grid& grid);
             std::string cellStateToString(cell_t value);
 
             template<typename T>
@@ -35,7 +35,7 @@ namespace Picross
 
         public:
             XMLGridSerialzer();
-            void saveGridToFile(const Grid &grid, std::string path);
+            void saveGridToFile(const Grid& grid, std::string path);
             Grid loadGridFromFile(std::string path);
     };
 

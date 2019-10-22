@@ -2,7 +2,7 @@
 
 namespace Picross
 {
-    CLIState::CLIState(std::istream &in, std::ostream &out, std::ostream &err) :
+    CLIState::CLIState(std::istream& in, std::ostream& out, std::ostream& err) :
         _in(in.rdbuf()),
         _out(out.rdbuf()),
         _err(err.rdbuf()),

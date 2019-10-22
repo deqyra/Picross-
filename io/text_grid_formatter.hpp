@@ -39,7 +39,7 @@ namespace Picross
 			std::string padBlock(int width, int height, std::string padString);
 
 			std::string renderTopLine(int width);
-			std::string renderRow(const std::vector<cell_t> &row, bool emptyCrossedCells = false);
+			std::string renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells = false);
 			std::string renderInterline(int width);
 			std::string renderBottomLine(int width);
 
@@ -51,8 +51,8 @@ namespace Picross
 			TextGridFormatter(std::string checkedChar, std::string emptyChar, std::string crossedChar);
 
 			// Render
-			std::string renderGrid(const Grid &grid, bool emptyCrossedCells = false);
-			std::string renderGridWithHints(const Grid &grid, bool emptyCrossedCells = false);
+			std::string renderGrid(const Grid& grid, bool emptyCrossedCells = false);
+			std::string renderGridWithHints(const Grid& grid, bool emptyCrossedCells = false);
 			
 			// Cell character customization
 			std::string getCharacter(cell_t cellContent);
