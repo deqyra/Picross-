@@ -23,15 +23,15 @@ User interaction:
         ✔ CLI app state object
         CLI app menus:
             Structures created statically on command chain instanciation
-            ☐ Main menu
+            ✔ Main menu 
                 -> Create a grid
                     -> [Create grid command]
                     -> [Manipulate grid menu]
-                -> Open a grid from text file
+                -> Open a grid from XML file
                     -> [Load grid command]
                     -> [Manipulate grid menu]
                 -> Quit
-            ☐ Manipulate grid menu
+            ✔ Manipulate grid menu
                 -> Solve grid
                     -> [Solver command]
                 -> Modify grid
