@@ -8,9 +8,9 @@ namespace Picross
     typedef unsigned char cell_t;
 
     // Cell possible values.
-    inline static const cell_t CELL_CHECKED = 2;
-    inline static const cell_t CELL_CLEARED = 1;
     inline static const cell_t CELL_CROSSED = 0;
+    inline static const cell_t CELL_CLEARED = 1;
+    inline static const cell_t CELL_CHECKED = 2;
 
     inline static const int CELL_T_VALUE_COUNT = 3;
     inline static const cell_t CELL_T_ORDERED_VALUES[CELL_T_VALUE_COUNT] = {

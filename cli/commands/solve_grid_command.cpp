@@ -52,7 +52,7 @@ namespace Picross
         }
         else
         {
-            state.out() << "No solvers available!" << std::endl << std::endl;
+            state.out() << "No solvers available!" << std::endl;
         }
 
         return COMMAND_SUCCESS;

@@ -52,7 +52,7 @@ void runCLIApp()
 
 	Picross::CLIMenu mainMenu = Picross::CLIMenu(state, mainMenuCommands, "Main menu", "Exit", nullptr);
 
-	state.out() << PROJECT_NAME << " " << PROJECT_VERSION << " " << COPYRIGHT_NOTICE << std::endl << std::endl;
+	state.out() << PROJECT_NAME << " " << PROJECT_VERSION << " " << COPYRIGHT_NOTICE << std::endl;
 	mainMenu.show();
 
 	state.out() << "Thank you for using Picross Engine. Bye!" << std::endl;

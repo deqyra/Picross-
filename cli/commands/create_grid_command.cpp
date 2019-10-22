@@ -41,7 +41,7 @@ namespace Picross
         std::vector<std::vector<int>> vHints = handleHintSequenceInput(width, height, "Column", state);
 
         state.grid() = Grid(width, height, hHints, vHints);
-        state.out() << "Grid creation successful." << std::endl << std::endl;
+        state.out() << "Grid creation successful." << std::endl;
         return COMMAND_SUCCESS;
     }
 

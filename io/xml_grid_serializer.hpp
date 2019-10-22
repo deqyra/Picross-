@@ -75,13 +75,13 @@ namespace Picross
     template<>
     inline std::string XMLGridSerialzer::getValueFromAttribute(tinyxml2::XMLElement* element, std::string attrName)
     {
-        std::string value;
         const char* res = element->Attribute(attrName.c_str());
         if (!res)
         {
             throw InvalidXMLGridError("Missing attribute " + attrName + " in element " + element->Name() + " in provided file.");
         }
 
+        std::string value = std::string(res);
         return value;
     }
 }

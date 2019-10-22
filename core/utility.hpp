@@ -60,7 +60,7 @@ namespace Picross
     {
         auto first = array;
         auto last = array + (sizeof(T) * length);
-        return std::distance(first, std::max_element(first, last));
+        return std::distance(first, std::max_element(first, last)) / sizeof(T);
     }
 }
 

@@ -41,7 +41,7 @@ namespace Picross
         {
             state.err() << "Exception thrown:" << std::endl;
             state.err() << e.what() << std::endl;
-            state.out() << "Grid could not saved." << std::endl;
+            state.out() << "Grid could not be saved." << std::endl;
 
             return COMMAND_FAILURE;
         }

@@ -28,6 +28,7 @@ namespace Picross
     {
         while (true)
         {
+            _state.out() << std::endl;
         	_state.out() << getTooltip() << ":" << std::endl;
             showOptions();
 

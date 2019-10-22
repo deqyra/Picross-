@@ -120,7 +120,7 @@ namespace Picross
             }
         }
 
-        tinyxml2::XMLElement* cellElt = findFirstChildOrThrow(contentElt, "entry");
+        tinyxml2::XMLElement* cellElt = findFirstChildOrThrow(contentElt, "cell");
         while (cellElt)
         {
             int row = getValueFromAttribute<int>(cellElt, "row");
@@ -136,6 +136,8 @@ namespace Picross
             {
                 throw InvalidXMLGridError("Specified cell coordinates exceed grid boundaries in provided file.");
             }
+
+            cellElt = cellElt->NextSiblingElement("cell");
         }
     }
 

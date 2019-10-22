@@ -26,7 +26,7 @@ namespace Picross
 
     int ModifyGridCommand::run(CLIState& state)
     {
-        state.out() << "Coming soon." << std::endl << std::endl;
+        state.out() << "Coming soon." << std::endl;
         return COMMAND_SUCCESS;
     }
 }
