@@ -94,7 +94,7 @@ Cleanup & enhancement:
         ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ☐ Have exhaustive #includes in all files
-        ☐ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
+        ✔ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
         ☐ Ensure class members declaration order and syntactical coherence
 Project management:
     ✔ Set up a git repo

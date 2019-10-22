@@ -254,7 +254,7 @@ namespace Picross
 		return result;
 	}
 
-	bool Grid::areValidRowHints(const std::vector<int> &hints, bool throwOnFail) const
+	bool Grid::areValidRowHints(const std::vector<int>& hints, bool throwOnFail) const
 	{
 		int space = minimumSpaceFromHints(hints);
 		bool result = space <= _width;
@@ -267,7 +267,7 @@ namespace Picross
 		return result;
 	}
 
-	bool Grid::areValidColHints(const std::vector<int> &hints, bool throwOnFail) const
+	bool Grid::areValidColHints(const std::vector<int>& hints, bool throwOnFail) const
 	{
 		int space = minimumSpaceFromHints(hints);
 		bool result = space <= _height;

@@ -20,7 +20,7 @@ namespace Picross
         return "Solve grid";
     }
 
-    void SolveCommand::run(CLIState &state)
+    void SolveCommand::run(CLIState& state)
     {
         std::vector<std::shared_ptr<Solver>> solvers = instantiateAllSolvers();
 
@@ -48,11 +48,6 @@ namespace Picross
         else
         {
             state.out() << "No solvers available!" << std::endl;
-        }
-
-        for (auto it = solvers.begin(); it != solvers.end(); it++)
-        {
-            delete (*it);
         }
     }
 
