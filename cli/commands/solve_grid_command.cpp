@@ -5,6 +5,7 @@
 #include "../../io/text_grid_formatter.hpp"
 
 #include <vector>
+#include <memory>
 
 namespace Picross
 {
@@ -21,7 +22,7 @@ namespace Picross
 
     void SolveCommand::run(CLIState &state)
     {
-        std::vector<Solver*> solvers = instantiateAllSolvers();
+        std::vector<std::shared_ptr<Solver>> solvers = instantiateAllSolvers();
 
         if (solvers.size())
         {
@@ -55,7 +56,7 @@ namespace Picross
         }
     }
 
-    void showSolvers(CLIState &state, std::vector<Solver*> &solvers)
+    void SolveCommand::showSolvers(CLIState& state, std::vector<std::shared_ptr<Solver>>& solvers)
     {
         state.out() << "Available solvers: " << std::endl;
         for (int i = 0; i < solvers.size(); i++)
@@ -66,7 +67,7 @@ namespace Picross
         state.out() << std::endl;
     }
 
-    void handleSolving(CLIState &state, Solver* solver)
+    void SolveCommand::handleSolving(CLIState& state, std::shared_ptr<Solver> solver)
     {
         Grid grid = Grid(state.grid());
 

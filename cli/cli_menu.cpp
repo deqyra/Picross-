@@ -3,7 +3,7 @@
 
 namespace Picross
 {
-    CLIMenu::CLIMenu(CLIState& state, std::vector<CLICommand*> commands, std::string tooltip, std::string exitName, CLICommand* exitCommand) :
+    CLIMenu::CLIMenu(CLIState& state, std::vector<std::shared_ptr<CLICommand>> commands, std::string tooltip, std::string exitName, std::shared_ptr<CLICommand> exitCommand) :
         _state(state),
         _commands(commands),
         _tooltip(tooltip),
@@ -11,18 +11,6 @@ namespace Picross
         _exitCommand(exitCommand)
     {
 
-    }
-
-    CLIMenu::~CLIMenu()
-    {
-        for (auto it = _commands.begin(); it != _commands.end(); it++)
-        {
-            delete (*it);
-            (*it) = nullptr;
-        }
-        
-        delete _exitCommand;
-        _exitCommand = nullptr;
     }
 
     std::string CLIMenu::getTooltip()

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "cli_command.hpp"
 #include "cli_state.hpp"
@@ -12,17 +13,17 @@ namespace Picross
     class CLIMenu
     {
         private:
-            std::vector<CLICommand*> _commands;
+            std::vector<std::shared_ptr<CLICommand>> _commands;
             CLIState& _state;
             std::string _tooltip;
             std::string _exitName;
-            CLICommand* _exitCommand;
+            std::shared_ptr<CLICommand> _exitCommand;
             
             void showOption(int n, std::string tooltip);
             void showOptions();
 
         public:
-            CLIMenu(CLIState& state, std::vector<CLICommand*> commands, std::string tooltip, std::string exitName, CLICommand* exitCommand = nullptr);
+            CLIMenu(CLIState& state, std::vector<std::shared_ptr<CLICommand>> commands, std::string tooltip, std::string exitName, std::shared_ptr<CLICommand> exitCommand = nullptr);
             virtual ~CLIMenu();
             virtual std::string getTooltip();
             virtual void show();

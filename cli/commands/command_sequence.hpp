@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "../cli_command.hpp"
 #include "../cli_state.hpp"
@@ -12,11 +13,11 @@ namespace Picross
     class CommandSequence : public CLICommand
     {
         private:
-            std::vector<CLICommand*> _commandList;
+            std::vector<std::shared_ptr<CLICommand>> _commandList;
             std::string _tooltip;
 
         public:
-            CommandSequence(std::vector<CLICommand*> commandList, std::string tooltip = "");
+            CommandSequence(std::vector<std::shared_ptr<CLICommand>> commandList, std::string tooltip = "");
             ~CommandSequence();
             virtual std::string getTooltip();
             virtual void run(CLIState& state);

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <memory>
 
 #include "cli/cli_menu.hpp"
 #include "cli/cli_command.hpp"
@@ -24,27 +25,27 @@ void runCLIApp()
 {
 	Picross::CLIState state = Picross::CLIState(std::cin, std::cout, std::cerr);
 
-	std::vector<Picross::CLICommand*> manipulateGridMenuCommands = {
-		new Picross::SolveCommand(),
-		new Picross::ModifyGridCommand(),
-		new Picross::SaveGridCommand()
+	std::vector<std::shared_ptr<Picross::CLICommand>> manipulateGridMenuCommands = {
+		std::make_shared<Picross::SolveCommand>(),
+		std::make_shared<Picross::ModifyGridCommand>(),
+		std::make_shared<Picross::SaveGridCommand>()
 	};
 
 	Picross::CLIMenu manipulateGridMenu = Picross::CLIMenu(state, manipulateGridMenuCommands, "Grid manipulation menu", "Close grid", nullptr);
 
-	std::vector<Picross::CLICommand*> newGridCommands =	{
-		new Picross::CreateGridCommand(),
-		new Picross::MenuCommand(manipulateGridMenu)
+	std::vector<std::shared_ptr<Picross::CLICommand>> newGridCommands =	{
+		std::make_shared<Picross::CreateGridCommand>(),
+		std::make_shared<Picross::MenuCommand>(manipulateGridMenu)
 	};
 
-	std::vector<Picross::CLICommand*> openGridCommands = {
-		new Picross::LoadGridCommand(),
-		new Picross::MenuCommand(manipulateGridMenu)
+	std::vector<std::shared_ptr<Picross::CLICommand>> openGridCommands = {
+		std::make_shared<Picross::LoadGridCommand>(),
+		std::make_shared<Picross::MenuCommand>(manipulateGridMenu)
 	};
 
-	std::vector<Picross::CLICommand*> mainMenuCommands = {
-		new Picross::CommandSequence(newGridCommands, "Create a grid"),
-		new Picross::CommandSequence(openGridCommands, "Open a grid from XML file")
+	std::vector<std::shared_ptr<Picross::CLICommand>> mainMenuCommands = {
+		std::make_shared<Picross::CommandSequence>(newGridCommands, "Create a grid"),
+		std::make_shared<Picross::CommandSequence>(openGridCommands, "Open a grid from XML file")
 	};
 
 	Picross::CLIMenu mainMenu = Picross::CLIMenu(state, mainMenuCommands, "Main menu", "Exit", nullptr);

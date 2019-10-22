@@ -80,8 +80,8 @@ Solving:
     ☐ Inference engine
 Cleanup & enhancement:
     Important:
-        ☐ Use smart pointers in ShellMenu and CommandSequence
-        ✔ Alternatively ensure ShellMenu and CommandSequence destructors don't leak
+        ✔ Use smart pointers in CLIMenu, CommandSequence and SolveGridCommand
+        ✔ Alternatively ensure CLIMenu and CommandSequence destructors don't leak
         ☐ Also use smart pointers on instanciation of the main menu
         ☐ Put comments here and there
         ☐ Custom exceptions
@@ -94,6 +94,8 @@ Cleanup & enhancement:
         ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ☐ Have exhaustive #includes in all files
+        ☐ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
+        ☐ Ensure class members declaration order and syntactical coherence
 Project management:
     ✔ Set up a git repo
     ☐ Come up with tests
