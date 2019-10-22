@@ -91,7 +91,7 @@ Cleanup & enhancement:
     Nice:
         ☐ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
-        ☐ Cross-platform handling of new lines (+ fix the hardcoded \n in utility.cpp:multilineConcatenation)
+        ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ☐ Have exhaustive #includes in all files
 Project management:

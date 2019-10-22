@@ -55,12 +55,18 @@ namespace Picross
     
     template<>
     int CLIInput::parseString(std::string input);
+    
+    template<>
+    bool CLIInput::parseString(std::string input);
 
     template <>
     std::string CLIInput::typeName<int>();
 
     template <>
     std::string CLIInput::typeName<std::string>();
+
+    template <>
+    std::string CLIInput::typeName<bool>();
 }
 
 #endif//CLI_INPUT
