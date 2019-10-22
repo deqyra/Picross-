@@ -2,9 +2,11 @@
 
 #include <vector>
 #include <stdexcept>
+#include <string>
 #include <sstream>
 #include <iostream>
 
+#include "cell_t.hpp"
 #include "utility.hpp"
 
 namespace Picross
@@ -61,11 +63,6 @@ namespace Picross
 		{
 			throw std::runtime_error(exceptionText.str().c_str());
 		}
-	}
-
-	Grid::~Grid()
-	{
-
 	}
 
 	int Grid::getWidth() const

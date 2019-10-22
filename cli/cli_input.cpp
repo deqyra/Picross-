@@ -1,5 +1,8 @@
 #include "cli_input.hpp"
 
+#include <iostream>
+#include <string>
+
 namespace Picross
 {
     template<>
@@ -31,15 +34,15 @@ namespace Picross
     }
 
     template <>
-    std::string CLIInput::typeName<int>()
-    {
-        return "integer";
-    }
-
-    template <>
     std::string CLIInput::typeName<std::string>()
     {
         return "string";
+    }
+
+    template <>
+    std::string CLIInput::typeName<int>()
+    {
+        return "integer";
     }
 
     template <>

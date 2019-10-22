@@ -1,4 +1,9 @@
+#include "../cli_command.hpp"
 #include "save_grid_command.hpp"
+
+#include <string>
+#include <iostream>
+
 #include "../cli_input.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
@@ -8,6 +13,11 @@ namespace Picross
         CLICommand()
     {
 
+    }
+
+    SaveGridCommand::~SaveGridCommand()
+    {
+        
     }
 
     std::string SaveGridCommand::getTooltip()

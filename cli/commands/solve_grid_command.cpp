@@ -1,11 +1,16 @@
+#include "../cli_command.hpp"
 #include "solve_grid_command.hpp"
+
+#include <string>
+#include <vector>
+#include <memory>
+#include <iostream>
+
 #include "../cli_input.hpp"
+#include "../cli_state.hpp"
 #include "../../solving/solver.hpp"
 #include "../../solving/utility.hpp"
 #include "../../io/text_grid_formatter.hpp"
-
-#include <vector>
-#include <memory>
 
 namespace Picross
 {
@@ -13,6 +18,11 @@ namespace Picross
         CLICommand()
     {
 
+    }
+
+    SolveCommand::~SolveCommand()
+    {
+        
     }
 
     std::string SolveCommand::getTooltip()

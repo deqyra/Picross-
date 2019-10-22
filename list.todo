@@ -82,20 +82,22 @@ Cleanup & enhancement:
     Important:
         ✔ Use smart pointers in CLIMenu, CommandSequence and SolveGridCommand
         ✔ Alternatively ensure CLIMenu and CommandSequence destructors don't leak
-        ☐ Also use smart pointers on instanciation of the main menu
+        ✔ Also use smart pointers on instanciation of the main menu
         ☐ Put comments here and there
         ☐ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
         ✔ CMake build
-        ☐ Make sure all polymorphically derived classes have a virtual destructor
+        ✔ Inline fully specialized templates
+        ✔ Make sure all polymorphically derived classes have a virtual destructor
     Nice:
         ☐ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
         ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
-        ☐ Have exhaustive #includes in all files
+        ✔ Have exhaustive #includes in all files
         ✔ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
-        ☐ Ensure class members declaration order and syntactical coherence
+        ✔ Ensure class members declaration order and syntactical coherence
+        ✔ Remove empty constructors and destructors (unless virtual)
 Project management:
     ✔ Set up a git repo
     ☐ Come up with tests

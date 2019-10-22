@@ -10,10 +10,10 @@ namespace tinyxml2
 {
     class TinyXML2Error : public std::exception
     {
-        private:
+        private:    // Attributes
             std::string _message;
 
-        public:
+        public:     // Public methods
             TinyXML2Error(const char* message);
             TinyXML2Error(std::string message);
             TinyXML2Error(XMLError err);

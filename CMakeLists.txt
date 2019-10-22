@@ -27,9 +27,11 @@ add_executable(picross  main.cpp
                         core/cell_t.cpp                         core/cell_t.hpp
                         core/grid.cpp                           core/grid.hpp
                         core/utility.cpp                        core/utility.hpp
+                        io/invalid_xml_grid_error.cpp           io/invalid_xml_grid_error.hpp
                         io/text_grid_formatter.cpp              io/text_grid_formatter.hpp
                         io/tinyxml2_error.cpp                   io/tinyxml2_error.hpp
                         io/xml_grid_serializer.cpp              io/xml_grid_serializer.hpp
                         solving/solver.cpp                      solving/solver.hpp
-                        )
+                        solving/utility.cpp                     solving/utility.hpp
+)
 target_link_libraries(picross PUBLIC tinyxml2)

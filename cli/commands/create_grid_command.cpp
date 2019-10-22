@@ -1,9 +1,13 @@
+#include "../cli_command.hpp"
 #include "create_grid_command.hpp"
 
 #include <sstream>
+#include <vector>
+#include <string>
+#include <iostream>
 
+#include "../cli_state.hpp"
 #include "../cli_input.hpp"
-#include "../cli_command.hpp"
 #include "../../core/utility.hpp"
 
 namespace Picross
@@ -12,6 +16,11 @@ namespace Picross
         CLICommand()
     {
 
+    }
+
+    CreateGridCommand::~CreateGridCommand()
+    {
+        
     }
 
     std::string CreateGridCommand::getTooltip()

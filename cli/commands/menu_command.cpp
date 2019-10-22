@@ -1,4 +1,9 @@
+#include "../cli_command.hpp"
 #include "menu_command.hpp"
+
+#include <string>
+
+#include "../cli_state.hpp"
 
 namespace Picross
 {
@@ -7,6 +12,11 @@ namespace Picross
         _innerMenu(innerMenu)
     {
 
+    }
+
+    MenuCommand::~MenuCommand()
+    {
+        
     }
 
     std::string MenuCommand::getTooltip()

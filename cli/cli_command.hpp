@@ -10,7 +10,7 @@ namespace Picross
     class CLICommand
     {
         public:
-            CLICommand();
+            virtual ~CLICommand();
             virtual std::string getTooltip() = 0;
             virtual void run(CLIState& state) = 0;
     };

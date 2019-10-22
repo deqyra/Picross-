@@ -9,16 +9,15 @@ namespace Picross
 {
     class CLIState
     {
-        private:
+        private:    // Attributes
             std::istream _in;
             std::ostream _out;
             std::ostream _err;
 
             Grid _grid;
 
-        public:
+        public:     // Public methods
             CLIState(std::istream& in, std::ostream& out, std::ostream& err);
-            ~CLIState();
 
             std::istream& in();
             std::ostream& out();

@@ -1,4 +1,11 @@
+#include "../cli_command.hpp"
 #include "command_sequence.hpp"
+
+#include <vector>
+#include <memory>
+#include <string>
+
+#include "../cli_state.hpp"
 
 namespace Picross
 {
@@ -7,10 +14,12 @@ namespace Picross
         _commandList(commandList),
         _tooltip(tooltip)
     {
+
     }
     
     CommandSequence::~CommandSequence()
     {
+        
     }
 
     std::string CommandSequence::getTooltip()

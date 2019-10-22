@@ -1,22 +1,25 @@
 #ifndef CREATE_GRID_COMMAND_HPP
 #define CREATE_GRID_COMMAND_HPP
 
+#include "../cli_command.hpp"
+
 #include <vector>
 #include <string>
 
-#include "../cli_command.hpp"
+#include "../cli_state.hpp"
 
 namespace Picross
 {
     class CreateGridCommand : public CLICommand
     {
-        public:
+        public:     // Public methods
             CreateGridCommand();
+            virtual ~CreateGridCommand();
 
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
 
-        private:
+        private:    // Private methods
             std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, std::string numberedPrefixNoun, CLIState& state);
     };
 }

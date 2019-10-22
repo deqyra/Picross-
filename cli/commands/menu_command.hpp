@@ -2,6 +2,9 @@
 #define MENU_COMMAND_HPP
 
 #include "../cli_command.hpp"
+
+#include <string>
+
 #include "../cli_menu.hpp"
 #include "../cli_state.hpp"
 
@@ -9,11 +12,13 @@ namespace Picross
 {
     class MenuCommand : public CLICommand
     {
-        private:
+        private:    // Attributes
             CLIMenu _innerMenu;
 
-        public:
+        public:     // Public methods
             MenuCommand(CLIMenu innerMenu);
+            virtual ~MenuCommand();
+
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
     };

@@ -10,7 +10,7 @@ namespace Picross
     class Solver
     {
         public:
-            Solver();
+            virtual ~Solver();
             virtual std::string name() = 0;
             virtual void solve(Grid& grid) = 0;
     };

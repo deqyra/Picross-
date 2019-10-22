@@ -64,6 +64,86 @@ namespace Picross
 		return s.str();
 	}
 
+	std::string TextGridFormatter::getCharacter(cell_t cellContent)
+	{
+		switch(cellContent)
+		{
+			case CELL_CHECKED:
+				return _checkedChar;
+				break;
+			case CELL_CLEARED:
+				return _emptyChar;
+				break;
+			case CELL_CROSSED:
+				return _crossedChar;
+				break;
+			default:
+				// Auto throw if character is not valid
+				isValidCellValue(cellContent, true);
+				std::stringstream s;
+				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
+				throw new std::runtime_error(s.str().c_str());
+		}
+	}
+
+	void TextGridFormatter::setCharacter(cell_t cellContent, std::string newChar)
+	{
+		if (newChar.length() != 1)
+		{
+			std::stringstream s;
+			s << "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" << cellContent << "\"." << std::endl;
+			throw new std::runtime_error(s.str().c_str());
+		}
+		
+		switch(cellContent)
+		{
+			case CELL_CHECKED:
+				_checkedChar = newChar;
+				break;
+			case CELL_CLEARED:
+				_emptyChar = newChar;
+				break;
+			case CELL_CROSSED:
+				_crossedChar = newChar;
+				break;
+			default:
+				// Auto throw if character is not valid
+				isValidCellValue(cellContent, true);
+				std::stringstream s;
+				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
+				throw new std::runtime_error(s.str().c_str());
+		}
+	}
+
+	void TextGridFormatter::resetCharacter(cell_t cellContent)
+	{
+		switch(cellContent)
+		{
+			case CELL_CHECKED:
+				_checkedChar = _defaultCheckedChar;
+				break;
+			case CELL_CLEARED:
+				_emptyChar = _defaultEmptyChar;
+				break;
+			case CELL_CROSSED:
+				_crossedChar = _defaultCrossedChar;
+				break;
+			default:
+				// Auto throw if character is not valid
+				isValidCellValue(cellContent, true);
+				std::stringstream s;
+				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
+				throw new std::runtime_error(s.str().c_str());
+		}
+	}
+
+	void TextGridFormatter::resetAllCharacters()
+	{
+		_checkedChar = _defaultCheckedChar;
+		_emptyChar = _defaultEmptyChar;
+		_crossedChar = _defaultCrossedChar;
+	}
+
 	std::string TextGridFormatter::pad(int length, std::string padString)
 	{
 		std::stringstream s;
@@ -207,85 +287,5 @@ namespace Picross
 		}
 
 		return s.str();
-	}
-
-	std::string TextGridFormatter::getCharacter(cell_t cellContent)
-	{
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				return _checkedChar;
-				break;
-			case CELL_CLEARED:
-				return _emptyChar;
-				break;
-			case CELL_CROSSED:
-				return _crossedChar;
-				break;
-			default:
-				// Auto throw if character is not valid
-				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
-		}
-	}
-
-	void TextGridFormatter::setCharacter(cell_t cellContent, std::string newChar)
-	{
-		if (newChar.length() != 1)
-		{
-			std::stringstream s;
-			s << "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" << cellContent << "\"." << std::endl;
-			throw new std::runtime_error(s.str().c_str());
-		}
-		
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				_checkedChar = newChar;
-				break;
-			case CELL_CLEARED:
-				_emptyChar = newChar;
-				break;
-			case CELL_CROSSED:
-				_crossedChar = newChar;
-				break;
-			default:
-				// Auto throw if character is not valid
-				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
-		}
-	}
-
-	void TextGridFormatter::resetCharacter(cell_t cellContent)
-	{
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				_checkedChar = _defaultCheckedChar;
-				break;
-			case CELL_CLEARED:
-				_emptyChar = _defaultEmptyChar;
-				break;
-			case CELL_CROSSED:
-				_crossedChar = _defaultCrossedChar;
-				break;
-			default:
-				// Auto throw if character is not valid
-				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
-		}
-	}
-
-	void TextGridFormatter::resetAllCharacters()
-	{
-		_checkedChar = _defaultCheckedChar;
-		_emptyChar = _defaultEmptyChar;
-		_crossedChar = _defaultCrossedChar;
 	}
 }

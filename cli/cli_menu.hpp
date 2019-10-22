@@ -12,21 +12,22 @@ namespace Picross
 {
     class CLIMenu
     {
-        private:
+        private:    // Attributes
             std::vector<std::shared_ptr<CLICommand>> _commands;
             CLIState& _state;
             std::string _tooltip;
             std::string _exitName;
             std::shared_ptr<CLICommand> _exitCommand;
+
+        public:     // Public methods
+            CLIMenu(CLIState& state, std::vector<std::shared_ptr<CLICommand>> commands, std::string tooltip, std::string exitName, std::shared_ptr<CLICommand> exitCommand = nullptr);
             
+            std::string getTooltip();
+            void show();
+            
+        private:    // Private methods
             void showOption(int n, std::string tooltip);
             void showOptions();
-
-        public:
-            CLIMenu(CLIState& state, std::vector<std::shared_ptr<CLICommand>> commands, std::string tooltip, std::string exitName, std::shared_ptr<CLICommand> exitCommand = nullptr);
-            virtual ~CLIMenu();
-            virtual std::string getTooltip();
-            virtual void show();
     };
 }
 

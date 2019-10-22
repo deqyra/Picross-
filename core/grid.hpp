@@ -10,17 +10,16 @@ namespace Picross
 {
 	class Grid
 	{
-		private:
+		private:	// Attributes
 			int _width;
 			int _height;
 			std::vector<cell_t> _content;			// 1D-array containing the "unfolded" grid, row-major indexed.
 			std::vector<std::vector<int>> _horizontalHints;
 			std::vector<std::vector<int>> _verticalHints;
 
-		public:
+		public:		// Public methods
 			Grid(int width, int height);
 			Grid(int width, int height, std::vector<std::vector<int>> horizontalHints, std::vector<std::vector<int>> verticalHints);
-			~Grid();
 
 			int getWidth() const;
 			int getHeight() const;

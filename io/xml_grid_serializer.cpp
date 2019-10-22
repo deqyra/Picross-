@@ -1,4 +1,13 @@
 #include "xml_grid_serializer.hpp"
+
+#include <string>
+#include <stdexcept>
+#include <vector>
+
+#include "tinyxml2_error.hpp"
+#include "invalid_xml_grid_error.hpp"
+#include "../lib/tinyxml2/tinyxml2.hpp"
+#include "../core/grid.hpp"
 #include "../core/utility.hpp"
 
 namespace Picross
@@ -204,22 +213,4 @@ namespace Picross
         }
         return elt;
     }
-
-    InvalidXMLGridError::InvalidXMLGridError(const char* message) :
-        _message(message)
-    {
-
-    }
-
-    InvalidXMLGridError::InvalidXMLGridError(std::string message) :
-        _message(message)
-    {
-
-    }
-    
-    const char* InvalidXMLGridError::what() const noexcept
-    {
-        return _message.c_str();
-    }
-
 }

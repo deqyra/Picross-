@@ -1,5 +1,9 @@
 #include "cli_state.hpp"
 
+#include <iostream>
+
+#include "../core/grid.hpp"
+
 namespace Picross
 {
     CLIState::CLIState(std::istream& in, std::ostream& out, std::ostream& err) :
@@ -7,11 +11,6 @@ namespace Picross
         _out(out.rdbuf()),
         _err(err.rdbuf()),
         _grid(0,0)
-    {
-
-    }
-
-    CLIState::~CLIState()
     {
 
     }

@@ -2,7 +2,7 @@
 
 namespace Picross
 {
-    CLICommand::CLICommand()
+    CLICommand::~CLICommand()
     {
         
     }

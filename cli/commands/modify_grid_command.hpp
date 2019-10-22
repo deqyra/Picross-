@@ -3,12 +3,18 @@
 
 #include "../cli_command.hpp"
 
+#include <string>
+
+#include "../cli_state.hpp"
+
 namespace Picross
 {
     class ModifyGridCommand : public CLICommand
     {
-        public:
+        public:     // Public methods
             ModifyGridCommand();
+            virtual ~ModifyGridCommand();
+
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
     };

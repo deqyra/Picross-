@@ -12,13 +12,14 @@ namespace Picross
 {
     class CommandSequence : public CLICommand
     {
-        private:
+        private:    // Attributes
             std::vector<std::shared_ptr<CLICommand>> _commandList;
             std::string _tooltip;
 
-        public:
+        public:     // Public methods
             CommandSequence(std::vector<std::shared_ptr<CLICommand>> commandList, std::string tooltip = "");
-            ~CommandSequence();
+            virtual ~CommandSequence();
+            
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
     };

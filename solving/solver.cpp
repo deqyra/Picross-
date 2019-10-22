@@ -2,7 +2,7 @@
 
 namespace Picross
 {
-    Solver::Solver()
+    Solver::~Solver()
     {
         
     }

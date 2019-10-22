@@ -10,7 +10,7 @@ namespace Picross
 {
     class CLIInput
     {
-        public:
+        public:     // Public methods
             template<typename T>
             static T askForInput(std::string title, CLIState& state);
 
@@ -60,10 +60,10 @@ namespace Picross
     bool CLIInput::parseString(std::string input);
 
     template <>
-    std::string CLIInput::typeName<int>();
+    std::string CLIInput::typeName<std::string>();
 
     template <>
-    std::string CLIInput::typeName<std::string>();
+    std::string CLIInput::typeName<int>();
 
     template <>
     std::string CLIInput::typeName<bool>();

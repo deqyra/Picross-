@@ -13,7 +13,12 @@ namespace Picross
 {
     class XMLGridSerialzer
     {
-        private:
+        public:     // Public methods
+            XMLGridSerialzer();
+            void saveGridToFile(const Grid& grid, std::string path);
+            Grid loadGridFromFile(std::string path);
+
+        private:    // Private methods
             // Reading utilities
             void loadXMLFile(std::string path, tinyxml2::XMLDocument& doc);
             tinyxml2::XMLElement* findFirstChildOrThrow(tinyxml2::XMLElement* root, std::string name);
@@ -32,22 +37,6 @@ namespace Picross
 
             template<typename T>
             inline T getValueFromAttribute(tinyxml2::XMLElement* element, std::string attrName);
-
-        public:
-            XMLGridSerialzer();
-            void saveGridToFile(const Grid& grid, std::string path);
-            Grid loadGridFromFile(std::string path);
-    };
-
-    class InvalidXMLGridError : public std::exception
-    {
-        private:
-            std::string _message;
-
-        public:
-            InvalidXMLGridError(const char* message);
-            InvalidXMLGridError(std::string message);
-            const char* what() const noexcept;
     };
 
     template<>

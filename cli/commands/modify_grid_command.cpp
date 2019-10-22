@@ -1,4 +1,9 @@
+#include "../cli_command.hpp"
 #include "modify_grid_command.hpp"
+
+#include <string>
+#include <iostream>
+
 #include "../cli_input.hpp"
 
 namespace Picross
@@ -7,6 +12,11 @@ namespace Picross
         CLICommand()
     {
 
+    }
+
+    ModifyGridCommand::~ModifyGridCommand()
+    {
+        
     }
 
     std::string ModifyGridCommand::getTooltip()

@@ -1,6 +1,11 @@
 #include "utility.hpp"
 
+#include <string>
+#include <vector>
 #include <sstream>
+
+#include "cell_t.hpp"
+#include "grid.hpp"
 
 static void removeCarriageReturnAtEnd(std::string& str)
 {

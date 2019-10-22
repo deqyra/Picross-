@@ -1,4 +1,12 @@
 #include "cli_menu.hpp"
+
+#include <string>
+#include <vector>
+#include <memory>
+#include <iostream>
+
+#include "cli_command.hpp"
+#include "cli_state.hpp"
 #include "cli_input.hpp"
 
 namespace Picross

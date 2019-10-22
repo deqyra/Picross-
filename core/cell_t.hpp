@@ -13,9 +13,11 @@ namespace Picross
     inline static const cell_t CELL_CROSSED = 0;
 
     inline static const int CELL_T_VALUE_COUNT = 3;
-    inline static const cell_t CELL_T_ORDERED_VALUES[CELL_T_VALUE_COUNT] = {CELL_CROSSED,
-                                                                            CELL_CLEARED,
-                                                                            CELL_CHECKED};
+    inline static const cell_t CELL_T_ORDERED_VALUES[CELL_T_VALUE_COUNT] = {
+        CELL_CROSSED,
+        CELL_CLEARED,
+        CELL_CHECKED
+    };
 
     bool isValidCellValue(cell_t val, bool throwOnFail = false);
     std::string cellValueToString(cell_t val);

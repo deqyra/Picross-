@@ -3,12 +3,18 @@
 
 #include "../cli_command.hpp"
 
+#include <string>
+
+#include "../cli_state.hpp"
+
 namespace Picross
 {
     class LoadGridCommand : public CLICommand
     {
-        public:
+        public:     // Public methods
             LoadGridCommand();
+            virtual ~LoadGridCommand();
+
             virtual std::string getTooltip();
             virtual void run(CLIState& state);
     };
