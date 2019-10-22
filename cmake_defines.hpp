@@ -1,0 +1,6 @@
+#ifndef CMAKE_DEFINES_HPP
+#define CMAKE_DEFINES_HPP
+
+#define VERSION "0.1"
+
+#endif//CMAKE_DEFINES_HPP

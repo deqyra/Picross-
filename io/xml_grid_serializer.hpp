@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "tinyxml2_error.hpp"
+#include "invalid_xml_grid_error.hpp"
 #include "../lib/tinyxml2/tinyxml2.hpp"
 #include "../core/grid.hpp"
 

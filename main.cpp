@@ -13,6 +13,8 @@
 #include "cli/commands/save_grid_command.hpp"
 #include "cli/commands/modify_grid_command.hpp"
 
+#include "cmake_defines.hpp"
+
 void runCLIApp();
 
 int main(int argc, char** argv)
@@ -50,5 +52,7 @@ void runCLIApp()
 
 	Picross::CLIMenu mainMenu = Picross::CLIMenu(state, mainMenuCommands, "Main menu", "Exit", nullptr);
 
+	state.out() << PROJECT_NAME << " " << PROJECT_VERSION << " " << COPYRIGHT_NOTICE << std::endl << std::endl;
+	state.out() << mainMenu.getTooltip() << ":" << std::endl;
 	mainMenu.show();
 }

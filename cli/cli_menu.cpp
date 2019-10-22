@@ -32,7 +32,7 @@ namespace Picross
         {
             showOptions();
 
-            int input = CLIInput::waitForInput<int>(_state);
+            int input = CLIInput::askForInput<int>("Please make a choice: ", _state);
             if (input < 0 || input > _commands.size())
             {
                 _state.err() << "Invalid input, please enter an integer between 0 and " << _commands.size() << "." << std::endl << std::endl; 
