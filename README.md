@@ -16,4 +16,5 @@ Project state:
 
 - ✔ Git repo  
 - ☐ Tests  
-- ☐ Continuous integration  
+- ☐ Continuous integration
+
