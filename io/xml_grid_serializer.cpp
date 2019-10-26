@@ -178,7 +178,7 @@ namespace Picross
     {
         int width = grid.getWidth();
         int height = grid.getHeight();
-        cell_t defaultState = mostPresentState(grid);
+        cell_t defaultState = grid.mostPresentState();
         root->SetAttribute("default", cellStateToString(defaultState).c_str());
 
         for (int row = 0; row < height; row++)

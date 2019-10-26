@@ -59,7 +59,7 @@ namespace Picross
 
                 try
                 {
-                    intHints = stringToHintVector(strHints);
+                    intHints = stringToIntVector(strHints);
                 }
                 catch(const std::exception& e)
                 {

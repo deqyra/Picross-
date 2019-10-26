@@ -99,7 +99,8 @@ configure_file("cmake_defines.config.hpp" "${SOURCE_FROM_BUILD}/cmake_defines.hp
     enable_testing()
     add_executable(tests    tests/main.cpp
                             tests/custom_generators.hpp
-                            tests/test_core.cpp)
+                            tests/core/test_cell_t.cpp
+                            tests/core/test_utility.cpp)
     target_link_libraries(tests PUBLIC ${CORE_LIB_NAME})
 
     add_test(NAME "tests" COMMAND tests)

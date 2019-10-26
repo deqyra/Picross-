@@ -11,26 +11,40 @@
 
 namespace Picross
 {
+    // Returns the minimum cell length needed for a hint sequence to be satisfied.
     int minimumSpaceFromHints(const std::vector<int>& hints);
-    std::vector<int> stringToHintVector(const std::string& str, char delimiter = ' ');
-    std::vector<std::string> tokenizeString(const std::string& str, char delimiter);
-    std::string multilineConcatenation(std::string first, std::string second);
-    cell_t mostPresentState(const Grid& grid);
 
+    // Parses an int sequence from a string and returns it in a vector.
+    std::vector<int> stringToIntVector(const std::string& str, char delimiter = ' ');
+
+    // Splits a string into substring based on a given delimiter, and returns all substrings in a vector.
+    std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens = false);
+
+    // Takes in two multi-line strings, concatenates them line by line and returns the result in one string.
+    std::string multilineConcatenation(std::string first, std::string second);
+
+    // Returns a string representation of the contents of a vector.
     template<typename T>
-    std::string vectorToString(const std::vector<T>& elements, std::string delimiter = " ", std::string opening = "", std::string closing = "")
+    std::string vectorToString(
+        const std::vector<T>& elements, std::string delimiter = " ",
+        std::string opening = "",       std::string closing = "",
+        std::string elementPrefix = "", std::string elementSuffix = "")
     {
         std::stringstream s;
         s << opening;
         for (auto it = elements.begin(); it != elements.end() - 1; it++)
         {
-            s << (*it) << delimiter;
+            s << elementPrefix << (*it) << elementSuffix << delimiter;
         }
-        s << elements.back() << closing;
+        s << elementPrefix << elements.back() << elementSuffix << closing;
+
+        // Output example:
+        // vectorToString({5, 2, 1}, "-", "<", ">", "[", "]") == "<[5]-[2]-[1]>"
 
         return s.str();
     }
 
+    // Given a vector of vectors, returns the maximum length of the contained vectors.
     template<typename T>
     int maxVectorLength(std::vector<std::vector<T>> vectors)
     {
@@ -47,20 +61,20 @@ namespace Picross
         return maxSize;
     }
 
+    // Given a vector of comparable values, returns the index of the element with the maximum value.
     template<typename T>
     int indexOfMaxElement(std::vector<T> array)
     {
-        auto first = array.begin();
-        auto last = array.end();
-        return std::distance(first, std::max_element(first, last));
+        // Type-aware distance between vector start pointer and max element pointer = max index
+        return std::distance(array.begin(), std::max_element(array.begin(), array.end()));
     }
 
+    // Given an array of comparable values and its length, returns the index of the element with the maximum value.
     template<typename T>
     int indexOfMaxElement(T* array, int length)
     {
-        auto first = array;
-        auto last = array + (sizeof(T) * length);
-        return std::distance(first, std::max_element(first, last)) / sizeof(T);
+        // Distance between array start pointer and max element pointer = max index * type size
+        return std::distance(array, std::max_element(array, array + length));
     }
 }
 
