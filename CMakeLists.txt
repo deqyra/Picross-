@@ -6,7 +6,7 @@
     endif()
 
 # Project general info
-    set(PROJECT_MAINTAINER_NAME "deqyra")
+    set(PROJECT_MAINTAINER_NAME "François Brachais")
     set(PROJECT_MAINTAINER_EMAIL "deqyra@gmail.com")
 
 # Project folder structure info
