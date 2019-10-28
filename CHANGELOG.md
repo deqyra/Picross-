@@ -1,6 +1,7 @@
 # [PicrossEngine v0.1](https://github.com/deqyra/PicrossEngine/releases/tag/v0.1)
 
 Functional groundwork to build upon in future releases.
+
 **Main additions:**
 
 - Fully featured representation of a game state
@@ -20,10 +21,26 @@ Includes an **interactive CLI app** capable of the following:
 - Tests (and maybe CI)
 - Windows support (it currently builds but doesn't run)
 
-**Attached files:**
+# [PicrossEngine v0.2](https://github.com/deqyra/PicrossEngine/releases/tag/v0.2)
 
-- `picross`: Linux executable built with `g++`.
-- `libtinyxml2.so`: [**C++ XML parsing library**](https://github.com/leethomason/tinyxml2), compiled for Linux using `g++`.
-- `example_grid1.xml`: XML serialized grid showing the expected structure of such files.
+Fully working "game" / simulator.
 
-Refer to build instructions on [`README.md`](https://github.com/deqyra/PicrossEngine/blob/release-v0.1/README.md#building-the-project) in [branch `release-v0.1`](https://github.com/deqyra/PicrossEngine/tree/release-v0.1).
+**Main additions:**
+
+- Modular build architecture
+- Modify grid command, a sub-shell parsing small commands to modify a grid's state
+- Comments / documentation
+- Tests! (Plenty of them!) (And they're modular too!)
+- Small fixes
+  
+The **interactive CLI app** is now capable of the following:  
+
+- Create a new grid
+- Load a grid from an XML file
+- Save a grid to an XML file
+- Manipulate a grid's state
+- Display a grid
+
+**Planned for next release:**
+
+- Iterative solver

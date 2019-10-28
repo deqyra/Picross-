@@ -3,6 +3,6 @@
 
 #define PROJECT_NAME "PICROSS ENGINE"
 #define PROJECT_VERSION "0.1"
-#define COPYRIGHT_NOTICE "(C) 2019 deqyra <deqyra@gmail.com>"
+#define COPYRIGHT_NOTICE "(C) 2019 François Brachais <deqyra@gmail.com>"
 
 #endif//CMAKE_DEFINES_HPP

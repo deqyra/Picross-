@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include <algorithm>
+
 #include "../template_scenario.hpp"
 #include "../../core/cell_t.hpp"
 #include "../../core/grid.hpp"
