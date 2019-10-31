@@ -59,6 +59,8 @@ namespace Picross
 		// Useful tip-related checks and functions.
 			bool areValidRowHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 			bool areValidColHints(const std::vector<int>& hints, bool throwOnFail = false) const;
+
+			friend bool operator==(const Grid& lhs, const Grid& rhs);
 	};
 }
 

@@ -86,6 +86,7 @@ Cleanup & enhancement:
         ☐ Put comments here and there
         ☐ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
+        ☐ Include folder name in all include-protection macros
         ✔ CMake build
         ✔ Inline fully specialized templates
         ✔ Make sure all polymorphically derived classes have a virtual destructor
@@ -94,6 +95,7 @@ Cleanup & enhancement:
         ☐ Better usage of std::endl (new line vs. buffer flushing)
         ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
+        ☐ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Have exhaustive #includes in all files
         ✔ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
         ✔ Ensure class members declaration order and syntactical coherence

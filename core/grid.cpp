@@ -303,4 +303,15 @@ namespace Picross
 		}
 		return result;
 	}
+
+	bool operator==(const Grid& lhs, const Grid& rhs)
+	{
+		if (lhs._width != rhs._width) return false;
+		if (lhs._height != rhs._height) return false;
+		if (lhs._horizontalHints != rhs._horizontalHints) return false;
+		if (lhs._verticalHints != rhs._verticalHints) return false;
+		if (lhs._content != rhs._content) return false;
+
+		return true;
+	}
 }

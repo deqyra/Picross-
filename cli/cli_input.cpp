@@ -1,6 +1,5 @@
 #include "cli_input.hpp"
 
-#include <iostream>
 #include <string>
 
 namespace Picross
@@ -30,7 +29,7 @@ namespace Picross
             return false;
         }
 
-        throw std::runtime_error("Invalid string value for expected bool input.");
+        throw std::invalid_argument("Invalid string value for expected bool input.");
     }
 
     template <>

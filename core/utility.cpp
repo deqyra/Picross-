@@ -6,25 +6,7 @@
 
 #include "cell_t.hpp"
 #include "grid.hpp"
-
-// Removes any single trailing '\r' at the end of a string.
-static void removeCarriageReturnAtEnd(std::string& str)
-{
-    if (str.back() == '\r')
-    {
-        str.pop_back();
-    }
-}
-
-// Checks whether a string is only made of digits.
-static bool stringIsNum(const std::string& str)
-{
-    for (auto it = str.begin(); it != str.end(); it++)
-    {
-        if (!std::isdigit(*it)) return false;
-    }
-    return true;
-}
+#include "../string/utility.hpp"
 
 namespace Picross
 {
@@ -67,7 +49,7 @@ namespace Picross
             // This also prevents negative numbers from being accepted. Even though this does not
             // fall within the scope of that function stricto sensu, it fits its use cases.
 
-            if (!stringIsNum(*it))
+            if (!StringUtil::stringIsNum(*it))
             {
                 throw std::runtime_error("Provided string does not represent an integer.");
             }
@@ -105,12 +87,12 @@ namespace Picross
         // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
         for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)
         {
-            removeCarriageReturnAtEnd(*it);
+            StringUtil::popCarriageReturn(*it);
         }
         
         for (auto it = secondTokens.begin(); it != secondTokens.end(); it++)
         {
-            removeCarriageReturnAtEnd(*it);
+            StringUtil::popCarriageReturn(*it);
         }
 
         // Step 3: iterate on both vectors at the same time and join their lines together.
