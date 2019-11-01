@@ -119,7 +119,8 @@ configure_file( "cmake_defines.config.hpp" "${CMAKE_SOURCE_DIR}/cmake_defines.hp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
                                         tests/cli/test_cli_state.cpp
-                                        tests/cli/test_cli_input.cpp )
+                                        tests/cli/test_cli_input.cpp
+                                        tests/string/test_utility.cpp )
     target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} )
     add_dependencies( ${TEST_TARGET_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 
