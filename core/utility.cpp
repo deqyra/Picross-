@@ -87,12 +87,12 @@ namespace Picross
         // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
         for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)
         {
-            StringUtil::popCarriageReturn(*it);
+            StringUtil::popCR(*it);
         }
         
         for (auto it = secondTokens.begin(); it != secondTokens.end(); it++)
         {
-            StringUtil::popCarriageReturn(*it);
+            StringUtil::popCR(*it);
         }
 
         // Step 3: iterate on both vectors at the same time and join their lines together.

@@ -3,9 +3,11 @@
 #include "../custom_generators.hpp"
 #include "../../core/cell_t.hpp"
 
+#define TAGS "[core][cell_t]"
+
 namespace Picross
 {
-    SCENARIO("Cell value validity is properly checked for", "[core][cell_t]")
+    SCENARIO("Cell value validity is properly checked for", TAGS)
     {
         GIVEN("Valid values")
         {
@@ -39,7 +41,7 @@ namespace Picross
         }
     }
 
-    SCENARIO("Cell values can all be turned to strings", "[core][cell_t]")
+    SCENARIO("Cell values can all be turned to strings", TAGS)
     {
         GIVEN("Valid values")
         {

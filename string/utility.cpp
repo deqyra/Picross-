@@ -4,11 +4,33 @@
 
 namespace StringUtil
 {
-    void popCarriageReturn(std::string& str)
+    void popCR(std::string& str)
     {
+        if (str.size() == 0) return;
+
         if (str.back() == '\r')
         {
             str.pop_back();
+        }
+    }
+
+    void popLF(std::string& str)
+    {
+        if (str.size() == 0) return;
+
+        if (str.back() == '\n')
+        {
+            str.pop_back();
+        }
+    }
+
+    void popCRLF(std::string& str)
+    {
+        if (str.size() < 2) return;
+
+        if (str.substr(str.size() - 3, 2) == "\r\n")
+        {
+            str = str.substr(0, str.size() - 2);
         }
     }
 

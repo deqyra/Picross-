@@ -116,7 +116,7 @@ namespace Picross
         std::string input;
         std::getline(state.in(), input);
         // Take care of terminal-induced bullcrap.
-        StringUtil::popCarriageReturn(input);        
+        StringUtil::popCR(input);        
         return parseString<T>(input);
     }
 

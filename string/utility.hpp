@@ -6,7 +6,7 @@
 namespace StringUtil
 {
     // Removes any single trailing '\r' at the end of a string.
-    void popCarriageReturn(std::string& str);
+    void popCR(std::string& str);
 
     // Checks whether a string contains a certain substring a certain amount of times.
     bool stringContains(const std::string& str, const char sub, int n = 1);
