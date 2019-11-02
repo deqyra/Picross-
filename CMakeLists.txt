@@ -113,15 +113,16 @@ add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
 
 # Build and run tests
     enable_testing( )
-    add_executable( ${TEST_TARGET_NAME}  tests/main.cpp
-                                        tests/custom_generators.hpp
-                                        tests/core/test_cell_t.cpp
+    add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                         tests/custom_generators.hpp
+                                        tests/core/test_cell_t.cpp              tests/template_scenario.hpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
                                         tests/cli/test_cli_state.cpp
                                         tests/cli/test_cli_input.cpp
                                         tests/string/test_utility.cpp
-                                        tests/io/test_xml_grid_serializer.cpp )
+                                        tests/io/generate_static_grids.cpp      tests/io/generate_static_grids.hpp
+                                        tests/io/test_xml_grid_serializer.cpp
+                                        tests/io/test_text_grid_formatter.cpp )
     target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} )
     add_dependencies( ${TEST_TARGET_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 

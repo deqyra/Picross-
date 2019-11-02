@@ -31,7 +31,7 @@ namespace Picross
     {
         std::vector<int> hints;
         // Tokenise input string according to provided delimiter (true = discard any empty token).
-        std::vector<std::string> tokens = tokenizeString(str, delimiter, true);
+        std::vector<std::string> tokens = StringUtil::tokenizeString(str, delimiter, true);
 
         for (auto it = tokens.begin(); it != tokens.end(); it++)
         {
@@ -61,28 +61,11 @@ namespace Picross
         return hints;
     }
 
-    std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens)
-    {
-        std::vector<std::string> tokens;
-        std::string token;
-        std::istringstream tokenStream(str);
-
-        // Repeatedly extract tokens from the input string.
-        while (std::getline(tokenStream, token, delimiter))
-        {
-            // If specified so, empty tokens should not be added to the output vector.
-            if (discardEmptyTokens && token == "") continue;
-            
-            tokens.push_back(token);
-        }
-        return tokens;
-    }
-
 	std::string multilineConcatenation(std::string first, std::string second)
 	{
         // Step 1: split input strings into vectors of lines.
-		std::vector<std::string> firstTokens = tokenizeString(first, '\n');
-		std::vector<std::string> secondTokens = tokenizeString(second, '\n');
+		std::vector<std::string> firstTokens = StringUtil::tokenizeString(first, '\n');
+		std::vector<std::string> secondTokens = StringUtil::tokenizeString(second, '\n');
         
         // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
         for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)

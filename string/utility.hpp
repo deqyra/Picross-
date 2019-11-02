@@ -2,6 +2,7 @@
 #define STRING_UTILITY_HPP
 
 #include <string>
+#include <vector>
 
 namespace StringUtil
 {
@@ -25,6 +26,15 @@ namespace StringUtil
 
     // Checks whether a string is only made of digits.
     bool stringIsNum(const std::string& str);
+
+    // Splits a string into substring based on a given delimiter, and returns all substrings in a vector.
+    std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens = false);
+
+    // Open the file located at the provided path and returns a string filled with all of its contents.
+    std::string readFileIntoString(const std::string& path, bool stripCarriageReturns = true);
+
+    // Remove carriage returns in provided string. Returns whether operation was successful.
+    std::string stripCR(std::string& str, bool inNewLinesOnly = false);
 }
 
 #endif//STRING_UTILITY_HPP

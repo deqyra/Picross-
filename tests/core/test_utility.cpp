@@ -8,6 +8,7 @@
 #include "../../core/cell_t.hpp"
 #include "../../core/grid.hpp"
 #include "../../core/utility.hpp"
+#include "../../string/utility.hpp"
 
 #define TAGS "[core][utility]"
 
@@ -90,37 +91,37 @@ namespace Picross
             THEN("String is properly tokenized on a delimiter")
             {
                 std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleep", "bloop,", "am", "robot."};
-                REQUIRE(tokenizeString(str, ' ', false) == spaceTokens);
+                REQUIRE(StringUtil::tokenizeString(str, ' ', false) == spaceTokens);
             }
 
             AND_THEN("There are no empty tokens (discarding them doesn't affect the result)")
             {
                 std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleep", "bloop,", "am", "robot."};
-                REQUIRE(tokenizeString(str, ' ', true) == spaceTokens);
+                REQUIRE(StringUtil::tokenizeString(str, ' ', true) == spaceTokens);
             }
 
             AND_THEN("String is properly tokenized on commas")
             {
                 std::vector<std::string> commaTokens = {"Hello", " world. Bleep bloop", " am robot."};
-                REQUIRE(tokenizeString(str, ',', false) == commaTokens);
+                REQUIRE(StringUtil::tokenizeString(str, ',', false) == commaTokens);
             }
 
             AND_THEN("String is properly tokenized on e's")
             {
                 std::vector<std::string> eTokens = {"H", "llo, world. Bl", "", "p bloop, am robot."};
-                REQUIRE(tokenizeString(str, 'e', false) == eTokens);
+                REQUIRE(StringUtil::tokenizeString(str, 'e', false) == eTokens);
             }
 
             AND_THEN("Empty tokens are properly discarded when asked to")
             {
                 std::vector<std::string> eTokens = {"H", "llo, world. Bl", "p bloop, am robot."};
-                REQUIRE(tokenizeString(str, 'e', true) == eTokens);
+                REQUIRE(StringUtil::tokenizeString(str, 'e', true) == eTokens);
             }
 
             AND_THEN("String ending with delimiter does not result in last token being empty")
             {
                 std::vector<std::string> dotTokens = {"Hello, world", " Bleep bloop, am robot"};
-                REQUIRE(tokenizeString(str, '.', false) == dotTokens);
+                REQUIRE(StringUtil::tokenizeString(str, '.', false) == dotTokens);
             }
         }
     }
@@ -172,6 +173,19 @@ namespace Picross
             {
                 std::stringstream s;
                 s << "<~(['" << val << "'] # ['" << val << "'])~>";
+
+                REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s.str());
+            }
+        }
+
+        AND_GIVEN("An empty vector")
+        {
+            std::vector<TestType> vec;
+
+            AND_THEN("Vector is properly formatted with surrounding strings")
+            {
+                std::stringstream s;
+                s << "<~()~>";
 
                 REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s.str());
             }

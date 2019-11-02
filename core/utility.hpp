@@ -17,9 +17,6 @@ namespace Picross
     // Parses an int sequence from a string and returns it in a vector.
     std::vector<int> stringToIntVector(const std::string& str, char delimiter = ' ');
 
-    // Splits a string into substring based on a given delimiter, and returns all substrings in a vector.
-    std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens = false);
-
     // Takes in two multi-line strings, concatenates them line by line and returns the result in one string.
     std::string multilineConcatenation(std::string first, std::string second);
 
@@ -32,11 +29,19 @@ namespace Picross
     {
         std::stringstream s;
         s << opening;
-        for (auto it = elements.begin(); it != elements.end() - 1; it++)
+
+        if (elements.size())
         {
-            s << elementPrefix << (*it) << elementSuffix << delimiter;
+            for (auto it = elements.begin(); it != elements.end() - 1; it++)
+            {
+                s << elementPrefix << (*it) << elementSuffix << delimiter;
+            }
+            s << elementPrefix << elements.back() << elementSuffix << closing;
         }
-        s << elementPrefix << elements.back() << elementSuffix << closing;
+        else
+        {
+            s << closing;
+        }
 
         // Output example:
         // vectorToString({5, 2, 1}, "-", "<", ">", "[", "]") == "<[5]-[2]-[1]>"

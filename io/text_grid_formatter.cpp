@@ -2,6 +2,7 @@
 #include "../core/utility.hpp"
 
 #include <sstream>
+#include <iostream>
 #include <stdexcept>
 
 namespace Picross
@@ -50,8 +51,8 @@ namespace Picross
 		int width = grid.getWidth();
 		int height = grid.getHeight();
 
-		int hPadding = maxVectorLength(grid.getAllRowHints()) * 2 + 1;
-		int vPadding = maxVectorLength(grid.getAllColHints()) * 2 + 1;
+		int hPadding = maxVectorLength(grid.getAllRowHints()) * 2 - 1;
+		int vPadding = maxVectorLength(grid.getAllColHints()) * 2 - 1;
 
 		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
 		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
@@ -159,7 +160,7 @@ namespace Picross
 		std::stringstream s;
 		for (int i = 0; i < height; i++)
 		{
-			s << pad(width, padString);
+			s << pad(width, padString) << '\n';
 		}
 		return s.str();
 	}
@@ -245,11 +246,17 @@ namespace Picross
 		std::stringstream s;
 		for (auto it = hints.begin(); it != hints.end(); it++)
 		{
-			s << pad(strLength, HORIZONTAL_CHAR);
+			s << pad(strLength, HORIZONTAL_CHAR) << '\n';
+	
 			int lengthDiff = maxHintLength - it->size();
-			s << pad(lengthDiff * 2, " ");
-			s << vectorToString(*it);
+			if (lengthDiff)
+			{
+				s << pad(lengthDiff * 2, " ");
+			}
+	
+			s << vectorToString(*it) << '\n';
 		}
+		s << pad(strLength, HORIZONTAL_CHAR) << '\n';
 
 		return s.str();
 	}
@@ -278,7 +285,7 @@ namespace Picross
 
 			if (i != maxHintLength - 1)
 			{
-				for (int j = 0; j < strHints.size(); i++)
+				for (int j = 0; j < strHints.size(); j++)
 				{
 					s << VERTICAL_CHAR << " ";
 				}

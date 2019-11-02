@@ -36,6 +36,8 @@ namespace Picross
                                         "boundedInput: ";
 
                 REQUIRE(ss.str() == expected);
+    
+                f.close();
             }
         }
 
@@ -59,6 +61,8 @@ namespace Picross
                                         "inputY: inputYes: inputTrue: inputN: inputNo: inputFalse: ";
 
                 REQUIRE(ss.str() == expected);
+
+                f.close();
             }
         }
     }
