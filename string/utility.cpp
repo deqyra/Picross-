@@ -19,7 +19,12 @@ namespace StringUtil
 
     bool popString(std::string& str, const std::string& sub)
     {
-        if (str == sub) return true;
+        if (str == sub)
+        {
+            str = "";
+            return true;
+        }
+        
         if (str.size() < sub.size()) return false;
 
         // Check whether substring is contained at the end of the main string.

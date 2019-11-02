@@ -122,7 +122,7 @@ add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
                                         tests/cli/test_cli_input.cpp
                                         tests/string/test_utility.cpp
                                         tests/io/test_xml_grid_serializer.cpp )
-    target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} )
+    target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} )
     add_dependencies( ${TEST_TARGET_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 
     add_test( NAME "tests" COMMAND ${TEST_TARGET_NAME} )

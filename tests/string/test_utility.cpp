@@ -7,7 +7,7 @@
 
 namespace StringUtil
 {
-    TEST_CASE("popChar pops chars at the end of a string", tags)
+    TEST_CASE("popChar pops chars at the end of a string", TAGS)
     {
         std::string str = "azerty\r";
         std::string res = "azerty";
@@ -19,19 +19,19 @@ namespace StringUtil
         REQUIRE(str == res2);
     }
 
-    TEST_CASE("popChar does not pop chars in the middle of a string", tags)
+    TEST_CASE("popChar does not pop chars in the middle of a string", TAGS)
     {
         std::string str = "azerty\r";
         std::string res = str;
 
-        REQUIRE(popChar(str, 'z'));
+        REQUIRE_FALSE(popChar(str, 'z'));
         REQUIRE(str == res);
-        REQUIRE(popChar(str, 'y'));
+        REQUIRE_FALSE(popChar(str, 'y'));
         REQUIRE(str == res);
     }
 
 
-    TEST_CASE("popChar returns false on an empty string", tags)
+    TEST_CASE("popChar returns false on an empty string", TAGS)
     {
         std::string str = "";
 
@@ -39,7 +39,7 @@ namespace StringUtil
         REQUIRE(str == "");
     }
 
-    TEST_CASE("popString pops a substring at the end of a string, including single characters", tags)
+    TEST_CASE("popString pops a substring at the end of a string, including single characters", TAGS)
     {
         std::string str = "azerty\r";
         std::string res = "azert";
@@ -54,21 +54,22 @@ namespace StringUtil
         REQUIRE(str == res3);
     }
 
-    TEST_CASE("popString does not pop a substring in the middle of a string", tags)
+    TEST_CASE("popString does not pop a substring in the middle of a string", TAGS)
     {
         std::string str = "azerty\r";
         std::string res = str;
 
-        REQUIRE(popString(str, "ze"));
+        REQUIRE_FALSE(popString(str, "ze"));
         REQUIRE(str == res);
-        REQUIRE(popString(str, "az"));
+        REQUIRE_FALSE(popString(str, "az"));
         REQUIRE(str == res);
     }
 
-    TEST_CASE("popString pops the whole string when both provided strings are the same", tags)
+    TEST_CASE("popString pops the whole string when both provided strings are the same", TAGS)
     {
         std::string str = "";
         std::string str2 = "azerty";
+        std::string str2Copy = str2;
 
         REQUIRE(popString(str, ""));
         REQUIRE(str == "");
@@ -76,18 +77,18 @@ namespace StringUtil
         REQUIRE(str2 == "");
     }
 
-    TEST_CASE("popString popString is a no-op when the substring isn't contained in the provided string", tags)
+    TEST_CASE("popString popString is a no-op when the substring isn't contained in the provided string", TAGS)
     {
         std::string str = "azerty";
         std::string res = str;
 
-        REQUIRE(popString(str, "qsd"));
+        REQUIRE_FALSE(popString(str, "qsd"));
         REQUIRE(str == res);
-        REQUIRE(popString(str, "azertyuiop"));
+        REQUIRE_FALSE(popString(str, "azertyuiop"));
         REQUIRE(str == res);
     }
 
-    TEST_CASE("stringContains works in the general case", tags)
+    TEST_CASE("stringContains works in the general case", TAGS)
     {
         std::string str = "azertyyy";
 
@@ -106,7 +107,7 @@ namespace StringUtil
         REQUIRE_FALSE(stringContains(str, 'y', 4, true));
     }
 
-    TEST_CASE("stringContains works on empty strings", tags)
+    TEST_CASE("stringContains works on empty strings", TAGS)
     {
         std::string str = "";
 
@@ -119,7 +120,7 @@ namespace StringUtil
         REQUIRE_FALSE(stringContains(str, 'y', 1, true));
     }
 
-    TEST_CASE("stringContains behaves properly on 0-occurrence searches", tags)
+    TEST_CASE("stringContains behaves properly on 0-occurrence searches", TAGS)
     {
         std::string str = "azerty";
 
