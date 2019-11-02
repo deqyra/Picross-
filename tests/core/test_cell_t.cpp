@@ -13,12 +13,9 @@ namespace Picross
         {
             auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
 
-            WHEN("Validity is tested for")
+            THEN("Values are considered valid")
             {
-                THEN("Values are considered valid")
-                {
-                    REQUIRE(isValidCellValue(values));
-                }
+                REQUIRE(isValidCellValue(values));
             }
         }
 
@@ -26,17 +23,14 @@ namespace Picross
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
 
-            WHEN("Validity is tested for")
+            THEN("Values are considered invalid")
             {
-                THEN("Values are considered invalid")
-                {
-                    REQUIRE_FALSE(isValidCellValue(values));
-                }
+                REQUIRE_FALSE(isValidCellValue(values));
+            }
 
-                AND_THEN("Validity function throws when asked to")
-                {
-                    REQUIRE_THROWS_AS(isValidCellValue(values, true), std::runtime_error);
-                }
+            AND_THEN("Validity function throws when asked to")
+            {
+                REQUIRE_THROWS_AS(isValidCellValue(values, true), std::runtime_error);
             }
         }
     }
@@ -47,13 +41,10 @@ namespace Picross
         {
             auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
 
-            WHEN("Cast to string")
+            THEN("Valid strings are returned")
             {
-                THEN("Valid strings are returned")
-                {
-                    using Catch::Matchers::StartsWith;
-                    REQUIRE_THAT(cellValueToString(values), StartsWith("CELL_"));
-                }
+                using Catch::Matchers::StartsWith;
+                REQUIRE_THAT(cellValueToString(values), StartsWith("CELL_"));
             }
         }
 
@@ -61,12 +52,9 @@ namespace Picross
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
 
-            WHEN("Cast to string")
+            THEN("An exception is thrown")
             {
-                THEN("An exception is thrown")
-                {
-                    REQUIRE_THROWS_AS(cellValueToString(values), std::runtime_error);
-                }
+                REQUIRE_THROWS_AS(cellValueToString(values), std::runtime_error);
             }
         }
     }

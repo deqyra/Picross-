@@ -5,19 +5,19 @@
 
 namespace StringUtil
 {
-    // Removes any given single trailing character at the end of a string.
+    // Removes any given single trailing character at the end of a string. Returns whether operation was successful.
     bool popChar(std::string& str, const char c);
 
-    // Removes any given trailing substring at the end of a string.
+    // Removes any given trailing substring at the end of a string. Returns whether operation was successful.
     bool popString(std::string& str, const std::string& sub);
 
-    // Removes any single trailing '\r' at the end of a string.
+    // Removes any single trailing '\r' at the end of a string. Returns whether operation was successful.
     bool popCR(std::string& str);
 
-    // Removes any single trailing '\n' at the end of a string.
+    // Removes any single trailing '\n' at the end of a string. Returns whether operation was successful.
     bool popLF(std::string& str);
 
-    // Removes any trailing '\r\n' at the end of a string.
+    // Removes any trailing '\r\n' at the end of a string. Returns whether operation was successful.
     bool popCRLF(std::string& str);
 
     // Checks whether a string contains a certain substring a certain amount of times.

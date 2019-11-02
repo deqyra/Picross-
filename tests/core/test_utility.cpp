@@ -15,35 +15,35 @@ namespace Picross
 {
     SCENARIO("Strings are properly parsed into int vectors", TAGS)
     {
-        GIVEN("A well-formed space-separated string")
+        GIVEN("A well-formed string")
         {
             std::string str = "5 2 1";
 
             THEN("String is correctly parsed into a vector")
             {
                 std::vector<int> expected = {5, 2, 1};
-                REQUIRE(stringToIntVector(str) == expected);
+                REQUIRE(stringToIntVector(str, ' ') == expected);
             }
         }
 
-        GIVEN("A string with way too many spaces")
+        AND_GIVEN("A string with way too many delimiters")
         {
             std::string str = "     5   2        1      ";
 
             THEN("String is correctly parsed into a vector")
             {
                 std::vector<int> expected = {5, 2, 1};
-                REQUIRE(stringToIntVector(str) == expected);
+                REQUIRE(stringToIntVector(str, ' ') == expected);
             }
         }
 
-        GIVEN("An ill-formed string (incorrect delimiter)")
+        AND_GIVEN("An ill-formed string (incorrect delimiter)")
         {
             std::string str = "5;2;1";
 
             THEN("An exception is thrown")
             {
-                REQUIRE_THROWS_AS(stringToIntVector(str), std::runtime_error);
+                REQUIRE_THROWS_AS(stringToIntVector(str, ' '), std::runtime_error);
             }
         }
     }
@@ -105,7 +105,7 @@ namespace Picross
                 REQUIRE(tokenizeString(str, ',', false) == commaTokens);
             }
 
-            AND_THEN("String is properly tokenized on 'e's")
+            AND_THEN("String is properly tokenized on e's")
             {
                 std::vector<std::string> eTokens = {"H", "llo, world. Bl", "", "p bloop, am robot."};
                 REQUIRE(tokenizeString(str, 'e', false) == eTokens);

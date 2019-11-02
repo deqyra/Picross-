@@ -7,9 +7,11 @@
 #include "../../cli/cli_state.hpp"
 #include "../../cli/cli_input.hpp"
 
+#define TAGS "[cli][cli_input]"
+
 namespace Picross
 {
-    SCENARIO("CLI input functions work")
+    SCENARIO("CLI input functions work", TAGS)
     {
         GIVEN("An int input file")
         {

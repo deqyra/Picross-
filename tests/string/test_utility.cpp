@@ -7,114 +7,144 @@
 
 namespace StringUtil
 {
-    SCENARIO("popChar works")
+    TEST_CASE("popChar pops chars at the end of a string", tags)
     {
-        GIVEN("Some strings")
-        {
-            std::string str1Res = "azerty";
-            std::string str1 = "azerty\r";
-            std::string str2Res = "azerty\ruiop";
-            std::string str2 = "azerty\ruiop";
-            std::string str3Res = "azertyuiop";
-            std::string str3 = "azertyuiop";
-            std::string str4Res = "jean-jacque";
-            std::string str4 = "jean-jacques";
-            std::string str5Res = "";
-            std::string str5 = "";
+        std::string str = "azerty\r";
+        std::string res = "azerty";
+        std::string res2 = "azert";
 
-            THEN("The given char is popped if located at the end of the string")
-            {
-                REQUIRE(popChar(str1, '\r'));
-                REQUIRE(str1 == str1Res);
-
-                REQUIRE_FALSE(popChar(str2, '\r'));
-                REQUIRE(str2 == str2Res);
-
-                REQUIRE_FALSE(popChar(str3, '\r'));
-                REQUIRE(str3 == str3Res);
-
-                REQUIRE(popChar(str4, 's'));
-                REQUIRE(str4 == str4Res);
-
-                REQUIRE_FALSE(popChar(str5, 's'));
-                REQUIRE(str5 == str5Res);
-            }
-        }
+        REQUIRE(popChar(str, '\r'));
+        REQUIRE(str == res);
+        REQUIRE(popChar(str, 'y'));
+        REQUIRE(str == res2);
     }
 
-    SCENARIO("popString works")
+    TEST_CASE("popChar does not pop chars in the middle of a string", tags)
     {
-        GIVEN("Some strings")
-        {
-            std::string str1Res = "azert";
-            std::string str1 = "azerty\r";
-            std::string str2Res = "azerty\ruiop";
-            std::string str2 = "azerty\ruiop";
-            std::string str3Res = "azertyuiop";
-            std::string str3 = "azertyuiop";
-            std::string str4Res = "jean-jac";
-            std::string str4 = "jean-jacques";
+        std::string str = "azerty\r";
+        std::string res = str;
 
-            THEN("The substring is popped if located at the end of the string")
-            {
-                REQUIRE(popString(str1, "y\r"));
-                REQUIRE(str1 == str1Res);
-
-                REQUIRE_FALSE(popString(str2, "y\r"));
-                REQUIRE(str2 == str2Res);
-
-                REQUIRE_FALSE(popString(str3, "y\r"));
-                REQUIRE(str3 == str3Res);
-
-                REQUIRE(popString(str4, "ques"));
-                REQUIRE(str4 == str4Res);
-
-                REQUIRE_FALSE(popString(str3, "azertyuiopaze"));
-                REQUIRE(str3 == str3Res);
-
-                REQUIRE(popString(str3, str3));
-                REQUIRE(str3 == "");
-            }
-        }
+        REQUIRE(popChar(str, 'z'));
+        REQUIRE(str == res);
+        REQUIRE(popChar(str, 'y'));
+        REQUIRE(str == res);
     }
 
-    SCENARIO("stringContains works")
+
+    TEST_CASE("popChar returns false on an empty string", tags)
     {
-        GIVEN("Some strings")
-        {
-            std::string str0 = "azertyyy";
+        std::string str = "";
 
-            THEN("The correct value is returned")
-            {
-                REQUIRE(stringContains(str0, 'y', 0, false));
-                REQUIRE(stringContains(str0, 'y', 1, false));
-                REQUIRE(stringContains(str0, 'y', 2, false));
-                REQUIRE(stringContains(str0, 'y', 3, false));
-                REQUIRE_FALSE(stringContains(str0, 'y', 4, false));
-
-                REQUIRE_FALSE(stringContains(str0, 'y', 0, true));
-                REQUIRE_FALSE(stringContains(str0, 'y', 1, true));
-                REQUIRE_FALSE(stringContains(str0, 'y', 2, true));
-                REQUIRE(stringContains(str0, 'y', 3, true));
-                REQUIRE_FALSE(stringContains(str0, 'y', 4, true));
-            }
-        }
+        REQUIRE_FALSE(popChar(str, 'a'));
+        REQUIRE(str == "");
     }
 
-    SCENARIO("stringIsNum works")
+    TEST_CASE("popString pops a substring at the end of a string, including single characters", tags)
     {
-        GIVEN("Some strings")
-        {
-            std::string numeric = "3216548";
-            std::string alphanum = "321aze456";
-            std::string alphabetic = "azeqsdwxc";
+        std::string str = "azerty\r";
+        std::string res = "azert";
+        std::string res2 = "aze";
+        std::string res3 = "az";
 
-            THEN("Strings are properly detected as being numeric or not")
-            {
-                REQUIRE(stringIsNum(numeric));
-                REQUIRE_FALSE(stringIsNum(alphanum));
-                REQUIRE_FALSE(stringIsNum(alphabetic));
-            }
-        }
+        REQUIRE(popString(str, "y\r"));
+        REQUIRE(str == res);
+        REQUIRE(popString(str, "rt"));
+        REQUIRE(str == res2);
+        REQUIRE(popString(str, "e"));
+        REQUIRE(str == res3);
+    }
+
+    TEST_CASE("popString does not pop a substring in the middle of a string", tags)
+    {
+        std::string str = "azerty\r";
+        std::string res = str;
+
+        REQUIRE(popString(str, "ze"));
+        REQUIRE(str == res);
+        REQUIRE(popString(str, "az"));
+        REQUIRE(str == res);
+    }
+
+    TEST_CASE("popString pops the whole string when both provided strings are the same", tags)
+    {
+        std::string str = "";
+        std::string str2 = "azerty";
+
+        REQUIRE(popString(str, ""));
+        REQUIRE(str == "");
+        REQUIRE(popString(str2, str2));
+        REQUIRE(str2 == "");
+    }
+
+    TEST_CASE("popString popString is a no-op when the substring isn't contained in the provided string", tags)
+    {
+        std::string str = "azerty";
+        std::string res = str;
+
+        REQUIRE(popString(str, "qsd"));
+        REQUIRE(str == res);
+        REQUIRE(popString(str, "azertyuiop"));
+        REQUIRE(str == res);
+    }
+
+    TEST_CASE("stringContains works in the general case", tags)
+    {
+        std::string str = "azertyyy";
+
+        // Inexact count (at least n occurrences)
+        REQUIRE(stringContains(str, 'y', 0, false));
+        REQUIRE(stringContains(str, 'y', 1, false));
+        REQUIRE(stringContains(str, 'y', 2, false));
+        REQUIRE(stringContains(str, 'y', 3, false));
+        REQUIRE_FALSE(stringContains(str, 'y', 4, false));
+
+        // Exact count (exactly n occurrences)
+        REQUIRE_FALSE(stringContains(str, 'y', 0, true));
+        REQUIRE_FALSE(stringContains(str, 'y', 1, true));
+        REQUIRE_FALSE(stringContains(str, 'y', 2, true));
+        REQUIRE(stringContains(str, 'y', 3, true));
+        REQUIRE_FALSE(stringContains(str, 'y', 4, true));
+    }
+
+    TEST_CASE("stringContains works on empty strings", tags)
+    {
+        std::string str = "";
+
+        // Searching for 0 occurrences returns true
+        REQUIRE(stringContains(str, 'y', 0, false));
+        REQUIRE(stringContains(str, 'y', 0, true));
+
+        // Searching for more than 0 occurrences returns false
+        REQUIRE_FALSE(stringContains(str, 'y', 1, false));
+        REQUIRE_FALSE(stringContains(str, 'y', 1, true));
+    }
+
+    TEST_CASE("stringContains behaves properly on 0-occurrence searches", tags)
+    {
+        std::string str = "azerty";
+
+        // Inexact search always returns true, no matter whether the queried character is contained in the string
+        REQUIRE(stringContains(str, 'y', 0, false));
+        REQUIRE(stringContains(str, 'w', 0, false));
+
+        // Exact search returns true only if the queried character is not present in the string
+        REQUIRE_FALSE(stringContains(str, 'y', 0, true));
+        REQUIRE(stringContains(str, 'w', 0, true));
+    }
+
+    TEST_CASE("stringIsNum works in the general case")
+    {
+        std::string numeric = "3216548";
+        std::string alphanum = "321aze456";
+        std::string alphabetic = "azeqsdwxc";
+
+        REQUIRE(stringIsNum(numeric));
+        REQUIRE_FALSE(stringIsNum(alphanum));
+        REQUIRE_FALSE(stringIsNum(alphabetic));
+    }
+
+    TEST_CASE("stringIsNum returns false on empty strings")
+    {
+        REQUIRE_FALSE(stringIsNum(""));
     }
 }

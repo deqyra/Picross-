@@ -19,8 +19,10 @@ namespace StringUtil
 
     bool popString(std::string& str, const std::string& sub)
     {
+        if (str == sub) return true;
         if (str.size() < sub.size()) return false;
 
+        // Check whether substring is contained at the end of the main string.
         if (str.substr(str.size() - sub.size(), sub.size()) == sub)
         {
             str = str.substr(0, str.size() - sub.size());
@@ -84,6 +86,8 @@ namespace StringUtil
 
     bool stringIsNum(const std::string& str)
     {
+        if (str.size() == 0) return false;
+        
         for (auto it = str.begin(); it != str.end(); it++)
         {
             // Return false at the first non-digit char found.

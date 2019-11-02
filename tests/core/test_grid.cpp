@@ -206,7 +206,7 @@ namespace Picross
         }
     }
 
-    SCENARIO("Grid utility functions work", TAGS)
+    SCENARIO("Grid most present state is coherent", TAGS)
     {
         Grid g = Grid(5, 5);
 
