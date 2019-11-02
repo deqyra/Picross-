@@ -44,7 +44,7 @@ add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
         set( PROJECT_COPYRIGHT "${PROJECT_COPYRIGHT} ${PROJECT_MAINTAINER_NAME} <${PROJECT_MAINTAINER_EMAIL}>" )
 
 # Header configuration
-configure_file( "cmake_defines.config.hpp" "${CMAKE_SOURCE_DIR}/cmake_defines.hpp" )
+    configure_file( "cmake_defines.config.hpp" "${CMAKE_SOURCE_DIR}/cmake_defines.hpp" )
 
 # Project definition
     project( ${PROJECT_TARGET_NAME} VERSION ${PROJECT_VERSION}
@@ -52,7 +52,7 @@ configure_file( "cmake_defines.config.hpp" "${CMAKE_SOURCE_DIR}/cmake_defines.hp
                                     LANGUAGES CXX)
 
 # C++ standard version
-    set( CMAKE_CXX_STANDARD 17)
+    set( CMAKE_CXX_STANDARD 17 )
 
 # Build tinyxml2
     set( TINYXML2_NAME "tinyxml2" )
