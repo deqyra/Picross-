@@ -1,0 +1,25 @@
+version: 1.0.{build}
+
+image: Previous Ubuntu1804
+
+install:
+- sh: sudo apt-get install build-essential cmake
+
+build_script:
+- sh: >-
+    mkdir build
+    cd build
+    cmake ..
+    make
+
+test_script:
+- sh: >-
+    if [[ ! -d build ]]
+        mkdir build
+        cd build
+        cmake ..
+        make
+    else
+        cd build
+        ./tests
+    fi

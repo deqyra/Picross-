@@ -76,14 +76,14 @@ User interaction:
         ☐ Think about it
 Solving:
     ✔ Generic solver
-    ☐ Ierative solver
+    ☐ Iterative solver
     ☐ Inference engine
 Cleanup & enhancement:
     Important:
         ✔ Use smart pointers in CLIMenu, CommandSequence and SolveGridCommand
         ✔ Alternatively ensure CLIMenu and CommandSequence destructors don't leak
         ✔ Also use smart pointers on instanciation of the main menu
-        ☐ Put comments here and there
+        ✔ Put comments here and there
         ☐ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
         ☐ Include folder name in all include-protection macros
@@ -93,7 +93,7 @@ Cleanup & enhancement:
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ☐ Better usage of std::endl (new line vs. buffer flushing)
-        ☐ Cross-platform handling of new lines (+ fix hardcoded \n's)
+        ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ☐ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Have exhaustive #includes in all files
@@ -102,5 +102,5 @@ Cleanup & enhancement:
         ✔ Remove empty constructors and destructors (unless virtual)
 Project management:
     ✔ Set up a git repo
-    ☐ Come up with tests
+    ✔ Come up with tests
     ☐ Set up continuous integration because why not

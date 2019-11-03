@@ -19,5 +19,6 @@ namespace Picross
         g = generate10x10PartialGrid();
         expected = StringUtil::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
         REQUIRE(txt.renderGridWithHints(g) == expected);
+        Catch::cout() << txt.renderGridWithHints(g);
     }
 }
