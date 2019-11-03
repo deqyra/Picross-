@@ -26,7 +26,7 @@ namespace Picross
 			int getWidth() const;
 			int getHeight() const;
 
-			// These return COPIES only. Modifications to the grid content and hints to be made through the appropriate methods.
+		// These return COPIES only. Modifications to the grid content and hints to be made through the appropriate methods.
 			std::vector<cell_t> getRow(int row) const;
 			std::vector<cell_t> getCol(int col) const;
 
@@ -35,27 +35,32 @@ namespace Picross
 			std::vector<std::vector<int>> getAllColHints() const;
 			std::vector<int> getColHints(int col) const;
 
-			// Cell modification methods.
+		// Cell modification methods.
 			cell_t getCell(int row, int col) const;
 			void setCell(int row, int col, cell_t val);
 			void checkCell(int row, int col);
 			void crossCell(int row, int col);
 			void clearCell(int row, int col);
 
-			// Tip modification methods.
+		// Tip modification methods.
 			void setRowHints(int row, std::vector<int> hints);
 			void setColHints(int col, std::vector<int> hints);
 			void setAllRowHints(std::vector<std::vector<int>> hints);
 			void setAllColHints(std::vector<std::vector<int>> hints);
 
-			// Useful coordinate checks.
+		// Useful checks.
 			bool isValidRow(int row, bool throwOnFail = false) const;
 			bool isValidCol(int col, bool throwOnFail = false) const;
 			bool isValidCell(int row, int col, bool throwOnFail = false) const;
+		
+		    // Return the cell value which is most present within a grid.
+			cell_t mostPresentState() const;
 
-			// Useful tip-related checks and functions.
+		// Useful tip-related checks and functions.
 			bool areValidRowHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 			bool areValidColHints(const std::vector<int>& hints, bool throwOnFail = false) const;
+
+			friend bool operator==(const Grid& lhs, const Grid& rhs);
 	};
 }
 

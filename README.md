@@ -1,5 +1,7 @@
 # Picross engine
 
+[![Build Status](https://travis-ci.org/deqyra/PicrossEngine.svg?branch=master)](https://travis-ci.org/deqyra/PicrossEngine)
+
 A small CLI program aiming at allowing the user to create picross (nonogram) grids and manipulate them, save them, load them, solve them, etc.  
 
 ## Quick roadmap  
@@ -15,8 +17,8 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 ## Project state
 
 - ✔ Git repo  
-- ☐ Tests  
-- ☐ Continuous integration
+- ✔ Tests  
+- ✔ Continuous integration
 
 ## Usage
 

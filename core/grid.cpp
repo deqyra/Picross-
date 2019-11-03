@@ -251,6 +251,33 @@ namespace Picross
 		return result;
 	}
 
+    cell_t Grid::mostPresentState() const
+    {
+        // Array to count occurrences of each cell value.
+        int counts[CELL_T_VALUE_COUNT] = {0};
+
+        // Traverse provided grid and increase counts accordingly.
+        for (int row = 0; row < getHeight(); row++)
+        {
+            for (int col = 0; col < getWidth(); col++)
+            {
+                counts[getCell(row, col)]++;
+
+                // This works because the underlying values of cell values
+                // start from 0 and go up in 1-increments, which corresponds
+                // to the indexing of the `counts` array.
+                //
+                // As a side effect, the layout of that array exactly matches
+                // that of CELL_T_ORDERED_VALUES, which allows to map counts
+                // and values on the same index (used in the return statement below).
+            }
+        }
+
+        // Find max index and return appropriate value.
+        int maxIndex = indexOfMaxElement(counts, CELL_T_VALUE_COUNT);
+        return CELL_T_ORDERED_VALUES[maxIndex];
+    }
+
 	bool Grid::areValidRowHints(const std::vector<int>& hints, bool throwOnFail) const
 	{
 		int space = minimumSpaceFromHints(hints);
@@ -275,5 +302,16 @@ namespace Picross
 			throw std::runtime_error(s.str().c_str());
 		}
 		return result;
+	}
+
+	bool operator==(const Grid& lhs, const Grid& rhs)
+	{
+		if (lhs._width != rhs._width) return false;
+		if (lhs._height != rhs._height) return false;
+		if (lhs._horizontalHints != rhs._horizontalHints) return false;
+		if (lhs._verticalHints != rhs._verticalHints) return false;
+		if (lhs._content != rhs._content) return false;
+
+		return true;
 	}
 }
