@@ -52,6 +52,7 @@ add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
                                     LANGUAGES CXX)
 
 # C++ standard version
+    # C++17 requires at least gcc 7 to be compiled
     set( CMAKE_CXX_STANDARD 17 )
 
 # Build tinyxml2
