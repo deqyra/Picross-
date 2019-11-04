@@ -8,7 +8,7 @@
 
 namespace Picross
 {
-    SCENARIO("Cell value validity is properly checked for", TAGS)
+    SCENARIO("Cell value validity is properly checked for and valid valid can be named", TAGS)
     {
         GIVEN("Valid values")
         {
@@ -17,6 +17,12 @@ namespace Picross
             THEN("Values are considered valid")
             {
                 REQUIRE(isValidCellValue(values));
+            }
+
+            AND_THEN("Values can be named")
+            {
+                using Catch::Matchers::StartsWith;
+                REQUIRE_THAT(cellValueName(values), StartsWith("CELL_"));
             }
         }
 
@@ -33,19 +39,24 @@ namespace Picross
             {
                 REQUIRE_THROWS_AS(isValidCellValue(values, true), InvalidCellValueError);
             }
+
+            AND_THEN("Trying to name them throws")
+            {
+                REQUIRE_THROWS_AS(cellValueName(values), InvalidCellValueError);
+            }
         }
     }
 
-    SCENARIO("Cell values can all be turned to strings", TAGS)
+    SCENARIO("Any cell value can be turned to an int and a string", TAGS)
     {
         GIVEN("Valid values")
         {
             auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
 
-            THEN("Valid strings are returned")
+            THEN("Valid ints and strings are returned")
             {
-                using Catch::Matchers::StartsWith;
-                REQUIRE_THAT(cellValueToString(values), StartsWith("CELL_"));
+                REQUIRE_NOTHROW(cellValueToInt(values));
+                REQUIRE_NOTHROW(cellValueToString(values));
             }
         }
 
@@ -53,9 +64,10 @@ namespace Picross
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
 
-            THEN("An exception is thrown")
+            THEN("Valid ints and strings are returned")
             {
-                REQUIRE_THROWS_AS(cellValueToString(values), InvalidCellValueError);
+                REQUIRE_NOTHROW(cellValueToInt(values));
+                REQUIRE_NOTHROW(cellValueToString(values));
             }
         }
     }

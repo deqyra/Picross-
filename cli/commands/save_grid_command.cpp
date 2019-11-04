@@ -39,8 +39,8 @@ namespace Picross
         }
         catch(const std::exception& e)
         {
-            state.err() << "Exception thrown:" << std::endl;
-            state.err() << e.what() << std::endl;
+            state.err() << "Exception thrown:\n";
+            state.err() << e.what() << '\n';
             state.out() << "Grid could not be saved." << std::endl;
 
             return COMMAND_FAILURE;

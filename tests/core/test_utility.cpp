@@ -82,50 +82,6 @@ namespace Picross
         }
     }
 
-    SCENARIO("Strings are properly tokenized", TAGS)
-    {
-        GIVEN("Any string")
-        {
-            std::string str = "Hello, world. Bleep bloop, am robot.";
-
-            THEN("String is properly tokenized on a delimiter")
-            {
-                std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleep", "bloop,", "am", "robot."};
-                REQUIRE(StringUtil::tokenizeString(str, ' ', false) == spaceTokens);
-            }
-
-            AND_THEN("There are no empty tokens (discarding them doesn't affect the result)")
-            {
-                std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleep", "bloop,", "am", "robot."};
-                REQUIRE(StringUtil::tokenizeString(str, ' ', true) == spaceTokens);
-            }
-
-            AND_THEN("String is properly tokenized on commas")
-            {
-                std::vector<std::string> commaTokens = {"Hello", " world. Bleep bloop", " am robot."};
-                REQUIRE(StringUtil::tokenizeString(str, ',', false) == commaTokens);
-            }
-
-            AND_THEN("String is properly tokenized on e's")
-            {
-                std::vector<std::string> eTokens = {"H", "llo, world. Bl", "", "p bloop, am robot."};
-                REQUIRE(StringUtil::tokenizeString(str, 'e', false) == eTokens);
-            }
-
-            AND_THEN("Empty tokens are properly discarded when asked to")
-            {
-                std::vector<std::string> eTokens = {"H", "llo, world. Bl", "p bloop, am robot."};
-                REQUIRE(StringUtil::tokenizeString(str, 'e', true) == eTokens);
-            }
-
-            AND_THEN("String ending with delimiter does not result in last token being empty")
-            {
-                std::vector<std::string> dotTokens = {"Hello, world", " Bleep bloop, am robot"};
-                REQUIRE(StringUtil::tokenizeString(str, '.', false) == dotTokens);
-            }
-        }
-    }
-
     SCENARIO("Multiline string concatenation works properly", TAGS)
     {
         GIVEN("A couple multiline strings of equal numbers of lines")

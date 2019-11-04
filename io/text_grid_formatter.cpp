@@ -2,7 +2,6 @@
 #include "../core/utility.hpp"
 #include "../core/exceptions/unrecognized_cell_value_error.hpp"
 
-#include <sstream>
 #include <iostream>
 #include <stdexcept>
 
@@ -29,22 +28,22 @@ namespace Picross
 		int width = grid.getWidth();
 		int height = grid.getHeight();
 
-		std::stringstream s;
+		std::string s;
 		// First line
-		s << renderTopLine(width);
+		s += renderTopLine(width);
 
 		// All rows and interlines
 		for (int i = 0; i < height - 1; i++)
 		{
-			s << renderRow(grid.getRow(i), emptyCrossedCells);
-			s << renderInterline(width);
+			s += renderRow(grid.getRow(i), emptyCrossedCells);
+			s += renderInterline(width);
 		}
 
 		// Last row and bottom line
-		s << renderRow(grid.getRow(height - 1));
-		s << renderBottomLine(width);
+		s += renderRow(grid.getRow(height - 1));
+		s += renderBottomLine(width);
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderGridWithHints(const Grid& grid, bool emptyCrossedCells)
@@ -60,10 +59,10 @@ namespace Picross
 		std::string hHintsStr = renderHorizontalHints(grid.getAllRowHints());
 		std::string gridStr = renderGrid(grid, emptyCrossedCells);
 
-		std::stringstream s;
-		s << multilineConcatenation(paddingBlock, vHintsStr);
-		s << multilineConcatenation(hHintsStr, gridStr);
-		return s.str();
+		std::string s;
+		s += multilineConcatenation(paddingBlock, vHintsStr);
+		s += multilineConcatenation(hHintsStr, gridStr);
+		return s;
 	}
 
 	std::string TextGridFormatter::getCharacter(cell_t cellContent)
@@ -82,9 +81,8 @@ namespace Picross
 			default:
 				// Auto throw if character is not valid
 				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw UnrecognizedCellValueError(s.str().c_str());
+				std::string s = "Cell value unhandled by formatter: " + cellValueToString(cellContent) + ".\n";
+				throw UnrecognizedCellValueError(s);
 		}
 	}
 
@@ -92,9 +90,8 @@ namespace Picross
 	{
 		if (newChar.length() != 1)
 		{
-			std::stringstream s;
-			s << "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" << cellContent << "\"." << std::endl;
-			throw UnrecognizedCellValueError(s.str().c_str());
+			std::string s = "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" + newChar + "\".\n";
+			throw UnrecognizedCellValueError(s);
 		}
 		
 		switch(cellContent)
@@ -111,9 +108,8 @@ namespace Picross
 			default:
 				// Auto throw if character is not valid
 				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw UnrecognizedCellValueError(s.str().c_str());
+				std::string s = "Cell value unhandled by formatter: " + cellValueToString(cellContent) + ".\n";
+				throw UnrecognizedCellValueError(s);
 		}
 	}
 
@@ -133,9 +129,8 @@ namespace Picross
 			default:
 				// Auto throw if character is not valid
 				isValidCellValue(cellContent, true);
-				std::stringstream s;
-				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw UnrecognizedCellValueError(s.str().c_str());
+				std::string s = "Cell content type unhandled by formatter: " + cellValueToString(cellContent) + ".\n";
+				throw UnrecognizedCellValueError(s);
 		}
 	}
 
@@ -148,41 +143,41 @@ namespace Picross
 
 	std::string TextGridFormatter::pad(int length, std::string padString)
 	{
-		std::stringstream s;
+		std::string s;
 		for (int i = 0; i < length; i++)
 		{
-			s << padString;
+			s += padString;
 		}
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::padBlock(int width, int height, std::string padString)
 	{
-		std::stringstream s;
+		std::string s;
 		for (int i = 0; i < height; i++)
 		{
-			s << pad(width, padString) << '\n';
+			s += pad(width, padString) + '\n';
 		}
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderTopLine(int width)
 	{
-		std::stringstream s;
-		s << TOP_LEFT_CHAR;
+		std::string s;
+		s += TOP_LEFT_CHAR;
 		for (int i = 0; i < width - 1; i++)
 		{
-			s << HORIZONTAL_CHAR << TOP_CROSS_CHAR;
+			s += HORIZONTAL_CHAR + TOP_CROSS_CHAR;
 		}
-		s << HORIZONTAL_CHAR << TOP_RIGHT_CHAR << std::endl;
+		s += HORIZONTAL_CHAR + TOP_RIGHT_CHAR + '\n';
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells)
 	{
-		std::stringstream s;
-		s << VERTICAL_CHAR;
+		std::string s;
+		s += VERTICAL_CHAR;
 
 		int width = row.size();
 		for (int i = 0; i < width; i++)
@@ -206,37 +201,37 @@ namespace Picross
 				default:
 					contentChar = " ";
 			}
-			s << contentChar << VERTICAL_CHAR;
+			s += contentChar + VERTICAL_CHAR;
 		}
-		s << std::endl;
+		s += '\n';
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderInterline(int width)
 	{
-		std::stringstream s;
-		s << LEFT_CROSS_CHAR;
+		std::string s;
+		s += LEFT_CROSS_CHAR;
 		for (int i = 0; i < width - 1; i++)
 		{
-			s << HORIZONTAL_CHAR << MIDDLE_CROSS_CHAR;
+			s += HORIZONTAL_CHAR + MIDDLE_CROSS_CHAR;
 		}
-		s << HORIZONTAL_CHAR << RIGHT_CROSS_CHAR << std::endl;
+		s += HORIZONTAL_CHAR + RIGHT_CROSS_CHAR + '\n';
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderBottomLine(int width)
 	{
-		std::stringstream s;
-		s << BOTTOM_LEFT_CHAR;
+		std::string s;
+		s += BOTTOM_LEFT_CHAR;
 		for (int i = 0; i < width - 1; i++)
 		{
-			s << HORIZONTAL_CHAR << BOTTOM_CROSS_CHAR;
+			s += HORIZONTAL_CHAR + BOTTOM_CROSS_CHAR;
 		}
-		s << HORIZONTAL_CHAR << BOTTOM_RIGHT_CHAR << std::endl;
+		s += HORIZONTAL_CHAR + BOTTOM_RIGHT_CHAR + '\n';
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderHorizontalHints(std::vector<std::vector<int>> hints)
@@ -244,22 +239,22 @@ namespace Picross
 		int maxHintLength = maxVectorLength(hints);
 		int strLength = maxHintLength * 2 - 1;
 
-		std::stringstream s;
+		std::string s;
 		for (auto it = hints.begin(); it != hints.end(); it++)
 		{
-			s << pad(strLength, HORIZONTAL_CHAR) << '\n';
+			s += pad(strLength, HORIZONTAL_CHAR) + '\n';
 	
 			int lengthDiff = maxHintLength - it->size();
 			if (lengthDiff)
 			{
-				s << pad(lengthDiff * 2, " ");
+				s += pad(lengthDiff * 2, " ");
 			}
 	
-			s << vectorToString(*it) << '\n';
+			s += vectorToString(*it) + '\n';
 		}
-		s << pad(strLength, HORIZONTAL_CHAR) << '\n';
+		s += pad(strLength, HORIZONTAL_CHAR) + '\n';
 
-		return s.str();
+		return s;
 	}
 
 	std::string TextGridFormatter::renderVerticalHints(std::vector<std::vector<int>> hints)
@@ -269,31 +264,31 @@ namespace Picross
 
 		for (auto it = hints.begin(); it != hints.end(); it++)
 		{
-			std::stringstream s;
+			std::string s;
 			int lengthDiff = maxHintLength - it->size();
-			s << pad(lengthDiff, " ") << vectorToString(*it, "");
-			strHints.push_back(s.str());
+			s += pad(lengthDiff, " ") + vectorToString(*it, "");
+			strHints.push_back(s);
 		}
 
-		std::stringstream s;
+		std::string s;
 		for (int i = 0; i < maxHintLength; i++)
 		{
 			for (auto it = strHints.begin(); it != strHints.end(); it++)
 			{
-				s << VERTICAL_CHAR << it->at(i);
+				s += VERTICAL_CHAR + it->at(i);
 			}
-			s << VERTICAL_CHAR << std::endl;
+			s += VERTICAL_CHAR + '\n';
 
 			if (i != maxHintLength - 1)
 			{
 				for (int j = 0; j < strHints.size(); j++)
 				{
-					s << VERTICAL_CHAR << " ";
+					s += VERTICAL_CHAR + " ";
 				}
-				s << VERTICAL_CHAR << std::endl;
+				s += VERTICAL_CHAR + '\n';
 			}
 		}
 
-		return s.str();
+		return s;
 	}
 }

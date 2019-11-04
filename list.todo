@@ -84,7 +84,7 @@ Cleanup & enhancement:
         ✔ Alternatively ensure CLIMenu and CommandSequence destructors don't leak
         ✔ Also use smart pointers on instanciation of the main menu
         ✔ Put comments here and there
-        ☐ Custom exceptions
+        ✔ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
         ✔ Include folder name in all include-protection macros
         ✔ CMake build

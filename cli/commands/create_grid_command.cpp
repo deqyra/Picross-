@@ -1,7 +1,6 @@
 #include "../cli_command.hpp"
 #include "create_grid_command.hpp"
 
-#include <sstream>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -53,9 +52,8 @@ namespace Picross
             std::vector<int> intHints;
             while (true)
             {
-                std::stringstream title;
-                title << numberedPrefixNoun << " n°" << i << ": ";
-                std::string strHints = CLIInput::askForInput<std::string>(title.str(), state);
+                std::string title = numberedPrefixNoun + " n°" + std::to_string(i) + ": ";
+                std::string strHints = CLIInput::askForInput<std::string>(title, state);
 
                 try
                 {

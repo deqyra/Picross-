@@ -60,10 +60,10 @@ namespace Picross
 
     void SolveCommand::showSolvers(CLIState& state, std::vector<std::shared_ptr<Solver>>& solvers)
     {
-        state.out() << "Available solvers: " << std::endl;
+        state.out() << "Available solvers:\n";
         for (int i = 0; i < solvers.size(); i++)
         {
-            state.out() << i + 1 << ". " << solvers[i]->name() << std::endl;
+            state.out() << i + 1 << ". " << solvers[i]->name() << '\n';
         }
         state.out() << "0. Exit" << std::endl;
     }
@@ -74,11 +74,11 @@ namespace Picross
 
         state.out() << "Solving grid using " << solver->name() << "..." << std::endl;
         solver->solve(grid);
-        state.out() << "Solving complete.";
+        state.out() << "Solving complete.\n";
 
         TextGridFormatter formatter;
 
-        state.out() << "The grid is now in the following state:" << std::endl;
+        state.out() << "The grid is now in the following state:\n";
         state.out() << formatter.renderGridWithHints(grid, true);
         bool save = CLIInput::askForInput<bool>("Do you want to keep these changes? ", state);
 

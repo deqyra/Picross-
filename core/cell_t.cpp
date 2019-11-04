@@ -23,15 +23,14 @@ namespace Picross
 		// Throw if asked to
 		if (throwOnFail && !found)
 		{
-			std::stringstream s;
-			s << "Invalid cell value \"" << val << "\"." << std::endl;
-			throw InvalidCellValueError(s.str().c_str());
+			std::string s = "Invalid cell value " + cellValueToString(val) + ".\n";
+			throw InvalidCellValueError(s);
 		}
 
 		return found;
     }
 
-	std::string cellValueToString(cell_t val)
+	std::string cellValueName(cell_t val)
 	{
 		// Throw if value is invalid
 		isValidCellValue(val, true);
@@ -49,9 +48,18 @@ namespace Picross
 				break;
 			default:
 				// A value may be valid as far as the type is concerned, but not handled in here. Report this properly.
-				std::stringstream s;
-				s << "Unrecognized cell value \"" << val << "\", cannot represent into string." << std::endl;
-				throw InvalidCellValueError(s.str().c_str());
+				std::string s = "Unrecognized cell value " + cellValueToString(val) + ", name unknown.\n";
+				throw InvalidCellValueError(s);
 		}
+	}
+
+	int cellValueToInt(cell_t val)
+	{
+		return static_cast<int>(val) & 0xFF;
+	}
+
+	std::string cellValueToString(cell_t val)
+	{
+		return std::to_string(cellValueToInt(val));
 	}
 }

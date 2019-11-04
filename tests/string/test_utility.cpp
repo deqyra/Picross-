@@ -133,7 +133,7 @@ namespace StringUtil
         REQUIRE(stringContains(str, 'w', 0, true));
     }
 
-    TEST_CASE("stringIsNum works in the general case")
+    TEST_CASE("stringIsNum works in the general case", TAGS)
     {
         std::string numeric = "3216548";
         std::string alphanum = "321aze456";
@@ -144,8 +144,79 @@ namespace StringUtil
         REQUIRE_FALSE(stringIsNum(alphabetic));
     }
 
-    TEST_CASE("stringIsNum returns false on empty strings")
+    TEST_CASE("stringIsNum returns false on empty strings", TAGS)
     {
         REQUIRE_FALSE(stringIsNum(""));
+    }
+
+    SCENARIO("Strings are properly tokenized", TAGS)
+    {
+        GIVEN("Any string")
+        {
+            std::string str = "Hello, world. Bleeep bloop, am robot.";
+
+            THEN("String is properly tokenized on a delimiter")
+            {
+                std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleeep", "bloop,", "am", "robot."};
+                REQUIRE(tokenizeString(str, ' ', false) == spaceTokens);
+            }
+
+            AND_THEN("There are no empty tokens (discarding them doesn't affect the result)")
+            {
+                std::vector<std::string> spaceTokens = {"Hello,", "world.", "Bleeep", "bloop,", "am", "robot."};
+                REQUIRE(tokenizeString(str, ' ', true) == spaceTokens);
+            }
+
+            AND_THEN("String is properly tokenized on commas")
+            {
+                std::vector<std::string> commaTokens = {"Hello", " world. Bleeep bloop", " am robot."};
+                REQUIRE(tokenizeString(str, ',', false) == commaTokens);
+            }
+
+            AND_THEN("String is properly tokenized on e's")
+            {
+                std::vector<std::string> eTokens = {"H", "llo, world. Bl", "", "", "p bloop, am robot."};
+                REQUIRE(tokenizeString(str, 'e', false) == eTokens);
+            }
+
+            AND_THEN("Empty tokens are properly discarded when asked to")
+            {
+                std::vector<std::string> eTokens = {"H", "llo, world. Bl", "p bloop, am robot."};
+                REQUIRE(tokenizeString(str, 'e', true) == eTokens);
+            }
+
+            AND_THEN("String ending with delimiter does not result in last token being empty")
+            {
+                std::vector<std::string> dotTokens = {"Hello, world", " Bleeep bloop, am robot"};
+                REQUIRE(tokenizeString(str, '.', false) == dotTokens);
+            }
+        }
+    }
+
+    TEST_CASE("readFileIntoString works properly")
+    {
+        std::string expectedWithCarriage = "azeazeaze\r\naaaa\r\ndddd\r\n\r\ntesttest\r\n";
+        std::string expectedNoCarriage = "azeazeaze\naaaa\ndddd\n\ntesttest\n";
+
+        std::string result;
+        REQUIRE_NOTHROW(result = readFileIntoString("resources/tests/string/dummy_file.txt"));
+
+        if (stringContains(result, '\r'))
+        {
+            REQUIRE(result == expectedWithCarriage);
+        }
+        else
+        {
+            REQUIRE(result == expectedNoCarriage);
+        }
+    }
+
+    TEST_CASE("stripCR works properly", TAGS)
+    {
+        // Stripping all CRs effectively removes all CRs
+        std::string test = "azeazeaze\r\naaaa\r\r\r\ndddd\r\n\r\ntesttest\r\n";
+        std::string expected = "azeazeaze\naaaa\ndddd\n\ntesttest\n";
+        REQUIRE_NOTHROW(stripCR(test));
+        REQUIRE(test == expected);
     }
 }

@@ -34,7 +34,7 @@ namespace StringUtil
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns = true);
 
     // Remove carriage returns in provided string. Returns whether operation was successful.
-    std::string stripCR(std::string& str, bool inNewLinesOnly = false);
+    void stripCR(std::string& str);
 }
 
 #endif//STRING__UTILITY_HPP

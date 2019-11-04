@@ -85,31 +85,31 @@ namespace Picross
         // Loop control: stop when either vector reaches its end.
         bool stop = itFirst == firstTokens.end() || itSecond == secondTokens.end();
 
-        std::stringstream s;
+        std::string s;
         while (!stop)
         {
             // Step 3.1: feed first line into stream.
             if (itFirst != firstTokens.end())
             {
-                s << *itFirst;
+                s += *itFirst;
                 itFirst++;
             }
 
             // Step 3.2: feed second line into stream.
             if (itSecond != secondTokens.end())
             {
-                s << *itSecond;
+                s += *itSecond;
                 itSecond++;
             }
 
             // Don't forget to advance iterators each time a line is accessed.
 
             // Step 3.3: break line and check for loop end.
-            s << std::endl;
+            s += '\n';
             stop = itFirst == firstTokens.end() && itSecond == secondTokens.end();
         }
 
         // Step 4: return single string with everything.
-        return s.str();
+        return s;
 	}
 }

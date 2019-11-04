@@ -27,26 +27,25 @@ namespace Picross
         std::string opening = "",       std::string closing = "",
         std::string elementPrefix = "", std::string elementSuffix = "")
     {
-        std::stringstream s;
-        s << opening;
+        std::string s = opening;
 
         if (elements.size())
         {
             for (auto it = elements.begin(); it != elements.end() - 1; it++)
             {
-                s << elementPrefix << (*it) << elementSuffix << delimiter;
+                s += elementPrefix + std::to_string(*it) + elementSuffix + delimiter;
             }
-            s << elementPrefix << elements.back() << elementSuffix << closing;
+            s += elementPrefix + std::to_string(elements.back()) + elementSuffix + closing;
         }
         else
         {
-            s << closing;
+            s += closing;
         }
 
         // Output example:
         // vectorToString({5, 2, 1}, "-", "<", ">", "[", "]") == "<[5]-[2]-[1]>"
 
-        return s.str();
+        return s;
     }
 
     // Given a vector of vectors, returns the maximum length of the contained vectors.

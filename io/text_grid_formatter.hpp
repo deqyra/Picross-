@@ -5,17 +5,17 @@
 #include <vector>
 
 // Grid display characters
-#define TOP_LEFT_CHAR "╔"
-#define TOP_RIGHT_CHAR "╗"
-#define BOTTOM_LEFT_CHAR "╚"
-#define BOTTOM_RIGHT_CHAR "╝"
-#define LEFT_CROSS_CHAR "╠"
-#define RIGHT_CROSS_CHAR "╣"
-#define TOP_CROSS_CHAR "╦"
-#define BOTTOM_CROSS_CHAR "╩"
-#define MIDDLE_CROSS_CHAR "╬"
-#define VERTICAL_CHAR "║"
-#define HORIZONTAL_CHAR "═"
+#define TOP_LEFT_CHAR (std::string)"╔"
+#define TOP_RIGHT_CHAR (std::string)"╗"
+#define BOTTOM_LEFT_CHAR (std::string)"╚"
+#define BOTTOM_RIGHT_CHAR (std::string)"╝"
+#define LEFT_CROSS_CHAR (std::string)"╠"
+#define RIGHT_CROSS_CHAR (std::string)"╣"
+#define TOP_CROSS_CHAR (std::string)"╦"
+#define BOTTOM_CROSS_CHAR (std::string)"╩"
+#define MIDDLE_CROSS_CHAR (std::string)"╬"
+#define VERTICAL_CHAR (std::string)"║"
+#define HORIZONTAL_CHAR (std::string)"═"
 
 #include "../core/cell_t.hpp"
 #include "../core/grid.hpp"

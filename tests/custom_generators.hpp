@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <memory>
 #include <vector>
+#include <tuple>
 
 #include "../core/cell_t.hpp"
 

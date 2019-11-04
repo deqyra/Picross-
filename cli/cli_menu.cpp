@@ -28,7 +28,7 @@ namespace Picross
     {
         while (true)
         {
-            _state.out() << std::endl;
+            _state.out() << '\n';
         	_state.out() << getTooltip() << ":" << std::endl;
             showOptions();
 
@@ -44,7 +44,7 @@ namespace Picross
                 break;
             }
 
-            _state.out() << std::endl;
+            _state.out() << '\n';
             _state.out() << _commands[input - 1]->getTooltip() << ":" << std::endl;
             _commands[input - 1]->run(_state);
         }

@@ -133,7 +133,7 @@ namespace StringUtil
             std::string res = s.str();
             if (stripCarriageReturns)
             {
-                res = stripCR(res);
+                stripCR(res);
             }
 
             return res;
@@ -142,23 +142,15 @@ namespace StringUtil
         throw FileNotFoundError(path + ": file not found.");
     }
 
-    std::string stripCR(std::string& str, bool inNewLinesOnly)
+    void stripCR(std::string& str)
     {
-        char splicingChar = '\r';
-        std::string endFill = "";
-        if (inNewLinesOnly)
-        {
-            splicingChar = '\n';
-            endFill = "\n";
-        }
-
-        std::stringstream result;
-        std::vector<std::string> tokens = tokenizeString(str, splicingChar);
+        std::string result;
+        std::vector<std::string> tokens = tokenizeString(str, '\r');
         for (auto it = tokens.begin(); it != tokens.end(); it++)
         {
-            popCR(*it);
-            result << *it << endFill;
+            //popCR(*it);
+            result += *it;
         }
-        return result.str();        
+        str = result;        
     }
 }

@@ -24,6 +24,12 @@ namespace Picross
     // Checks whether provided value is valid for a cell.
     bool isValidCellValue(cell_t val, bool throwOnFail = false);
 
+    // Gives the name of a cell value.
+    std::string cellValueName(cell_t val);
+
+    // Gives the int representation of a cell value.
+    int cellValueToInt(cell_t val);
+
     // Gives the string representation of a cell value.
     std::string cellValueToString(cell_t val);
 }
