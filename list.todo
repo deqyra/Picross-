@@ -85,14 +85,14 @@ Cleanup & enhancement:
         ✔ Also use smart pointers on instanciation of the main menu
         ✔ Put comments here and there
         ✔ Custom exceptions
-        ☐ Use std::string::operator+ instead of abusing stringstreams
+        ✔ Use std::string::operator+ instead of abusing stringstreams
         ✔ Include folder name in all include-protection macros
         ✔ CMake build
         ✔ Inline fully specialized templates
         ✔ Make sure all polymorphically derived classes have a virtual destructor
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
-        ☐ Better usage of std::endl (new line vs. buffer flushing)
+        ✔ Better usage of std::endl (new line vs. buffer flushing)
         ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ☐ Make CLI-related stuff its own library, with custom templated state et al
@@ -103,4 +103,4 @@ Cleanup & enhancement:
 Project management:
     ✔ Set up a git repo
     ✔ Come up with tests
-    ☐ Set up continuous integration because why not
+    ✔ Set up continuous integration because why not
