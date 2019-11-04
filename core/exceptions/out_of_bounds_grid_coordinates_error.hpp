@@ -1,0 +1,11 @@
+#ifndef CORE__EXCEPTIONS__OUT_OF_BOUNDS_GRID_COORDINATES_ERROR
+#define CORE__EXCEPTIONS__OUT_OF_BOUNDS_GRID_COORDINATES_ERROR
+
+#include "../../make_basic_exception.hpp"
+
+namespace Picross
+{
+    DECLARE_BASIC_EXCEPTION(OutOfBoundsGridCoordinatesError)
+}
+
+#endif//CORE__EXCEPTIONS__OUT_OF_BOUNDS_GRID_COORDINATES_ERROR

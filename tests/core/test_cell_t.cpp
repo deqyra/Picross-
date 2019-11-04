@@ -2,6 +2,7 @@
 
 #include "../custom_generators.hpp"
 #include "../../core/cell_t.hpp"
+#include "../../core/exceptions/invalid_cell_value_error.hpp"
 
 #define TAGS "[core][cell_t]"
 
@@ -30,7 +31,7 @@ namespace Picross
 
             AND_THEN("Validity function throws when asked to")
             {
-                REQUIRE_THROWS_AS(isValidCellValue(values, true), std::runtime_error);
+                REQUIRE_THROWS_AS(isValidCellValue(values, true), InvalidCellValueError);
             }
         }
     }
@@ -54,7 +55,7 @@ namespace Picross
 
             THEN("An exception is thrown")
             {
-                REQUIRE_THROWS_AS(cellValueToString(values), std::runtime_error);
+                REQUIRE_THROWS_AS(cellValueToString(values), InvalidCellValueError);
             }
         }
     }

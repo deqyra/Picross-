@@ -44,7 +44,7 @@ namespace Picross
 
             THEN("An exception is thrown")
             {
-                REQUIRE_THROWS_AS(stringToIntVector(str, ' '), std::runtime_error);
+                REQUIRE_THROWS_AS(stringToIntVector(str, ' '), std::invalid_argument);
             }
         }
     }

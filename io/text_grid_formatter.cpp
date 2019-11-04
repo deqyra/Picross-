@@ -1,5 +1,6 @@
 #include "text_grid_formatter.hpp"
 #include "../core/utility.hpp"
+#include "../core/exceptions/unrecognized_cell_value_error.hpp"
 
 #include <sstream>
 #include <iostream>
@@ -83,7 +84,7 @@ namespace Picross
 				isValidCellValue(cellContent, true);
 				std::stringstream s;
 				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
+				throw UnrecognizedCellValueError(s.str().c_str());
 		}
 	}
 
@@ -93,7 +94,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" << cellContent << "\"." << std::endl;
-			throw new std::runtime_error(s.str().c_str());
+			throw UnrecognizedCellValueError(s.str().c_str());
 		}
 		
 		switch(cellContent)
@@ -112,7 +113,7 @@ namespace Picross
 				isValidCellValue(cellContent, true);
 				std::stringstream s;
 				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
+				throw UnrecognizedCellValueError(s.str().c_str());
 		}
 	}
 
@@ -134,7 +135,7 @@ namespace Picross
 				isValidCellValue(cellContent, true);
 				std::stringstream s;
 				s << "Cell content type unhandled by formatter: " << cellContent << "." << std::endl;
-				throw new std::runtime_error(s.str().c_str());
+				throw UnrecognizedCellValueError(s.str().c_str());
 		}
 	}
 

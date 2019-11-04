@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
+#include "exceptions/invalid_cell_value_error.hpp"
 
 namespace Picross
 {
@@ -24,7 +25,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Invalid cell value \"" << val << "\"." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw InvalidCellValueError(s.str().c_str());
 		}
 
 		return found;
@@ -50,7 +51,7 @@ namespace Picross
 				// A value may be valid as far as the type is concerned, but not handled in here. Report this properly.
 				std::stringstream s;
 				s << "Unrecognized cell value \"" << val << "\", cannot represent into string." << std::endl;
-				throw std::runtime_error(s.str().c_str());
+				throw InvalidCellValueError(s.str().c_str());
 		}
 	}
 }

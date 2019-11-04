@@ -67,9 +67,13 @@
 
     # Build core lib
         add_library( ${CORE_LIB_NAME} SHARED
-                    core/cell_t.cpp     core/cell_t.hpp
-                    core/grid.cpp       core/grid.hpp
-                    core/utility.cpp    core/utility.hpp)
+                    core/cell_t.cpp                                             core/cell_t.hpp
+                    core/grid.cpp                                               core/grid.hpp
+                    core/utility.cpp                                            core/utility.hpp
+                    core/exceptions/invalid_cell_value_error.cpp                core/exceptions/invalid_cell_value_error.hpp
+                    core/exceptions/invalid_grid_hints_error.cpp                core/exceptions/invalid_grid_hints_error.hpp
+                    core/exceptions/unrecognized_cell_value_error.cpp           core/exceptions/unrecognized_cell_value_error.hpp
+                    core/exceptions/out_of_bounds_grid_coordinates_error.cpp    core/exceptions/out_of_bounds_grid_coordinates_error.hpp )
                     target_link_libraries( ${CORE_LIB_NAME} PUBLIC ${STRING_UTIL_LIB_NAME} )
 
     # Build solver lib
@@ -80,10 +84,11 @@
 
     # Build IO lib
         add_library( ${IO_LIB_NAME} SHARED
-                    io/invalid_xml_grid_error.cpp   io/invalid_xml_grid_error.hpp
-                    io/text_grid_formatter.cpp      io/text_grid_formatter.hpp
-                    io/tinyxml2_error.cpp           io/tinyxml2_error.hpp
-                    io/xml_grid_serializer.cpp      io/xml_grid_serializer.hpp )
+                    io/xml_grid_serializer.cpp                  io/xml_grid_serializer.hpp
+                    io/text_grid_formatter.cpp                  io/text_grid_formatter.hpp
+                    io/exceptions/invalid_xml_grid_error.cpp    io/exceptions/invalid_xml_grid_error.hpp
+                    io/exceptions/tinyxml2_error.cpp            io/exceptions/tinyxml2_error.hpp
+                    io/exceptions/file_not_found_error.cpp      io/exceptions/file_not_found_error.hpp )
         target_link_libraries( ${IO_LIB_NAME} PUBLIC ${CORE_LIB_NAME} ${TINYXML2_NAME} )
 
     # Build CLI lib
@@ -100,10 +105,10 @@
                     cli/commands/command_sequence.cpp       cli/commands/command_sequence.hpp
                     cli/commands/menu_command.cpp           cli/commands/menu_command.hpp )
         target_link_libraries( ${CLI_LIB_NAME} PUBLIC
-                            ${STRING_UTIL_LIB_NAME}
-                            ${CORE_LIB_NAME}
-                            ${SOLVER_LIB_NAME}
-                            ${IO_LIB_NAME} )
+                                ${STRING_UTIL_LIB_NAME}
+                                ${CORE_LIB_NAME}
+                                ${SOLVER_LIB_NAME}
+                                ${IO_LIB_NAME} )
     
     # Build executable
         add_executable( ${EXECUTABLE_NAME}

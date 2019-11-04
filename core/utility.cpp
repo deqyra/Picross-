@@ -51,7 +51,7 @@ namespace Picross
 
             if (!StringUtil::stringIsNum(*it))
             {
-                throw std::runtime_error("Provided string does not represent an integer.");
+                throw std::invalid_argument("Provided string does not represent an integer.");
             }
 
             // Put parsed tokens in output vector.

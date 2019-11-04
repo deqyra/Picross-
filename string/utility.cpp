@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "../io/exceptions/file_not_found_error.hpp"
 
 namespace StringUtil
 {
@@ -138,7 +139,7 @@ namespace StringUtil
             return res;
         }
 
-        throw std::runtime_error(path + ": file not found.");
+        throw FileNotFoundError(path + ": file not found.");
     }
 
     std::string stripCR(std::string& str, bool inNewLinesOnly)

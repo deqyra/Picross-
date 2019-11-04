@@ -4,11 +4,12 @@
 #include <stdexcept>
 #include <vector>
 
-#include "tinyxml2_error.hpp"
-#include "invalid_xml_grid_error.hpp"
+#include "exceptions/tinyxml2_error.hpp"
+#include "exceptions/invalid_xml_grid_error.hpp"
 #include "../lib/tinyxml2/tinyxml2.hpp"
 #include "../core/grid.hpp"
 #include "../core/utility.hpp"
+#include "../core/exceptions/out_of_bounds_grid_coordinates_error.hpp"
 
 namespace Picross
 {
@@ -132,7 +133,7 @@ namespace Picross
             {
                 grid.setCell(row, col, state);
             }
-            catch(const std::runtime_error& e)
+            catch(const OutOfBoundsGridCoordinatesError& e)
             {
                 throw InvalidXMLGridError("Specified cell coordinates exceed grid boundaries in provided file.");
             }

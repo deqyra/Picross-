@@ -8,6 +8,8 @@
 
 #include "cell_t.hpp"
 #include "utility.hpp"
+#include "exceptions/out_of_bounds_grid_coordinates_error.hpp"
+#include "exceptions/invalid_grid_hints_error.hpp"
 
 namespace Picross
 {
@@ -39,7 +41,7 @@ namespace Picross
 			{
 				areValidRowHints((*it), true);
 			}
-			catch(const std::runtime_error& e)
+			catch(const InvalidGridHintsError& e)
 			{
 				exceptionCaught = true;
 				exceptionText << e.what();
@@ -52,7 +54,7 @@ namespace Picross
 			{
 				areValidColHints((*it), true);
 			}
-			catch(const std::runtime_error& e)
+			catch(const InvalidGridHintsError& e)
 			{
 				exceptionCaught = true;
 				exceptionText << e.what();
@@ -61,7 +63,7 @@ namespace Picross
 
 		if (exceptionCaught)
 		{
-			throw std::runtime_error(exceptionText.str().c_str());
+			throw InvalidGridHintsError(exceptionText.str().c_str());
 		}
 	}
 
@@ -191,7 +193,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Horizontal hints vector size (" << hints.size() << ") must be the same as grid height (" << _height << ")." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw InvalidGridHintsError(s.str().c_str());
 		}
 
 		for (int i = 0; i < hints.size(); i++)
@@ -206,7 +208,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Vertical hints vector size (" << hints.size() << ") must be the same as grid width (" << _width << ")." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw InvalidGridHintsError(s.str().c_str());
 		}
 
 		for (int i = 0; i < hints.size(); i++)
@@ -222,7 +224,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Invalid row " << row << " for grid with height " << _height << "." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw OutOfBoundsGridCoordinatesError(s.str().c_str());
 		}
 		return result;
 	}
@@ -234,7 +236,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Invalid column " << col << " for grid with width " << _width << "." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw OutOfBoundsGridCoordinatesError(s.str().c_str());
 		}
 		return result;
 	}
@@ -246,7 +248,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Invalid cell (" << row << ", " << col << ") for grid with dimensions (" << _height << ", " << _width << ")." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw OutOfBoundsGridCoordinatesError(s.str().c_str());
 		}
 		return result;
 	}
@@ -286,7 +288,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Hints " << vectorToString(hints, ", ", "(", ")") << " require minimum space " << space << " which exceeds grid width (" << _width << "), and thus are invalid." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw InvalidGridHintsError(s.str().c_str());
 		}
 		return result;
 	}
@@ -299,7 +301,7 @@ namespace Picross
 		{
 			std::stringstream s;
 			s << "Hints " << vectorToString(hints, ", ", "(", ")") << " require minimum space " << space << " which exceeds grid height (" << _height << "), and thus are invalid." << std::endl;
-			throw std::runtime_error(s.str().c_str());
+			throw InvalidGridHintsError(s.str().c_str());
 		}
 		return result;
 	}
