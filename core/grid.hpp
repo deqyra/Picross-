@@ -1,5 +1,5 @@
-#ifndef GRID_HPP
-#define GRID_HPP
+#ifndef CORE__GRID_HPP
+#define CORE__GRID_HPP
 
 #include <vector>
 #include <string>
@@ -64,4 +64,4 @@ namespace Picross
 	};
 }
 
-#endif//GRID_HPP
+#endif//CORE__GRID_HPP

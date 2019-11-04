@@ -1,5 +1,5 @@
-#ifndef LOAD_GRID_COMMAND_HPP
-#define LOAD_GRID_COMMAND_HPP
+#ifndef CLI__COMMANDS__LOAD_GRID_COMMAND_HPP
+#define CLI__COMMANDS__LOAD_GRID_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
@@ -20,4 +20,4 @@ namespace Picross
     };
 }
 
-#endif//LOAD_GRID_COMMAND_HPP
+#endif//CLI__COMMANDS__LOAD_GRID_COMMAND_HPP

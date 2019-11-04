@@ -1,5 +1,5 @@
-#ifndef CELL_T
-#define CELL_T
+#ifndef CORE__CELL_T
+#define CORE__CELL_T
 
 #include <cstddef>
 #include <string>
@@ -28,4 +28,4 @@ namespace Picross
     std::string cellValueToString(cell_t val);
 }
 
-#endif//CELL_T
+#endif//CORE__CELL_T

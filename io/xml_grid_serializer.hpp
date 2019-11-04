@@ -1,5 +1,5 @@
-#ifndef XML_GRID_SERIALIZER_HPP
-#define XML_GRID_SERIALIZER_HPP
+#ifndef IO__XML_GRID_SERIALIZER_HPP
+#define IO__XML_GRID_SERIALIZER_HPP
 
 #include <string>
 #include <stdexcept>
@@ -86,4 +86,4 @@ namespace Picross
     }
 }
 
-#endif//XML_GRID_SERIALIZER_HPP
+#endif//IO__XML_GRID_SERIALIZER_HPP

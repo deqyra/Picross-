@@ -1,5 +1,5 @@
-#ifndef COMMAND_SEQUENCE_HPP
-#define COMMAND_SEQUENCE_HPP
+#ifndef CLI__COMMANDS__COMMAND_SEQUENCE_HPP
+#define CLI__COMMANDS__COMMAND_SEQUENCE_HPP
 
 #include <vector>
 #include <string>
@@ -25,4 +25,4 @@ namespace Picross
     };
 }
 
-#endif//COMMAND_SEQUENCE_HPP
+#endif//CLI__COMMANDS__COMMAND_SEQUENCE_HPP

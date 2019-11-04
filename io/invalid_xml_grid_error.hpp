@@ -1,5 +1,5 @@
-#ifndef INVALID_XML_GRID_ERROR
-#define INVALID_XML_GRID_ERROR
+#ifndef IO__INVALID_XML_GRID_ERROR
+#define IO__INVALID_XML_GRID_ERROR
 
 #include <stdexcept>
 #include <string>
@@ -18,4 +18,4 @@ namespace Picross
     };
 }
 
-#endif//INVALID_XML_GRID_ERROR
+#endif//IO__INVALID_XML_GRID_ERROR

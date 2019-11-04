@@ -1,5 +1,5 @@
-#ifndef SAVE_GRID_COMMAND_HPP
-#define SAVE_GRID_COMMAND_HPP
+#ifndef CLI__COMMANDS__SAVE_GRID_COMMAND_HPP
+#define CLI__COMMANDS__SAVE_GRID_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
@@ -20,4 +20,4 @@ namespace Picross
     };
 }
 
-#endif//SAVE_GRID_COMMAND_HPP
+#endif//CLI__COMMANDS__SAVE_GRID_COMMAND_HPP

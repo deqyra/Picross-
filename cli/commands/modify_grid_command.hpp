@@ -1,5 +1,5 @@
-#ifndef MODIFY_GRID_COMMAND_HPP
-#define MODIFY_GRID_COMMAND_HPP
+#ifndef CLI__COMMANDS__MODIFY_GRID_COMMAND_HPP
+#define CLI__COMMANDS__MODIFY_GRID_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
@@ -20,4 +20,4 @@ namespace Picross
     };
 }
 
-#endif//MODIFY_GRID_COMMAND_HPP
+#endif//CLI__COMMANDS__MODIFY_GRID_COMMAND_HPP

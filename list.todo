@@ -86,7 +86,7 @@ Cleanup & enhancement:
         ✔ Put comments here and there
         ☐ Custom exceptions
         ☐ Use std::string::operator+ instead of abusing stringstreams
-        ☐ Include folder name in all include-protection macros
+        ✔ Include folder name in all include-protection macros
         ✔ CMake build
         ✔ Inline fully specialized templates
         ✔ Make sure all polymorphically derived classes have a virtual destructor

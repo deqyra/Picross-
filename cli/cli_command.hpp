@@ -1,5 +1,5 @@
-#ifndef CLI_COMMAND_HPP
-#define CLI_COMMAND_HPP
+#ifndef CLI__CLI_COMMAND_HPP
+#define CLI__CLI_COMMAND_HPP
 
 #include <string>
 
@@ -20,4 +20,4 @@ namespace Picross
     inline static const int COMMAND_FAILURE = -1;
 }
 
-#endif//CLI_COMMAND_HPP
+#endif//CLI__CLI_COMMAND_HPP

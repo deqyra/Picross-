@@ -1,5 +1,5 @@
-#ifndef CLI_INPUT
-#define CLI_INPUT
+#ifndef CLI__CLI_INPUT
+#define CLI__CLI_INPUT
 
 #include <iostream>
 #include <string>
@@ -147,4 +147,4 @@ namespace Picross
     std::string CLIInput::typeName<bool>();
 }
 
-#endif//CLI_INPUT
+#endif//CLI__CLI_INPUT

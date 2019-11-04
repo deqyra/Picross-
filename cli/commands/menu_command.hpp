@@ -1,5 +1,5 @@
-#ifndef MENU_COMMAND_HPP
-#define MENU_COMMAND_HPP
+#ifndef CLI__COMMANDS__MENU_COMMAND_HPP
+#define CLI__COMMANDS__MENU_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
@@ -24,4 +24,4 @@ namespace Picross
     };
 }
 
-#endif//MENU_COMMAND_HPP
+#endif//CLI__COMMANDS__MENU_COMMAND_HPP

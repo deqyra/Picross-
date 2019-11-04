@@ -1,5 +1,5 @@
-#ifndef SOLVER_HPP
-#define SOLVER_HPP
+#ifndef SOLVING__SOLVER_HPP
+#define SOLVING__SOLVER_HPP
 
 #include <string>
 
@@ -16,4 +16,4 @@ namespace Picross
     };
 }
 
-#endif//SOLVER_HPP
+#endif//SOLVING__SOLVER_HPP

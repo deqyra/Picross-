@@ -1,5 +1,5 @@
-#ifndef CLI_MENU_HPP
-#define CLI_MENU_HPP
+#ifndef CLI__CLI_MENU_HPP
+#define CLI__CLI_MENU_HPP
 
 #include <string>
 #include <vector>
@@ -32,4 +32,4 @@ namespace Picross
     };
 }
 
-#endif//CLI_MENU_HPP
+#endif//CLI__CLI_MENU_HPP

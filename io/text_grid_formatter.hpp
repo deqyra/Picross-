@@ -1,5 +1,5 @@
-#ifndef TEXT_GRID_FORMATTER_HPP
-#define TEXT_GRID_FORMATTER_HPP
+#ifndef IO__TEXT_GRID_FORMATTER_HPP
+#define IO__TEXT_GRID_FORMATTER_HPP
 
 #include <string>
 #include <vector>
@@ -63,4 +63,4 @@ namespace Picross
 	};
 }
 
-#endif//TEXT_GRID_FORMATTER_HPP
+#endif//IO__TEXT_GRID_FORMATTER_HPP

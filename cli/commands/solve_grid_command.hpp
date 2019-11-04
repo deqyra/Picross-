@@ -1,5 +1,5 @@
-#ifndef SOLVE_COMMAND_HPP
-#define SOLVE_COMMAND_HPP
+#ifndef CLI__COMMANDS__SOLVE_COMMAND_HPP
+#define CLI__COMMANDS__SOLVE_COMMAND_HPP
 
 #include "../cli_command.hpp"
 
@@ -27,4 +27,4 @@ namespace Picross
     };
 }
 
-#endif//SOLVE_COMMAND_HPP
+#endif//CLI__COMMANDS__SOLVE_COMMAND_HPP

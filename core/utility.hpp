@@ -1,5 +1,5 @@
-#ifndef CORE_UTILITY_HPP
-#define CORE_UTILITY_HPP
+#ifndef CORE__UTILITY_HPP
+#define CORE__UTILITY_HPP
 
 #include <vector>
 #include <string>
@@ -83,4 +83,4 @@ namespace Picross
     }
 }
 
-#endif//CORE_UTILITY_HPP
+#endif//CORE__UTILITY_HPP

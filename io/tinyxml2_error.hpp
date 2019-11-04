@@ -1,5 +1,5 @@
-#ifndef TINYXML2_ERROR_HPP
-#define TINYXML2_ERROR_HPP
+#ifndef IO__TINYXML2_ERROR_HPP
+#define IO__TINYXML2_ERROR_HPP
 
 #include <stdexcept>
 #include <string>
@@ -25,4 +25,4 @@ namespace tinyxml2
     std::string xmlErrorToString(XMLError err);
 }
 
-#endif//TINYXML2_ERROR_HPP
+#endif//IO__TINYXML2_ERROR_HPP

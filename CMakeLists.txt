@@ -21,11 +21,11 @@
     set( COPY_RESOURCES_TARGET_NAME "copy_resources" )
 
 # Copy resource folder
-add_custom_target( ${COPY_RESOURCES_TARGET_NAME} )
-add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
-                    COMMENT "Copying resource folder"
-                    POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ./resources )
+    add_custom_target( ${COPY_RESOURCES_TARGET_NAME} )
+    add_custom_command( TARGET ${COPY_RESOURCES_TARGET_NAME}
+                        COMMENT "Copying resource folder"
+                        POST_BUILD
+                        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ./resources )
 
 # Header configuration variables
     set( PROJECT_VERSION "0.1" )

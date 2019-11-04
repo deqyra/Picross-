@@ -1,5 +1,5 @@
-#ifndef STRING_UTILITY_HPP
-#define STRING_UTILITY_HPP
+#ifndef STRING__UTILITY_HPP
+#define STRING__UTILITY_HPP
 
 #include <string>
 #include <vector>
@@ -37,4 +37,4 @@ namespace StringUtil
     std::string stripCR(std::string& str, bool inNewLinesOnly = false);
 }
 
-#endif//STRING_UTILITY_HPP
+#endif//STRING__UTILITY_HPP

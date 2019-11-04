@@ -1,5 +1,5 @@
-#ifndef SOLVING_UTILITY_HPP
-#define SOLVING_UTILITY_HPP
+#ifndef SOLVING__UTILITY_HPP
+#define SOLVING__UTILITY_HPP
 
 #include <vector>
 #include <memory>
@@ -13,4 +13,4 @@ namespace Picross
     std::vector<std::shared_ptr<Solver>> instantiateAllSolvers();
 }
 
-#endif//SOLVING_UTILITY_HPP
+#endif//SOLVING__UTILITY_HPP
