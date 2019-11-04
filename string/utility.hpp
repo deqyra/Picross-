@@ -4,6 +4,11 @@
 #include <string>
 #include <vector>
 
+namespace std
+{
+    std::string to_string(std::string val);
+}
+
 namespace StringUtil
 {
     // Removes any given single trailing character at the end of a string. Returns whether operation was successful.

@@ -6,6 +6,14 @@
 #include <string>
 #include "../io/exceptions/file_not_found_error.hpp"
 
+namespace std
+{
+    std::string to_string(std::string val)
+    {
+        return val;
+    }
+}
+
 namespace StringUtil
 {
     bool popChar(std::string& str, const char c)

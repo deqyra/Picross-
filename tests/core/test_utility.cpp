@@ -111,26 +111,26 @@ namespace Picross
 
             THEN("Vector is properly formatted with no surrounding characters")
             {
-                std::stringstream s;
-                s << val << " " << val;
+                std::string s;
+                s += std::to_string(val) + " " + std::to_string(val);
 
-                REQUIRE(vectorToString(vec) == s.str());
+                REQUIRE(vectorToString(vec) == s);
             }
 
             AND_THEN("Vector is properly formatted with single surrounding characters")
             {
-                std::stringstream s;
-                s << "<[" << val << "]-[" << val << "]>";
+                std::string s;
+                s += "<[" + std::to_string(val) + "]-[" + std::to_string(val) + "]>";
 
-                REQUIRE(vectorToString(vec, "-", "<", ">", "[", "]") == s.str());
+                REQUIRE(vectorToString(vec, "-", "<", ">", "[", "]") == s);
             }
 
             AND_THEN("Vector is properly formatted with surrounding strings")
             {
-                std::stringstream s;
-                s << "<~(['" << val << "'] # ['" << val << "'])~>";
+                std::string s;
+                s += "<~(['" + std::to_string(val) + "'] # ['" + std::to_string(val) + "'])~>";
 
-                REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s.str());
+                REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s);
             }
         }
 
@@ -140,10 +140,9 @@ namespace Picross
 
             AND_THEN("Vector is properly formatted with surrounding strings")
             {
-                std::stringstream s;
-                s << "<~()~>";
+                std::string s = "<~()~>";
 
-                REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s.str());
+                REQUIRE(vectorToString(vec, " # ", "<~(", ")~>", "['", "']") == s);
             }
         }
     }

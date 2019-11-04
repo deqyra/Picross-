@@ -8,6 +8,7 @@
 
 #include "cell_t.hpp"
 #include "grid.hpp"
+#include "../string/utility.hpp"
 
 namespace Picross
 {
