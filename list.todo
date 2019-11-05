@@ -10,7 +10,7 @@ Core stuff:
     ✔ Grid/cell state manipulation
         -> Change cell states
         -> Change hints (autocheck valididty)
-    ☐ Hint generation from grid state
+    ✔ Hint generation from grid state
     ✔ Is solvable and is solved checks
 I/O:
     ✔ Text grid formatter

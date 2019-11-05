@@ -214,6 +214,26 @@ namespace Picross
 		}
 	}
 
+	void Grid::setHintsFromState()
+	{
+		std::vector<std::vector<int>> newHorizontalHints;
+		std::vector<std::vector<int>> newVerticalHints;
+
+		// Fill those two new vectors with hints generated from current columns and rows.
+		for (int i = 0; i < _height; i++)
+		{
+			newHorizontalHints.push_back(hintsFromCells(getRow(i)));
+		}
+
+		for (int i = 0; i < _width; i++)
+		{
+			newVerticalHints.push_back(hintsFromCells(getCol(i)));
+		}
+
+		_horizontalHints = newHorizontalHints;
+		_verticalHints = newVerticalHints;
+	}
+
 	bool Grid::isValidRow(int row, bool throwOnFail) const
 	{
 		bool result = row >= 0 && row < _height;
@@ -249,23 +269,23 @@ namespace Picross
 
 	bool Grid::hintsAreConsistent() const
 	{
-		return sumOfVectorSums(_verticalHints) == sumOfVectorSums(_horizontalHints);
+		return sumOfVectorSums(_horizontalHints) == sumOfVectorSums(_verticalHints);
 	}
 
 	bool Grid::isSolved() const
 	{
 		// Simply return false if any row/column doesn't satisfty its corresponding hints.
-		for (int i = 0; i < _width; i++)
+		for (int i = 0; i < _height; i++)
 		{
-			if (!cellsSatisfyHints(getCol(i), _verticalHints[i]))
+			if (!cellsSatisfyHints(getRow(i), _horizontalHints[i]))
 			{
 				return false;
 			}
 		}
 
-		for (int i = 0; i < _height; i++)
+		for (int i = 0; i < _width; i++)
 		{
-			if (!cellsSatisfyHints(getRow(i), _horizontalHints[i]))
+			if (!cellsSatisfyHints(getCol(i), _verticalHints[i]))
 			{
 				return false;
 			}

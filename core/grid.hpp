@@ -47,6 +47,7 @@ namespace Picross
 			void setColHints(int col, std::vector<int> hints);
 			void setAllRowHints(std::vector<std::vector<int>> hints);
 			void setAllColHints(std::vector<std::vector<int>> hints);
+			void setHintsFromState();
 
 		// Useful checks.
 			bool isValidRow(int row, bool throwOnFail = false) const;
