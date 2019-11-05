@@ -15,7 +15,7 @@ class MicroShell
         MicroShell();
 
         void clearCommands();
-        void addCommand(MicroShellCommand command);
+        void addCommand(std::shared_ptr<MicroShellCommand> command);
         void removeCommand(std::string name);
 
         int processInput(const std::string& input);

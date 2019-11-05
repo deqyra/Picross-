@@ -64,9 +64,7 @@
     # Build string util lib
         add_library( ${TOOLS_LIB_NAME} SHARED
                     tools/string_tools.cpp                              tools/string_tools.hpp
-                    tools/micro_shell.cpp                               tools/micro_shell.hpp
-                    tools/generic/responsibility_chain.cpp              tools/generic/responsibility_chain.hpp
-                    tools/generic/responsibility_chain_receiver.cpp     tools/generic/responsibility_chain_receiver.hpp )
+                    tools/micro_shell.cpp                               tools/micro_shell.hpp )
 
     # Build core lib
         add_library( ${CORE_LIB_NAME} SHARED
