@@ -247,6 +247,33 @@ namespace Picross
 		return result;
 	}
 
+	bool Grid::hintsAreConsistent() const
+	{
+		return sumOfVectorSums(_verticalHints) == sumOfVectorSums(_horizontalHints);
+	}
+
+	bool Grid::isSolved() const
+	{
+		// Simply return false if any row/column doesn't satisfty its corresponding hints.
+		for (int i = 0; i < _width; i++)
+		{
+			if (!cellsSatisfyHints(getCol(i), _verticalHints[i]))
+			{
+				return false;
+			}
+		}
+
+		for (int i = 0; i < _height; i++)
+		{
+			if (!cellsSatisfyHints(getRow(i), _horizontalHints[i]))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
     cell_t Grid::mostPresentState() const
     {
         // Array to count occurrences of each cell value.

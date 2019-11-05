@@ -21,6 +21,12 @@ namespace Picross
     // Takes in two multi-line strings, concatenates them line by line and returns the result in one string.
     std::string multilineConcatenation(std::string first, std::string second);
 
+    // Tells whether the layout of the provided vector of cells satisfies the provided hints.
+    bool cellsSatisfyHints(std::vector<cell_t> cells, std::vector<int> hints);
+
+    // Generates the vector of hints that is satisfied by the provided cells.
+    std::vector<int> hintsFromCells(std::vector<cell_t> cells);
+
     // Returns a string representation of the contents of a vector.
     template<typename T>
     std::string vectorToString(
@@ -64,6 +70,22 @@ namespace Picross
         }
 
         return maxSize;
+    }
+
+    // Given a vector of vectors, returns the sum of all of their contents.
+    template<typename T>
+    T sumOfVectorSums(std::vector<std::vector<T>> vectors)
+    {
+        T result = 0;
+        for (auto it = vectors.begin(); it != vectors.end(); it++)
+        {
+            for (auto jt = it->begin(); jt != it->end(); jt++)
+            {
+                result += *jt;
+            }
+        }
+
+        return result;
     }
 
     // Given a vector of comparable values, returns the index of the element with the maximum value.

@@ -112,4 +112,41 @@ namespace Picross
         // Step 4: return single string with everything.
         return s;
 	}
+
+    bool cellsSatisfyHints(std::vector<cell_t> cells, std::vector<int> hints)
+    {
+        // Cells satisfy hints if the hints generated from them are the same as those provided.
+        return hintsFromCells(cells) == hints;
+    }
+
+    std::vector<int> hintsFromCells(std::vector<cell_t> cells)
+    {
+        std::vector<int> hints;
+        int count = 0;
+
+        for (auto it = cells.begin(); it != cells.end(); it++)
+        {
+            // If the cell is checked, count it.
+            if (*it == CELL_CHECKED)
+            {
+                count++;
+                continue;
+            }
+
+            // Otherwise, current sequence is over: register count if non-0 and reset count variable.
+            if (count)
+            {
+                hints.push_back(count);
+                count = 0;
+            }
+        }
+
+        // Make sure to register the last count if non-0.
+        if (count)
+        {
+            hints.push_back(count);
+        }
+
+        return hints;
+    }
 }

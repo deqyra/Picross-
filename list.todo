@@ -11,7 +11,7 @@ Core stuff:
         -> Change cell states
         -> Change hints (autocheck valididty)
     ☐ Hint generation from grid state
-    ☐ Is solvable and is solved checks
+    ✔ Is solvable and is solved checks
 I/O:
     ✔ Text grid formatter
     ✔ XML grid serialization

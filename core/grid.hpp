@@ -52,8 +52,10 @@ namespace Picross
 			bool isValidRow(int row, bool throwOnFail = false) const;
 			bool isValidCol(int col, bool throwOnFail = false) const;
 			bool isValidCell(int row, int col, bool throwOnFail = false) const;
+			bool hintsAreConsistent() const;
+			bool isSolved() const;
 		
-		    // Return the cell value which is most present within a grid.
+		// Return the cell value which is most present within a grid.
 			cell_t mostPresentState() const;
 
 		// Useful tip-related checks and functions.
