@@ -355,4 +355,9 @@ namespace Picross
 
 		return true;
 	}
+
+	bool operator!=(const Grid& lhs, const Grid& rhs)
+	{
+		return !(lhs == rhs);
+	}
 }

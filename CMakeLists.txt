@@ -11,7 +11,7 @@
 
 # Project target structure
     set( PROJECT_TARGET_NAME "PicrossEngine" )
-    set( STRING_UTIL_LIB_NAME "StringUtil" )
+    set( TOOLS_LIB_NAME "Tools" )
     set( CORE_LIB_NAME "${PROJECT_TARGET_NAME}.Core" )
     set( SOLVER_LIB_NAME "${PROJECT_TARGET_NAME}.Solvers" )
     set( IO_LIB_NAME "${PROJECT_TARGET_NAME}.IO" )
@@ -62,8 +62,11 @@
 
 # Build project
     # Build string util lib
-        add_library( ${STRING_UTIL_LIB_NAME} SHARED
-                    string/utility.cpp      string/utility.hpp )
+        add_library( ${TOOLS_LIB_NAME} SHARED
+                    tools/string_tools.cpp                              tools/string_tools.hpp
+                    tools/micro_shell.cpp                               tools/micro_shell.hpp
+                    tools/generic/responsibility_chain.cpp              tools/generic/responsibility_chain.hpp
+                    tools/generic/responsibility_chain_receiver.cpp     tools/generic/responsibility_chain_receiver.hpp )
 
     # Build core lib
         add_library( ${CORE_LIB_NAME} SHARED
@@ -74,7 +77,7 @@
                     core/exceptions/invalid_grid_hints_error.cpp                core/exceptions/invalid_grid_hints_error.hpp
                     core/exceptions/unrecognized_cell_value_error.cpp           core/exceptions/unrecognized_cell_value_error.hpp
                     core/exceptions/out_of_bounds_grid_coordinates_error.cpp    core/exceptions/out_of_bounds_grid_coordinates_error.hpp )
-                    target_link_libraries( ${CORE_LIB_NAME} PUBLIC ${STRING_UTIL_LIB_NAME} )
+                    target_link_libraries( ${CORE_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
 
     # Build solver lib
         add_library( ${SOLVER_LIB_NAME} SHARED
@@ -105,7 +108,7 @@
                     cli/commands/command_sequence.cpp       cli/commands/command_sequence.hpp
                     cli/commands/menu_command.cpp           cli/commands/menu_command.hpp )
         target_link_libraries( ${CLI_LIB_NAME} PUBLIC
-                                ${STRING_UTIL_LIB_NAME}
+                                ${TOOLS_LIB_NAME}
                                 ${CORE_LIB_NAME}
                                 ${SOLVER_LIB_NAME}
                                 ${IO_LIB_NAME} )
@@ -125,7 +128,7 @@
                                         tests/core/test_grid.cpp
                                         tests/cli/test_cli_state.cpp
                                         tests/cli/test_cli_input.cpp
-                                        tests/string/test_utility.cpp
+                                        tests/tools/test_string_tools.cpp
                                         tests/io/generate_static_grids.cpp      tests/io/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
                                         tests/io/test_text_grid_formatter.cpp )

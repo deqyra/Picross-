@@ -1,11 +1,11 @@
 #include "../../lib/catch2/catch2.hpp"
 
 #include <string>
-#include "../../string/utility.hpp"
+#include "../../tools/string_tools.hpp"
 
 #define TAGS "[string][utility]"
 
-namespace StringUtil
+namespace StringTools
 {
     TEST_CASE("popChar pops chars at the end of a string", TAGS)
     {

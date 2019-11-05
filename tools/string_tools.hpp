@@ -1,5 +1,5 @@
-#ifndef STRING__UTILITY_HPP
-#define STRING__UTILITY_HPP
+#ifndef TOOLS__STRING_TOOLS_HPP
+#define TOOLS__STRING_TOOLS_HPP
 
 #include <string>
 #include <vector>
@@ -9,7 +9,7 @@ namespace std
     std::string to_string(std::string val);
 }
 
-namespace StringUtil
+namespace StringTools
 {
     // Removes any given single trailing character at the end of a string. Returns whether operation was successful.
     bool popChar(std::string& str, const char c);
@@ -42,4 +42,4 @@ namespace StringUtil
     void stripCR(std::string& str);
 }
 
-#endif//STRING__UTILITY_HPP
+#endif//TOOLS__STRING_TOOLS_HPP

@@ -9,6 +9,7 @@
 #include "../../core/exceptions/invalid_grid_hints_error.hpp"
 #include "../../core/exceptions/invalid_cell_value_error.hpp"
 #include "../../core/exceptions/out_of_bounds_grid_coordinates_error.hpp"
+#include "../../io/xml_grid_serializer.hpp"
 
 #define TAGS "[core][grid]"
 
@@ -209,6 +210,71 @@ namespace Picross
         }
     }
 
+    SCENARIO("Setting hints from state works", TAGS)
+    {
+        GIVEN("Some grid")
+        {
+            XMLGridSerialzer xmlReader = XMLGridSerialzer();
+            Grid reference = xmlReader.loadGridFromFile("resources/tests/core/10_10_partial.xml");
+            Grid test = reference;
+            std::vector<std::vector<int>> emptyHints = std::vector<std::vector<int>>(10, std::vector<int>());
+            // Remove all hints from one grid and see if re-generating them works.
+            test.setAllColHints(emptyHints);
+            test.setAllRowHints(emptyHints);
+            REQUIRE(test != reference);
+
+            THEN("Hints are properly generated")
+            {
+                REQUIRE_NOTHROW(test.setHintsFromState());
+                REQUIRE(test == reference);
+            }
+        }
+    }
+
+    SCENARIO("Hint consistency check works", TAGS)
+    {
+        GIVEN("Some grid")
+        {
+            XMLGridSerialzer xmlReader = XMLGridSerialzer();
+            Grid reference = xmlReader.loadGridFromFile("resources/tests/core/10_10_partial.xml");
+
+            THEN("Hint consistency check works")
+            {
+                REQUIRE(reference.hintsAreConsistent());
+
+                reference.setColHints(4, {5});
+                REQUIRE_FALSE(reference.hintsAreConsistent());
+
+                reference.setRowHints(0, {1, 1, 2});
+                reference.setRowHints(1, {1, 1, 2});
+                reference.setRowHints(2, {1, 1});
+                // Such a grid is not solvable but its hints are consistent.
+                REQUIRE(reference.hintsAreConsistent());
+            }
+        }
+    }
+
+    SCENARIO("Solved check works", TAGS)
+    {
+        GIVEN("Some grid")
+        {
+            XMLGridSerialzer xmlReader = XMLGridSerialzer();
+            Grid reference = xmlReader.loadGridFromFile("resources/tests/core/10_10_partial.xml");
+
+            THEN("Solved check works")
+            {
+                REQUIRE(reference.isSolved());
+
+                reference.checkCell(3, 5);
+                REQUIRE_FALSE(reference.isSolved());
+                reference.clearCell(3, 5);
+
+                reference.setColHints(4, {5});
+                REQUIRE_FALSE(reference.isSolved());
+            }
+        }
+    }
+
     SCENARIO("Grid most present state is coherent", TAGS)
     {
         Grid g = Grid(5, 5);
@@ -234,6 +300,32 @@ namespace Picross
             THEN("Most present state is checked")
             {
                 REQUIRE(g.mostPresentState() == CELL_CHECKED);
+            }
+        }
+    }
+
+    SCENARIO("Grid comparison works", TAGS)
+    {
+        GIVEN("A couple grids")
+        {
+            XMLGridSerialzer xmlReader = XMLGridSerialzer();
+            Grid grid1 = xmlReader.loadGridFromFile("resources/tests/core/10_10_partial.xml");
+            Grid grid2 = xmlReader.loadGridFromFile("resources/tests/core/10_10_partial.xml");
+
+            THEN("== works")
+            {
+                REQUIRE(grid1 == grid2);
+
+                grid2.checkCell(3,5);
+                REQUIRE_FALSE(grid1 == grid2);
+            }
+
+            AND_THEN("!= works")
+            {
+                REQUIRE_FALSE(grid1 != grid2);
+
+                grid2.checkCell(3,5);
+                REQUIRE(grid1 != grid2);
             }
         }
     }

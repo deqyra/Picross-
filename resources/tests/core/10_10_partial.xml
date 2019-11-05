@@ -1,0 +1,79 @@
+<grid width="10" height="10">
+    <hints>
+        <horizontal>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+        </horizontal>
+        <vertical>
+            <entry>
+                <hintValue>3</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry></entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>5</hintValue>
+            </entry>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+        </vertical>
+    </hints>
+    <content default="cleared">
+        <cell row="0" col="0" state="checked"/>
+        <cell row="1" col="0" state="checked"/>
+        <cell row="2" col="0" state="checked"/>
+        <cell row="4" col="0" state="checked"/>
+        <cell row="6" col="0" state="checked"/>
+        <cell row="7" col="0" state="checked"/>
+        <cell row="9" col="0" state="checked"/>
+        <cell row="0" col="2" state="checked"/>
+        <cell row="1" col="2" state="checked"/>
+        <cell row="3" col="2" state="checked"/>
+        <cell row="5" col="2" state="checked"/>
+        <cell row="6" col="2" state="checked"/>
+        <cell row="9" col="2" state="checked"/>
+        <cell row="7" col="2" state="checked"/>
+        <cell row="8" col="2" state="checked"/>
+    </content>
+</grid>

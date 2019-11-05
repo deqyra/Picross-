@@ -3,7 +3,7 @@
 #include "generate_static_grids.hpp"
 #include "../../io/text_grid_formatter.hpp"
 #include "../../core/grid.hpp"
-#include "../../string/utility.hpp"
+#include "../../tools/string_tools.hpp"
 
 #define TAGS "[io][xml][grid][serialization]"
 
@@ -13,11 +13,11 @@ namespace Picross
     {
         TextGridFormatter txt = TextGridFormatter();
         Grid g = generate10x10PartialGrid();
-        std::string expected = StringUtil::readFileIntoString("resources/tests/io/10_10_partial_formatted_no_hints.txt");
+        std::string expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_no_hints.txt");
         REQUIRE(txt.renderGrid(g) == expected);
 
         g = generate10x10PartialGrid();
-        expected = StringUtil::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
+        expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
         REQUIRE(txt.renderGridWithHints(g) == expected);
     }
 }

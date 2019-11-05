@@ -8,7 +8,7 @@
 #include "../../core/cell_t.hpp"
 #include "../../core/grid.hpp"
 #include "../../core/utility.hpp"
-#include "../../string/utility.hpp"
+#include "../../tools/string_tools.hpp"
 
 #define TAGS "[core][utility]"
 
@@ -102,6 +102,77 @@ namespace Picross
         }
     }
 
+    SCENARIO("Hint generation and hint satisfaction check work properly", TAGS)
+    {
+        GIVEN("Different layouts of cells")
+        {
+            std::vector<cell_t> layout1 = {
+                CELL_CLEARED,   // 
+                CELL_CROSSED,   // X
+                CELL_CLEARED,   // 
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CROSSED,   // X
+                CELL_CLEARED,   // 
+                CELL_CLEARED,   // 
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CLEARED,   // 
+                CELL_CROSSED,   // X
+                CELL_CROSSED,   // X
+                CELL_CLEARED,   // 
+                CELL_CROSSED,   // X
+                CELL_CLEARED,   // 
+                CELL_CHECKED,   // O
+                CELL_CLEARED,   // X
+                CELL_CLEARED    // X
+            };
+
+            std::vector<cell_t> layout2 = {
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CLEARED,   // 
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CROSSED,   // X
+                CELL_CHECKED    // O
+            };
+
+            std::vector<cell_t> layout3 = {
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CHECKED,   // O
+                CELL_CROSSED,   // X
+                CELL_CHECKED    // O
+            };
+
+            std::vector<int> hints1 = {3, 4, 1};
+            std::vector<int> hints3 = {5, 1};
+
+            THEN("The check works properly")
+            {
+                REQUIRE(cellsSatisfyHints(layout1, hints1));
+                REQUIRE(cellsSatisfyHints(layout2, hints1));
+                REQUIRE_FALSE(cellsSatisfyHints(layout3, hints1));
+            }
+
+            AND_THEN("Hint generation works properly")
+            {
+                REQUIRE(hintsFromCells(layout1) == hints1);
+                REQUIRE(hintsFromCells(layout2) == hints1);
+                REQUIRE(hintsFromCells(layout3) == hints3);
+            }
+        }
+    }
+
     TEMPLATE_SCENARIO("Vectors can be formatted into a custom string", TAGS, int, char, std::string)
     {
         GIVEN("Some vector")
@@ -162,6 +233,23 @@ namespace Picross
             THEN("Maximum length is correctly found")
             {
                 REQUIRE(maxVectorLength(vecs) == 10);
+            }
+        }
+    }
+
+    SCENARIO("Sum of vector sums works properly")
+    {
+        GIVEN("Some vectors in a vector")
+        {
+            std::vector<std::vector<int>> vectors;
+            vectors.push_back({3, 5, 2});
+            vectors.push_back({1, 4, 6});
+            vectors.push_back({2, 7});
+            vectors.push_back({9, 12, 5, 8});
+
+            THEN("The correct sum is returned")
+            {
+                REQUIRE(sumOfVectorSums(vectors) == 64);
             }
         }
     }

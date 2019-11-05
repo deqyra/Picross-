@@ -64,6 +64,7 @@ namespace Picross
 			bool areValidColHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 
 			friend bool operator==(const Grid& lhs, const Grid& rhs);
+			friend bool operator!=(const Grid& lhs, const Grid& rhs);
 	};
 }
 

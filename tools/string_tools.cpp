@@ -1,4 +1,4 @@
-#include "utility.hpp"
+#include "string_tools.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -14,7 +14,7 @@ namespace std
     }
 }
 
-namespace StringUtil
+namespace StringTools
 {
     bool popChar(std::string& str, const char c)
     {

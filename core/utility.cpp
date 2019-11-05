@@ -6,7 +6,7 @@
 
 #include "cell_t.hpp"
 #include "grid.hpp"
-#include "../string/utility.hpp"
+#include "../tools/string_tools.hpp"
 
 namespace Picross
 {
@@ -31,7 +31,7 @@ namespace Picross
     {
         std::vector<int> hints;
         // Tokenise input string according to provided delimiter (true = discard any empty token).
-        std::vector<std::string> tokens = StringUtil::tokenizeString(str, delimiter, true);
+        std::vector<std::string> tokens = StringTools::tokenizeString(str, delimiter, true);
 
         for (auto it = tokens.begin(); it != tokens.end(); it++)
         {
@@ -49,7 +49,7 @@ namespace Picross
             // This also prevents negative numbers from being accepted. Even though this does not
             // fall within the scope of that function stricto sensu, it fits its use cases.
 
-            if (!StringUtil::stringIsNum(*it))
+            if (!StringTools::stringIsNum(*it))
             {
                 throw std::invalid_argument("Provided string does not represent an integer.");
             }
@@ -64,18 +64,18 @@ namespace Picross
 	std::string multilineConcatenation(std::string first, std::string second)
 	{
         // Step 1: split input strings into vectors of lines.
-		std::vector<std::string> firstTokens = StringUtil::tokenizeString(first, '\n');
-		std::vector<std::string> secondTokens = StringUtil::tokenizeString(second, '\n');
+		std::vector<std::string> firstTokens = StringTools::tokenizeString(first, '\n');
+		std::vector<std::string> secondTokens = StringTools::tokenizeString(second, '\n');
         
         // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
         for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)
         {
-            StringUtil::popCR(*it);
+            StringTools::popCR(*it);
         }
         
         for (auto it = secondTokens.begin(); it != secondTokens.end(); it++)
         {
-            StringUtil::popCR(*it);
+            StringTools::popCR(*it);
         }
 
         // Step 3: iterate on both vectors at the same time and join their lines together.

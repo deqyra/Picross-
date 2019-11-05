@@ -5,7 +5,7 @@
 #include <string>
 
 #include "cli_state.hpp"
-#include "../string/utility.hpp"
+#include "../tools/string_tools.hpp"
 
 namespace Picross
 {
@@ -116,7 +116,7 @@ namespace Picross
         std::string input;
         std::getline(state.in(), input);
         // Take care of terminal-induced bullcrap.
-        StringUtil::popCR(input);        
+        StringTools::popCR(input);        
         return parseString<T>(input);
     }
 
