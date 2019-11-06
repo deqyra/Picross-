@@ -8,7 +8,7 @@
 #include "../../core/grid.hpp"
 #include "../../core/exceptions/invalid_grid_hints_error.hpp"
 #include "../../core/exceptions/invalid_cell_value_error.hpp"
-#include "../../core/exceptions/out_of_bounds_grid_coordinates_error.hpp"
+#include "../../tools/exceptions/index_out_of_bounds_error.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
 #define TAGS "[core][grid]"
@@ -128,10 +128,10 @@ namespace Picross
 
             AND_THEN("Cell/row/column getters and setters throw when asked impossible coordinates or non-existent cell value")
             {
-                REQUIRE_THROWS_AS(g.getCell(10, 0), OutOfBoundsGridCoordinatesError);
-                REQUIRE_THROWS_AS(g.getCell(0, 10), OutOfBoundsGridCoordinatesError);
-                REQUIRE_THROWS_AS(g.setCell(10, 0, CELL_CHECKED), OutOfBoundsGridCoordinatesError);
-                REQUIRE_THROWS_AS(g.setCell(0, 10, CELL_CHECKED), OutOfBoundsGridCoordinatesError);
+                REQUIRE_THROWS_AS(g.getCell(10, 0), IndexOutOfBoundsError);
+                REQUIRE_THROWS_AS(g.getCell(0, 10), IndexOutOfBoundsError);
+                REQUIRE_THROWS_AS(g.setCell(10, 0, CELL_CHECKED), IndexOutOfBoundsError);
+                REQUIRE_THROWS_AS(g.setCell(0, 10, CELL_CHECKED), IndexOutOfBoundsError);
                 REQUIRE_THROWS_AS(g.setCell(0, 0, CELL_T_VALUE_COUNT), InvalidCellValueError);
             }
 
@@ -161,7 +161,7 @@ namespace Picross
                 REQUIRE(g.getAllRowHints() == hHints);
 
                 // Throws when coordinate is off limits
-                REQUIRE_THROWS_AS(g.setRowHints(10, {}), OutOfBoundsGridCoordinatesError);
+                REQUIRE_THROWS_AS(g.setRowHints(10, {}), IndexOutOfBoundsError);
                 // Throws when hint required space is above grid dimension
                 REQUIRE_THROWS_AS(g.setRowHints(2, {2, 2, 2}), InvalidGridHintsError);
 
@@ -177,7 +177,7 @@ namespace Picross
                 REQUIRE_NOTHROW(g.setColHints(2, {1}));
                 REQUIRE(g.getAllColHints() == vHints);
 
-                REQUIRE_THROWS_AS(g.setColHints(10, {}), OutOfBoundsGridCoordinatesError);
+                REQUIRE_THROWS_AS(g.setColHints(10, {}), IndexOutOfBoundsError);
                 REQUIRE_THROWS_AS(g.setColHints(2, {2, 2, 2}), InvalidGridHintsError);
 
                 REQUIRE(g.getColHints(2) == expected);
@@ -197,9 +197,9 @@ namespace Picross
                 REQUIRE_NOTHROW(g.isValidCol(4, true));
                 REQUIRE_NOTHROW(g.isValidCell(3, 4, true));
 
-                REQUIRE_THROWS_AS(g.isValidRow(5, true), OutOfBoundsGridCoordinatesError);
-                REQUIRE_THROWS_AS(g.isValidCol(5, true), OutOfBoundsGridCoordinatesError);
-                REQUIRE_THROWS_AS(g.isValidCell(5, 5, true), OutOfBoundsGridCoordinatesError);
+                REQUIRE_THROWS_AS(g.isValidRow(5, true), IndexOutOfBoundsError);
+                REQUIRE_THROWS_AS(g.isValidCol(5, true), IndexOutOfBoundsError);
+                REQUIRE_THROWS_AS(g.isValidCell(5, 5, true), IndexOutOfBoundsError);
 
                 REQUIRE_NOTHROW(g.areValidColHints({3, 1}, true));
                 REQUIRE_THROWS_AS(g.areValidColHints({3, 3}, true), InvalidGridHintsError);

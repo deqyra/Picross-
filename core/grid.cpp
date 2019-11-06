@@ -7,7 +7,7 @@
 
 #include "cell_t.hpp"
 #include "utility.hpp"
-#include "exceptions/out_of_bounds_grid_coordinates_error.hpp"
+#include "../tools/exceptions/index_out_of_bounds_error.hpp"
 #include "exceptions/invalid_grid_hints_error.hpp"
 
 namespace Picross
@@ -240,7 +240,7 @@ namespace Picross
 		if (throwOnFail && !result)
 		{
 			std::string s = "Invalid row " + std::to_string(row) + " for grid with height " + std::to_string(_height) + ".\n";
-			throw OutOfBoundsGridCoordinatesError(s);
+			throw IndexOutOfBoundsError(s);
 		}
 		return result;
 	}
@@ -251,7 +251,7 @@ namespace Picross
 		if (throwOnFail && !result)
 		{
 			std::string s = "Invalid column " + std::to_string(col) + " for grid with width " + std::to_string(_width) + ".\n";
-			throw OutOfBoundsGridCoordinatesError(s);
+			throw IndexOutOfBoundsError(s);
 		}
 		return result;
 	}
@@ -262,7 +262,7 @@ namespace Picross
 		if (throwOnFail && !result)
 		{
 			std::string s = "Invalid cell (" + std::to_string(row) + ", " + std::to_string(col) + ") for grid with dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").\n";
-			throw OutOfBoundsGridCoordinatesError(s);
+			throw IndexOutOfBoundsError(s);
 		}
 		return result;
 	}

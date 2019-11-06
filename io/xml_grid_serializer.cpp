@@ -9,7 +9,7 @@
 #include "../lib/tinyxml2/tinyxml2.hpp"
 #include "../core/grid.hpp"
 #include "../core/utility.hpp"
-#include "../core/exceptions/out_of_bounds_grid_coordinates_error.hpp"
+#include "../tools/exceptions/index_out_of_bounds_error.hpp"
 
 namespace Picross
 {
@@ -133,7 +133,7 @@ namespace Picross
             {
                 grid.setCell(row, col, state);
             }
-            catch(const OutOfBoundsGridCoordinatesError& e)
+            catch(const IndexOutOfBoundsError& e)
             {
                 throw InvalidXMLGridError("Specified cell coordinates exceed grid boundaries in provided file.");
             }

@@ -23,7 +23,7 @@ namespace Picross
 		// Throw if asked to
 		if (throwOnFail && !found)
 		{
-			std::string s = "Invalid cell value " + cellValueToString(val) + ".\n";
+			std::string s = "Invalid cell value " + cellValueToString(val) + ".";
 			throw InvalidCellValueError(s);
 		}
 
@@ -48,7 +48,7 @@ namespace Picross
 				break;
 			default:
 				// A value may be valid as far as the type is concerned, but not handled in here. Report this properly.
-				std::string s = "Unrecognized cell value " + cellValueToString(val) + ", name unknown.\n";
+				std::string s = "Unrecognized cell value " + cellValueToString(val) + ", name unknown.";
 				throw InvalidCellValueError(s);
 		}
 	}

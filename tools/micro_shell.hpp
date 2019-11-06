@@ -8,15 +8,28 @@
 
 class MicroShell
 {
+    using CommandPtr = std::shared_ptr<MicroShellCommand>;
+    using ChainIter = std::deque<CommandPtr>::iterator;
+
     private:    // Attributes
-        std::deque<std::shared_ptr<MicroShellCommand>> _chain;
+        std::deque<CommandPtr> _chain;
 
     public:     // Public methods
         MicroShell();
 
+    // Command manipulation methods
         void clearCommands();
-        void addCommand(std::shared_ptr<MicroShellCommand> command);
+        void addCommand(CommandPtr command, int index = -1);
+        void removeCommand(int index);
         void removeCommand(std::string name);
+
+    // Getter methods
+        CommandPtr getCommand(int index);
+        CommandPtr getCommand(std::string name);
+
+    // Checks
+        int indexOf(std::string name);
+        bool hasCommand(std::string name);
 
         int processInput(const std::string& input);
 };
