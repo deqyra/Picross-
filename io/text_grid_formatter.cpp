@@ -1,6 +1,8 @@
 #include "text_grid_formatter.hpp"
 #include "../core/utility.hpp"
 #include "../core/exceptions/unrecognized_cell_value_error.hpp"
+#include "../tools/string_tools.hpp"
+#include "../tools/iterable_tools.hpp"
 
 #include <iostream>
 #include <stdexcept>
@@ -51,8 +53,8 @@ namespace Picross
 		int width = grid.getWidth();
 		int height = grid.getHeight();
 
-		int hPadding = maxVectorLength(grid.getAllRowHints()) * 2 - 1;
-		int vPadding = maxVectorLength(grid.getAllColHints()) * 2 - 1;
+		int hPadding = IterTools::maxIterableLength(grid.getAllRowHints()) * 2 - 1;
+		int vPadding = IterTools::maxIterableLength(grid.getAllColHints()) * 2 - 1;
 
 		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
 		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
@@ -60,8 +62,8 @@ namespace Picross
 		std::string gridStr = renderGrid(grid, emptyCrossedCells);
 
 		std::string s;
-		s += multilineConcatenation(paddingBlock, vHintsStr);
-		s += multilineConcatenation(hHintsStr, gridStr);
+		s += StringTools::multilineConcatenation(paddingBlock, vHintsStr);
+		s += StringTools::multilineConcatenation(hHintsStr, gridStr);
 		return s;
 	}
 
@@ -236,7 +238,7 @@ namespace Picross
 
 	std::string TextGridFormatter::renderHorizontalHints(std::vector<std::vector<int>> hints)
 	{
-		int maxHintLength = maxVectorLength(hints);
+		int maxHintLength = IterTools::maxIterableLength(hints);
 		int strLength = maxHintLength * 2 - 1;
 
 		std::string s;
@@ -250,7 +252,7 @@ namespace Picross
 				s += pad(lengthDiff * 2, " ");
 			}
 	
-			s += vectorToString(*it) + '\n';
+			s += StringTools::iterableToString(*it) + '\n';
 		}
 		s += pad(strLength, HORIZONTAL_CHAR) + '\n';
 
@@ -260,13 +262,13 @@ namespace Picross
 	std::string TextGridFormatter::renderVerticalHints(std::vector<std::vector<int>> hints)
 	{
 		std::vector<std::string> strHints;
-		int maxHintLength = maxVectorLength(hints);
+		int maxHintLength = IterTools::maxIterableLength(hints);
 
 		for (auto it = hints.begin(); it != hints.end(); it++)
 		{
 			std::string s;
 			int lengthDiff = maxHintLength - it->size();
-			s += pad(lengthDiff, " ") + vectorToString(*it, "");
+			s += pad(lengthDiff, " ") + StringTools::iterableToString(*it, "");
 			strHints.push_back(s);
 		}
 

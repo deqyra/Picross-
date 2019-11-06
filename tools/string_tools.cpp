@@ -150,6 +150,58 @@ namespace StringTools
         throw FileNotFoundError(path + ": file not found.");
     }
 
+	std::string multilineConcatenation(std::string first, std::string second)
+	{
+        // Step 1: split input strings into vectors of lines.
+		std::vector<std::string> firstTokens = StringTools::tokenizeString(first, '\n');
+		std::vector<std::string> secondTokens = StringTools::tokenizeString(second, '\n');
+        
+        // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
+        for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)
+        {
+            StringTools::popCR(*it);
+        }
+        
+        for (auto it = secondTokens.begin(); it != secondTokens.end(); it++)
+        {
+            StringTools::popCR(*it);
+        }
+
+        // Step 3: iterate on both vectors at the same time and join their lines together.
+        auto itFirst = firstTokens.begin();
+        auto itSecond = secondTokens.begin();
+
+        // Loop control: stop when either vector reaches its end.
+        bool stop = itFirst == firstTokens.end() || itSecond == secondTokens.end();
+
+        std::string s;
+        while (!stop)
+        {
+            // Step 3.1: feed first line into stream.
+            if (itFirst != firstTokens.end())
+            {
+                s += *itFirst;
+                itFirst++;
+            }
+
+            // Step 3.2: feed second line into stream.
+            if (itSecond != secondTokens.end())
+            {
+                s += *itSecond;
+                itSecond++;
+            }
+
+            // Don't forget to advance iterators each time a line is accessed.
+
+            // Step 3.3: break line and check for loop end.
+            s += '\n';
+            stop = itFirst == firstTokens.end() && itSecond == secondTokens.end();
+        }
+
+        // Step 4: return single string with everything.
+        return s;
+	}
+
     void stripCR(std::string& str)
     {
         std::string result;

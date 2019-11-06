@@ -7,8 +7,9 @@
 
 #include "cell_t.hpp"
 #include "utility.hpp"
-#include "../tools/exceptions/index_out_of_bounds_error.hpp"
 #include "exceptions/invalid_grid_hints_error.hpp"
+#include "../tools/exceptions/index_out_of_bounds_error.hpp"
+#include "../tools/iterable_tools.hpp"
 
 namespace Picross
 {
@@ -269,7 +270,7 @@ namespace Picross
 
 	bool Grid::hintsAreConsistent() const
 	{
-		return sumOfVectorSums(_horizontalHints) == sumOfVectorSums(_verticalHints);
+		return IterTools::sum2NestedIterables<int>(_horizontalHints) == IterTools::sum2NestedIterables<int>(_verticalHints);
 	}
 
 	bool Grid::isSolved() const
@@ -317,7 +318,8 @@ namespace Picross
         }
 
         // Find max index and return appropriate value.
-        int maxIndex = indexOfMaxElement(counts, CELL_T_VALUE_COUNT);
+		// Arguments here are iterators (pointers really) the begining of the array and its element count.
+        int maxIndex = IterTools::indexOfMaxElement(counts, CELL_T_VALUE_COUNT);
         return CELL_T_ORDERED_VALUES[maxIndex];
     }
 
@@ -327,7 +329,7 @@ namespace Picross
 		bool result = space <= _width;
 		if (throwOnFail && !result)
 		{
-			std::string s = "Hints " + vectorToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid width (" + std::to_string(_width) + "), and thus are invalid.\n";
+			std::string s = "Hints " + StringTools::iterableToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid width (" + std::to_string(_width) + "), and thus are invalid.\n";
 			throw InvalidGridHintsError(s);
 		}
 		return result;
@@ -339,7 +341,7 @@ namespace Picross
 		bool result = space <= _height;
 		if (throwOnFail && !result)
 		{
-			std::string s = "Hints " + vectorToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid height (" + std::to_string(_height) + "), and thus are invalid.\n";
+			std::string s = "Hints " + StringTools::iterableToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid height (" + std::to_string(_height) + "), and thus are invalid.\n";
 			throw InvalidGridHintsError(s);
 		}
 		return result;

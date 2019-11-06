@@ -38,8 +38,46 @@ namespace StringTools
     // Open the file located at the provided path and returns a string filled with all of its contents.
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns = true);
 
+    // Takes in two multi-line strings, concatenates them line by line and returns the result in one string.
+    std::string multilineConcatenation(std::string first, std::string second);
+
     // Remove carriage returns in provided string. Returns whether operation was successful.
     void stripCR(std::string& str);
+
+    // Returns a string representation of the contents of an iterable.
+    template<typename Iter>
+    std::string iterableToString(
+        Iter first, Iter last,          std::string delimiter = " ",
+        std::string opening = "",       std::string closing = "",
+        std::string elementPrefix = "", std::string elementSuffix = "")
+    {
+        std::string s = opening;
+
+        for (auto it = first; it != last; it++)
+        {
+            s += elementPrefix + std::to_string(*it) + elementSuffix;
+            if (it != last - 1)
+            {
+                s += delimiter;
+            }
+        }
+
+        s += closing;
+
+        // Output example:
+        // vectorToString({5, 2, 1}, "-", "<", ">", "[", "]") == "<[5]-[2]-[1]>"
+
+        return s;
+    }
+
+    template<typename Iterable>
+    std::string iterableToString(
+        Iterable container,             std::string delimiter = " ",
+        std::string opening = "",       std::string closing = "",
+        std::string elementPrefix = "", std::string elementSuffix = "")
+    {
+        return iterableToString(container.begin(), container.end(), delimiter, opening, closing, elementPrefix, elementSuffix);
+    }
 }
 
 #endif//TOOLS__STRING_TOOLS_HPP

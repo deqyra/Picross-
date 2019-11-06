@@ -65,6 +65,7 @@
         add_library( ${TOOLS_LIB_NAME} SHARED
                     tools/string_tools.cpp                              tools/string_tools.hpp
                     tools/micro_shell.cpp                               tools/micro_shell.hpp
+                                                                        tools/micro_shell_command.hpp
                     tools/exceptions/index_out_of_bounds_error.cpp      tools/exceptions/index_out_of_bounds_error.hpp
                     tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp )
 

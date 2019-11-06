@@ -1,4 +1,5 @@
 #include "../../lib/catch2/catch2.hpp"
+#include "../template_scenario.hpp"
 
 #include <string>
 #include "../../tools/string_tools.hpp"
@@ -29,7 +30,6 @@ namespace StringTools
         REQUIRE_FALSE(popChar(str, 'y'));
         REQUIRE(str == res);
     }
-
 
     TEST_CASE("popChar returns false on an empty string", TAGS)
     {
@@ -208,6 +208,71 @@ namespace StringTools
         else
         {
             REQUIRE(result == expectedNoCarriage);
+        }
+    }
+
+    TEMPLATE_SCENARIO("Vectors can be formatted into a custom string", TAGS, int, char, std::string)
+    {
+        GIVEN("Some vector")
+        {
+            TestType val = TestType();
+            std::vector<TestType> vec = {val, val};
+
+            THEN("Vector is properly formatted with no surrounding characters")
+            {
+                std::string s;
+                s += std::to_string(val) + " " + std::to_string(val);
+
+                REQUIRE(StringTools::iterableToString(vec) == s);
+            }
+
+            AND_THEN("Vector is properly formatted with single surrounding characters")
+            {
+                std::string s;
+                s += "<[" + std::to_string(val) + "]-[" + std::to_string(val) + "]>";
+
+                REQUIRE(StringTools::iterableToString(vec, "-", "<", ">", "[", "]") == s);
+            }
+
+            AND_THEN("Vector is properly formatted with surrounding strings")
+            {
+                std::string s;
+                s += "<~(['" + std::to_string(val) + "'] # ['" + std::to_string(val) + "'])~>";
+
+                REQUIRE(StringTools::iterableToString(vec, " # ", "<~(", ")~>", "['", "']") == s);
+            }
+        }
+
+        AND_GIVEN("An empty vector")
+        {
+            std::vector<TestType> vec;
+
+            AND_THEN("Vector is properly formatted with surrounding strings")
+            {
+                std::string s = "<~()~>";
+
+                REQUIRE(StringTools::iterableToString(vec, " # ", "<~(", ")~>", "['", "']") == s);
+            }
+        }
+    }
+
+    SCENARIO("Multiline string concatenation works properly", TAGS)
+    {
+        GIVEN("A couple multiline strings of equal numbers of lines")
+        {
+            std::string str1 =  "String 1 part 1 \n"
+                                "String 1 part 2 \n"
+                                "String 1 part 3 \n";
+
+            std::string str2 =  "String 2 part 1\n"
+                                "String 2 part 2\n"
+                                "String 2 part 3\n";
+
+            std::string res =   "String 1 part 1 String 2 part 1\n"
+                                "String 1 part 2 String 2 part 2\n"
+                                "String 1 part 3 String 2 part 3\n";
+
+            REQUIRE(StringTools::multilineConcatenation(str1, str2) == res);
         }
     }
 
