@@ -1,5 +1,5 @@
-#ifndef TOOLS__MICRO_SHELL_COMMAND_HPP
-#define TOOLS__MICRO_SHELL_COMMAND_HPP
+#ifndef TOOLS__MICRO_SHELL__MICRO_SHELL_COMMAND_HPP
+#define TOOLS__MICRO_SHELL__MICRO_SHELL_COMMAND_HPP
 
 #include <string>
 
@@ -16,4 +16,4 @@ class MicroShellCommand
         virtual std::string help() = 0;
 };
 
-#endif//TOOLS__MICRO_SHELL_COMMAND_HPP
+#endif//TOOLS__MICRO_SHELL__MICRO_SHELL_COMMAND_HPP

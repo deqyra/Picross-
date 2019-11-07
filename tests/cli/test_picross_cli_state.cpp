@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <fstream>
-#include "../../cli/cli_state.hpp"
+#include "../../cli/picross_cli_state.hpp"
 
-#define TAGS "[cli][cli_state]"
+#define TAGS "[picross_cli][cli_state]"
 
 namespace Picross
 {
@@ -12,18 +12,14 @@ namespace Picross
     {
         GIVEN("Valid arguments")
         {
-            CLIState state = CLIState(std::cin, std::cout, std::cerr);
+            PicrossCLIState state = PicrossCLIState();
             THEN("Constructor works")
             {
-                REQUIRE_NOTHROW(CLIState(std::cin, std::cout, std::cerr));
+                REQUIRE_NOTHROW(PicrossCLIState());
             }
 
             AND_THEN("Getters work")
             {
-                // Encapsulated streams write to and read from the same buffers as those provided
-                REQUIRE(state.in().rdbuf() == std::cin.rdbuf());
-                REQUIRE(state.out().rdbuf() == std::cout.rdbuf());
-                REQUIRE(state.err().rdbuf() == std::cerr.rdbuf());
                 // Default grid is constructed in state
                 REQUIRE(state.grid() == Grid(0, 0));
             }

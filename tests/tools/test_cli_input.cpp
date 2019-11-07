@@ -4,8 +4,8 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include "../../cli/cli_state.hpp"
-#include "../../cli/cli_input.hpp"
+#include "../../cli/picross_cli_state.hpp"
+#include "../../tools/cli/cli_input.hpp"
 
 #define TAGS "[cli][cli_input]"
 
@@ -18,15 +18,15 @@ namespace Picross
             std::ifstream f = std::ifstream("resources/tests/cli/int_input.txt", std::ios::in);
             REQUIRE(f);
             std::stringstream ss;
-            CLIState s = CLIState(f, ss, ss);
+            CLIStreams s = CLIStreams(f, ss, ss);
 
             THEN("Related input functions work")
             {
                 REQUIRE(CLIInput::askForInput<int>("input1: ", s) == 30);
                 REQUIRE(CLIInput::askForInput<int>("input2: ", s) == -20);
-                REQUIRE(CLIInput::askForMinInput<int>("minInput: ", s, 40) == 40);
-                REQUIRE(CLIInput::askForMaxInput<int>("maxInput: ", s, 40) == 40);
-                REQUIRE(CLIInput::askForBoundedInput<int>("boundedInput: ", s, 15, 25) == 20);
+                REQUIRE(CLIInput::askForMinInput<int>("minInput: ", 40, s) == 40);
+                REQUIRE(CLIInput::askForMaxInput<int>("maxInput: ", 40, s) == 40);
+                REQUIRE(CLIInput::askForBoundedInput<int>("boundedInput: ", 15, 25, s) == 20);
 
                 std::string expected =  "input1: Invalid input, please enter a integer.\n"
                                         "input1: input2: minInput: Invalid input, please enter a value that is at least 40.\n"
@@ -46,7 +46,7 @@ namespace Picross
             std::ifstream f = std::ifstream("resources/tests/cli/bool_input.txt", std::ios::in);
             REQUIRE(f);
             std::stringstream ss;
-            CLIState s = CLIState(f, ss, ss);
+            CLIStreams s = CLIStreams(f, ss, ss);
 
             THEN("Related input functions work")
             {

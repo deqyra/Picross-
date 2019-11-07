@@ -1,5 +1,5 @@
-#ifndef TOOLS__MICRO_SHELL_HPP
-#define TOOLS__MICRO_SHELL_HPP
+#ifndef TOOLS__MICRO_SHELL__MICRO_SHELL_HPP
+#define TOOLS__MICRO_SHELL__MICRO_SHELL_HPP
 
 #include <string>
 #include <deque>
@@ -34,4 +34,4 @@ class MicroShell
         int processInput(const std::string& input);
 };
 
-#endif//TOOLS__MICRO_SHELL_HPP
+#endif//TOOLS__MICRO_SHELL__MICRO_SHELL_HPP

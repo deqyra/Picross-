@@ -1,15 +1,17 @@
-#include "../cli_command.hpp"
+#include "../tools/cli/cli_command.hpp"
+#include "../tools/cli/cli_streams.hpp"
+#include "../tools/cli/cli_input.hpp"
 #include "modify_grid_command.hpp"
+#include "picross_cli_state.hpp"
 
 #include <string>
 #include <iostream>
 
-#include "../cli_input.hpp"
 
 namespace Picross
 {
     ModifyGridCommand::ModifyGridCommand() :
-        CLICommand()
+        CLICommand<PicrossCLIState>()
     {
 
     }
@@ -24,9 +26,9 @@ namespace Picross
         return "Modify grid";
     }
 
-    int ModifyGridCommand::run(CLIState& state)
+    int ModifyGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
-        state.out() << "Coming soon." << std::endl;
+        streams.out() << "Coming soon." << std::endl;
         return COMMAND_SUCCESS;
     }
 }

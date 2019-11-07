@@ -64,10 +64,18 @@
     # Build string util lib
         add_library( ${TOOLS_LIB_NAME} SHARED
                     tools/string_tools.cpp                              tools/string_tools.hpp
-                    tools/micro_shell.cpp                               tools/micro_shell.hpp
-                                                                        tools/micro_shell_command.hpp
+                                                                        tools/iterable_tools.hpp
+                    tools/micro_shell/micro_shell.cpp                   tools/micro_shell/micro_shell.hpp
+                                                                        tools/micro_shell/micro_shell_codes.hpp
+                                                                        tools/micro_shell/micro_shell_command.hpp
                     tools/exceptions/index_out_of_bounds_error.cpp      tools/exceptions/index_out_of_bounds_error.hpp
-                    tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp )
+                    tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp 
+                    tools/cli/cli_input.hpp                             tools/cli/cli_input.cpp
+                    tools/cli/cli_streams.cpp                           tools/cli/cli_streams.hpp
+                                                                        tools/cli/cli_command.hpp
+                                                                        tools/cli/cli_menu.hpp
+                                                                        tools/cli/menu_command.hpp
+                                                                        tools/cli/command_sequence.hpp )
 
     # Build core lib
         add_library( ${CORE_LIB_NAME} SHARED
@@ -95,17 +103,12 @@
 
     # Build CLI lib
         add_library( ${CLI_LIB_NAME} SHARED
-                    cli/cli_input.hpp                       cli/cli_input.cpp
-                    cli/cli_command.hpp                     cli/cli_command.cpp
-                    cli/cli_state.cpp                       cli/cli_state.hpp
-                    cli/cli_menu.cpp                        cli/cli_menu.hpp
-                    cli/commands/create_grid_command.cpp    cli/commands/create_grid_command.hpp
-                    cli/commands/load_grid_command.cpp      cli/commands/load_grid_command.hpp
-                    cli/commands/save_grid_command.cpp      cli/commands/save_grid_command.hpp
-                    cli/commands/modify_grid_command.cpp    cli/commands/modify_grid_command.hpp
-                    cli/commands/solve_grid_command.cpp     cli/commands/solve_grid_command.hpp
-                    cli/commands/command_sequence.cpp       cli/commands/command_sequence.hpp
-                    cli/commands/menu_command.cpp           cli/commands/menu_command.hpp )
+                    cli/picross_cli_state.cpp      cli/picross_cli_state.hpp
+                    cli/create_grid_command.cpp    cli/create_grid_command.hpp
+                    cli/load_grid_command.cpp      cli/load_grid_command.hpp
+                    cli/save_grid_command.cpp      cli/save_grid_command.hpp
+                    cli/modify_grid_command.cpp    cli/modify_grid_command.hpp
+                    cli/solve_grid_command.cpp     cli/solve_grid_command.hpp )
         target_link_libraries( ${CLI_LIB_NAME} PUBLIC
                                 ${TOOLS_LIB_NAME}
                                 ${CORE_LIB_NAME}
@@ -125,13 +128,14 @@
                                         tests/core/test_cell_t.cpp              tests/template_scenario.hpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
-                                        tests/cli/test_cli_state.cpp
-                                        tests/cli/test_cli_input.cpp
+                                        tests/cli/test_picross_cli_state.cpp
+                                        tests/tools/test_cli_input.cpp
+                                        tests/tools/test_cli_streams.cpp
                                         tests/tools/test_string_tools.cpp
                                         tests/io/generate_static_grids.cpp      tests/io/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
                                         tests/io/test_text_grid_formatter.cpp )
-    target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} )
+    target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} ${TOOLS_LIB_NAME} )
     add_dependencies( ${TEST_TARGET_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 
     add_test( NAME "tests" COMMAND ${TEST_TARGET_NAME} )

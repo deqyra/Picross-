@@ -2,10 +2,10 @@
 #include "micro_shell_codes.hpp"
 
 #include <string>
+#include <vector>
 #include <algorithm>
-#include "string_tools.hpp"
-#include "exceptions/index_out_of_bounds_error.hpp"
-#include "exceptions/shell_command_not_found_error.hpp"
+#include "../string_tools.hpp"
+#include "../exceptions/index_out_of_bounds_error.hpp"
 
 MicroShell::MicroShell() :
     _chain()
