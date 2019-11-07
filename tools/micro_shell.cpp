@@ -1,8 +1,11 @@
 #include "micro_shell.hpp"
+#include "micro_shell_codes.hpp"
 
 #include <string>
 #include <algorithm>
+#include "string_tools.hpp"
 #include "exceptions/index_out_of_bounds_error.hpp"
+#include "exceptions/shell_command_not_found_error.hpp"
 
 MicroShell::MicroShell() :
     _chain()
@@ -120,5 +123,12 @@ MicroShell::CommandPtr MicroShell::getCommand(std::string name)
 
 int MicroShell::processInput(const std::string& input)
 {
-    return 0;
+    std::vector<std::string> tokens = StringTools::tokenizeString(input, ' ', true);
+    int index = indexOf(tokens[0]);
+    if (index == - 1)
+    {
+        return SHELL_COMMAND_NOT_FOUND;
+    }
+
+    return _chain[index]->processInput(input);
 }
