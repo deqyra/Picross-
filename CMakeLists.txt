@@ -103,12 +103,12 @@
 
     # Build CLI lib
         add_library( ${CLI_LIB_NAME} SHARED
-                    cli/picross_cli_state.cpp      cli/picross_cli_state.hpp
-                    cli/create_grid_command.cpp    cli/create_grid_command.hpp
-                    cli/load_grid_command.cpp      cli/load_grid_command.hpp
-                    cli/save_grid_command.cpp      cli/save_grid_command.hpp
-                    cli/modify_grid_command.cpp    cli/modify_grid_command.hpp
-                    cli/solve_grid_command.cpp     cli/solve_grid_command.hpp )
+                    picross_cli/picross_cli_state.cpp       picross_cli/picross_cli_state.hpp
+                    picross_cli/create_grid_command.cpp     picross_cli/create_grid_command.hpp
+                    picross_cli/load_grid_command.cpp       picross_cli/load_grid_command.hpp
+                    picross_cli/save_grid_command.cpp       picross_cli/save_grid_command.hpp
+                    picross_cli/modify_grid_command.cpp     picross_cli/modify_grid_command.hpp
+                    picross_cli/solve_grid_command.cpp      picross_cli/solve_grid_command.hpp )
         target_link_libraries( ${CLI_LIB_NAME} PUBLIC
                                 ${TOOLS_LIB_NAME}
                                 ${CORE_LIB_NAME}

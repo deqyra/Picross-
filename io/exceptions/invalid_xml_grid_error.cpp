@@ -1,5 +1,5 @@
 #include "invalid_xml_grid_error.hpp"
-#include "../../make_basic_exception.hpp"
+#include "../../tools/make_basic_exception.hpp"
 
 namespace Picross
 {

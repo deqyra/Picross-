@@ -4,14 +4,14 @@
 
 #include "tools/cli/cli_menu.hpp"
 #include "tools/cli/cli_command.hpp"
-#include "cli/picross_cli_state.hpp"
 #include "tools/cli/command_sequence.hpp"
 #include "tools/cli/menu_command.hpp"
-#include "cli/create_grid_command.hpp"
-#include "cli/load_grid_command.hpp"
-#include "cli/solve_grid_command.hpp"
-#include "cli/save_grid_command.hpp"
-#include "cli/modify_grid_command.hpp"
+#include "picross_cli/picross_cli_state.hpp"
+#include "picross_cli/create_grid_command.hpp"
+#include "picross_cli/load_grid_command.hpp"
+#include "picross_cli/solve_grid_command.hpp"
+#include "picross_cli/save_grid_command.hpp"
+#include "picross_cli/modify_grid_command.hpp"
 
 #include "cmake_defines.hpp"
 

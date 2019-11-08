@@ -1,7 +1,7 @@
 #ifndef CORE__EXCEPTIONS__INVALID_CELL_VALUE_ERROR_HPP
 #define CORE__EXCEPTIONS__INVALID_CELL_VALUE_ERROR_HPP
 
-#include "../../make_basic_exception.hpp"
+#include "../../tools/make_basic_exception.hpp"
 
 namespace Picross
 {
