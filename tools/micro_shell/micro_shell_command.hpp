@@ -23,4 +23,17 @@ class MicroShellCommand
         virtual std::string help() = 0;
 };
 
+template<typename CustomState>
+MicroShellCommand<CustomState>::MicroShellCommand()
+{
+
+}
+
+template<typename CustomState>
+MicroShellCommand<CustomState>::~MicroShellCommand()
+{
+
+}
+
+
 #endif//TOOLS__MICRO_SHELL__MICRO_SHELL_COMMAND_HPP

@@ -22,7 +22,7 @@ namespace Picross
 
     }
 
-    int PicrossShellHintsCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams)
+    int PicrossShellHintsCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 

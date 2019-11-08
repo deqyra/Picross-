@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "../../cli/picross_cli_state.hpp"
+#include "../../picross_cli/picross_cli_state.hpp"
 
 #define TAGS "[picross_cli][cli_state]"
 

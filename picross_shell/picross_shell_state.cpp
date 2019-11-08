@@ -3,7 +3,9 @@
 
 namespace Picross
 {
-    PicrossShellState::PicrossShellState()
+    PicrossShellState::PicrossShellState() :
+        _mainGrid(0, 0),
+        _workingGrid(0, 0)
     {
 
     }

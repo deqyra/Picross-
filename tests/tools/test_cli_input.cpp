@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include "../../cli/picross_cli_state.hpp"
 #include "../../tools/cli/cli_input.hpp"
 
 #define TAGS "[cli][cli_input]"

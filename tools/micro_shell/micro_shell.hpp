@@ -18,7 +18,7 @@ class MicroShell
 {
     using PicrossShellCommand = MicroShellCommand<CustomState>;
     using CommandPtr = std::shared_ptr<PicrossShellCommand>;
-    using ChainIter = std::deque<CommandPtr>::iterator;
+    using ChainIter = typename std::deque<CommandPtr>::iterator;
 
     private:    // Attributes
         std::deque<CommandPtr> _chain;
@@ -49,7 +49,7 @@ class MicroShell
         int processInput(const std::string& input, CustomState& state, CLIStreams& streams);
         std::string globalHelpString();
         std::string commandHelpString(std::string commandName);
-        void handleExit(std::string command, CustomState& state, CLIStreams& streams);
+        int handleExit(std::string command, CustomState& state, CLIStreams& streams);
 };
 
 template<typename CustomState>
@@ -97,7 +97,7 @@ void MicroShell<CustomState>::removeCommand(std::string name)
     };
 
     // Find a command with the same name as provided.
-    ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
+    MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
 
     // Throw if not found.
     if (it == _chain.end())
@@ -138,7 +138,7 @@ int MicroShell<CustomState>::indexOf(std::string name)
     };
 
     // Find a command with given name.
-    ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
+    MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
 
     // Calculate and return index, or -1 if not found.
     return it != _chain.end() ? (it - _chain.begin()) : -1;
@@ -158,7 +158,7 @@ void MicroShell<CustomState>::setExitCommand(MicroShell<CustomState>::CommandPtr
 }
 
 template<typename CustomState>
-MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(int index)
+typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(int index)
 {
     // Try to fetch the command at provided index.
     if (index >= _chain.size())
@@ -171,7 +171,7 @@ MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(int inde
 }
 
 template<typename CustomState>
-MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(std::string name)
+typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(std::string name)
 {
     // Try to fetch the command at provided index.
     int index = indexOf(name);
@@ -185,20 +185,20 @@ MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(std::str
 }
 
 template<typename CustomState>
-MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getExitCommand()
+typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getExitCommand()
 {
     return _exitCommand;
 }
 
 template<typename CustomState>
-int MicroShell<CustomState>::run(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams)
+int MicroShell<CustomState>::run(CustomState& state, CLIStreams& streams)
 {
     // Run the shell: prompt the user repeatedly and interpret the commands that were entered.
     int shellCode;
     do
     {
         std::string command = CLIInput::askForInput<std::string>("$ ", streams);
-        shellCode = shell.processInput(command, shellState, streams);
+        shellCode = processInput(command, state, streams);
     } while (shellCode != SHELL_EXIT);      // Exit when the proper signal is returned.
 
     return SHELL_EXIT;
@@ -256,7 +256,7 @@ std::string MicroShell<CustomState>::globalHelpString()
     {
         s += "  - " + (*it)->name() + ": " + (*it)->description() + "\n";
     }
-    s += "Type 'help <command>' to get help about one command.\n"
+    s += "Type 'help <command>' to get help about one command.\n";
 
     return s;
 }
@@ -281,7 +281,7 @@ std::string MicroShell<CustomState>::commandHelpString(std::string commandName)
 }
 
 template<typename CustomState>
-void MicroShell<CustomState>::handleExit(std::string command, CustomState& state, CLIStreams& streams)
+int MicroShell<CustomState>::handleExit(std::string command, CustomState& state, CLIStreams& streams)
 {
     // If not exit command was provided, just exit immediately.
     if (!_exitCommand)
@@ -289,7 +289,7 @@ void MicroShell<CustomState>::handleExit(std::string command, CustomState& state
         return SHELL_EXIT;
     }
     // Otherwise run the provided exit command.
-    return _exitCommand->processInput(command, state, streams)
+    return _exitCommand->processInput(command, state, streams);
 }
 
 #endif//TOOLS__MICRO_SHELL__MICRO_SHELL_HPP

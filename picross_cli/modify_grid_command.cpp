@@ -59,6 +59,7 @@ namespace Picross
 
     ModifyGridCommand::PicrossShell ModifyGridCommand::instantiateMicroShell()
     {
-
+        ModifyGridCommand::PicrossShell shell = MicroShell<PicrossShellState>();
+        return shell;
     }
 }

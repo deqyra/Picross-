@@ -22,7 +22,7 @@ namespace Picross
 
     }
 
-    int PicrossShellRollbackCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams)
+    int PicrossShellRollbackCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 

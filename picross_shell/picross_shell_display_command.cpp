@@ -23,7 +23,7 @@ namespace Picross
 
     }
 
-    int PicrossShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams)
+    int PicrossShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
         TextGridFormatter tgf = TextGridFormatter();

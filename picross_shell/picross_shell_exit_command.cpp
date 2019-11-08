@@ -20,7 +20,7 @@ namespace Picross
 
     }
 
-    int PicrossShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams)
+    int PicrossShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         if (state.mainGrid() != state.workingGrid())
         {

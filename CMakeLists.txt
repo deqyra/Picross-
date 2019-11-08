@@ -16,6 +16,7 @@
     set( SOLVER_LIB_NAME "${PROJECT_TARGET_NAME}.Solvers" )
     set( IO_LIB_NAME "${PROJECT_TARGET_NAME}.IO" )
     set( CLI_LIB_NAME "${PROJECT_TARGET_NAME}.CLI" )
+    set( SHELL_LIB_NAME "${PROJECT_TARGET_NAME}.Shell" )
     set( EXECUTABLE_NAME ${PROJECT_TARGET_NAME} )
     set( TEST_TARGET_NAME "tests" )
     set( COPY_RESOURCES_TARGET_NAME "copy_resources" )
@@ -65,9 +66,10 @@
         add_library( ${TOOLS_LIB_NAME} SHARED
                     tools/string_tools.cpp                              tools/string_tools.hpp
                                                                         tools/iterable_tools.hpp
-                    tools/micro_shell/micro_shell.cpp                   tools/micro_shell/micro_shell.hpp
+                                                                        tools/micro_shell/micro_shell.hpp
                                                                         tools/micro_shell/micro_shell_codes.hpp
                                                                         tools/micro_shell/micro_shell_command.hpp
+                                                                        tools/make_basic_exception.hpp
                     tools/exceptions/index_out_of_bounds_error.cpp      tools/exceptions/index_out_of_bounds_error.hpp
                     tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp 
                     tools/cli/cli_input.hpp                             tools/cli/cli_input.cpp
@@ -113,8 +115,19 @@
                                 ${TOOLS_LIB_NAME}
                                 ${CORE_LIB_NAME}
                                 ${SOLVER_LIB_NAME}
-                                ${IO_LIB_NAME} )
+                                ${IO_LIB_NAME}
+                                ${SHELL_LIB_NAME} )
     
+    # Build shell lib
+        add_library( ${SHELL_LIB_NAME} SHARED
+                    picross_shell/picross_shell_commit_command.cpp      picross_shell/picross_shell_commit_command.hpp
+                    picross_shell/picross_shell_display_command.cpp     picross_shell/picross_shell_display_command.hpp
+                    picross_shell/picross_shell_exit_command.cpp        picross_shell/picross_shell_exit_command.hpp
+                    picross_shell/picross_shell_hints_command.cpp       picross_shell/picross_shell_hints_command.hpp
+                    picross_shell/picross_shell_rollback_command.cpp    picross_shell/picross_shell_rollback_command.hpp
+                    picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp )
+        target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
+
     # Build executable
         add_executable( ${EXECUTABLE_NAME}
                         main.cpp
