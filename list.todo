@@ -66,12 +66,12 @@ User interaction:
                     ☐ $ cross <x> <y>                           # Cross cell at coordinates (x;y)
                     ☐ $ clear <x> <y>                           # Clear cell at coordinates (x;y)
                     ☐ $ <check|cross|clear> <x0:xn> <y0:xn>     # Check/cross/clear cells in coordinate range [x0 ; xn] × [y0 ; yn]
-                    ☐ $ display [nohints]                       # Display grid with hints by default, without them when nohints is specified
-                    ☐ $ hints <h|v> <n> <values>                # Set horizontal or vertical hints for row or column n to provided values 
-                    ☐ $ hints generate                          # Generate hints from grid state, overwriting current ones
-                    ☐ $ commit                                  # Write changes to current grid
-                    ☐ $ rollback                                # Discard changes and revert state back to last saved grid
-                    ☐ $ exit                                    # Exit
+                    ✔ $ display [nohints]                       # Display grid with hints by default, without them when nohints is specified
+                    ✔ $ hints <h|v> <n> <values>                # Set horizontal or vertical hints for row or column n to provided values
+                    ✔ $ hints generate                          # Generate hints from grid state, overwriting current ones
+                    ✔ $ commit                                  # Write changes to current grid
+                    ✔ $ rollback                                # Discard changes and revert state back to last saved grid
+                    ✔ $ exit                                    # Exit
     Shell toolkit:
         ☐ Think about it
 Solving:

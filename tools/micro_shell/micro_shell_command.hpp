@@ -6,6 +6,9 @@
 #include "../cli/cli_streams.hpp"
 #include "../cli/cli_input.hpp"
 
+#define HELP_KEYWORD "help"
+#define EXIT_KEYWORD "exit"
+
 template<typename CustomState>
 class MicroShellCommand
 {

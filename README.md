@@ -10,7 +10,7 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 - ✔ Complete game representation  
 - ✔ Save/load XML games  
 - ✔ CLI display capabilities  
-- ↻ Interactive CLI app (80%)  
+- ✔ Interactive CLI app (80%)  
 - ☐ Shell toolkit kind of thing  
 - ☐ Iterative solver  
 - ☐ Inferring solver  
@@ -26,6 +26,7 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 ### Building the project
 
 - Install [CMake](https://cmake.org/)
+- Make sure your compiler is C++17-compliant.
 - Open a command line, go to a directory of your choice and do the following:
 - `git clone https://github.com/deqyra/PicrossEngine.git`
 - `cd PicrossEngine`
@@ -44,7 +45,7 @@ If you generated a makefile-based buildsystem, simply run `make` afterwards.
 
 #### MinGW linker complaining about `vsnprintf` defined multiple times
 
-Open the MinGW installation manager and install packages `mingw32-libmingwex-*`. Retry.
+Open the MinGW installation manager and install packages `mingw32-libmingwex-*`.
 
 **If you encounter an issue that is not filed here, please open an issue and I will have a look.  
 If you have a solution, please edit this README and open a pull request with your changes.**

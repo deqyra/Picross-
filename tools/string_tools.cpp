@@ -129,6 +129,40 @@ namespace StringTools
         return tokens;
     }
 
+    std::vector<int> stringToIntVector(const std::string& str, char delimiter)
+    {
+        std::vector<int> hints;
+        // Tokenise input string according to provided delimiter (true = discard any empty token).
+        std::vector<std::string> tokens = StringTools::tokenizeString(str, delimiter, true);
+
+        for (auto it = tokens.begin(); it != tokens.end(); it++)
+        {
+            // By default, std::stoi will successfully parse any string which begins with a digit, 
+            // discarding the rest of the content from the point it cannot be parsed anymore.
+            //
+            // From the standpoint of this function, if string "53;<>!12aaa" was an extracted token,
+            // then it is clearly invalid and should not be parsed.
+            // However, std::stoi("53;<>!12aaa") does not throw and returns 53.
+            //
+            // This may be seen as kind of a behavioural discrepancy, leading to confusion on the
+            // side of the user. Therefore, it is strictly required that any token must be 
+            // exclusively comprised of digits, which is what the following condition ensures.
+            //
+            // This also prevents negative numbers from being accepted. Even though this does not
+            // fall within the scope of that function stricto sensu, it fits its use cases.
+
+            if (!StringTools::stringIsNum(*it))
+            {
+                throw std::invalid_argument("Provided string does not represent an integer.");
+            }
+
+            // Put parsed tokens in output vector.
+            hints.push_back(std::stoi(*it));
+        }
+
+        return hints;
+    }
+
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns)
     {
         std::ifstream f = std::ifstream(path.c_str(), std::ios::in);

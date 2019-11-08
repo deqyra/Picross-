@@ -15,41 +15,6 @@
 
 namespace Picross
 {
-    SCENARIO("Strings are properly parsed into int vectors", TAGS)
-    {
-        GIVEN("A well-formed string")
-        {
-            std::string str = "5 2 1";
-
-            THEN("String is correctly parsed into a vector")
-            {
-                std::vector<int> expected = {5, 2, 1};
-                REQUIRE(stringToIntVector(str, ' ') == expected);
-            }
-        }
-
-        AND_GIVEN("A string with way too many delimiters")
-        {
-            std::string str = "     5   2        1      ";
-
-            THEN("String is correctly parsed into a vector")
-            {
-                std::vector<int> expected = {5, 2, 1};
-                REQUIRE(stringToIntVector(str, ' ') == expected);
-            }
-        }
-
-        AND_GIVEN("An ill-formed string (incorrect delimiter)")
-        {
-            std::string str = "5;2;1";
-
-            THEN("An exception is thrown")
-            {
-                REQUIRE_THROWS_AS(stringToIntVector(str, ' '), std::invalid_argument);
-            }
-        }
-    }
-
     SCENARIO("Minimum grid space required can be computed from hint sequence", TAGS)
     {
         GIVEN("A hint sequence")

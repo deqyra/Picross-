@@ -35,6 +35,9 @@ namespace StringTools
     // Splits a string into substring based on a given delimiter, and returns all substrings in a vector.
     std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens = false);
 
+    // Parses an int sequence from a string and returns it in a vector.
+    std::vector<int> stringToIntVector(const std::string& str, char delimiter = ' ');
+
     // Open the file located at the provided path and returns a string filled with all of its contents.
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns = true);
 

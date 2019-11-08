@@ -7,8 +7,9 @@
 #include <string>
 #include <iostream>
 
-#include "../core/utility.hpp"
 #include "../core/grid.hpp"
+#include "../core/utility.hpp"
+#include "../tools/string_tools.hpp"
 
 namespace Picross
 {
@@ -57,7 +58,7 @@ namespace Picross
 
                 try
                 {
-                    intHints = stringToIntVector(strHints);
+                    intHints = StringTools::stringToIntVector(strHints);
                 }
                 catch(const std::exception& e)
                 {
