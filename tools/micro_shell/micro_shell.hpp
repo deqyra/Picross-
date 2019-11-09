@@ -216,13 +216,14 @@ int MicroShell<CustomState>::processInput(const std::string& input, CustomState&
     {
         // If more than one token was extracted, the second one is
         // probably the command the user want to get help about.
-        if (tokens.size() >= 1)
+        if (tokens.size() > 1)
         {
             streams.out() << commandHelpString(tokens[1]) << std::endl;;
         }
         // Otherwise, display an informative list of commands.
         else
         {
+
             streams.out() << globalHelpString() << std::endl;
         }
 

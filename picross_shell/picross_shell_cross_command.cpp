@@ -53,7 +53,7 @@ namespace Picross
             success = StringTools::parseIntRange(tokens[2], ':', j0, jn);
             if (!success) return SHELL_COMMAND_BAD_ARGUMENTS;
 
-            state.workingGrid().setCellRange(i0, in, j0, jn, CELL_CHECKED);
+            state.workingGrid().setCellRange(i0, in, j0, jn, CELL_CROSSED);
 
             return SHELL_COMMAND_SUCCESS;
         }

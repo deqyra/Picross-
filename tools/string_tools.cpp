@@ -118,7 +118,6 @@ namespace StringTools
         std::string token;
         std::istringstream tokenStream(str);
 
-        // Repeatedly extract tokens from the input string.
         while (std::getline(tokenStream, token, delimiter))
         {
             // If specified so, empty tokens should not be added to the output vector.
@@ -126,6 +125,15 @@ namespace StringTools
             
             tokens.push_back(token);
         }
+
+        if (str.back() == delimiter && !discardEmptyTokens)
+        {
+            // Manually add an empty token if the string ends with the delimiter.
+            // This is to ensure consistency with the behaviour of the function when the string _starts_ with the delimiter.
+            // In such a case, an empty token is automatically detected first.
+            tokens.push_back("");
+        }
+
         return tokens;
     }
 
@@ -254,44 +262,30 @@ namespace StringTools
 
         std::vector<std::string> tokens = tokenizeString(input, delimiter, false);
 
-        if (tokens.size() == 0)
-        {
-            low = -1;
-            high = -1;
-        }
-        else if (tokens.size() == 1)
+        if (tokens.size() == 1)
         {
             if (!stringIsNum(tokens[0])) return false;
 
-            if (input[0] == delimiter)
-            {
-                low = -1;
-                high = std::stoi(tokens[0]);
-            }
-            else if (input[input.size() - 1] == delimiter)
-            {
-                low = std::stoi(tokens[0]);
-                high = -1;
-            }
-            else
-            {
-                low = std::stoi(tokens[0]);
-                high = std::stoi(tokens[0]);
-            }
-            
+            low = std::stoi(tokens[0]);
+            high = std::stoi(tokens[0]);
         }
         else if (tokens.size() == 2)
         {
-            if (!stringIsNum(tokens[0]) || !stringIsNum(tokens[1])) return false;
-
-            low = std::stoi(tokens[0]);
-            high = std::stoi(tokens[1]);
-
-            if (low > high)
+            if ( (tokens[0] != "" && !stringIsNum(tokens[0])) || 
+                 (tokens[1] != "" && !stringIsNum(tokens[1])) )
             {
-                int tmp = high;
-                high = low;
-                low = tmp;
+                return false;
+            }
+
+            if (tokens[0] == "") low = -1;
+            else low = std::stoi(tokens[0]);
+
+            if (tokens[0] == "") high = -1;
+            else high = std::stoi(tokens[1]);
+
+            if (low > high && high != -1)
+            {
+                std::swap(low, high);
             }
         }
 

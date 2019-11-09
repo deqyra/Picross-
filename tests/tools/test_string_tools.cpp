@@ -185,21 +185,21 @@ namespace StringTools
                 REQUIRE(tokenizeString(str, 'e', true) == eTokens);
             }
 
-            AND_THEN("String ending with delimiter does not result in last token being empty")
+            AND_THEN("String ending with delimiter results in last token being empty")
             {
-                std::vector<std::string> dotTokens = {"Hello, world", " Bleeep bloop, am robot"};
+                std::vector<std::string> dotTokens = {"Hello, world", " Bleeep bloop, am robot", ""};
                 REQUIRE(tokenizeString(str, '.', false) == dotTokens);
             }
 
-            AND_THEN("String starting with delimiter does not result in first token being empty")
+            AND_THEN("String starting with delimiter results in first token being empty")
             {
-                std::vector<std::string> hTokens = {"ello, world. Bleeep bloop, am robot."};
+                std::vector<std::string> hTokens = {"", "ello, world. Bleeep bloop, am robot."};
                 REQUIRE(tokenizeString(str, 'H', false) == hTokens);
             }
 
-            AND_THEN("String containing only one delimiter results in no tokens")
+            AND_THEN("String containing only one delimiter results in two tokens")
             {
-                std::vector<std::string> hTokens = {};
+                std::vector<std::string> hTokens = {"", ""};
                 REQUIRE(tokenizeString("a", 'a', false) == hTokens);
             }
         }
@@ -309,11 +309,11 @@ namespace StringTools
         {
             std::string str1 =  "String 1 part 1 \n"
                                 "String 1 part 2 \n"
-                                "String 1 part 3 \n";
+                                "String 1 part 3 ";
 
             std::string str2 =  "String 2 part 1\n"
                                 "String 2 part 2\n"
-                                "String 2 part 3\n";
+                                "String 2 part 3";
 
             std::string res =   "String 1 part 1 String 2 part 1\n"
                                 "String 1 part 2 String 2 part 2\n"

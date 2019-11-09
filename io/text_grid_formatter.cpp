@@ -56,10 +56,15 @@ namespace Picross
 		int hPadding = IterTools::maxIterableLength(grid.getAllRowHints()) * 2 - 1;
 		int vPadding = IterTools::maxIterableLength(grid.getAllColHints()) * 2 - 1;
 
+		// In all blocks remove the final \n to negate useless newline concatenation
 		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
+		paddingBlock.pop_back();		// Remove final \n
 		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
+		vHintsStr.pop_back();			// Remove final \n
 		std::string hHintsStr = renderHorizontalHints(grid.getAllRowHints());
+		hHintsStr.pop_back();			// Remove final \n
 		std::string gridStr = renderGrid(grid, emptyCrossedCells);
+		gridStr.pop_back();				// Remove final \n
 
 		std::string s;
 		s += StringTools::multilineConcatenation(paddingBlock, vHintsStr);

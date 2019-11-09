@@ -10,7 +10,7 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 - ✔ Complete game representation  
 - ✔ Save/load XML games  
 - ✔ CLI display capabilities  
-- ✔ Interactive CLI app (80%)  
+- ✔ Interactive CLI app  
 - ☐ Shell toolkit kind of thing  
 - ☐ Iterative solver  
 - ☐ Inferring solver  
