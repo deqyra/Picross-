@@ -47,6 +47,9 @@ namespace StringTools
     // Remove carriage returns in provided string. Returns whether operation was successful.
     void stripCR(std::string& str);
 
+    // Parse two ints separated by a single character
+    bool parseIntRange(std::string input, char delimiter, int& low, int& high);
+
     // Returns a string representation of the contents of an iterable.
     template<typename Iter>
     std::string iterableToString(

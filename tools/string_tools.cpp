@@ -247,4 +247,54 @@ namespace StringTools
         }
         str = result;        
     }
+
+    bool parseIntRange(std::string input, char delimiter, int& low, int& high)
+    {
+        if (input == "") return false;
+
+        std::vector<std::string> tokens = tokenizeString(input, delimiter, false);
+
+        if (tokens.size() == 0)
+        {
+            low = -1;
+            high = -1;
+        }
+        else if (tokens.size() == 1)
+        {
+            if (!stringIsNum(tokens[0])) return false;
+
+            if (input[0] == delimiter)
+            {
+                low = -1;
+                high = std::stoi(tokens[0]);
+            }
+            else if (input[input.size() - 1] == delimiter)
+            {
+                low = std::stoi(tokens[0]);
+                high = -1;
+            }
+            else
+            {
+                low = std::stoi(tokens[0]);
+                high = std::stoi(tokens[0]);
+            }
+            
+        }
+        else if (tokens.size() == 2)
+        {
+            if (!stringIsNum(tokens[0]) || !stringIsNum(tokens[1])) return false;
+
+            low = std::stoi(tokens[0]);
+            high = std::stoi(tokens[1]);
+
+            if (low > high)
+            {
+                int tmp = high;
+                high = low;
+                low = tmp;
+            }
+        }
+
+        return true;
+    }
 }

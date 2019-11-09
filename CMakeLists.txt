@@ -125,6 +125,9 @@
                     picross_shell/picross_shell_exit_command.cpp        picross_shell/picross_shell_exit_command.hpp
                     picross_shell/picross_shell_hints_command.cpp       picross_shell/picross_shell_hints_command.hpp
                     picross_shell/picross_shell_rollback_command.cpp    picross_shell/picross_shell_rollback_command.hpp
+                    picross_shell/picross_shell_check_command.cpp       picross_shell/picross_shell_check_command.hpp
+                    picross_shell/picross_shell_cross_command.cpp       picross_shell/picross_shell_cross_command.hpp
+                    picross_shell/picross_shell_clear_command.cpp       picross_shell/picross_shell_clear_command.hpp
                     picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp )
         target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
 

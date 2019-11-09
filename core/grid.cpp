@@ -145,6 +145,34 @@ namespace Picross
 		_content[(row * _width) + col] = val;
 	}
 
+	void Grid::setCellRange(int i0, int in, int j0, int jn, cell_t val)
+	{
+		isValidCellValue(val, true);
+
+		if (!isValidRow(i0) || !isValidRow(in) || !isValidCol(j0) || !isValidCol(jn))
+		{
+			std::string s = "Range (" + std::to_string(i0) + ":" + std::to_string(in) + " ; " + std::to_string(i0) + ":" + std::to_string(in) + ") is out of bound for grid of dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
+			throw IndexOutOfBoundsError(s.c_str());
+		}
+
+		if (i0 > in)
+		{
+			std::swap(i0, in);
+		}
+		if (j0 > jn)
+		{
+			std::swap(j0, jn);
+		}
+
+		for (int i = i0; i <= in; i++)
+		{
+			for (int j = j0; j <= jn; j++)
+			{
+				_content[(i * _width) + j] = val;
+			}
+		}
+	}
+
 	void Grid::checkCell(int row, int col)
 	{
 		// This will throw if the checks fail (last parameter).

@@ -38,6 +38,7 @@ namespace Picross
 		// Cell modification methods.
 			cell_t getCell(int row, int col) const;
 			void setCell(int row, int col, cell_t val);
+			void setCellRange(int i0, int in, int j0, int jn, cell_t val);
 			void checkCell(int row, int col);
 			void crossCell(int row, int col);
 			void clearCell(int row, int col);

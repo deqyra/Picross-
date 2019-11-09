@@ -190,6 +190,18 @@ namespace StringTools
                 std::vector<std::string> dotTokens = {"Hello, world", " Bleeep bloop, am robot"};
                 REQUIRE(tokenizeString(str, '.', false) == dotTokens);
             }
+
+            AND_THEN("String starting with delimiter does not result in first token being empty")
+            {
+                std::vector<std::string> hTokens = {"ello, world. Bleeep bloop, am robot."};
+                REQUIRE(tokenizeString(str, 'H', false) == hTokens);
+            }
+
+            AND_THEN("String containing only one delimiter results in no tokens")
+            {
+                std::vector<std::string> hTokens = {};
+                REQUIRE(tokenizeString("a", 'a', false) == hTokens);
+            }
         }
     }
     
