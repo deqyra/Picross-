@@ -7,6 +7,16 @@
 #include "../tools/micro_shell/micro_shell.hpp"
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 
+#include "../picross_shell/picross_shell_state.hpp"
+#include "../picross_shell/picross_shell_check_command.hpp"
+#include "../picross_shell/picross_shell_cross_command.hpp"
+#include "../picross_shell/picross_shell_clear_command.hpp"
+#include "../picross_shell/picross_shell_commit_command.hpp"
+#include "../picross_shell/picross_shell_rollback_command.hpp"
+#include "../picross_shell/picross_shell_display_command.hpp"
+#include "../picross_shell/picross_shell_hints_command.hpp"
+#include "../picross_shell/picross_shell_exit_command.hpp"
+
 #include <string>
 #include <iostream>
 
@@ -60,6 +70,14 @@ namespace Picross
     ModifyGridCommand::PicrossShell ModifyGridCommand::instantiateMicroShell()
     {
         ModifyGridCommand::PicrossShell shell = MicroShell<PicrossShellState>();
+        shell.addCommand(std::make_shared<PicrossShellCheckCommand>());
+        shell.addCommand(std::make_shared<PicrossShellCrossCommand>());
+        shell.addCommand(std::make_shared<PicrossShellClearCommand>());
+        shell.addCommand(std::make_shared<PicrossShellCommitCommand>());
+        shell.addCommand(std::make_shared<PicrossShellRollbackCommand>());
+        shell.addCommand(std::make_shared<PicrossShellDisplayCommand>());
+        shell.addCommand(std::make_shared<PicrossShellHintsCommand>());
+        shell.setExitCommand(std::make_shared<PicrossShellExitCommand>());
         return shell;
     }
 }
