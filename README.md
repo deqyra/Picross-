@@ -43,9 +43,14 @@ If you generated a makefile-based buildsystem, simply run `make` afterwards.
 
 ### Troubleshooting
 
-#### MinGW linker complaining about `vsnprintf` defined multiple times
+#### MinGW linker complains about `vsnprintf` defined multiple times
 
 Open the MinGW installation manager and install packages `mingw32-libmingwex-*`.
+
+### Windows executable produced with MinGW displays an error dialog
+
+"The procedure entry point ... could not be located in the dynamic link library ..."  
+Copy `C:\MinGW\bin\libstdc++-6.dll` (or similar) into the same folder as the executable. If you don't have it, one is provided in the [v1.0 release](https://github.com/deqyra/PicrossEngine/releases/tag/v1.0)
 
 **If you encounter an issue that is not filed here, please open an issue and I will have a look.  
 If you have a solution, please edit this README and open a pull request with your changes.**
