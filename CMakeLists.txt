@@ -30,6 +30,11 @@
 
 # Toggles
     option( BUILD_STATIC_LIBS "Build libraries as static libraries" OFF )
+    
+    if( WIN32 )
+        set( BUILD_STATIC_LIBS ON )
+    endif(  )
+
     if( ${BUILD_STATIC_LIBS} )
         set( STATIC_OR_SHARED "STATIC" )
     else(  )
@@ -66,7 +71,7 @@
 
 # Build tinyxml2
     set( TINYXML2_NAME "tinyxml2" )
-    add_library( ${TINYXML2_NAME} SHARED
+    add_library( ${TINYXML2_NAME} ${STATIC_OR_SHARED}
                 lib/tinyxml2/tinyxml2.cpp   lib/tinyxml2/tinyxml2.hpp)
 
 # Build project
@@ -137,13 +142,19 @@
                     picross_shell/picross_shell_cross_command.cpp       picross_shell/picross_shell_cross_command.hpp
                     picross_shell/picross_shell_clear_command.cpp       picross_shell/picross_shell_clear_command.hpp
                     picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp )
-        target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
+        target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} ${IO_LIB_NAME} )
 
     # Build executable
         add_executable( ${EXECUTABLE_NAME}
                         main.cpp
                         cmake_defines.config.hpp     cmake_defines.hpp )        
-        target_link_libraries( ${EXECUTABLE_NAME} PUBLIC ${CLI_LIB_NAME} )
+        target_link_libraries( ${EXECUTABLE_NAME} PUBLIC
+                                ${CLI_LIB_NAME} 
+                                ${TOOLS_LIB_NAME}
+                                ${CORE_LIB_NAME}
+                                ${SOLVER_LIB_NAME}
+                                ${IO_LIB_NAME}
+                                ${SHELL_LIB_NAME} )
         add_dependencies( ${EXECUTABLE_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 
 # Build and run tests
