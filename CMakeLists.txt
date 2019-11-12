@@ -1,7 +1,7 @@
 # CMake configuration
-    cmake_minimum_required(VERSION 3.1...3.15)
+    cmake_minimum_required( VERSION 3.1...3.15 )
 
-    if( ${CMAKE_VERSION} VERSION_LESS 3.12)
+    if( ${CMAKE_VERSION} VERSION_LESS 3.12 )
         cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} )
     endif( )
 
@@ -27,6 +27,14 @@
                         COMMENT "Copying resource folder"
                         POST_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ./resources )
+
+# Toggles
+    option( BUILD_STATIC_LIBS "Build libraries as static libraries" OFF )
+    if( ${BUILD_STATIC_LIBS} )
+        set( STATIC_OR_SHARED "STATIC" )
+    else(  )
+        set( STATIC_OR_SHARED "SHARED" )
+    endif(  )
 
 # Header configuration variables
     set( PROJECT_VERSION "1.0" )
@@ -63,7 +71,7 @@
 
 # Build project
     # Build string util lib
-        add_library( ${TOOLS_LIB_NAME} SHARED
+        add_library( ${TOOLS_LIB_NAME} ${STATIC_OR_SHARED}
                     tools/string_tools.cpp                              tools/string_tools.hpp
                                                                         tools/iterable_tools.hpp
                                                                         tools/micro_shell/micro_shell.hpp
@@ -80,7 +88,7 @@
                                                                         tools/cli/command_sequence.hpp )
 
     # Build core lib
-        add_library( ${CORE_LIB_NAME} SHARED
+        add_library( ${CORE_LIB_NAME} ${STATIC_OR_SHARED}
                     core/cell_t.cpp                                             core/cell_t.hpp
                     core/grid.cpp                                               core/grid.hpp
                     core/utility.cpp                                            core/utility.hpp
@@ -90,13 +98,13 @@
                     target_link_libraries( ${CORE_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
 
     # Build solver lib
-        add_library( ${SOLVER_LIB_NAME} SHARED
+        add_library( ${SOLVER_LIB_NAME} ${STATIC_OR_SHARED}
                     solving/solver.cpp                      solving/solver.hpp
                     solving/utility.cpp                     solving/utility.hpp)
         target_link_libraries( ${SOLVER_LIB_NAME} PUBLIC ${CORE_LIB_NAME} )
 
     # Build IO lib
-        add_library( ${IO_LIB_NAME} SHARED
+        add_library( ${IO_LIB_NAME} ${STATIC_OR_SHARED}
                     io/xml_grid_serializer.cpp                  io/xml_grid_serializer.hpp
                     io/text_grid_formatter.cpp                  io/text_grid_formatter.hpp
                     io/exceptions/invalid_xml_grid_error.cpp    io/exceptions/invalid_xml_grid_error.hpp
@@ -104,7 +112,7 @@
         target_link_libraries( ${IO_LIB_NAME} PUBLIC ${CORE_LIB_NAME} ${TINYXML2_NAME} )
 
     # Build CLI lib
-        add_library( ${CLI_LIB_NAME} SHARED
+        add_library( ${CLI_LIB_NAME} ${STATIC_OR_SHARED}
                     picross_cli/picross_cli_state.cpp       picross_cli/picross_cli_state.hpp
                     picross_cli/create_grid_command.cpp     picross_cli/create_grid_command.hpp
                     picross_cli/load_grid_command.cpp       picross_cli/load_grid_command.hpp
@@ -119,7 +127,7 @@
                                 ${SHELL_LIB_NAME} )
     
     # Build shell lib
-        add_library( ${SHELL_LIB_NAME} SHARED
+        add_library( ${SHELL_LIB_NAME} ${STATIC_OR_SHARED}
                     picross_shell/picross_shell_commit_command.cpp      picross_shell/picross_shell_commit_command.hpp
                     picross_shell/picross_shell_display_command.cpp     picross_shell/picross_shell_display_command.hpp
                     picross_shell/picross_shell_exit_command.cpp        picross_shell/picross_shell_exit_command.hpp
@@ -134,7 +142,7 @@
     # Build executable
         add_executable( ${EXECUTABLE_NAME}
                         main.cpp
-                        cmake_defines.config.hpp     cmake_defines.hpp)
+                        cmake_defines.config.hpp     cmake_defines.hpp )        
         target_link_libraries( ${EXECUTABLE_NAME} PUBLIC ${CLI_LIB_NAME} )
         add_dependencies( ${EXECUTABLE_NAME} ${COPY_RESOURCES_TARGET_NAME} )
 
