@@ -60,6 +60,7 @@ User interaction:
                 -> copy grid and solve copy
                 -> display solved grid
                 -> ask to save in current state
+            ☐ Display grid command
             ✔ Modify grid command
                 Micro shell interpreting subcommands:
                     ✔ $ check <x> <y>                           # Check cell at coordinates (x;y)
@@ -71,6 +72,9 @@ User interaction:
                     ✔ $ hints generate                          # Generate hints from grid state, overwriting current ones
                     ✔ $ commit                                  # Write changes to current grid
                     ✔ $ rollback                                # Discard changes and revert state back to last saved grid
+                    ☐ $ undo                                    # Undo the last change on the grid
+                    ☐ $ isSolved                                # Tells whether the grid is solved in its current state
+                    ☐ $ hintCoherence                           # Tells whether the hints of the grid are coherent in their current state
                     ✔ $ exit                                    # Exit
     Shell toolkit:
         ☐ Think about it

@@ -33,24 +33,50 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 - `mkdir build && cd build`
 - `cmake ..`
 
-You can customize the generated buildsystem by running `cmake .. -G <generator>`, replacing `<generator>` with the buildsystem you want. Here are some of them: _(include the double-quotes in the command line)_  
+You can customize the generated buildsystem by running `cmake .. -G <generator>`, replacing `<generator>` with the buildsystem you want. Use `cmake -G` to get a complete list. Here are some of them: _(include the double-quotes in the command line)_  
 
 - `"Unix Makefiles"` for most Unix-based systems
-- `"MinGW Makefiles"` for MinGW (make sure `where g++` returns something)
+- `"MinGW Makefiles"` for a MinGW toolchain (make sure `where g++` returns something)
+- `"MSYS Makefiles"` for a MSYS installation (make sure `where g++` returns something)
 - `"Visual Studio <ver> <year>" [-A <arch>]` for Visual Studio solutions
 
 If you generated a makefile-based buildsystem, simply run `make` afterwards.
 
 ### Troubleshooting
 
-#### MinGW linker complains about `vsnprintf` defined multiple times
+#### CMake "CXX compiler identification is unknown" on Windows
+
+If CMake complains that `cl is not a full path and was not found in the PATH`:  
+* Install the [Visual C++ Build Tools 2015](https://go.microsoft.com/fwlink/?LinkId=691126)
+* Make sure `where cl` returns something before retrying
+* Alternatively, if MinGW is installed on your system, you can go for it and run `cmake .. -G "MinGW Makefiles"`.  
+
+If CMake complains the same as above but for `g++`:
+* Make sure MinGW is properly installed and your PATH is set to point to its `bin` folder (mostly likely something along the lines of `C:\MinGW\bin`).
+* `where g++` should return something before you retry.
+
+#### CMake can generate MSYS makefiles but running those fails
+
+Not investigated yet.
+
+#### MinGW linker complains about `vsnprintf` being defined multiple times
 
 Open the MinGW installation manager and install packages `mingw32-libmingwex-*`.
 
-### Windows executable produced with MinGW displays an error dialog
+#### Tests fail on Windows with MinGW
+
+This has not yet been investigated. It does not keep you from using the executable.
+
+#### Windows executable produced with MinGW displays an error dialog
 
 "The procedure entry point ... could not be located in the dynamic link library ..."  
-Copy `C:\MinGW\bin\libstdc++-6.dll` (or similar) into the same folder as the executable. If you don't have it, one is provided in the [v1.0 release](https://github.com/deqyra/PicrossEngine/releases/tag/v1.0)
+Copy `C:\MinGW\bin\libstdc++-6.dll` (or similar) into the same folder as the executable. If you don't have it, one is provided in the [v1.0 release](https://github.com/deqyra/PicrossEngine/releases/tag/v1.0).
+
+#### Displaying a grid in the Windows console prints gibberish
+
+This is because the Windows console, unlike most systems, is not simply a file which you can write a stream of bytes to. Instead, it is a special device that requires special API calls. Characters that are over 1-byte-wide get "split" between API calls and the end result is that gibberish.  
+Although I don't want to meddle too much with platform-specific code, I will try to find a solution at some point.  
+As a temporary workaround, you can use a [WSL system](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to compile the project for Unix and run it from there.
 
 **If you encounter an issue that is not filed here, please open an issue and I will have a look.  
 If you have a solution, please edit this README and open a pull request with your changes.**

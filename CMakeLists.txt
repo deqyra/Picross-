@@ -3,7 +3,23 @@
 
     if( ${CMAKE_VERSION} VERSION_LESS 3.12 )
         cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} )
-    endif( )
+    endif(  )
+
+    set( CMAKE_CXX_COMPILER_WORKS 1 )   # Skips the compiler test, which is platform-dependent
+
+# Toggles
+    option( BUILD_STATIC_LIBS "Build libraries as static libraries" OFF )
+
+    if( WIN32 )
+        message( "Windows detected, forcing static libs." )
+        set( BUILD_STATIC_LIBS ON )
+    endif(  )
+
+    if( ${BUILD_STATIC_LIBS} )
+        set( STATIC_OR_SHARED "STATIC" )
+    else(  )
+        set( STATIC_OR_SHARED "SHARED" )
+    endif(  )
 
 # Project general info
     set( PROJECT_MAINTAINER_NAME "François Brachais" )
@@ -27,19 +43,6 @@
                         COMMENT "Copying resource folder"
                         POST_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ./resources )
-
-# Toggles
-    option( BUILD_STATIC_LIBS "Build libraries as static libraries" OFF )
-    
-    if( WIN32 )
-        set( BUILD_STATIC_LIBS ON )
-    endif(  )
-
-    if( ${BUILD_STATIC_LIBS} )
-        set( STATIC_OR_SHARED "STATIC" )
-    else(  )
-        set( STATIC_OR_SHARED "SHARED" )
-    endif(  )
 
 # Header configuration variables
     set( PROJECT_VERSION "1.0" )

@@ -55,6 +55,7 @@ namespace Picross
 
 	int cellValueToInt(cell_t val)
 	{
+		// Clear all bits but keep the 8 LSB (cell_t is an unsigned char = 1 byte).
 		return static_cast<int>(val) & 0xFF;
 	}
 

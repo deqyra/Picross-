@@ -21,26 +21,29 @@ Includes an **interactive CLI app** capable of the following:
 - Tests (and maybe CI)
 - Windows support (it currently builds but doesn't run)
 
-# [PicrossEngine v0.2](https://github.com/deqyra/PicrossEngine/releases/tag/v0.2)
+# [PicrossEngine v1.0](https://github.com/deqyra/PicrossEngine/releases/tag/v1.0)
 
-Fully working "game" / simulator.
+Fully working Picross simulator. Lacks solvers.  
 
 **Main additions:**
 
-- Modular build architecture
-- Modify grid command, a sub-shell parsing small commands to modify a grid's state
-- Comments / documentation
-- Tests! (Plenty of them!) (And they're modular too!)
-- Small fixes
+- Modular buildsystem
+- CLI menu/command became a new library kind of thing, in order to make it reusable in any kind of project
+- Newly added shell also became a library in that fashion
+- General restructuration of the project following these changes
+- Nice test suite
+- CI is live!
   
-The **interactive CLI app** is now capable of the following:  
+Includes an **interactive CLI app** capable of the following:  
 
 - Create a new grid
 - Load a grid from an XML file
 - Save a grid to an XML file
-- Manipulate a grid's state
-- Display a grid
+- **Modify a loaded grid**
+This is done through displaying a shell to the user, who can then input commands to modify the grid. Documentation is to be available in the wiki of the repo.
 
 **Planned for next release:**
 
+- Windows console support: UTF8 characters display gibberish for now. If you are using Windows, please consider installing WSL and using the project from there.
 - Iterative solver
+
