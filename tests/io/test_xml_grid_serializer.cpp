@@ -8,7 +8,7 @@
 
 namespace Picross
 {
-    TEST_CASE("XMLGridSerializer properly deserializes valid XML files", TAGS)
+    TEST_CASE("XML deserialization", TAGS)
     {
         XMLGridSerialzer xml = XMLGridSerialzer();
         Grid g(0, 0);
@@ -16,7 +16,7 @@ namespace Picross
         REQUIRE(g == generate10x10PartialGrid());
     }
 
-    TEST_CASE("XMLGridSerializer properly serializes grids", TAGS)
+    TEST_CASE("XML serialization", TAGS)
     {
         XMLGridSerialzer xml = XMLGridSerialzer();
         REQUIRE_NOTHROW(xml.saveGridToFile(generate10x10PartialGrid(), "resources/tests/io/output.xml"));

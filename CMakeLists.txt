@@ -163,7 +163,7 @@
 # Build and run tests
     enable_testing( )
     add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                         tests/custom_generators.hpp
-                                        tests/core/test_cell_t.cpp              tests/template_scenario.hpp
+                                        tests/core/test_cell_t.cpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
                                         tests/cli/test_picross_cli_state.cpp

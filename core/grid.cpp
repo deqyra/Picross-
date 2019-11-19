@@ -35,6 +35,18 @@ namespace Picross
 		bool exceptionCaught = false;
 		std::string exceptionText;
 
+		if (_horizontalHints.size() != _height)
+		{
+			std::string str = "Number of provided horizontal hint entries (" + std::to_string(_horizontalHints.size()) + ") is different from grid height (" + std::to_string(_height) + ").";
+			throw InvalidGridHintsError(str);
+		}
+
+		if (_verticalHints.size() != _width)
+		{
+			std::string str = "Number of provided vertical hints entries (" + std::to_string(_verticalHints.size()) + ") is different from grid width (" + std::to_string(_width) + ").";
+			throw InvalidGridHintsError(str);
+		}
+
 		for (auto it = _horizontalHints.begin(); it != _horizontalHints.end(); it++)
 		{
 			try
@@ -147,14 +159,17 @@ namespace Picross
 
 	void Grid::setCellRange(int i0, int in, int j0, int jn, cell_t val)
 	{
+		// This will throw if the checks fail (last parameter).
 		isValidCellValue(val, true);
 
+		// Throw if given range is invalid.
 		if (!isValidRow(i0) || !isValidRow(in) || !isValidCol(j0) || !isValidCol(jn))
 		{
 			std::string s = "Range (" + std::to_string(i0) + ":" + std::to_string(in) + " ; " + std::to_string(i0) + ":" + std::to_string(in) + ") is out of bound for grid of dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
 			throw IndexOutOfBoundsError(s.c_str());
 		}
 
+		// Swap range extents if wrongly ordered.
 		if (i0 > in)
 		{
 			std::swap(i0, in);
@@ -164,6 +179,7 @@ namespace Picross
 			std::swap(j0, jn);
 		}
 
+		// Set given value for all cells in range.
 		for (int i = i0; i <= in; i++)
 		{
 			for (int j = j0; j <= jn; j++)
@@ -223,6 +239,7 @@ namespace Picross
 			throw InvalidGridHintsError(s);
 		}
 
+		// Set all hints using member method to check on hint sequence validity.
 		for (int i = 0; i < hints.size(); i++)
 		{
 			setRowHints(i, hints[i]);
@@ -237,6 +254,7 @@ namespace Picross
 			throw InvalidGridHintsError(s);
 		}
 
+		// Set all hints using member method to check on hint sequence validity.
 		for (int i = 0; i < hints.size(); i++)
 		{
 			setColHints(i, hints[i]);
@@ -259,45 +277,47 @@ namespace Picross
 			newVerticalHints.push_back(hintsFromCells(getCol(i)));
 		}
 
+		// Assign those.
 		_horizontalHints = newHorizontalHints;
 		_verticalHints = newVerticalHints;
 	}
 
 	bool Grid::isValidRow(int row, bool throwOnFail) const
 	{
-		bool result = row >= 0 && row < _height;
-		if (throwOnFail && !result)
+		bool valid = row >= 0 && row < _height;
+		if (throwOnFail && !valid)
 		{
 			std::string s = "Invalid row " + std::to_string(row) + " for grid with height " + std::to_string(_height) + ".\n";
 			throw IndexOutOfBoundsError(s);
 		}
-		return result;
+		return valid;
 	}
 
 	bool Grid::isValidCol(int col, bool throwOnFail) const
 	{
-		bool result = col >= 0 && col < _width;
-		if (throwOnFail && !result)
+		bool valid = col >= 0 && col < _width;
+		if (throwOnFail && !valid)
 		{
 			std::string s = "Invalid column " + std::to_string(col) + " for grid with width " + std::to_string(_width) + ".\n";
 			throw IndexOutOfBoundsError(s);
 		}
-		return result;
+		return valid;
 	}
 
 	bool Grid::isValidCell(int row, int col, bool throwOnFail) const
 	{
-		bool result = isValidRow(row) && isValidCol(col);
-		if (throwOnFail && !result)
+		bool valid = isValidRow(row) && isValidCol(col);
+		if (throwOnFail && !valid)
 		{
 			std::string s = "Invalid cell (" + std::to_string(row) + ", " + std::to_string(col) + ") for grid with dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").\n";
 			throw IndexOutOfBoundsError(s);
 		}
-		return result;
+		return valid;
 	}
 
 	bool Grid::hintsAreConsistent() const
 	{
+		// Hints are consistent if the sum of horinzontal hints equals the sum of vertical hints. 
 		return IterTools::sum2NestedIterables<int>(_horizontalHints) == IterTools::sum2NestedIterables<int>(_verticalHints);
 	}
 
@@ -354,29 +374,30 @@ namespace Picross
 	bool Grid::areValidRowHints(const std::vector<int>& hints, bool throwOnFail) const
 	{
 		int space = minimumSpaceFromHints(hints);
-		bool result = space <= _width;
-		if (throwOnFail && !result)
+		bool valid = space <= _width;
+		if (throwOnFail && !valid)
 		{
 			std::string s = "Hints " + StringTools::iterableToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid width (" + std::to_string(_width) + "), and thus are invalid.\n";
 			throw InvalidGridHintsError(s);
 		}
-		return result;
+		return valid;
 	}
 
 	bool Grid::areValidColHints(const std::vector<int>& hints, bool throwOnFail) const
 	{
 		int space = minimumSpaceFromHints(hints);
-		bool result = space <= _height;
-		if (throwOnFail && !result)
+		bool valid = space <= _height;
+		if (throwOnFail && !valid)
 		{
 			std::string s = "Hints " + StringTools::iterableToString(hints, ", ", "(", ")") + " require minimum space " + std::to_string(space) + " which exceeds grid height (" + std::to_string(_height) + "), and thus are invalid.\n";
 			throw InvalidGridHintsError(s);
 		}
-		return result;
+		return valid;
 	}
 
 	bool operator==(const Grid& lhs, const Grid& rhs)
 	{
+		// Return false if any member is not equal in both grids.
 		if (lhs._width != rhs._width) return false;
 		if (lhs._height != rhs._height) return false;
 		if (lhs._horizontalHints != rhs._horizontalHints) return false;

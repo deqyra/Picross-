@@ -8,67 +8,66 @@
 
 namespace Picross
 {
-    SCENARIO("Cell value validity is properly checked for and valid valid can be named", TAGS)
+    TEST_CASE("Cell value validity", TAGS)
     {
-        GIVEN("Valid values")
+        SECTION("Valid values")
         {
             auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
-
-            THEN("Values are considered valid")
-            {
-                REQUIRE(isValidCellValue(values));
-            }
-
-            AND_THEN("Values can be named")
-            {
-                using Catch::Matchers::StartsWith;
-                REQUIRE_THAT(cellValueName(values), StartsWith("CELL_"));
-            }
+            REQUIRE(isValidCellValue(values));
         }
 
-        AND_GIVEN("Invalid values")
+        SECTION("Invalid values")
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
-
-            THEN("Values are considered invalid")
-            {
-                REQUIRE_FALSE(isValidCellValue(values));
-            }
-
-            AND_THEN("Validity function throws when asked to")
-            {
-                REQUIRE_THROWS_AS(isValidCellValue(values, true), InvalidCellValueError);
-            }
-
-            AND_THEN("Trying to name them throws")
-            {
-                REQUIRE_THROWS_AS(cellValueName(values), InvalidCellValueError);
-            }
+            REQUIRE_FALSE(isValidCellValue(values));
+            REQUIRE_THROWS_AS(isValidCellValue(values, true), InvalidCellValueError);
         }
     }
 
-    SCENARIO("Any cell value can be turned to an int and a string", TAGS)
+    TEST_CASE("Cell value naming", TAGS)
     {
-        GIVEN("Valid values")
+        SECTION("Valid values")
         {
             auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
 
-            THEN("Valid ints and strings are returned")
-            {
-                REQUIRE_NOTHROW(cellValueToInt(values));
-                REQUIRE_NOTHROW(cellValueToString(values));
-            }
+            using Catch::Matchers::StartsWith;
+            REQUIRE_THAT(cellValueName(values), StartsWith("CELL_"));
         }
 
-        AND_GIVEN("Invalid values")
+        SECTION("Invalid values")
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
+            REQUIRE_THROWS_AS(cellValueName(values), InvalidCellValueError);
+        }
+    }
 
-            THEN("Valid ints and strings are returned")
-            {
-                REQUIRE_NOTHROW(cellValueToInt(values));
-                REQUIRE_NOTHROW(cellValueToString(values));
-            }
+    TEST_CASE("Cell value int conversion", TAGS)
+    {
+        SECTION("Valid values")
+        {
+            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
+            REQUIRE_NOTHROW(cellValueToInt(values));
+        }
+
+        SECTION("Invalid values")
+        {
+            auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
+            REQUIRE_NOTHROW(cellValueToInt(values));
+        }
+    }
+
+    TEST_CASE("Cell value string conversion", TAGS)
+    {
+        SECTION("Valid values")
+        {
+            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
+            REQUIRE_NOTHROW(cellValueToString(values));
+        }
+
+        SECTION("Invalid values")
+        {
+            auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
+            REQUIRE_NOTHROW(cellValueToString(values));
         }
     }
 }

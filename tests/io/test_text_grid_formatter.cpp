@@ -5,19 +5,23 @@
 #include "../../core/grid.hpp"
 #include "../../tools/string_tools.hpp"
 
-#define TAGS "[io][xml][grid][serialization]"
+#define TAGS "[io][text][grid][formatting]"
 
 namespace Picross
 {
-    TEST_CASE("Text grid formatter produces expected output")
+    TEST_CASE("Text grid render no hints", TAGS)
     {
         TextGridFormatter txt = TextGridFormatter();
         Grid g = generate10x10PartialGrid();
         std::string expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_no_hints.txt");
         REQUIRE(txt.renderGrid(g) == expected);
+    }
 
-        g = generate10x10PartialGrid();
-        expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
+    TEST_CASE("Text grid render with hints", TAGS)
+    {
+        TextGridFormatter txt = TextGridFormatter();
+        Grid g = generate10x10PartialGrid();
+        std::string expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
         REQUIRE(txt.renderGridWithHints(g) == expected);
     }
 }
