@@ -101,8 +101,9 @@ Cleanup & enhancement:
         ✔ Better usage of std::endl (new line vs. buffer flushing)
         ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
-        ☐ Test for CLI stuff
-        ☐ Test for shell stuff
+        ☐ Tests for CLI stuff
+        ☐ Tests for shell stuff
+        ☐ Have Windows print UTF8 characters properly
         ✔ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Aliase templates where appropriate (shorten CLI* names)
         ✔ Have exhaustive #includes in all files

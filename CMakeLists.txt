@@ -163,7 +163,7 @@
 # Build and run tests
     enable_testing( )
     add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                                 tests/custom_generators.hpp
-                                        tests/test_debugging_utils.cpp                  tests/test_debugging_utils.hpp
+                                        tests/debugging_tools.cpp                       tests/debugging_tools.hpp
                                         tests/core/test_cell_t.cpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
