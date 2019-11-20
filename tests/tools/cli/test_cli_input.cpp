@@ -1,10 +1,10 @@
-#include "../../lib/catch2/catch2.hpp"
+#include "../../../lib/catch2/catch2.hpp"
 
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <string>
-#include "../../tools/cli/cli_input.hpp"
+#include "../../../tools/cli/cli_input.hpp"
 
 #define TAGS "[cli][cli_input]"
 
@@ -14,7 +14,7 @@ namespace Picross
     {
         SECTION("Int input")
         {
-            std::ifstream f = std::ifstream("resources/tests/cli/int_input.txt", std::ios::in);
+            std::ifstream f = std::ifstream("resources/tests/tools/cli/int_input.txt", std::ios::in);
             REQUIRE(f);
             std::stringstream ss;
             CLIStreams s = CLIStreams(f, ss, ss);
@@ -39,7 +39,7 @@ namespace Picross
 
         SECTION("Bool input")
         {
-            std::ifstream f = std::ifstream("resources/tests/cli/bool_input.txt", std::ios::in);
+            std::ifstream f = std::ifstream("resources/tests/tools/cli/bool_input.txt", std::ios::in);
             REQUIRE(f);
             std::stringstream ss;
             CLIStreams s = CLIStreams(f, ss, ss);

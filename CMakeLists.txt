@@ -162,15 +162,20 @@
 
 # Build and run tests
     enable_testing( )
-    add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                         tests/custom_generators.hpp
+    add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                                 tests/custom_generators.hpp
+                                        tests/test_debugging_utils.cpp                  tests/test_debugging_utils.hpp
                                         tests/core/test_cell_t.cpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
-                                        tests/cli/test_picross_cli_state.cpp
-                                        tests/tools/test_cli_input.cpp
-                                        tests/tools/test_cli_streams.cpp
+                                        tests/picross_cli/test_picross_cli_state.cpp
+                                        tests/tools/cli/test_cli_input.cpp
+                                        tests/tools/cli/test_cli_streams.cpp
+                                        tests/tools/cli/cli_test_classes.cpp            tests/tools/cli/cli_test_classes.hpp
+                                        tests/tools/cli/test_cli_menu.cpp
+                                        tests/tools/cli/test_cli_menu_command.cpp
+                                        tests/tools/cli/test_cli_command_sequence.cpp
                                         tests/tools/test_string_tools.cpp
-                                        tests/io/generate_static_grids.cpp      tests/io/generate_static_grids.hpp
+                                        tests/io/generate_static_grids.cpp              tests/io/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
                                         tests/io/test_text_grid_formatter.cpp )
     target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} ${TOOLS_LIB_NAME} )

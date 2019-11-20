@@ -1,8 +1,8 @@
-#include "../../lib/catch2/catch2.hpp"
+#include "../../../lib/catch2/catch2.hpp"
 
 #include <iostream>
 #include <fstream>
-#include "../../tools/cli/cli_streams.hpp"
+#include "../../../tools/cli/cli_streams.hpp"
 
 #define TAGS "[cli][cli_streams]"
 
