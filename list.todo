@@ -111,8 +111,10 @@ Cleanup & enhancement:
         ✔ Ensure class members declaration order and syntactical coherence
         ✔ Remove empty constructors and destructors (unless virtual or required)
 Bugs:
-    ✔ Grid text formatting with hints fails when either directional hints are all empty
+    ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
+    ☐ Grid text formatting with hints fails when either directional hints are all empty
     ☐ Grid text formatting with hints doesn't properly handle display of 2-digit hints
+    ☐ XML grid serializer fails to read grid with no cells
 Project management:
     ✔ Set up a git repo
     ✔ Come up with tests

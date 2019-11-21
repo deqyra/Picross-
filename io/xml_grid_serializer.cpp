@@ -121,7 +121,7 @@ namespace Picross
             }
         }
 
-        tinyxml2::XMLElement* cellElt = findFirstChildOrThrow(contentElt, "cell");
+        tinyxml2::XMLElement* cellElt = contentElt->FirstChildElement("cell");
         while (cellElt)
         {
             int row = getValueFromAttribute<int>(cellElt, "row");

@@ -170,6 +170,7 @@
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
                                         tests/picross_cli/test_picross_cli_state.cpp
+                                        tests/picross_cli/test_create_grid_command.cpp
                                         tests/tools/cli/test_cli_input.cpp
                                         tests/tools/cli/test_cli_streams.cpp
                                         tests/tools/cli/cli_test_classes.cpp            tests/tools/cli/cli_test_classes.hpp
