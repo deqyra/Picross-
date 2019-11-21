@@ -1,6 +1,8 @@
 #include "cli_input.hpp"
+#include "../string_tools.hpp"
 
 #include <string>
+#include <stdexcept>
 
 template<>
 std::string CLIInput::parseString(std::string input)
@@ -11,6 +13,10 @@ std::string CLIInput::parseString(std::string input)
 template<>
 int CLIInput::parseString(std::string input)
 {
+    if (!StringTools::stringIsNum(input))
+    {
+        throw std::invalid_argument("String to parse is not exclusively made of digits and a minus sign, or it is at a wrong position.");
+    }
     return std::stoi(input);
 }
 

@@ -30,7 +30,7 @@ namespace StringTools
     bool stringContains(const std::string& str, const char sub, int n = 1, bool exact = false);
 
     // Checks whether a string is only made of digits.
-    bool stringIsNum(const std::string& str);
+    bool stringIsNum(const std::string& str, bool acceptMinusSign = true);
 
     // Splits a string into substring based on a given delimiter, and returns all substrings in a vector.
     std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens = false);
@@ -48,7 +48,13 @@ namespace StringTools
     void stripCR(std::string& str);
 
     // Parse two ints separated by a single character
-    bool parseIntRange(std::string input, char delimiter, int& low, int& high);
+    void parseIntRange(std::string input,                               // The input string to parse
+                       char delimiter,                                  // The delimiter in the string
+                       int& lowBound,                                   // The lower bound to be found
+                       int& highBound,                                  // The higher bound to be found
+                       int min = std::numeric_limits<int>::min(),       // The minimum lower bound value
+                       int max = std::numeric_limits<int>::max(),       // The maximum higher bound value
+                       bool throwOnExceedingBounds = false);            // Whether to throw if found bounds exceed min/max values
 
     // Returns a string representation of the contents of an iterable.
     template<typename Iter>

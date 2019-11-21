@@ -7,8 +7,10 @@
 
 #include <vector>
 #include <string>
+#include "cell_manip_for_commands.hpp"
 #include "../tools/string_tools.hpp"
 #include "../io/text_grid_formatter.hpp"
+#include "../tools/exceptions/range_bounds_exceeded_error.hpp"
 
 namespace Picross
 {
@@ -39,23 +41,7 @@ namespace Picross
         }
         else // if (tokens.size() == 3)
         {
-            int i0, in;
-            int j0, jn;
-            bool success;
-            
-            success = StringTools::parseIntRange(tokens[1], ':', i0, in);
-            if (!success)
-            {
-                streams.out() << "check: range \"" << tokens[1] << "\" could not be parsed." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
-
-            success = StringTools::parseIntRange(tokens[2], ':', j0, jn);
-            if (!success) return SHELL_COMMAND_BAD_ARGUMENTS;
-
-            state.workingGrid().setCellRange(i0, in, j0, jn, CELL_CHECKED);
-
-            return SHELL_COMMAND_SUCCESS;
+            return handleCellManipForCommand(tokens, CELL_CHECKED, "check", state, streams);
         }
     }
 

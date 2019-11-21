@@ -78,7 +78,7 @@
                 lib/tinyxml2/tinyxml2.cpp   lib/tinyxml2/tinyxml2.hpp)
 
 # Build project
-    # Build string util lib
+    # Build tools lib
         add_library( ${TOOLS_LIB_NAME} ${STATIC_OR_SHARED}
                     tools/string_tools.cpp                              tools/string_tools.hpp
                                                                         tools/iterable_tools.hpp
@@ -88,6 +88,7 @@
                                                                         tools/make_basic_exception.hpp
                     tools/exceptions/index_out_of_bounds_error.cpp      tools/exceptions/index_out_of_bounds_error.hpp
                     tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp 
+                    tools/exceptions/range_bounds_exceeded_error.cpp    tools/exceptions/range_bounds_exceeded_error.hpp 
                     tools/cli/cli_input.hpp                             tools/cli/cli_input.cpp
                     tools/cli/cli_streams.cpp                           tools/cli/cli_streams.hpp
                                                                         tools/cli/cli_command.hpp
@@ -144,7 +145,8 @@
                     picross_shell/picross_shell_check_command.cpp       picross_shell/picross_shell_check_command.hpp
                     picross_shell/picross_shell_cross_command.cpp       picross_shell/picross_shell_cross_command.hpp
                     picross_shell/picross_shell_clear_command.cpp       picross_shell/picross_shell_clear_command.hpp
-                    picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp )
+                    picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp
+                    picross_shell/cell_manip_for_commands.cpp           picross_shell/cell_manip_for_commands.hpp )
         target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} ${IO_LIB_NAME} )
 
     # Build executable

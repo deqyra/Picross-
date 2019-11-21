@@ -165,7 +165,7 @@ namespace Picross
 		// Throw if given range is invalid.
 		if (!isValidRow(i0) || !isValidRow(in) || !isValidCol(j0) || !isValidCol(jn))
 		{
-			std::string s = "Range (" + std::to_string(i0) + ":" + std::to_string(in) + " ; " + std::to_string(i0) + ":" + std::to_string(in) + ") is out of bound for grid of dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
+			std::string s = "Range (" + std::to_string(i0) + ":" + std::to_string(in) + " ; " + std::to_string(j0) + ":" + std::to_string(jn) + ") is out of bound for grid of dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
 			throw IndexOutOfBoundsError(s.c_str());
 		}
 

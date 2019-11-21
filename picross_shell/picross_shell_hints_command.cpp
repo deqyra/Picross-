@@ -119,11 +119,14 @@ namespace Picross
 
     int PicrossShellHintsCommand::handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
     {
+        // Syntax: hints <h|v>       <indexToModify> <spaceSeparatedValues>
+        // Syntax: hints <direction> <indexString>   <valueString>
+
         std::string direction = tokens[1];
         std::string indexString = tokens[2];
         std::string valueString = tokens[3];
 
-        if (!StringTools::stringIsNum(indexString))
+        if (!StringTools::stringIsNum(indexString, false))
         {
             streams.out() << "\"" << indexString << "\" is not a valid index value." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;

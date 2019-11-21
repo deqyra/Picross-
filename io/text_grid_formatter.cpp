@@ -55,16 +55,20 @@ namespace Picross
 
 		int hPadding = IterTools::maxIterableLength(grid.getAllRowHints()) * 2 - 1;
 		int vPadding = IterTools::maxIterableLength(grid.getAllColHints()) * 2 - 1;
+		// Exceptional case: either directional hints are ALL empty, resulting in value -1. Set it back to 0.
+		if (hPadding == -1) hPadding = 0;
+		if (vPadding == -1) vPadding = 0;
+
+		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
+		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
+		std::string hHintsStr = renderHorizontalHints(grid.getAllRowHints());
+		std::string gridStr = renderGrid(grid, emptyCrossedCells);
 
 		// In all blocks remove the final \n to negate useless newline concatenation
-		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
-		paddingBlock.pop_back();		// Remove final \n
-		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
-		vHintsStr.pop_back();			// Remove final \n
-		std::string hHintsStr = renderHorizontalHints(grid.getAllRowHints());
-		hHintsStr.pop_back();			// Remove final \n
-		std::string gridStr = renderGrid(grid, emptyCrossedCells);
-		gridStr.pop_back();				// Remove final \n
+		if (paddingBlock.length()) paddingBlock.pop_back();
+		if (vHintsStr.length()) vHintsStr.pop_back();
+		if (hHintsStr.length()) hHintsStr.pop_back();
+		gridStr.pop_back();
 
 		std::string s;
 		s += StringTools::multilineConcatenation(paddingBlock, vHintsStr);
@@ -245,6 +249,8 @@ namespace Picross
 	{
 		int maxHintLength = IterTools::maxIterableLength(hints);
 		int strLength = maxHintLength * 2 - 1;
+		// Exceptional case: are ALL empty, resulting in value -1. Set it back to 0.
+		if (strLength == -1) strLength = 0;
 
 		std::string s;
 		for (auto it = hints.begin(); it != hints.end(); it++)

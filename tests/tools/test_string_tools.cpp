@@ -144,12 +144,19 @@ namespace StringTools
         SECTION("General case")
         {
             std::string numeric = "3216548";
+            std::string negative = "-3216548";
             std::string alphanum = "321aze456";
             std::string alphabetic = "azeqsdwxc";
 
-            REQUIRE(stringIsNum(numeric));
-            REQUIRE_FALSE(stringIsNum(alphanum));
-            REQUIRE_FALSE(stringIsNum(alphabetic));
+            REQUIRE(stringIsNum(numeric, true));
+            REQUIRE(stringIsNum(negative, true));
+            REQUIRE_FALSE(stringIsNum(alphanum, true));
+            REQUIRE_FALSE(stringIsNum(alphabetic, true));
+
+            REQUIRE(stringIsNum(numeric, false));
+            REQUIRE_FALSE(stringIsNum(negative, false));
+            REQUIRE_FALSE(stringIsNum(alphanum, false));
+            REQUIRE_FALSE(stringIsNum(alphabetic, false));
         }
 
         SECTION("Empty string")

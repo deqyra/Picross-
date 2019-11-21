@@ -8,28 +8,18 @@
 
 namespace Picross
 {
-    SCENARIO("CLI state works", TAGS)
+    TEST_CASE("CLIState constructor", TAGS)
     {
-        GIVEN("Valid arguments")
-        {
-            PicrossCLIState state = PicrossCLIState();
-            THEN("Constructor works")
-            {
-                REQUIRE_NOTHROW(PicrossCLIState());
-            }
+        PicrossCLIState state = PicrossCLIState();
+        // Default grid is constructed in state
+        REQUIRE(state.grid() == Grid(0, 0));
+    }
 
-            AND_THEN("Getters work")
-            {
-                // Default grid is constructed in state
-                REQUIRE(state.grid() == Grid(0, 0));
-            }
-
-            AND_THEN("Setters work")
-            {
-                Grid g = Grid(5, 5);
-                REQUIRE_NOTHROW(state.grid() = g);
-                REQUIRE(state.grid() == g);
-            }
-        }
+    TEST_CASE("CLIState getters and setters")
+    {
+        PicrossCLIState state = PicrossCLIState();
+        Grid g = Grid(5, 5);
+        REQUIRE_NOTHROW(state.grid() = g);
+        REQUIRE(state.grid() == g);
     }
 }
