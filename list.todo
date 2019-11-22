@@ -96,6 +96,8 @@ Cleanup & enhancement:
         ✔ Make sure all polymorphically derived classes have a virtual destructor
         ✔ Reorganize all kinds of utils in the "tools" folder
         ☐ Ensure all argument copies are compiler-made when needed
+        ☐ User wiki on GitHub
+        ☐ Tech wiki on GitHub (?)
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)
@@ -114,7 +116,8 @@ Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
     ☐ Grid text formatting with hints fails when either directional hints are all empty
     ☐ Grid text formatting with hints doesn't properly handle display of 2-digit hints
-    ☐ XML grid serializer fails to read grid with no cells
+    ✔ XML grid serializer fails to read grid with no cells
+    ☐ Exceptions in the shell are only caught at main menu level
 Project management:
     ✔ Set up a git repo
     ✔ Come up with tests

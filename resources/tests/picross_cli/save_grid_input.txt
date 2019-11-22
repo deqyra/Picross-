@@ -1,0 +1,1 @@
+resources/tests/picross_cli/saved_grid.xml

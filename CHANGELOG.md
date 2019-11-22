@@ -47,3 +47,22 @@ This is done through displaying a shell to the user, who can then input commands
 - Windows console support: UTF8 characters display gibberish for now. If you are using Windows, please consider installing WSL and using the project from there.
 - Iterative solver
 
+# [PicrossEngine v1.1](https://github.com/deqyra/PicrossEngine/releases/tag/v1.1)
+
+Now with an iterative solver.  
+
+**Main additions:**
+
+- Iterative solver
+- `isSolved`, `undo` and `hintCoherence` shell commands (available through the `Modify grid` option of the grid manipulation menu)
+- More tests and comments
+  
+**Bug fixes:**
+
+- XML deserializer now accepts XML grids with no content
+- Text formatter now properly renders grids with no vertical or horizontal hints
+
+**Planned for next release:**
+
+- Inferring solver
+

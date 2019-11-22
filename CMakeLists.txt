@@ -178,7 +178,7 @@
                                         tests/tools/cli/test_cli_menu_command.cpp
                                         tests/tools/cli/test_cli_command_sequence.cpp
                                         tests/tools/test_string_tools.cpp
-                                        tests/io/generate_static_grids.cpp              tests/io/generate_static_grids.hpp
+                                        tests/generate_static_grids.cpp                 tests/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
                                         tests/io/test_text_grid_formatter.cpp )
     target_link_libraries( ${TEST_TARGET_NAME} PUBLIC ${CORE_LIB_NAME} ${CLI_LIB_NAME} ${IO_LIB_NAME} ${TOOLS_LIB_NAME} )

@@ -1,0 +1,1 @@
+resources/tests/picross_cli/5_10_completed.xml
