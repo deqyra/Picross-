@@ -1,6 +1,6 @@
 #include "../../lib/catch2/catch2.hpp"
 
-#include "../custom_generators.hpp"
+#include "../catch2_custom_generators.hpp"
 #include "../../core/cell_t.hpp"
 #include "../../core/exceptions/invalid_cell_value_error.hpp"
 

@@ -164,13 +164,16 @@
 
 # Build and run tests
     enable_testing( )
-    add_executable( ${TEST_TARGET_NAME}  tests/main.cpp                                 tests/custom_generators.hpp
+    add_executable( ${TEST_TARGET_NAME} tests/main.cpp                                  tests/catch2_custom_generators.hpp
+                                        tests/catch2_custom_string_makers.cpp           tests/catch2_custom_string_makers.hpp
                                         tests/debugging_tools.cpp                       tests/debugging_tools.hpp
                                         tests/core/test_cell_t.cpp
                                         tests/core/test_utility.cpp
                                         tests/core/test_grid.cpp
                                         tests/picross_cli/test_picross_cli_state.cpp
                                         tests/picross_cli/test_create_grid_command.cpp
+                                        tests/picross_cli/test_load_grid_command.cpp
+                                        tests/picross_cli/test_save_grid_command.cpp
                                         tests/tools/cli/test_cli_input.cpp
                                         tests/tools/cli/test_cli_streams.cpp
                                         tests/tools/cli/cli_test_classes.cpp            tests/tools/cli/cli_test_classes.hpp
