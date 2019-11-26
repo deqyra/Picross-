@@ -40,13 +40,33 @@ namespace Picross
 
     int ModifyGridCommand::run(PicrossCLIState& cliState, CLIStreams& streams)
     {
-        streams.out() << "Invoking micro shell..." << std::endl;
+        // Instantiate the shell and create state to work on.
+        streams.out() << "Invoking micro-shell..." << std::endl;
         PicrossShell shell = instantiateMicroShell();
         PicrossShellState shellState = CLIStateToShellState(cliState);
 
-        streams.out() << "Picross micro-shell. Type 'help' to get a list of available commands." << std::endl;
-        shell.run(shellState, streams);
+        bool cleanExit = false;
 
+        while (!cleanExit)
+        {
+            try
+            {
+                // Run the shell.
+                streams.out() << "Picross micro-shell. Type 'help' to get a list of available commands." << std::endl;
+                shell.run(shellState, streams);
+                cleanExit = true;
+            }
+            catch(const std::exception& e)
+            {
+                // Informative error logging.
+                streams.err() << "The micro-shell threw an unhandled exception:\n";
+                streams.err() << e.what() << '\n';
+                streams.out() << "Restarting..." << std::endl;
+            }
+        }
+        // The shell is done running.
+
+        // Retrieve modified grid.
         cliState = shellStateToCLIState(shellState);
 
         return COMMAND_SUCCESS;
@@ -54,6 +74,7 @@ namespace Picross
 
     PicrossCLIState ModifyGridCommand::shellStateToCLIState(PicrossShellState& shellState)
     {
+        // Keep only the main grid (discarding potential pending changes).
         PicrossCLIState cliState = PicrossCLIState();
         cliState.grid() = shellState.mainGrid();
         return cliState;
@@ -61,6 +82,7 @@ namespace Picross
 
     PicrossShellState ModifyGridCommand::CLIStateToShellState(PicrossCLIState& cliState)
     {
+        // Copy the grid in CLI in both working grids of the shell state.
         PicrossShellState shellState = PicrossShellState();
         shellState.mainGrid() = cliState.grid();
         shellState.workingGrid() = cliState.grid();
@@ -69,6 +91,7 @@ namespace Picross
 
     ModifyGridCommand::PicrossShell ModifyGridCommand::instantiateMicroShell()
     {
+        // Add all known commands to the shell.
         ModifyGridCommand::PicrossShell shell = MicroShell<PicrossShellState>();
         shell.addCommand(std::make_shared<PicrossShellCheckCommand>());
         shell.addCommand(std::make_shared<PicrossShellCrossCommand>());

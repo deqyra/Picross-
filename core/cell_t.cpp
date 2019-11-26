@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "exceptions/invalid_cell_value_error.hpp"
+#include "exceptions/unrecognized_cell_value_error.hpp"
 
 namespace Picross
 {
@@ -49,7 +50,7 @@ namespace Picross
 			default:
 				// A value may be valid as far as the type is concerned, but not handled in here. Report this properly.
 				std::string s = "Unrecognized cell value " + cellValueToString(val) + ", name unknown.";
-				throw InvalidCellValueError(s);
+				throw UnrecognizedCellValueError(s);
 		}
 	}
 

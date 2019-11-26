@@ -27,14 +27,15 @@ namespace Picross
 		return space - 1;
 	}
 
-    bool cellsSatisfyHints(std::vector<cell_t> cells, std::vector<int> hints)
+    bool cellsSatisfyHints(const std::vector<cell_t>& cells, const std::vector<int>& hints)
     {
         // Cells satisfy hints if the hints generated from them are the same as those provided.
         return hintsFromCells(cells) == hints;
     }
 
-    std::vector<int> hintsFromCells(std::vector<cell_t> cells)
+    std::vector<int> hintsFromCells(const std::vector<cell_t>& cells)
     {
+        // Count every sequence of checked cells and store the length of each in a vector.
         std::vector<int> hints;
         int count = 0;
 
@@ -44,11 +45,9 @@ namespace Picross
             if (*it == CELL_CHECKED)
             {
                 count++;
-                continue;
             }
-
             // Otherwise, current sequence is over: register count if non-0 and reset count variable.
-            if (count)
+            else if (count)
             {
                 hints.push_back(count);
                 count = 0;

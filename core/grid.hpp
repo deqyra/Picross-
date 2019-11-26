@@ -60,7 +60,7 @@ namespace Picross
 		// Return the cell value which is most present within a grid.
 			cell_t mostPresentState() const;
 
-		// Useful tip-related checks and functions.
+		// Useful hint-related checks and functions.
 			bool areValidRowHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 			bool areValidColHints(const std::vector<int>& hints, bool throwOnFail = false) const;
 

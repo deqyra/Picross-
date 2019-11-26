@@ -24,7 +24,9 @@ namespace Picross
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
 
         private:    // Private methods
+            // Retrieve the main grid from the shell state into a CLI state.
             PicrossCLIState shellStateToCLIState(PicrossShellState& shellState);
+            // Retrieve the main grid from the CLI state into a shell state.
             PicrossShellState CLIStateToShellState(PicrossCLIState& cliState);
             PicrossShell instantiateMicroShell();
     };

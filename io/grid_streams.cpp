@@ -6,6 +6,7 @@
 
 std::ostream& operator<<(std::ostream& os, Picross::Grid const& grid)
 {
+    // Print the input grid with hints.
     Picross::TextGridFormatter txt = Picross::TextGridFormatter();
     os << txt.renderGridWithHints(grid);
     return os;

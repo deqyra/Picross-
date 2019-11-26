@@ -30,11 +30,13 @@ namespace Picross
 
     int LoadGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
+        // Get path from user.
         std::string path = CLIInput::askForInput<std::string>("Enter path to an XML grid file: ", streams);
 
         XMLGridSerialzer reader;
         try
         {
+            // Read the file.
             Grid loadedGrid = reader.loadGridFromFile(path);
             state.grid() = loadedGrid;
             streams.out() << "Grid successfully loaded." << std::endl;
@@ -43,6 +45,7 @@ namespace Picross
         }
         catch(const std::exception& e)
         {
+            // Informative error logging.
             streams.err() << "Exception thrown:\n";
             streams.err() << e.what() << '\n';
             streams.out() << "Grid could not be loaded." << std::endl;

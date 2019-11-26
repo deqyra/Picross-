@@ -1,0 +1,6 @@
+clear : :
+exit
+yes
+clear : :
+commit
+exit
