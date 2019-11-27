@@ -1,5 +1,5 @@
-#ifndef CLI__SOLVE_COMMAND_HPP
-#define CLI__SOLVE_COMMAND_HPP
+#ifndef PICROSS_CLI__CLI_SOLVE_COMMAND_HPP
+#define PICROSS_CLI__CLI_SOLVE_COMMAND_HPP
 
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_streams.hpp"
@@ -14,13 +14,13 @@
 
 namespace Picross
 {
-    class SolveCommand : public CLICommand<PicrossCLIState>
+    class CLISolveCommand : public CLICommand<PicrossCLIState>
     {
         using SolverPtr = std::shared_ptr<Solver>;
 
         public:     // Public methods
-            SolveCommand();
-            virtual ~SolveCommand();
+            CLISolveCommand();
+            virtual ~CLISolveCommand();
 
             virtual std::string getTooltip();
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
@@ -33,4 +33,4 @@ namespace Picross
     };
 }
 
-#endif//CLI__SOLVE_COMMAND_HPP
+#endif//PICROSS_CLI__CLI_SOLVE_COMMAND_HPP

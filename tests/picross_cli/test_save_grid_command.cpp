@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "../../picross_cli/picross_cli_state.hpp"
-#include "../../picross_cli/save_grid_command.hpp"
+#include "../../picross_cli/cli_save_grid_command.hpp"
 #include "../../core/grid.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
@@ -11,7 +11,7 @@
 
 namespace Picross
 {
-    TEST_CASE("SaveGridCommand end-to-end")
+    TEST_CASE("CLISaveGridCommand end-to-end")
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/save_grid_input.txt", std::ios::in);
         REQUIRE(f);
@@ -24,7 +24,7 @@ namespace Picross
         PicrossCLIState state = PicrossCLIState();
         state.grid() = g;
 
-        SaveGridCommand command = SaveGridCommand();
+        CLISaveGridCommand command = CLISaveGridCommand();
         command.run(state, s);
 
         Grid gSaved = xml.loadGridFromFile("resources/tests/picross_cli/saved_grid.xml");

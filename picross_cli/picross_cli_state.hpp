@@ -1,5 +1,5 @@
-#ifndef CLI__PICROSS_CLI_STATE_HPP
-#define CLI__PICROSS_CLI_STATE_HPP
+#ifndef PICROSS_CLI__CLI_PICROSS_CLI_STATE_HPP
+#define PICROSS_CLI__CLI_PICROSS_CLI_STATE_HPP
 
 #include <iostream>
 
@@ -18,4 +18,4 @@ namespace Picross
     };
 }
 
-#endif//CLI__PICROSS_CLI_STATE_HPP
+#endif//PICROSS_CLI__CLI_PICROSS_CLI_STATE_HPP

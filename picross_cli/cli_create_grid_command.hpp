@@ -1,5 +1,5 @@
-#ifndef CLI__CREATE_GRID_COMMAND_HPP
-#define CLI__CREATE_GRID_COMMAND_HPP
+#ifndef PICROSS_CLI__CLI_CREATE_GRID_COMMAND_HPP
+#define PICROSS_CLI__CLI_CREATE_GRID_COMMAND_HPP
 
 #include "../tools/cli/cli_command.hpp"
 #include "picross_cli_state.hpp"
@@ -9,11 +9,11 @@
 
 namespace Picross
 {
-    class CreateGridCommand : public CLICommand<PicrossCLIState>
+    class CLICreateGridCommand : public CLICommand<PicrossCLIState>
     {
         public:     // Public methods
-            CreateGridCommand();
-            virtual ~CreateGridCommand();
+            CLICreateGridCommand();
+            virtual ~CLICreateGridCommand();
 
             virtual std::string getTooltip();
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
@@ -26,4 +26,4 @@ namespace Picross
     };
 }
 
-#endif//CLI__CREATE_GRID_COMMAND_HPP
+#endif//PICROSS_CLI__CLI_CREATE_GRID_COMMAND_HPP

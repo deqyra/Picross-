@@ -1,7 +1,7 @@
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_streams.hpp"
 #include "../tools/cli/cli_input.hpp"
-#include "save_grid_command.hpp"
+#include "cli_save_grid_command.hpp"
 #include "picross_cli_state.hpp"
 
 #include <string>
@@ -11,23 +11,23 @@
 
 namespace Picross
 {
-    SaveGridCommand::SaveGridCommand() :
+    CLISaveGridCommand::CLISaveGridCommand() :
         CLICommand<PicrossCLIState>()
     {
 
     }
 
-    SaveGridCommand::~SaveGridCommand()
+    CLISaveGridCommand::~CLISaveGridCommand()
     {
         
     }
 
-    std::string SaveGridCommand::getTooltip()
+    std::string CLISaveGridCommand::getTooltip()
     {
         return "Save grid to disk";
     }
 
-    int SaveGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
+    int CLISaveGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
         // Get path from user.
         std::string path = CLIInput::askForInput<std::string>("Enter file path to save the XML grid to: ", streams);

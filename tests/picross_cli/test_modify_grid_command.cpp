@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "../../picross_cli/picross_cli_state.hpp"
-#include "../../picross_cli/modify_grid_command.hpp"
+#include "../../picross_cli/cli_modify_grid_command.hpp"
 #include "../../core/grid.hpp"
 #include "../../core/cell_t.hpp"
 #include "../../io/xml_grid_serializer.hpp"
@@ -13,7 +13,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ModifyGridCommand end-to-end")
+    TEST_CASE("CLIModifyGridCommand end-to-end")
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/modify_grid_input.txt", std::ios::in);
         REQUIRE(f);
@@ -26,7 +26,7 @@ namespace Picross
         PicrossCLIState state = PicrossCLIState();
         state.grid() = g;
 
-        ModifyGridCommand command = ModifyGridCommand();
+        CLIModifyGridCommand command = CLIModifyGridCommand();
         command.run(state, s);
 
         // Check the grid wasn't modified in the state (changes were made but not committed)

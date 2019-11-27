@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_commit_command.hpp"
+#include "shell_commit_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -11,18 +11,18 @@
 
 namespace Picross
 {
-    PicrossShellCommitCommand::PicrossShellCommitCommand() :
+    ShellCommitCommand::ShellCommitCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellCommitCommand::~PicrossShellCommitCommand()
+    ShellCommitCommand::~ShellCommitCommand()
     {
 
     }
 
-    int PicrossShellCommitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellCommitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         
@@ -38,17 +38,17 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    std::string PicrossShellCommitCommand::name()
+    std::string ShellCommitCommand::name()
     {
         return "commit";
     }
 
-    std::string PicrossShellCommitCommand::description()
+    std::string ShellCommitCommand::description()
     {
         return "Save pending changes";
     }
 
-    std::string PicrossShellCommitCommand::help()
+    std::string ShellCommitCommand::help()
     {
         std::string s;
         s += "commit - save pending changes from the working grid to the main grid.\n";

@@ -1,6 +1,6 @@
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_input.hpp"
-#include "create_grid_command.hpp"
+#include "cli_create_grid_command.hpp"
 #include "picross_cli_state.hpp"
 
 #include <vector>
@@ -13,23 +13,23 @@
 
 namespace Picross
 {
-    CreateGridCommand::CreateGridCommand() :
+    CLICreateGridCommand::CLICreateGridCommand() :
         CLICommand<PicrossCLIState>()
     {
 
     }
 
-    CreateGridCommand::~CreateGridCommand()
+    CLICreateGridCommand::~CLICreateGridCommand()
     {
         
     }
 
-    std::string CreateGridCommand::getTooltip()
+    std::string CLICreateGridCommand::getTooltip()
     {
         return "Create a new grid";
     }
 
-    int CreateGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
+    int CLICreateGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
         // Ask for dimensions.
         int height = CLIInput::askForBoundedInput<int>("Enter new grid height: ", 1, GRID_MAX_SIZE, streams);
@@ -61,7 +61,7 @@ namespace Picross
         }
     }
 
-    std::vector<std::vector<int>> CreateGridCommand::handleHintSequenceInput(int sequenceLength, int maxHintSpace, std::string numberedPrefixNoun, CLIStreams& streams)
+    std::vector<std::vector<int>> CLICreateGridCommand::handleHintSequenceInput(int sequenceLength, int maxHintSpace, std::string numberedPrefixNoun, CLIStreams& streams)
     {
         // Repeatedly asks for hints that fit in a certain grid.
 
@@ -113,7 +113,7 @@ namespace Picross
         return allHints;
     }
 
-    bool CreateGridCommand::hintsArePositiveNonZero(std::vector<int>& hints)
+    bool CLICreateGridCommand::hintsArePositiveNonZero(std::vector<int>& hints)
     {
         // Return false if any of the provided hints is below 1.
         for (auto it = hints.begin(); it != hints.end(); it++)

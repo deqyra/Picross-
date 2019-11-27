@@ -1,5 +1,5 @@
-#ifndef CLI__MODIFY_GRID_COMMAND_HPP
-#define CLI__MODIFY_GRID_COMMAND_HPP
+#ifndef PICROSS_CLI__CLI_MODIFY_GRID_COMMAND_HPP
+#define PICROSS_CLI__CLI_MODIFY_GRID_COMMAND_HPP
 
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_streams.hpp"
@@ -12,13 +12,13 @@
 
 namespace Picross
 {
-    class ModifyGridCommand : public CLICommand<PicrossCLIState>
+    class CLIModifyGridCommand : public CLICommand<PicrossCLIState>
     {
         using PicrossShell = MicroShell<PicrossShellState>;
 
         public:     // Public methods
-            ModifyGridCommand();
-            virtual ~ModifyGridCommand();
+            CLIModifyGridCommand();
+            virtual ~CLIModifyGridCommand();
 
             virtual std::string getTooltip();
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
@@ -32,4 +32,4 @@ namespace Picross
     };
 }
 
-#endif//CLI__MODIFY_GRID_COMMAND_HPP
+#endif//PICROSS_CLI__CLI_MODIFY_GRID_COMMAND_HPP

@@ -2,25 +2,25 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_exit_command.hpp"
+#include "shell_exit_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <string>
 
 namespace Picross
 {
-    PicrossShellExitCommand::PicrossShellExitCommand() :
+    ShellExitCommand::ShellExitCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellExitCommand::~PicrossShellExitCommand()
+    ShellExitCommand::~ShellExitCommand()
     {
 
     }
 
-    int PicrossShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // No argument checking: if exit was invoked, start the exit procedure.
         
@@ -35,17 +35,17 @@ namespace Picross
         return SHELL_EXIT;
     }
 
-    std::string PicrossShellExitCommand::name()
+    std::string ShellExitCommand::name()
     {
         return "exit";
     }
 
-    std::string PicrossShellExitCommand::description()
+    std::string ShellExitCommand::description()
     {
         return "Exit the shell";
     }
 
-    std::string PicrossShellExitCommand::help()
+    std::string ShellExitCommand::help()
     {
         std::string s;
         s += "exit - exit the shell.\n";

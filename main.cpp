@@ -7,20 +7,20 @@
 #include "tools/cli/command_sequence.hpp"
 #include "tools/cli/menu_command.hpp"
 #include "picross_cli/picross_cli_state.hpp"
-#include "picross_cli/create_grid_command.hpp"
-#include "picross_cli/load_grid_command.hpp"
-#include "picross_cli/solve_grid_command.hpp"
-#include "picross_cli/save_grid_command.hpp"
-#include "picross_cli/modify_grid_command.hpp"
+#include "picross_cli/cli_create_grid_command.hpp"
+#include "picross_cli/cli_load_grid_command.hpp"
+#include "picross_cli/cli_solve_grid_command.hpp"
+#include "picross_cli/cli_save_grid_command.hpp"
+#include "picross_cli/cli_modify_grid_command.hpp"
 
 #include "cmake_defines.hpp"
 
 using Picross::PicrossCLIState;
-using Picross::SolveCommand;
-using Picross::ModifyGridCommand;
-using Picross::SaveGridCommand;
-using Picross::LoadGridCommand;
-using Picross::CreateGridCommand;
+using Picross::CLISolveCommand;
+using Picross::CLIModifyGridCommand;
+using Picross::CLISaveGridCommand;
+using Picross::CLILoadGridCommand;
+using Picross::CLICreateGridCommand;
 
 using PicrossCLICommand = CLICommand<PicrossCLIState>;
 using PicrossCommandPtr = std::shared_ptr<PicrossCLICommand>;
@@ -41,9 +41,9 @@ void runCLIApp()
 {
 	// Commands available from the "Manipulate grid" menu:
 	std::vector<PicrossCommandPtr> manipulateGridMenuCommands = {
-		std::make_shared<SolveCommand>(), 							// Attempt to solve the grid using a solver
-		std::make_shared<ModifyGridCommand>(),						// Modify the grid manually
-		std::make_shared<SaveGridCommand>()							// Save the grid to disk
+		std::make_shared<CLISolveCommand>(),						// Attempt to solve the grid using a solver
+		std::make_shared<CLIModifyGridCommand>(),					// Modify the grid manually
+		std::make_shared<CLISaveGridCommand>()						// Save the grid to disk
 	};
 
 	// "Manipulate grid" menu, consisting of the commands instantiated above.
@@ -51,13 +51,13 @@ void runCLIApp()
 
 	// Command sequence for the "Create new grid" option of the main menu:
 	std::vector<PicrossCommandPtr> newGridCommands = {
-		std::make_shared<CreateGridCommand>(), 						// 1 - Run the grid creation command.
+		std::make_shared<CLICreateGridCommand>(),					// 1 - Run the grid creation command.
 		std::make_shared<PicrossMenuCommand>(manipulateGridMenu)	// 2 - Display the "Manipulate grid" menu (defined above).
 	};
 
 	// Command sequence for the "Open XML grid" option of the main menu:
 	std::vector<PicrossCommandPtr> openGridCommands = {
-		std::make_shared<LoadGridCommand>(), 						// 1 - Run the command to read a grid from an XML file.
+		std::make_shared<CLILoadGridCommand>(),						// 1 - Run the command to read a grid from an XML file.
 		std::make_shared<PicrossMenuCommand>(manipulateGridMenu)	// 2 - Display the "Manipulate grid" menu (defined above).
 	};
 

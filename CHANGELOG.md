@@ -61,9 +61,9 @@ Now with an iterative solver.
 
 - XML deserializer now accepts XML grids with no content
 - Text formatter now properly renders grids with no vertical or horizontal hints
-- Better exception handling
+- Failproof exception handling
 
 **Planned for next release:**
 
-- Inferring solver
+-  ¯\\\_(ツ)\_/¯
 

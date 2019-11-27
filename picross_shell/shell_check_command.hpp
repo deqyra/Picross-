@@ -1,5 +1,5 @@
-#ifndef PICROSS_SHELL__PICROSS_SHELL_CLEAR_COMMAND_HPP
-#define PICROSS_SHELL__PICROSS_SHELL_CLEAR_COMMAND_HPP
+#ifndef PICROSS_SHELL__SHELL_CHECK_COMMAND_HPP
+#define PICROSS_SHELL__SHELL_CHECK_COMMAND_HPP
 
 #include "../tools/micro_shell/micro_shell_command.hpp"
 #include "../tools/cli/cli_input.hpp"
@@ -10,11 +10,11 @@
 
 namespace Picross
 {
-    class PicrossShellClearCommand : public MicroShellCommand<PicrossShellState>
+    class ShellCheckCommand : public MicroShellCommand<PicrossShellState>
     {
         public:     // Public methods
-            PicrossShellClearCommand();
-            virtual ~PicrossShellClearCommand();
+            ShellCheckCommand();
+            virtual ~ShellCheckCommand();
 
             virtual int processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams);
             virtual std::string name();
@@ -23,4 +23,4 @@ namespace Picross
     };
 }
 
-#endif//PICROSS_SHELL__PICROSS_SHELL_CLEAR_COMMAND_HPP
+#endif//PICROSS_SHELL__SHELL_CHECK_COMMAND_HPP

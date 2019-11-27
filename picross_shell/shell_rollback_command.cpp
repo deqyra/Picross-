@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_rollback_command.hpp"
+#include "shell_rollback_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -11,18 +11,18 @@
 
 namespace Picross
 {
-    PicrossShellRollbackCommand::PicrossShellRollbackCommand() :
+    ShellRollbackCommand::ShellRollbackCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellRollbackCommand::~PicrossShellRollbackCommand()
+    ShellRollbackCommand::~ShellRollbackCommand()
     {
 
     }
 
-    int PicrossShellRollbackCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellRollbackCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 
@@ -37,17 +37,17 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    std::string PicrossShellRollbackCommand::name()
+    std::string ShellRollbackCommand::name()
     {
         return "rollback";
     }
 
-    std::string PicrossShellRollbackCommand::description()
+    std::string ShellRollbackCommand::description()
     {
         return "Discard pending changes";
     }
 
-    std::string PicrossShellRollbackCommand::help()
+    std::string ShellRollbackCommand::help()
     {
         std::string s;
         s += "rollback - discard pending changes and revert the working grid to the same state as the main grid.\n";

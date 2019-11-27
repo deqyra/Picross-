@@ -122,12 +122,12 @@
 
     # Build CLI lib
         add_library( ${CLI_LIB_NAME} ${STATIC_OR_SHARED}
-                    picross_cli/picross_cli_state.cpp       picross_cli/picross_cli_state.hpp
-                    picross_cli/create_grid_command.cpp     picross_cli/create_grid_command.hpp
-                    picross_cli/load_grid_command.cpp       picross_cli/load_grid_command.hpp
-                    picross_cli/save_grid_command.cpp       picross_cli/save_grid_command.hpp
-                    picross_cli/modify_grid_command.cpp     picross_cli/modify_grid_command.hpp
-                    picross_cli/solve_grid_command.cpp      picross_cli/solve_grid_command.hpp )
+                    picross_cli/picross_cli_state.cpp           picross_cli/picross_cli_state.hpp
+                    picross_cli/cli_create_grid_command.cpp     picross_cli/cli_create_grid_command.hpp
+                    picross_cli/cli_load_grid_command.cpp       picross_cli/cli_load_grid_command.hpp
+                    picross_cli/cli_save_grid_command.cpp       picross_cli/cli_save_grid_command.hpp
+                    picross_cli/cli_modify_grid_command.cpp     picross_cli/cli_modify_grid_command.hpp
+                    picross_cli/cli_solve_grid_command.cpp      picross_cli/cli_solve_grid_command.hpp )
         target_link_libraries( ${CLI_LIB_NAME} PUBLIC
                                 ${TOOLS_LIB_NAME}
                                 ${CORE_LIB_NAME}
@@ -137,16 +137,16 @@
     
     # Build shell lib
         add_library( ${SHELL_LIB_NAME} ${STATIC_OR_SHARED}
-                    picross_shell/picross_shell_commit_command.cpp      picross_shell/picross_shell_commit_command.hpp
-                    picross_shell/picross_shell_display_command.cpp     picross_shell/picross_shell_display_command.hpp
-                    picross_shell/picross_shell_exit_command.cpp        picross_shell/picross_shell_exit_command.hpp
-                    picross_shell/picross_shell_hints_command.cpp       picross_shell/picross_shell_hints_command.hpp
-                    picross_shell/picross_shell_rollback_command.cpp    picross_shell/picross_shell_rollback_command.hpp
-                    picross_shell/picross_shell_check_command.cpp       picross_shell/picross_shell_check_command.hpp
-                    picross_shell/picross_shell_cross_command.cpp       picross_shell/picross_shell_cross_command.hpp
-                    picross_shell/picross_shell_clear_command.cpp       picross_shell/picross_shell_clear_command.hpp
-                    picross_shell/picross_shell_state.cpp               picross_shell/picross_shell_state.hpp
-                    picross_shell/cell_manip_for_commands.cpp           picross_shell/cell_manip_for_commands.hpp )
+                    picross_shell/shell_commit_command.cpp      picross_shell/shell_commit_command.hpp
+                    picross_shell/shell_display_command.cpp     picross_shell/shell_display_command.hpp
+                    picross_shell/shell_exit_command.cpp        picross_shell/shell_exit_command.hpp
+                    picross_shell/shell_hints_command.cpp       picross_shell/shell_hints_command.hpp
+                    picross_shell/shell_rollback_command.cpp    picross_shell/shell_rollback_command.hpp
+                    picross_shell/shell_check_command.cpp       picross_shell/shell_check_command.hpp
+                    picross_shell/shell_cross_command.cpp       picross_shell/shell_cross_command.hpp
+                    picross_shell/shell_clear_command.cpp       picross_shell/shell_clear_command.hpp
+                    picross_shell/picross_shell_state.cpp       picross_shell/picross_shell_state.hpp
+                    picross_shell/cell_manip_for_commands.cpp   picross_shell/cell_manip_for_commands.hpp )
         target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} ${IO_LIB_NAME} )
 
     # Build executable

@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_cross_command.hpp"
+#include "shell_cross_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -14,18 +14,18 @@
 
 namespace Picross
 {
-    PicrossShellCrossCommand::PicrossShellCrossCommand() :
+    ShellCrossCommand::ShellCrossCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellCrossCommand::~PicrossShellCrossCommand()
+    ShellCrossCommand::~ShellCrossCommand()
     {
 
     }
 
-    int PicrossShellCrossCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellCrossCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         
@@ -48,17 +48,17 @@ namespace Picross
         }
     }
 
-    std::string PicrossShellCrossCommand::name()
+    std::string ShellCrossCommand::name()
     {
         return "cross";
     }
 
-    std::string PicrossShellCrossCommand::description()
+    std::string ShellCrossCommand::description()
     {
         return "Cross cell or range of cells";
     }
 
-    std::string PicrossShellCrossCommand::help()
+    std::string ShellCrossCommand::help()
     {
         std::string s;
         s += "cross - cross cells in the working grid.\n";

@@ -1,5 +1,5 @@
-#ifndef CLI__SAVE_GRID_COMMAND_HPP
-#define CLI__SAVE_GRID_COMMAND_HPP
+#ifndef PICROSS_CLI__CLI_SAVE_GRID_COMMAND_HPP
+#define PICROSS_CLI__CLI_SAVE_GRID_COMMAND_HPP
 
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_streams.hpp"
@@ -10,15 +10,15 @@
 
 namespace Picross
 {
-    class SaveGridCommand : public CLICommand<PicrossCLIState>
+    class CLISaveGridCommand : public CLICommand<PicrossCLIState>
     {
         public:     // Public methods
-            SaveGridCommand();
-            virtual ~SaveGridCommand();
+            CLISaveGridCommand();
+            virtual ~CLISaveGridCommand();
 
             virtual std::string getTooltip();
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
     };
 }
 
-#endif//CLI__SAVE_GRID_COMMAND_HPP
+#endif//PICROSS_CLI__CLI_SAVE_GRID_COMMAND_HPP

@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_hints_command.hpp"
+#include "shell_hints_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -11,18 +11,18 @@
 
 namespace Picross
 {
-    PicrossShellHintsCommand::PicrossShellHintsCommand() :
+    ShellHintsCommand::ShellHintsCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellHintsCommand::~PicrossShellHintsCommand()
+    ShellHintsCommand::~ShellHintsCommand()
     {
 
     }
 
-    int PicrossShellHintsCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
 
@@ -103,7 +103,7 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    int PicrossShellHintsCommand::handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Syntax:    hints <h|v>       <indexToModify> <spaceSeparatedValues>
         //                    ^               ^                ^
@@ -172,17 +172,17 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    std::string PicrossShellHintsCommand::name()
+    std::string ShellHintsCommand::name()
     {
         return "hints";
     }
 
-    std::string PicrossShellHintsCommand::description()
+    std::string ShellHintsCommand::description()
     {
         return "Change grid hints";
     }
 
-    std::string PicrossShellHintsCommand::help()
+    std::string ShellHintsCommand::help()
     {
         std::string s;
         s += "hints - modify hints on the working grid.\n";
@@ -195,7 +195,7 @@ namespace Picross
         return s;
     }
 
-    bool PicrossShellHintsCommand::hintsArePositiveNonZero(std::vector<int>& hints)
+    bool ShellHintsCommand::hintsArePositiveNonZero(std::vector<int>& hints)
     {
         // Return false if any of the provided hints is below 1.
         for (auto it = hints.begin(); it != hints.end(); it++)

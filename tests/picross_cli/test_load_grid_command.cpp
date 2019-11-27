@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "../../picross_cli/picross_cli_state.hpp"
-#include "../../picross_cli/load_grid_command.hpp"
+#include "../../picross_cli/cli_load_grid_command.hpp"
 #include "../../core/grid.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
@@ -11,7 +11,7 @@
 
 namespace Picross
 {
-    TEST_CASE("LoadGridCommand end-to-end")
+    TEST_CASE("CLILoadGridCommand end-to-end")
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/load_grid_input.txt", std::ios::in);
         REQUIRE(f);
@@ -20,7 +20,7 @@ namespace Picross
         CLIStreams s = CLIStreams(f, ss, ss);
         PicrossCLIState state = PicrossCLIState();
 
-        LoadGridCommand command = LoadGridCommand();
+        CLILoadGridCommand command = CLILoadGridCommand();
         command.run(state, s);
 
         XMLGridSerialzer xml = XMLGridSerialzer();

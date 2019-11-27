@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_display_command.hpp"
+#include "shell_display_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -12,18 +12,18 @@
 
 namespace Picross
 {
-    PicrossShellDisplayCommand::PicrossShellDisplayCommand() :
+    ShellDisplayCommand::ShellDisplayCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellDisplayCommand::~PicrossShellDisplayCommand()
+    ShellDisplayCommand::~ShellDisplayCommand()
     {
 
     }
 
-    int PicrossShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         
@@ -56,17 +56,17 @@ namespace Picross
         }
     }
 
-    std::string PicrossShellDisplayCommand::name()
+    std::string ShellDisplayCommand::name()
     {
         return "display";
     }
 
-    std::string PicrossShellDisplayCommand::description()
+    std::string ShellDisplayCommand::description()
     {
         return "Display grid in its current state";
     }
 
-    std::string PicrossShellDisplayCommand::help()
+    std::string ShellDisplayCommand::help()
     {
         std::string s;
         s += "display - print a representation of the current state of the working grid.\n";

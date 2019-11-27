@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_clear_command.hpp"
+#include "shell_clear_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -14,18 +14,18 @@
 
 namespace Picross
 {
-    PicrossShellClearCommand::PicrossShellClearCommand() :
+    ShellClearCommand::ShellClearCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellClearCommand::~PicrossShellClearCommand()
+    ShellClearCommand::~ShellClearCommand()
     {
 
     }
 
-    int PicrossShellClearCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellClearCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         
@@ -48,17 +48,17 @@ namespace Picross
         }
     }
 
-    std::string PicrossShellClearCommand::name()
+    std::string ShellClearCommand::name()
     {
         return "clear";
     }
 
-    std::string PicrossShellClearCommand::description()
+    std::string ShellClearCommand::description()
     {
         return "Clear cell or range of cells";
     }
 
-    std::string PicrossShellClearCommand::help()
+    std::string ShellClearCommand::help()
     {
         std::string s;
         s += "clear - clear cells in the working grid.\n";

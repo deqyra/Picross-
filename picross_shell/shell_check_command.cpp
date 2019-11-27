@@ -2,7 +2,7 @@
 #include "../tools/micro_shell/micro_shell_codes.hpp"
 #include "../tools/cli/cli_input.hpp"
 #include "../tools/cli/cli_streams.hpp"
-#include "picross_shell_check_command.hpp"
+#include "shell_check_command.hpp"
 #include "picross_shell_state.hpp"
 
 #include <vector>
@@ -14,18 +14,18 @@
 
 namespace Picross
 {
-    PicrossShellCheckCommand::PicrossShellCheckCommand() :
+    ShellCheckCommand::ShellCheckCommand() :
         MicroShellCommand<PicrossShellState>()
     {
 
     }
 
-    PicrossShellCheckCommand::~PicrossShellCheckCommand()
+    ShellCheckCommand::~ShellCheckCommand()
     {
 
     }
 
-    int PicrossShellCheckCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellCheckCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
 
@@ -48,17 +48,17 @@ namespace Picross
         }
     }
 
-    std::string PicrossShellCheckCommand::name()
+    std::string ShellCheckCommand::name()
     {
         return "check";
     }
 
-    std::string PicrossShellCheckCommand::description()
+    std::string ShellCheckCommand::description()
     {
         return "Check cell or range of cells";
     }
 
-    std::string PicrossShellCheckCommand::help()
+    std::string ShellCheckCommand::help()
     {
         std::string s;
         s += "check - check cells in the working grid.\n";

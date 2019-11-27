@@ -1,5 +1,5 @@
 #include "../tools/cli/cli_command.hpp"
-#include "solve_grid_command.hpp"
+#include "cli_solve_grid_command.hpp"
 
 #include <string>
 #include <vector>
@@ -14,23 +14,23 @@
 
 namespace Picross
 {
-    SolveCommand::SolveCommand() :
+    CLISolveCommand::CLISolveCommand() :
         CLICommand<PicrossCLIState>()
     {
 
     }
 
-    SolveCommand::~SolveCommand()
+    CLISolveCommand::~CLISolveCommand()
     {
         
     }
 
-    std::string SolveCommand::getTooltip()
+    std::string CLISolveCommand::getTooltip()
     {
         return "Solve grid";
     }
 
-    int SolveCommand::run(PicrossCLIState& state, CLIStreams& streams)
+    int CLISolveCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
         std::vector<SolverPtr> solvers = instantiateAllSolvers();
 
@@ -59,7 +59,7 @@ namespace Picross
         return COMMAND_SUCCESS;
     }
 
-    void SolveCommand::showSolvers(std::vector<SolveCommand::SolverPtr>& solvers, CLIStreams& streams)
+    void CLISolveCommand::showSolvers(std::vector<CLISolveCommand::SolverPtr>& solvers, CLIStreams& streams)
     {
         // Print available solvers in a numbered list.
         streams.out() << "Available solvers:\n";
@@ -70,7 +70,7 @@ namespace Picross
         streams.out() << "0. Exit" << std::endl;
     }
 
-    bool SolveCommand::handleSolving(SolveCommand::SolverPtr solver, PicrossCLIState& state, CLIStreams& streams)
+    bool CLISolveCommand::handleSolving(CLISolveCommand::SolverPtr solver, PicrossCLIState& state, CLIStreams& streams)
     {
         // Create a working grid, in order not to fuck up the state grid if something goes horribly wrong.
         Grid grid = Grid(state.grid());

@@ -1,7 +1,7 @@
 #include "../tools/cli/cli_command.hpp"
 #include "../tools/cli/cli_streams.hpp"
 #include "../tools/cli/cli_input.hpp"
-#include "load_grid_command.hpp"
+#include "cli_load_grid_command.hpp"
 #include "picross_cli_state.hpp"
 
 #include <string>
@@ -12,23 +12,23 @@
 
 namespace Picross
 {
-    LoadGridCommand::LoadGridCommand() :
+    CLILoadGridCommand::CLILoadGridCommand() :
         CLICommand<PicrossCLIState>()
     {
 
     }
 
-    LoadGridCommand::~LoadGridCommand()
+    CLILoadGridCommand::~CLILoadGridCommand()
     {
         
     }
 
-    std::string LoadGridCommand::getTooltip()
+    std::string CLILoadGridCommand::getTooltip()
     {
         return "Load a grid from disk";
     }
 
-    int LoadGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
+    int CLILoadGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
         // Get path from user.
         std::string path = CLIInput::askForInput<std::string>("Enter path to an XML grid file: ", streams);
