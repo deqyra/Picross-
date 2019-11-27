@@ -9,6 +9,7 @@ namespace IterTools
     template<typename Iter>
     int maxIterableLength(Iter first, Iter last)
     {
+        // Classic max algorithm.
         int maxSize = 0;
         for (Iter it = first; it != last; it++)
         {
@@ -33,6 +34,7 @@ namespace IterTools
     template<typename T, typename Iter>
     T sum2NestedIterables(Iter first, Iter last)
     {
+        // Classic sum algorithm.
         T result = 0;
         for (auto it = first; it != last; it++)
         {
@@ -56,7 +58,7 @@ namespace IterTools
     template<typename Iter>
     int indexOfMaxElement(Iter first, Iter last)
     {
-        // Type-aware distance between vector start pointer and max element pointer = max index
+        // Type-aware distance between vector start pointer and max element pointer = max index.
         return std::distance(first, std::max_element(first, last));
     }
 
@@ -64,7 +66,7 @@ namespace IterTools
     template<typename Iter>
     int indexOfMaxElement(Iter first, int count)
     {
-        // Type-aware distance between vector start pointer and max element pointer = max index
+        // Type-aware distance between vector start pointer and max element pointer = max index.
         return std::distance(first, std::max_element(first, first + count));
     }
 

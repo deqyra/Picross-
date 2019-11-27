@@ -4,6 +4,10 @@
 #include <string>
 #include <stdexcept>
 
+//
+// Specializations of parseString.
+//
+
 template<>
 std::string CLIInput::parseString(std::string input)
 {
@@ -15,7 +19,7 @@ int CLIInput::parseString(std::string input)
 {
     if (!StringTools::stringIsNum(input))
     {
-        throw std::invalid_argument("String to parse is not exclusively made of digits and a minus sign, or it is at a wrong position.");
+        throw std::invalid_argument("parseString<int>: String to parse is not exclusively made of digits and a minus sign, or it is at a wrong position.");
     }
     return std::stoi(input);
 }
@@ -33,8 +37,12 @@ bool CLIInput::parseString(std::string input)
         return false;
     }
 
-    throw std::invalid_argument("Invalid string value for expected bool input.");
+    throw std::invalid_argument("parseString<bool>: Invalid string value for expected bool input.");
 }
+
+//
+// Specializations of typeName.
+//
 
 template <>
 std::string CLIInput::typeName<std::string>()

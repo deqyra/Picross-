@@ -74,19 +74,24 @@ namespace StringTools
         // Kind of a string cursor.
         std::size_t found = -1;
 
-        // Search the string while the cursor is valid
+        // Search the string while the cursor is valid.
         do
         {
-            // Search only after the lastly found position
+            // Search only after the last found position.
+            // found is initialized at -1, which gives 0 for found + 1 at the first iteration.
             found = str.find(sub, found + 1);
 
             if (found != std::string::npos)
             {
+                // Increment count.
                 i++;
+
+                // If an inexact count was requested (_at least_ n occurrences), return true as soon as the count is met.
                 if (!exact && i == n)
                 {
                     return true;
                 }
+                // If an exact count was requested (_exactly_ n occurrences), return false as soon as the count is passed.
                 if (exact && i > n)
                 {
                     return false;
@@ -107,6 +112,7 @@ namespace StringTools
         if (str.size() == 0) return false;
         
         int index = 0;
+        // Check every character in the string.
         for (auto it = str.begin(); it != str.end(); it++)
         {
             if (!acceptMinusSign)
@@ -129,10 +135,10 @@ namespace StringTools
 
     std::vector<std::string> tokenizeString(const std::string& str, char delimiter, bool discardEmptyTokens)
     {
-        // If the string does not contain the delimiter, return the string as-is.
+        // If the string does not contain the delimiter, return the string as-is (within a vector).
         if (!stringContains(str, delimiter))
         {
-            // Except if it's empty and discarding empty tokens was required.
+            // EXCEPT if it's empty and discarding empty tokens was required.
             if (str == "" && discardEmptyTokens)
             {
                 // In which case, return an empty vector.
@@ -157,9 +163,11 @@ namespace StringTools
         if (str.back() == delimiter && !discardEmptyTokens)
         {
             // Manually add an empty token if the string ends with the delimiter.
+            tokens.push_back("");
+
             // This is to ensure consistency with the behaviour of the function when the string _starts_ with the delimiter.
             // In such a case, an empty token is automatically detected first.
-            tokens.push_back("");
+            // This behaviour is also more representative of how the input string was formatted.
         }
 
         return tokens;
@@ -182,17 +190,14 @@ namespace StringTools
             //
             // This may be seen as kind of a behavioural discrepancy, leading to confusion on the
             // side of the user. Therefore, it is strictly required that any token must be 
-            // exclusively comprised of digits, which is what the following condition ensures.
-            //
-            // This also prevents negative numbers from being accepted. Even though this does not
-            // fall within the scope of that function stricto sensu, it fits its use cases.
+            // exclusively comprised of digits (and a minus sign if any), which is what the following condition ensures.
 
             if (!StringTools::stringIsNum(*it))
             {
                 throw std::invalid_argument("Provided string does not represent an integer.");
             }
 
-            // Put parsed tokens in output vector.
+            // Push parsed token in output vector.
             hints.push_back(std::stoi(*it));
         }
 
@@ -201,13 +206,16 @@ namespace StringTools
 
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns)
     {
+        // Open the file for reading.
         std::ifstream f = std::ifstream(path.c_str(), std::ios::in);
         if (f)
         {
+            // Get the whole file buffer into a stringstream.
             std::stringstream s;
             s << f.rdbuf();
             f.close();
 
+            // Process the string if required and return it.
             std::string res = s.str();
             if (stripCarriageReturns)
             {
@@ -226,7 +234,7 @@ namespace StringTools
 		std::vector<std::string> firstTokens = StringTools::tokenizeString(first, '\n');
 		std::vector<std::string> secondTokens = StringTools::tokenizeString(second, '\n');
 
-        // Step 2: remove potential trailing '\r' from every line in both vectors (can happen on Windows).
+        // Step 2: remove potential trailing '\r's from every line in both vectors (can happen on Windows).
         for (auto it = firstTokens.begin(); it != firstTokens.end(); it++)
         {
             StringTools::popCR(*it);
@@ -242,7 +250,7 @@ namespace StringTools
         auto itSecond = secondTokens.begin();
 
         // Loop control: stop when either vector reaches its end.
-        bool stop = itFirst == firstTokens.end() || itSecond == secondTokens.end();
+        bool stop = ((itFirst == firstTokens.end()) || (itSecond == secondTokens.end()));
 
         std::string s;
         while (!stop)
@@ -260,12 +268,11 @@ namespace StringTools
                 s += *itSecond;
                 itSecond++;
             }
-
-            // Don't forget to advance iterators each time a line is accessed.
+            // Don't forget to move iterators forward each time a line is accessed.
 
             // Step 3.3: break line and check for loop end.
             s += '\n';
-            stop = itFirst == firstTokens.end() && itSecond == secondTokens.end();
+            stop = ((itFirst == firstTokens.end()) || (itSecond == secondTokens.end()));
         }
 
         // Step 4: return single string with everything.
@@ -368,26 +375,10 @@ namespace StringTools
             {
                 // Else, parse it.
                 lowBound = std::stoi(tokens[0]);
-
-                // If it is lower than the minimum...
-                if (lowBound < min)
-                {
-                    // Throw if required.
-                    if (throwOnExceedingBounds)
-                    {
-                        std::string str = "parseIntRange: lower bound " + std::to_string(lowBound) + " is below minimum" + std::to_string(min) + ".";
-                        throw RangeBoundsExceededError(str);
-                    }
-                    // Otherwise give it its value.
-                    else
-                    {
-                        lowBound = min;
-                    }                    
-                }
             }
 
             // If the higher bound is empty, give it the maximum value.
-            if (tokens[0] == "")
+            if (tokens[1] == "")
             {
                 highBound = max;
             }
@@ -395,22 +386,6 @@ namespace StringTools
             {
                 // Else, parse it.
                 highBound = std::stoi(tokens[1]);
-
-                // If it is greater than the maximum...
-                if (highBound > max)
-                {
-                    // Throw if required.
-                    if (throwOnExceedingBounds)
-                    {
-                        std::string str = "parseIntRange: higher bound " + std::to_string(highBound) + " is above maximum" + std::to_string(max) + ".";
-                        throw RangeBoundsExceededError(str);
-                    }
-                    // Otherwise give it its value.
-                    else
-                    {
-                        highBound = max;
-                    }                    
-                }
             }
 
             // Swap both bounds around if needed.
@@ -418,8 +393,40 @@ namespace StringTools
             {
                 std::swap(lowBound, highBound);
             }
+
+            // If the higher bound is greater than the maximum...
+            if (highBound > max)
+            {
+                // Throw if required.
+                if (throwOnExceedingBounds)
+                {
+                    std::string str = "parseIntRange: higher bound " + std::to_string(highBound) + " is above maximum" + std::to_string(max) + ".";
+                    throw RangeBoundsExceededError(str);
+                }
+                // Otherwise set it at the max value.
+                else
+                {
+                    highBound = max;
+                }                    
+            }
+
+            // If the lower bound is lower than the minimum...
+            if (lowBound < min)
+            {
+                // Throw if required.
+                if (throwOnExceedingBounds)
+                {
+                    std::string str = "parseIntRange: lower bound " + std::to_string(lowBound) + " is below minimum" + std::to_string(min) + ".";
+                    throw RangeBoundsExceededError(str);
+                }
+                // Otherwise set it at the min value.
+                else
+                {
+                    lowBound = min;
+                }                    
+            }
         }
-        else
+        else // if (tokens.size() > 2)
         {
             std::string str = "parseIntRange: Too many delimiters in \"" + input + "\".";
             throw std::invalid_argument(str.c_str());

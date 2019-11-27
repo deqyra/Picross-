@@ -22,6 +22,8 @@ namespace Picross
 
     int PicrossShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
+        // No argument checking: if exit was invoked, start the exit procedure.
+        
         if (state.mainGrid() != state.workingGrid())
         {
             streams.out() << "You have pending changes on your working grid. Exiting the shell will discard them.\n";
@@ -46,7 +48,7 @@ namespace Picross
     std::string PicrossShellExitCommand::help()
     {
         std::string s;
-        s += "exit - exits the shell.\n";
+        s += "exit - exit the shell.\n";
         s += "No arguments.\n";
         return s;
     }

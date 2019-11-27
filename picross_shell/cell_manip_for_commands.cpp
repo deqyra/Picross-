@@ -13,12 +13,14 @@ namespace Picross
 {
     int handleCellManipForCommand(std::vector<std::string> tokens, cell_t value, std::string commandName, PicrossShellState& state, CLIStreams& streams)
     {
+        // Range coordinates.
         int i0, in;
         int j0, jn;
-        bool success;
+        // Grid dimensions.
         int height = state.workingGrid().getHeight();
         int width = state.workingGrid().getWidth();
 
+        // Parse the first input range.
         try
         {
             StringTools::parseIntRange(tokens[1], ':', i0, in, 0, height - 1, true);
@@ -34,6 +36,7 @@ namespace Picross
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
+        // Parse the second input range.
         try
         {
             StringTools::parseIntRange(tokens[2], ':', j0, jn, 0, width - 1, true);
@@ -49,6 +52,7 @@ namespace Picross
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
+        // Set the cell range to the corresponding value.
         state.workingGrid().setCellRange(i0, in, j0, jn, value);
 
         return SHELL_COMMAND_SUCCESS;

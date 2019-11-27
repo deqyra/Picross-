@@ -24,9 +24,12 @@ namespace Picross
 
     int PicrossShellCommitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
+        // Expected syntax: see docstring in help().
+        
+        // Parse arguments.
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 
-        if (tokens.size() > 1)          // Too many arguments
+        if (tokens.size() > 1)          // Too many arguments.
         {
             streams.out() << "commit: no arguments expected." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
@@ -48,7 +51,7 @@ namespace Picross
     std::string PicrossShellCommitCommand::help()
     {
         std::string s;
-        s += "commit - saves pending changes from the working grid to the main grid.\n";
+        s += "commit - save pending changes from the working grid to the main grid.\n";
         s += "No arguments.\n";
         return s;
     }

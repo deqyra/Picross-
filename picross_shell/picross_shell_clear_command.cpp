@@ -27,14 +27,17 @@ namespace Picross
 
     int PicrossShellClearCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
+        // Expected syntax: see docstring in help().
+        
+        // Parse arguments.
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 
-        if (tokens.size() < 3)          // Too few arguments
+        if (tokens.size() < 3)          // Too few arguments.
         {
             streams.out() << "clear: too few arguments." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        else if (tokens.size() > 3)     // Too many arguments
+        else if (tokens.size() > 3)     // Too many arguments.
         {
             streams.out() << "clear: too many arguments." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
@@ -58,12 +61,15 @@ namespace Picross
     std::string PicrossShellClearCommand::help()
     {
         std::string s;
-        s += "clear - clears cells in the working grid.\n";
+        s += "clear - clear cells in the working grid.\n";
         s += "Syntax: clear <i|i0:in> <j|j0:jn>\n";
-        s += " - i: row coordinate of a cell to clear.\n";
-        s += " - i0:in: row coordinate range of cells to clear (e.g. 1:4).\n";
-        s += " - j: column coordinate of a cell to clear.\n";
-        s += " - j0:jn: column coordinate range of cells to clear (e.g. 2:7).\n";
+        s += " - `i`: row coordinate of the cells to clear.\n";
+        s += " - `i0:in`: row coordinate range of the cells to clear (e.g: `3:6`).\n";
+        s += " - `j`: column coordinate of the cells to clear.\n";
+        s += " - `j0:jn`: column coordinate range of the cells to clear (e.g: `8:9`).\n";
+        s += "Omitting x0 or xn will automatically expand the range respectively to its lower bound or higher bound.\n";
+        s += "E.g: `:3` will expand to `0:3`, `3:` will expand to `3:9` if 9 is the max value.\n";
+        s += "`:` will expand to the whole range (continuing the above example, `0:9`).\n";
         return s;
     }
 

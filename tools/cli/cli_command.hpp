@@ -12,7 +12,9 @@ class CLICommand
 {
     public:
         virtual ~CLICommand();
+        // Display name of the command.
         virtual std::string getTooltip() = 0;
+        // Run the command.
         virtual int run(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams) = 0;
 };
 

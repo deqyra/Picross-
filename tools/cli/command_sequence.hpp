@@ -8,13 +8,16 @@
 #include "cli_command.hpp"
 #include "cli_input.hpp"
 
+// Extended command allowing to run several commands in a row.
 template <typename CustomState>
 class CommandSequence : public CLICommand<CustomState>
 {
     using CommandPtr = std::shared_ptr<CLICommand<CustomState>>;
 
     private:    // Attributes
+        // Ordered commands to run.
         std::vector<CommandPtr> _commandList;
+        // Display name of the command sequence.
         std::string _tooltip;
 
     public:     // Public methods
@@ -22,6 +25,7 @@ class CommandSequence : public CLICommand<CustomState>
         virtual ~CommandSequence();
         
         virtual std::string getTooltip();
+        // Run the command sequence.
         virtual int run(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams);
 };
 
@@ -53,6 +57,7 @@ std::string CommandSequence<CustomState>::getTooltip()
 template <typename CustomState>
 int CommandSequence<CustomState>::run(CustomState& state, CLIStreams& streams)
 {
+    // Run all commands in order.
     for (auto it = _commandList.begin(); it != _commandList.end(); it++)
     {
         int status;
@@ -62,11 +67,21 @@ int CommandSequence<CustomState>::run(CustomState& state, CLIStreams& streams)
         }
         catch (const std::exception& e)
         {
+            // Informative error logging.
             streams.err() << "Exception thrown:\n";
-            streams.err() << e.what() << std::endl;
+            streams.err() << e.what() << '\n';
+            streams.out() << "Command sequence \"" + _tooltip + "\" aborted." << std::endl;
             return COMMAND_FAILURE;
         }
-        if (status != COMMAND_SUCCESS) return status;
+
+        // If the command failed (but didn't throw)...
+        if (status != COMMAND_SUCCESS)
+        {
+            // Log error and return prematurely.
+            streams.err() << "Command \"" + (*it)->getTooltip() + "\" returned with value " + std::to_string(status) + "\n";
+            streams.out() << "Command sequence \"" + _tooltip + "\" aborted." << std::endl;
+            return status;
+        }
     }
 
     return COMMAND_SUCCESS;

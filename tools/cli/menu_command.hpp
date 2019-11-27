@@ -8,6 +8,7 @@
 #include "cli_menu.hpp"
 #include "cli_streams.hpp"
 
+// Extended command wrapping a menu.
 template<typename CustomState>
 class MenuCommand : public CLICommand<CustomState>
 {
@@ -19,6 +20,7 @@ class MenuCommand : public CLICommand<CustomState>
         virtual ~MenuCommand();
 
         virtual std::string getTooltip();
+        // Run the MenuCommand (show the inner menu).
         virtual int run(CustomState& state, CLIStreams& streams);
 };
 

@@ -98,6 +98,8 @@ Cleanup & enhancement:
         ☐ Ensure all argument copies are compiler-made when needed
         ☐ User wiki on GitHub
         ☐ Tech wiki on GitHub (?)
+        ☐ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
+        ☐ Refactor all "informative error logging" in exception logging blocks.
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)

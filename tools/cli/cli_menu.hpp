@@ -16,19 +16,26 @@ class CLIMenu
     using CommandPtr = std::shared_ptr<CLICommand<CustomState>>;
     
     private:    // Attributes
+        // Commands to be available in the menu.
         std::vector<CommandPtr> _commands;
+        // Display name of the menu.
         std::string _tooltip;
+        // Display name of the exit option.
         std::string _exitName;
+        // Custom exit command (can be nullptr).
         CommandPtr _exitCommand;
 
     public:     // Public methods
         CLIMenu(std::vector<CommandPtr> commands, std::string tooltip, std::string exitName, CommandPtr exitCommand = nullptr);
         
         std::string getTooltip();
+        // Print the menu and handle input.
         void show(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams);
         
     private:    // Private methods
+        // Generate display string for a given tooltip.
         std::string optionString(int n, std::string tooltip);
+        // Generate display strings for all options.
         std::string allOptionsString();
 };
 
@@ -51,15 +58,19 @@ std::string CLIMenu<CustomState>::getTooltip()
 template<typename CustomState>
 void CLIMenu<CustomState>::show(CustomState& state, CLIStreams& streams)
 {
+    // While user did not ask to exit...
     while (true)
     {
+        // Print menu header and options.
         streams.out() << '\n';
         streams.out() << getTooltip() << ":" << std::endl;
         streams.out() << allOptionsString();
 
+        // Prompt the user.
         int nOptions = _commands.size();
         int input = CLIInput::askForBoundedInput<int>("Please make a choice: ", 0, nOptions, streams);
 
+        // Handle exit if required.
         if (input == 0)
         {
             if (_exitCommand)
@@ -69,9 +80,21 @@ void CLIMenu<CustomState>::show(CustomState& state, CLIStreams& streams)
             break;
         }
 
+        // Run the corresponding command otherwise.
         streams.out() << '\n';
         streams.out() << _commands[input - 1]->getTooltip() << ":" << std::endl;
-        _commands[input - 1]->run(state, streams);
+
+        try
+        {
+            _commands[input - 1]->run(state, streams);
+        }
+        catch (const std::exception& e)
+        {
+            // Informative error logging.
+            streams.err() << "Exception thrown by command \"" + _commands[input - 1]->getTooltip() + "\":\n";
+            streams.err() << e.what() << '\n';
+            streams.out() << "Aborting." << std::endl;
+        }
     }
 }
 

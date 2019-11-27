@@ -21,13 +21,25 @@ class MicroShell
     using ChainIter = typename std::deque<CommandPtr>::iterator;
 
     private:    // Attributes
+        // Command chain.
         std::deque<CommandPtr> _chain;
+        // Custom exit command (can be nullptr).
         CommandPtr _exitCommand;
+
+        // Lambda generating another lambda, which is parameterized on a name to checkk against.
+        // The returned lambda tells whether the name of an input shell command is the same as the parameterized name.
+        static constexpr auto _lambda_commandNameIs = [] (std::string nameToCheck)
+        {
+            return [nameToCheck] (CommandPtr c)
+            {
+                return c->name() == nameToCheck;
+            };
+        };
 
     public:     // Public methods
         MicroShell();
 
-    // Command manipulation methods
+    // Command chain manipulation methods
         void clearCommands();
         void addCommand(CommandPtr command, int index = -1);
         void removeCommand(int index);
@@ -39,16 +51,21 @@ class MicroShell
         CommandPtr getCommand(std::string name);
         CommandPtr getExitCommand();
 
-    // Checks
+    // Useful checks
         int indexOf(std::string name);
         bool hasCommand(std::string name);
 
+        // Run the shell.
         int run(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams);
 
     private:    // Private methods
+        // Process user input.
         int processInput(const std::string& input, CustomState& state, CLIStreams& streams);
+        // Generate a docstring descriptive of all contained commands.
         std::string globalHelpString();
+        // Generate the docstring for a given command.
         std::string commandHelpString(std::string commandName);
+        // Handle exit procedure.
         int handleExit(std::string command, CustomState& state, CLIStreams& streams);
 };
 
@@ -66,21 +83,21 @@ void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr com
     // Do not accept several commands with the same name, nor any command named 'exit' or 'help'.
     if (hasCommand(command->name()) || command->name() == EXIT_KEYWORD || command->name() == HELP_KEYWORD)
     {
-        std::string s = "Command \"" + command->name() + "\" already exists in the shell and cannot be added.";
+        std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Command \"" + command->name() + "\" already exists in the shell and cannot be added.";
         throw std::invalid_argument(s.c_str());
     }
 
-    // If index is -1, insert new command at the back.
+    // If index is -1 (default), insert new command at the back.
     if (index == - 1)
     {
         _chain.push_back(command);
     }
     else
     {
-        // Else try to insert at given index
+        // Else try to insert at given index.
         if (_chain.begin() + index >= _chain.end())
         {
-            std::string s = "Index " + std::to_string(index) + " is out of bounds, cannot add command.";
+            std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Index " + std::to_string(index) + " is out of bounds, cannot add command.";
             throw IndexOutOfBoundsError(s);
         }
         _chain.insert(_chain.begin() + index, command);
@@ -90,23 +107,18 @@ void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr com
 template<typename CustomState>
 void MicroShell<CustomState>::removeCommand(std::string name)
 {
-    // Lambda telling whether a given command is of the provided name.
-    auto lambda = [name] (CommandPtr c)
-    {
-        return c->name() == name;
-    };
-
-    // Find a command with the same name as provided.
-    MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
+    // Find the index of the command with the provided name.
+    int index = indexOf(name);
 
     // Throw if not found.
-    if (it == _chain.end())
+    if (index == -1)
     {
-        std::string s = "Command \"" + name + "\" is not part of the shell and cannot be removed.";
+        std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Command \"" + name + "\" is not part of the shell and cannot be removed.";
         throw std::invalid_argument(s.c_str());
     }
 
-    _chain.erase(it);
+    // Remove command.
+    removeCommand(index);
 }
 
 template<typename CustomState>
@@ -115,7 +127,7 @@ void MicroShell<CustomState>::removeCommand(int index)
     // Try to erase the command at provided index.
     if (_chain.begin() + index >= _chain.end())
     {
-        std::string s = "Index " + std::to_string(index) + " is out of bounds, cannot remove command.";
+        std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Index " + std::to_string(index) + " is out of bounds, cannot remove command.";
         throw IndexOutOfBoundsError(s);
     }
 
@@ -131,14 +143,8 @@ void MicroShell<CustomState>::clearCommands()
 template<typename CustomState>
 int MicroShell<CustomState>::indexOf(std::string name)
 {
-    // Lambda telling whether a given command is of the provided name.
-    auto lambda = [name] (CommandPtr c)
-    {
-        return c->name() == name;
-    };
-
     // Find a command with given name.
-    MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), lambda);
+    MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), _lambda_commandNameIs(name));
 
     // Calculate and return index, or -1 if not found.
     return it != _chain.end() ? (it - _chain.begin()) : -1;
@@ -163,7 +169,7 @@ typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand
     // Try to fetch the command at provided index.
     if (index >= _chain.size())
     {
-        std::string s = "Index " + std::to_string(index) + " is out of bounds, cannot fetch command.";
+        std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Index " + std::to_string(index) + " is out of bounds, cannot fetch command.";
         throw IndexOutOfBoundsError(s);
     }
 
@@ -177,7 +183,7 @@ typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand
     int index = indexOf(name);
     if (index == -1)
     {
-        std::string s = "Command with name " + name + " is not part of the shell and cannot be fetched.";
+        std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Command with name " + name + " is not part of the shell and cannot be fetched.";
         throw IndexOutOfBoundsError(s);
     }
 
@@ -245,7 +251,19 @@ int MicroShell<CustomState>::processInput(const std::string& input, CustomState&
     }
 
     // ...and run that command.
-    return _chain[index]->processInput(input, state, streams);
+    try
+    {
+        return _chain[index]->processInput(input, state, streams);
+    }
+    catch(const std::exception& e)
+    {
+        // Informative error logging.
+        streams.err() << "Exception thrown by command \"" + _chain[index]->name() + "\":\n";
+        streams.err() << e.what() << '\n';
+        streams.out() << "Warning shell state may be corrupted.\n";
+        streams.out() << "Resuming normally..." << std::endl;
+        return COMMAND_FAILURE;
+    }    
 }
 
 template<typename CustomState>
@@ -265,16 +283,18 @@ std::string MicroShell<CustomState>::globalHelpString()
 template<typename CustomState>
 std::string MicroShell<CustomState>::commandHelpString(std::string commandName)
 {
-    // Print the help message of the command which was requested.
-    std::string s;
+    // Find command.
     int index = indexOf(commandName);
 
+    std::string s;
+    // Handle command not found.
     if (index == -1)
     {
         s = "Command '" + commandName + "' not found, help cannot be displayed.\n";
         return s;
     }
 
+    // Get the docstring of the command which was requested.
     s = "'" + commandName + "' help:\n";
     s += _chain[index]->help();
 

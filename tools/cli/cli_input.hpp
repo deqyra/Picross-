@@ -115,9 +115,11 @@ template<typename T>
 T CLIInput::waitForInput(CLIStreams& streams)
 {
     std::string input;
+    // Get input.
     std::getline(streams.in(), input);
     // Take care of terminal-induced bullcrap.
-    StringTools::popCR(input);        
+    StringTools::popCR(input);
+    // Type-aware parsing of the input.
     return parseString<T>(input);
 }
 

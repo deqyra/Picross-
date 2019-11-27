@@ -26,12 +26,13 @@ namespace Picross
     {
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
 
-        if (tokens.size() > 1)          // Too many arguments
+        if (tokens.size() > 1)          // Too many arguments.
         {
             streams.out() << "rollback: no arguments expected." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
+        // Revert changes on the working grid.
         state.workingGrid() = state.mainGrid();
         return SHELL_COMMAND_SUCCESS;
     }
@@ -49,7 +50,7 @@ namespace Picross
     std::string PicrossShellRollbackCommand::help()
     {
         std::string s;
-        s += "rollback - discards pending changes and reverts the working grid to the same state as the main grid.\n";
+        s += "rollback - discard pending changes and revert the working grid to the same state as the main grid.\n";
         s += "No arguments.\n";
         return s;
     }

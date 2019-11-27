@@ -25,15 +25,19 @@ namespace Picross
 
     int PicrossShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
     {
+        // Expected syntax: see docstring in help().
+        
+        // Parse arguments.
         std::vector<std::string> tokens = StringTools::tokenizeString(command, ' ', true);
+
         TextGridFormatter tgf = TextGridFormatter();
 
-        if (tokens.size() > 2)          // Too many arguments
+        if (tokens.size() > 2)          // Too many arguments.
         {
             streams.out() << "display: too many arguments." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        else if (tokens.size() < 2)     // No arguments (apart from the command name)
+        else if (tokens.size() < 2)     // No arguments (apart from the command name).
         {
             streams.out() << tgf.renderGridWithHints(state.workingGrid());
             return SHELL_COMMAND_SUCCESS;
@@ -65,9 +69,9 @@ namespace Picross
     std::string PicrossShellDisplayCommand::help()
     {
         std::string s;
-        s += "display - prints a representation of the current state of the working grid.\n";
+        s += "display - print a representation of the current state of the working grid.\n";
         s += "Syntax: display [nohints]\n";
-        s += " - nohints: when specified, hints are not printed on the side of the grid.";
+        s += " - `nohints`: when specified, hints are not printed on the side of the grid.";
         return s;
     }
 
