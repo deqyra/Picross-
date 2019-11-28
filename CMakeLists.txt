@@ -81,6 +81,7 @@
     # Build tools lib
         add_library( ${TOOLS_LIB_NAME} ${STATIC_OR_SHARED}
                     tools/string_tools.cpp                              tools/string_tools.hpp
+                    tools/lambda_maker.cpp                              tools/lambda_maker.hpp
                                                                         tools/iterable_tools.hpp
                                                                         tools/micro_shell/micro_shell.hpp
                                                                         tools/micro_shell/micro_shell_codes.hpp

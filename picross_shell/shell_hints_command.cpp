@@ -7,7 +7,9 @@
 
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "../tools/string_tools.hpp"
+#include "../tools/lambda_maker.hpp"
 
 namespace Picross
 {
@@ -148,7 +150,14 @@ namespace Picross
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
-        // Checked parsed hints validity.
+        // Checked parsed hints validity: all above 0.
+        if (!std::all_of(hints.begin(), hints.end(), LambdaMaker::greater_than(0)))
+        {
+            streams.out() << "hints: hints must all be above 0." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+
+        // Checked parsed hints validity: fit in current grid.
         if (direction == "h" && !state.workingGrid().areValidRowHints(hints))
         {
             streams.out() << "hints: hint values \"" << valueString << "\" do not fit in grid of width " << state.workingGrid().getWidth() << "." << std::endl;
@@ -193,15 +202,5 @@ namespace Picross
         s += " - `n`: 0-based index of the target row or column.\n";
         s += " - `values`: semicolon-separated positive integers representing the new hints.\n";
         return s;
-    }
-
-    bool ShellHintsCommand::hintsArePositiveNonZero(std::vector<int>& hints)
-    {
-        // Return false if any of the provided hints is below 1.
-        for (auto it = hints.begin(); it != hints.end(); it++)
-        {
-            if (*it < 1) return false;
-        }
-        return true;
     }
 }

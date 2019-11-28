@@ -28,8 +28,6 @@ namespace Picross
         private:    // Private methods
             // Handle hint modification based on command arguments.
             int handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
-            // Check whether hints are all positive.
-            bool hintsArePositiveNonZero(std::vector<int>& hints);
     };
 }
 

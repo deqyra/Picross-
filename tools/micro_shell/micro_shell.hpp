@@ -26,11 +26,11 @@ class MicroShell
         // Custom exit command (can be nullptr).
         CommandPtr _exitCommand;
 
-        // Lambda generating another lambda, which is parameterized on a name to checkk against.
+        // Lambda generating another lambda, which is parameterized on a name to check against.
         // The returned lambda tells whether the name of an input shell command is the same as the parameterized name.
         static constexpr auto _lambda_commandNameIs = [] (std::string nameToCheck)
         {
-            return [nameToCheck] (CommandPtr c)
+            return [nameToCheck] (CommandPtr c) -> bool
             {
                 return c->name() == nameToCheck;
             };

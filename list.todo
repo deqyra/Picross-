@@ -98,7 +98,7 @@ Cleanup & enhancement:
         ✔ Ensure all argument copies are compiler-made when needed
         ☐ User wiki on GitHub
         ☐ Tech wiki on GitHub (?)
-        ☐ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
+        ✔ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
         ☐ Refactor all "informative error logging" in exception logging blocks.
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
@@ -106,8 +106,9 @@ Cleanup & enhancement:
         ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ✔ Tests for CLI stuff
-        ☐ Tests for shell stuff
+        ✔ Tests for shell stuff
         ☐ Have Windows print UTF8 characters properly
+        ☐ Ensure consistency of stream usage (err for exception printing only)
         ✔ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Aliase templates where appropriate (shorten CLI* names)
         ✔ Have exhaustive #includes in all files

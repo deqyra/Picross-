@@ -6,10 +6,12 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 #include "../core/grid.hpp"
 #include "../core/utility.hpp"
 #include "../tools/string_tools.hpp"
+#include "../tools/lambda_maker.hpp"
 
 namespace Picross
 {
@@ -89,7 +91,7 @@ namespace Picross
                 }
 
                 // Check whether the entered hints are all above 0.
-                if (!hintsArePositiveNonZero(intHints))
+                if (!std::all_of(intHints.begin(), intHints.end(), LambdaMaker::greater_than(0)))
                 {
                     streams.err() << "All hints must be above 0. Please try again." << std::endl;
                     continue;
@@ -111,15 +113,5 @@ namespace Picross
         }
 
         return allHints;
-    }
-
-    bool CLICreateGridCommand::hintsArePositiveNonZero(std::vector<int>& hints)
-    {
-        // Return false if any of the provided hints is below 1.
-        for (auto it = hints.begin(); it != hints.end(); it++)
-        {
-            if (*it < 1) return false;
-        }
-        return true;
     }
 }
