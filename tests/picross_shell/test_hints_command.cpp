@@ -31,24 +31,29 @@ namespace Picross
         SECTION("Bad arguments")
         {
             REQUIRE(command.processInput("hints aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
-            REQUIRE(command.processInput("hints v aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
-            REQUIRE(command.processInput("hints v aze aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
-            REQUIRE(command.processInput("hints v 3 aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints row aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints row aze aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints row 3 aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
             REQUIRE(command.processInput("hints generate aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
-            REQUIRE(command.processInput("hints h 3 5;5", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints clear aze", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints col clear lol", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints row 3 5;5", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
+            REQUIRE(command.processInput("hints row 3 5;0;2", state, s) == SHELL_COMMAND_BAD_ARGUMENTS);
             REQUIRE(state.mainGrid() == g);
             REQUIRE(state.workingGrid() == modifiedG);
             std::string expected = StringTools::readFileIntoString("resources/tests/picross_shell/hints_invalid_output.txt");
             REQUIRE(ss.str() == expected);
         }
 
-        SECTION("Specify new hints")
+        SECTION("Modify some hints")
         {
-            REQUIRE(command.processInput("hints h 3 2;4;2", state, s) == SHELL_COMMAND_SUCCESS);
-            REQUIRE(command.processInput("hints v 2 2;2", state, s) == SHELL_COMMAND_SUCCESS);
+            REQUIRE(command.processInput("hints row 3 2;4;2", state, s) == SHELL_COMMAND_SUCCESS);
+            REQUIRE(command.processInput("hints col 2 2;2", state, s) == SHELL_COMMAND_SUCCESS);
+            REQUIRE(command.processInput("hints col 5 clear", state, s) == SHELL_COMMAND_SUCCESS);
 
             modifiedG.setRowHints(3, {2, 4, 2});
             modifiedG.setColHints(2, {2, 2});
+            modifiedG.setColHints(5, {});
             
             REQUIRE(state.mainGrid() == g);
             REQUIRE(state.workingGrid() == modifiedG);
@@ -64,6 +69,31 @@ namespace Picross
             
             REQUIRE(state.mainGrid() == g);
             REQUIRE(state.workingGrid() == completed);
+        }
+
+        SECTION("Clear hints in either direction")
+        {
+            Grid completedNoHints = xml.loadGridFromFile("resources/tests/picross_shell/5_10_completed_nohints.xml");
+            Grid completed = xml.loadGridFromFile("resources/tests/picross_shell/5_10_completed.xml");
+            state.workingGrid() = completed;
+
+            REQUIRE(command.processInput("hints col clear", state, s) == SHELL_COMMAND_SUCCESS);
+            REQUIRE(command.processInput("hints row clear", state, s) == SHELL_COMMAND_SUCCESS);
+            
+            REQUIRE(state.mainGrid() == g);
+            REQUIRE(state.workingGrid() == completedNoHints);
+        }
+
+        SECTION("Clear all hints at once")
+        {
+            Grid completedNoHints = xml.loadGridFromFile("resources/tests/picross_shell/5_10_completed_nohints.xml");
+            Grid completed = xml.loadGridFromFile("resources/tests/picross_shell/5_10_completed.xml");
+            state.workingGrid() = completed;
+
+            REQUIRE(command.processInput("hints clear", state, s) == SHELL_COMMAND_SUCCESS);
+            
+            REQUIRE(state.mainGrid() == g);
+            REQUIRE(state.workingGrid() == completedNoHints);
         }
     }
 }

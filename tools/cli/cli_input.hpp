@@ -55,7 +55,7 @@ T CLIInput::askForInput(std::string title, CLIStreams& streams)
         }
         catch(const std::invalid_argument& e)
         {
-            streams.err() << "Invalid input, please enter a " << typeName<T>() << "." << std::endl;
+            streams.out() << "Invalid input, please enter a " << typeName<T>() << "." << std::endl;
         }            
     }
 }
@@ -73,7 +73,7 @@ T CLIInput::askForMinInput(std::string title, T min, CLIStreams& streams)
             return input;
         }
 
-        streams.err() << "Invalid input, please enter a value that is at least " << min << "." << std::endl;
+        streams.out() << "Invalid input, please enter a value that is at least " << min << "." << std::endl;
     }
 }
 
@@ -90,7 +90,7 @@ T CLIInput::askForMaxInput(std::string title, T max, CLIStreams& streams)
             return input;
         }
 
-        streams.err() << "Invalid input, please enter a value that is at most " << max << "." << std::endl;
+        streams.out() << "Invalid input, please enter a value that is at most " << max << "." << std::endl;
     }
 }
 
@@ -107,7 +107,7 @@ T CLIInput::askForBoundedInput(std::string title, T min, T max, CLIStreams& stre
             return input;
         }
 
-        streams.err() << "Invalid input, please enter a value between " << min << " and " << max << "." << std::endl;
+        streams.out() << "Invalid input, please enter a value between " << min << " and " << max << "." << std::endl;
     }
 }
 

@@ -92,14 +92,15 @@ namespace Picross
         // Guarantees: - tokens.size() >= 2
         //             - tokens[1] == "row" || tokens[1] == "col"
 
-        if (tokens.size() > 2)  // Too few arguments.
+        if (tokens.size() == 2)  // Too few arguments.
         {
             streams.out() << "hints: missing arguments after \"" + tokens[1] + "\"." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
+
         if (tokens[2] == "clear")       // Handle `hints <row|col> clear` commands.
         {
-            clearDirectionSubroutine(tokens, state, streams);
+            return clearDirectionSubroutine(tokens, state, streams);
         }
         else if (tokens.size() == 3)
         {

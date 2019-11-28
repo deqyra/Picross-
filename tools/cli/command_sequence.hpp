@@ -78,7 +78,7 @@ int CommandSequence<CustomState>::run(CustomState& state, CLIStreams& streams)
         if (status != COMMAND_SUCCESS)
         {
             // Log error and return prematurely.
-            streams.err() << "Command \"" + (*it)->getTooltip() + "\" returned with value " + std::to_string(status) + "\n";
+            streams.out() << "Command \"" + (*it)->getTooltip() + "\" returned with value " + std::to_string(status) + "\n";
             streams.out() << "Command sequence \"" + _tooltip + "\" aborted." << std::endl;
             return status;
         }

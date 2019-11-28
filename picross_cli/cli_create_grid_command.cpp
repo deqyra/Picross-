@@ -86,21 +86,21 @@ namespace Picross
                 }
                 catch(const std::exception& e)
                 {
-                    streams.err() << "Input could not be parsed. Please only enter space-separated integers." << std::endl;
+                    streams.out() << "Input could not be parsed. Please only enter space-separated integers." << std::endl;
                     continue;
                 }
 
                 // Check whether the entered hints are all above 0.
                 if (!std::all_of(intHints.begin(), intHints.end(), LambdaMaker::greater_than(0)))
                 {
-                    streams.err() << "All hints must be above 0. Please try again." << std::endl;
+                    streams.out() << "All hints must be above 0. Please try again." << std::endl;
                     continue;
                 }
 
                 // Check whether the entered hints fit in the grid.
                 if (minimumSpaceFromHints(intHints) > maxHintSpace)
                 {
-                    streams.err() << "Such hints do not fit in a grid of provided dimensions. Please try again." << std::endl;
+                    streams.out() << "Such hints do not fit in a grid of provided dimensions. Please try again." << std::endl;
                     continue;
                 }
 
