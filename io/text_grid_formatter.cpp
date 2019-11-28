@@ -82,7 +82,11 @@ namespace Picross
 
 		// Combine all blocks to get the final render.
 		std::string s;
-		s += StringTools::multilineConcatenation(paddingBlock, vHintsStr);
+		if (vPadding)
+		{
+			// Only use the top blocks if non-empty, otherwise a useless '\n' is inserted.
+			s += StringTools::multilineConcatenation(paddingBlock, vHintsStr);
+		}
 		s += StringTools::multilineConcatenation(hHintsStr, gridStr);
 		return s;
 	}
@@ -277,31 +281,8 @@ namespace Picross
 			// ══════════ ... ═════════
 			s += pad(strLength, HORIZONTAL_CHAR) + '\n';
 
-			// Compute how many spaces need to be inserted to properly pad the hint sequence.	
-			int lengthDiff = maxHintLength - it->size();
-			// Generate padding.
-			if (lengthDiff)
-			{
-				// If there IS a length diff between the max hints and the current hints, AND the current
-				// hints are empty, there is a single-space offset to take care of, illustrated below:
-				//
-				// ═════╠
-				// 3 4 1║ [max hints]       size: 3; lengthDiff: 0; padLength: 0
-				// ═════╠
-				// <-->1║ [non-empty hints] size: 1; lengthDiff: 2; padLength: 4
-				// ═════╠
-				// <--->║ [empty hints]     size: 0; lengthDiff: 3; padLength: 5
-				// ═════╠
-				//
-				// The pad length calculation can be generalized to 2 * lengthDiff,
-				// except when the hints are empty, in which case it is (2 * lengthDiff) - 1.
-
-				int padLength = it->size() ? lengthDiff * 2 : (lengthDiff * 2) - 1;
-				s += pad(padLength, " ");
-			}
-	
-			// Concatenate contents of the hint sequence.
-			s += StringTools::iterableToString(*it) + '\n';
+			// Concatenate the padded hints
+			s += renderPaddedHints(*it, maxHintLength) + '\n';
 		}
 		// Generate bottom separator string.
 		s += pad(strLength, HORIZONTAL_CHAR) + '\n';
@@ -317,46 +298,77 @@ namespace Picross
 
 		// The max hint sequence length is needed to pad shorter hint sequences, in order for all to be the same size.
 		int maxHintLength = IterTools::maxIterableLength(hints);
+		int strLength = (maxHintLength * 2) - 1;
+		// Exceptional case: hints are ALL empty, resulting in length -1. Set it back to 0.
+		if (strLength == -1) strLength = 0;
 
 		std::vector<std::string> strHints;
 		for (auto it = hints.begin(); it != hints.end(); it++)
 		{
-			std::string s;
-			// Make all hints padded string of the same length.
-			int lengthDiff = maxHintLength - it->size();
-			s += pad(lengthDiff, " ") + StringTools::iterableToString(*it, "");
-			strHints.push_back(s);
+			strHints.push_back(renderPaddedHints(*it, maxHintLength));
 		}
 		// At this point, strHints contains stringified hints like so:
-		// " 341"
-		// "2221"
-		// "  63"
-		// Considering inserted spaces are "empty hints", all the hint sequences are the same size.
+		// "  3 4 1"
+		// "2 2 2 1"
+		// "    6 3"
+		// All of these strings are guaranteed to be the same size, which is strLength.
 
 		std::string s;
-		// "Verticalize" all previously stringified hints, inserting vertical separators and padding where needed.
-		for (int i = 0; i < maxHintLength; i++)
+		// "Verticalize" all previously stringified hints, inserting vertical separators where needed.
+		for (int i = 0; i < strLength; i++)
 		{
-			// Normal line: print all hints separated by the vertical separator.
-			// ║1║2║3║4║5║6║7║8║9║ ║
+			// Print a single stringified hint character from all hints, separated by the vertical separator, like so:
+			// ║1║2║ ║4║5║ ║7║8║ ║9║
+			//
+			// Padding is included in the stringified hints, so one row out of two is like the following:
+			// ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║
+
 			for (auto it = strHints.begin(); it != strHints.end(); it++)
 			{
 				s += VERTICAL_CHAR + it->at(i);
 			}
 			s += VERTICAL_CHAR + '\n';
-
-			// Separator line: print spaces separated by the vertical separator.
-   			// ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║
-			if (i != maxHintLength - 1)
-			{
-				for (int j = 0; j < strHints.size(); j++)
-				{
-					s += VERTICAL_CHAR + " ";
-				}
-				s += VERTICAL_CHAR + '\n';
-			}
 		}
 
+		return s;
+	}
+
+	std::string TextGridFormatter::renderPaddedHints(std::vector<int> hints, int maxHintLength)
+	{
+		std::string s;
+
+		// Compute the length difference between the max hint sequence length and this hint sequence.
+		int lengthDiff = maxHintLength - hints.size();
+		// Generate padding.
+		if (lengthDiff)
+		{
+			// Compute the needed space-padding length.
+			int padLength = hints.size() ? lengthDiff * 2 : (lengthDiff * 2) - 1;
+
+			// If there IS a length diff between the max hints and the current hints, AND the current
+			// hints are empty, there is a single-space offset to take care of, illustrated below:
+			//
+			// ═════╠
+			// 3 4 1║ [max hints]       size: 3; lengthDiff: 0; padLength: 0
+			// ═════╠
+			// <-->1║ [non-empty hints] size: 1; lengthDiff: 2; padLength: 4
+			// ═════╠
+			// <--->║ [empty hints]     size: 0; lengthDiff: 3; padLength: 5
+			// ═════╠
+			//
+			// The pad length calculation can be generalized to 2 * lengthDiff,
+			// except when the hints are empty, in which case it is (2 * lengthDiff) - 1.
+			// All of this gives the statement above.
+
+			// A potential problem with the above is when maxHintLength is 0, which would give -1 for padLength.
+			// However, in such a case, lengthDiff is always 0 (unless something has gone horrribly wrong),
+			// and thus this whole block has been ignored.
+
+			s += pad(padLength, " ");
+		}
+
+		// Concatenate contents of the hint sequence.
+		s += StringTools::iterableToString(hints);
 		return s;
 	}
 }

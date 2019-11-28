@@ -55,19 +55,21 @@ namespace Picross
 			// Returns a string containing `height` lines, each containing `width` times `padString`.
 			std::string padBlock(int width, int height, std::string padString);
 
-			// Renders into a string the top line of a displayed grid.
+			// Renders the top line of a grid into a string.
 			std::string renderTopLine(int width);
-			// Renders into a string the provided grid row.
+			// Renders the provided grid row into a string.
 			std::string renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells = false);
-			// Renders into a string an interline of a displayed grid.
+			// Renders an interline of a grid into a string.
 			std::string renderInterline(int width);
-			// Renders into a string the bottom line of a displayed grid.
+			// Renders the bottom line of a grid into a string.
 			std::string renderBottomLine(int width);
 
-			// Renders into a string the horizontal hints of a displayed grid.
+			// Renders the horizontal hints of a grid into a string.
 			std::string renderHorizontalHints(std::vector<std::vector<int>> hints);
-			// Renders into a string the vertical hints of a displayed grid.
+			// Renders the vertical hints of a grid into a string.
 			std::string renderVerticalHints(std::vector<std::vector<int>> hints);
+			// Renders hints into a string, including necessary padding depending on the given max hint length.
+			std::string renderPaddedHints(std::vector<int> hints, int maxHintLength);
 	};
 }
 

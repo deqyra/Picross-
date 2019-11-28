@@ -95,7 +95,7 @@ Cleanup & enhancement:
         ✔ Inline fully specialized templates
         ✔ Make sure all polymorphically derived classes have a virtual destructor
         ✔ Reorganize all kinds of utils in the "tools" folder
-        ☐ Ensure all argument copies are compiler-made when needed
+        ✔ Ensure all argument copies are compiler-made when needed
         ☐ User wiki on GitHub
         ☐ Tech wiki on GitHub (?)
         ☐ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
