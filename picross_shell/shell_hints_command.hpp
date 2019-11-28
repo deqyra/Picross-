@@ -11,6 +11,7 @@
 
 // If you change this delimiter, don't forget to update the help() method.
 #define PICROSS_SHELL_HINTS_COMMAND_DELIMITER ';'
+#define PICROSS_SHELL_HINTS_COMMAND_NO_HINTS "none"
 
 namespace Picross
 {

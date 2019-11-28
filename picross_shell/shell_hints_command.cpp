@@ -138,6 +138,19 @@ namespace Picross
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
+        // If hint sequence is "none", reset hints for given index in given direction.
+        if (valueString == PICROSS_SHELL_HINTS_COMMAND_NO_HINTS)
+        {
+            if (direction == "v")
+            {
+                state.workingGrid().setColHints(index, {});
+            }
+            if (direction == "h")
+            {
+                state.workingGrid().setRowHints(index, {});
+            }
+        }
+
         // Attempt to parse new hints.
         std::vector<int> hints;
         try

@@ -107,6 +107,8 @@ Cleanup & enhancement:
         ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ✔ Tests for CLI stuff
         ✔ Tests for shell stuff
+        ☐ Tests for generic shell
+        ☐ Tests for lambda maker
         ☐ Have Windows print UTF8 characters properly
         ☐ Ensure consistency of stream usage (err for exception printing only)
         ✔ Make CLI-related stuff its own library, with custom templated state et al
