@@ -11,7 +11,7 @@
 
 namespace Picross
 {
-    int handleCellManipForCommand(std::vector<std::string> tokens, cell_t value, std::string commandName, PicrossShellState& state, CLIStreams& streams)
+    int handleCellManipForCommand(const std::vector<std::string>& tokens, cell_t value, const std::string& commandName, PicrossShellState& state, CLIStreams& streams)
     {
         // Range coordinates.
         int i0, in;

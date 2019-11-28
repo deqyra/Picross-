@@ -23,7 +23,7 @@ namespace Picross
 
     }
 
-    int ShellDisplayCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellDisplayCommand::processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         

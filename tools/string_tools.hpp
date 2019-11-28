@@ -42,13 +42,13 @@ namespace StringTools
     std::string readFileIntoString(const std::string& path, bool stripCarriageReturns = true);
 
     // Takes in two multi-line strings, concatenates them line by line and returns the result in one string.
-    std::string multilineConcatenation(std::string first, std::string second);
+    std::string multilineConcatenation(const std::string& first, const std::string& second);
 
     // Remove carriage returns in provided string. Returns whether operation was successful.
     void stripCR(std::string& str);
 
     // Parse two ints separated by a single character
-    void parseIntRange(std::string input,                               // The input string to parse
+    void parseIntRange(const std::string& input,                        // The input string to parse
                        char delimiter,                                  // The delimiter in the string
                        int& lowBound,                                   // The lower bound to be found
                        int& highBound,                                  // The higher bound to be found
@@ -59,9 +59,9 @@ namespace StringTools
     // Returns a string representation of the contents of an iterable.
     template<typename Iter>
     std::string iterableToString(
-        Iter first, Iter last,          std::string delimiter = " ",
-        std::string opening = "",       std::string closing = "",
-        std::string elementPrefix = "", std::string elementSuffix = "")
+        Iter first, Iter last,                 const std::string& delimiter = " ",
+        const std::string& opening = "",       const std::string& closing = "",
+        const std::string& elementPrefix = "", const std::string& elementSuffix = "")
     {
         std::string s = opening;
 
@@ -84,9 +84,9 @@ namespace StringTools
 
     template<typename Iterable>
     std::string iterableToString(
-        Iterable container,             std::string delimiter = " ",
-        std::string opening = "",       std::string closing = "",
-        std::string elementPrefix = "", std::string elementSuffix = "")
+        const Iterable& container,             const std::string& delimiter = " ",
+        const std::string& opening = "",       const std::string& closing = "",
+        const std::string& elementPrefix = "", const std::string& elementSuffix = "")
     {
         return iterableToString(container.begin(), container.end(), delimiter, opening, closing, elementPrefix, elementSuffix);
     }

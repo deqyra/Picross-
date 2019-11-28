@@ -51,9 +51,9 @@ namespace Picross
 		private:	// Private methods
 		// Render-related utilities
 			// Returns a string containing `length` times `padString`.
-			std::string pad(int length, std::string padString);
+			std::string pad(int length, const std::string& padString);
 			// Returns a string containing `height` lines, each containing `width` times `padString`.
-			std::string padBlock(int width, int height, std::string padString);
+			std::string padBlock(int width, int height, const std::string& padString);
 
 			// Renders the top line of a grid into a string.
 			std::string renderTopLine(int width);
@@ -65,11 +65,11 @@ namespace Picross
 			std::string renderBottomLine(int width);
 
 			// Renders the horizontal hints of a grid into a string.
-			std::string renderHorizontalHints(std::vector<std::vector<int>> hints);
+			std::string renderHorizontalHints(const std::vector<std::vector<int>>& hints);
 			// Renders the vertical hints of a grid into a string.
-			std::string renderVerticalHints(std::vector<std::vector<int>> hints);
+			std::string renderVerticalHints(const std::vector<std::vector<int>>& hints);
 			// Renders hints into a string, including necessary padding depending on the given max hint length.
-			std::string renderPaddedHints(std::vector<int> hints, int maxHintLength);
+			std::string renderPaddedHints(const std::vector<int>& hints, int maxHintLength);
 	};
 }
 

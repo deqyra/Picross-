@@ -24,7 +24,7 @@ namespace Picross
 
     }
 
-    int ShellHintsCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
 
@@ -55,7 +55,7 @@ namespace Picross
         }
     }
 
-    int ShellHintsCommand::generateSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::generateSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Guarantees: - tokens.size() >= 2
         //             - tokens[1] == "generate"
@@ -71,7 +71,7 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    int ShellHintsCommand::clearSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::clearSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Guarantees: - tokens.size() >= 2
         //             - tokens[1] == "clear"
@@ -87,7 +87,7 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    int ShellHintsCommand::directionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::directionSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Guarantees: - tokens.size() >= 2
         //             - tokens[1] == "row" || tokens[1] == "col"
@@ -118,7 +118,7 @@ namespace Picross
         }
     }
 
-    int ShellHintsCommand::clearDirectionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::clearDirectionSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Guarantees: - tokens.size() >= 2
         //             - tokens[1] == "row" || tokens[1] == "col"
@@ -142,7 +142,7 @@ namespace Picross
         return SHELL_COMMAND_SUCCESS;
     }
 
-    int ShellHintsCommand::handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    int ShellHintsCommand::handleHintModification(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams)
     {
         // Syntax:    hints <h|v>       <indexToModify> <spaceSeparatedValues>
         //                    ^               ^                ^

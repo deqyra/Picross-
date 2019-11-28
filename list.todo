@@ -96,6 +96,7 @@ Cleanup & enhancement:
         ✔ Make sure all polymorphically derived classes have a virtual destructor
         ✔ Reorganize all kinds of utils in the "tools" folder
         ✔ Ensure all argument copies are compiler-made when needed
+        ☐ Also ensure heavy objects are otherwise passed as const references
         ☐ User wiki on GitHub
         ☐ Tech wiki on GitHub (?)
         ✔ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero

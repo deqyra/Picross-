@@ -9,13 +9,13 @@
 //
 
 template<>
-std::string CLIInput::parseString(std::string input)
+std::string CLIInput::parseString(const std::string& input)
 {
     return input;
 }
 
 template<>
-int CLIInput::parseString(std::string input)
+int CLIInput::parseString(const std::string& input)
 {
     if (!StringTools::stringIsNum(input))
     {
@@ -25,7 +25,7 @@ int CLIInput::parseString(std::string input)
 }
 
 template<>
-bool CLIInput::parseString(std::string input)
+bool CLIInput::parseString(const std::string& input)
 {
     if (input == "y" || input == "yes" || input == "true")
     {

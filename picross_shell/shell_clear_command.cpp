@@ -25,7 +25,7 @@ namespace Picross
 
     }
 
-    int ShellClearCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellClearCommand::processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
         

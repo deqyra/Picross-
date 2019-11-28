@@ -20,7 +20,7 @@ namespace Picross
 
         private:    // Private methods
             // Handle user input for all hints in a certain direction.
-            std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, int maxHintSpace, std::string numberedPrefixNoun, CLIStreams& streams);
+            std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, int maxHintSpace, const std::string& numberedPrefixNoun, CLIStreams& streams);
     };
 }
 

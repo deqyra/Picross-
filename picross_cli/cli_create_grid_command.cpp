@@ -63,7 +63,7 @@ namespace Picross
         }
     }
 
-    std::vector<std::vector<int>> CLICreateGridCommand::handleHintSequenceInput(int sequenceLength, int maxHintSpace, std::string numberedPrefixNoun, CLIStreams& streams)
+    std::vector<std::vector<int>> CLICreateGridCommand::handleHintSequenceInput(int sequenceLength, int maxHintSpace, const std::string& numberedPrefixNoun, CLIStreams& streams)
     {
         // Repeatedly asks for hints that fit in a certain grid.
 

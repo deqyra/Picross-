@@ -25,7 +25,7 @@ namespace Picross
             // Load the specified xml file into the given document object.
             void loadXMLFile(std::string path, tinyxml2::XMLDocument& doc);
             // Find the first child of the given name in the provided node and auto-throw if not found.
-            tinyxml2::XMLElement* findFirstChildOrThrow(tinyxml2::XMLElement* root, std::string name);
+            tinyxml2::XMLElement* findFirstChildOrThrow(tinyxml2::XMLElement* root, const std::string& name);
             // Parse all hints from the provided XML element into a vector.
             std::vector<std::vector<int>> parseHintEntryCollection(tinyxml2::XMLElement* hintsElt);
             // Fill provided grid with the contents of the provided XML node.
@@ -49,7 +49,7 @@ namespace Picross
 
             // Generic functions to query an attribute of a node and extract a value of templated type from it.
             template<typename T>
-            inline T getValueFromAttribute(tinyxml2::XMLElement* element, std::string attrName);
+            inline T getValueFromAttribute(tinyxml2::XMLElement* element, const std::string& attrName);
     };
 
     template<>
@@ -73,7 +73,7 @@ namespace Picross
     }
 
     template<>
-    inline int XMLGridSerialzer::getValueFromAttribute(tinyxml2::XMLElement* element, std::string attrName)
+    inline int XMLGridSerialzer::getValueFromAttribute(tinyxml2::XMLElement* element, const std::string& attrName)
     {
         int value;
         // Query the integer attribute and throw any error.
@@ -87,7 +87,7 @@ namespace Picross
     }
 
     template<>
-    inline std::string XMLGridSerialzer::getValueFromAttribute(tinyxml2::XMLElement* element, std::string attrName)
+    inline std::string XMLGridSerialzer::getValueFromAttribute(tinyxml2::XMLElement* element, const std::string& attrName)
     {
         // Query the attribute and throw if it couldn't be found.
         const char* res = element->Attribute(attrName.c_str());

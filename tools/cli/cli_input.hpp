@@ -15,23 +15,23 @@ class CLIInput
 
         // Prompts the user for input using the provided string as title. Loops until input is successfully parsed.
         template<typename T>
-        static T askForInput(std::string title, CLIStreams& streams = defaultStreams);
+        static T askForInput(const std::string& title, CLIStreams& streams = defaultStreams);
 
         // Repeatedly asks for input until entered value is at least the provided minimum value. Should be used on orderable types when it makes sense.
         template<typename T>
-        static T askForMinInput(std::string title, T min, CLIStreams& streams = defaultStreams);
+        static T askForMinInput(const std::string& title, T min, CLIStreams& streams = defaultStreams);
 
         // Repeatedly asks for input until entered value is at most the provided maximum value. Should be used on orderable types when it makes sense.
         template<typename T>
-        static T askForMaxInput(std::string title, T max, CLIStreams& streams = defaultStreams);
+        static T askForMaxInput(const std::string& title, T max, CLIStreams& streams = defaultStreams);
 
         // Repeatedly asks for input until entered value is within provided bounds. Should be used on orderable types when it makes sense.
         template<typename T>
-        static T askForBoundedInput(std::string title, T min, T max, CLIStreams& streams = defaultStreams);
+        static T askForBoundedInput(const std::string& title, T min, T max, CLIStreams& streams = defaultStreams);
 
         // Parses a string to find a value of the template parameter. Needs an explicit specialized definition for each type.
         template<typename T>
-        static T parseString(std::string input);
+        static T parseString(const std::string& input);
 
         // Returns a descriptive string of the template parameter. Needs an explicit specialized definition for each type.
         template<typename T>
@@ -43,7 +43,7 @@ class CLIInput
 };
 
 template<typename T>
-T CLIInput::askForInput(std::string title, CLIStreams& streams)
+T CLIInput::askForInput(const std::string& title, CLIStreams& streams)
 {
     // Prompt the user for a value until a valid one is entered.
     while (true)
@@ -61,7 +61,7 @@ T CLIInput::askForInput(std::string title, CLIStreams& streams)
 }
 
 template<typename T>
-T CLIInput::askForMinInput(std::string title, T min, CLIStreams& streams)
+T CLIInput::askForMinInput(const std::string& title, T min, CLIStreams& streams)
 {
     // Ask for input until the entered value is valid and at least min.
     while (true)
@@ -78,7 +78,7 @@ T CLIInput::askForMinInput(std::string title, T min, CLIStreams& streams)
 }
 
 template<typename T>
-T CLIInput::askForMaxInput(std::string title, T max, CLIStreams& streams)
+T CLIInput::askForMaxInput(const std::string& title, T max, CLIStreams& streams)
 {
     // Ask for input until the entered value is valid and at most max.
     while (true)
@@ -95,7 +95,7 @@ T CLIInput::askForMaxInput(std::string title, T max, CLIStreams& streams)
 }
 
 template<typename T>
-T CLIInput::askForBoundedInput(std::string title, T min, T max, CLIStreams& streams)
+T CLIInput::askForBoundedInput(const std::string& title, T min, T max, CLIStreams& streams)
 {
     // Ask for input until the entered value is between min and max.
     while (true)
@@ -128,13 +128,13 @@ T CLIInput::waitForInput(CLIStreams& streams)
 //
 
 template<>
-std::string CLIInput::parseString(std::string input);
+std::string CLIInput::parseString(const std::string& input);
 
 template<>
-int CLIInput::parseString(std::string input);
+int CLIInput::parseString(const std::string& input);
 
 template<>
-bool CLIInput::parseString(std::string input);
+bool CLIInput::parseString(const std::string& input);
 
 //
 // Specializations of typeName.

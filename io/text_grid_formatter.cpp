@@ -171,7 +171,7 @@ namespace Picross
 		_crossedChar = _defaultCrossedChar;
 	}
 
-	std::string TextGridFormatter::pad(int length, std::string padString)
+	std::string TextGridFormatter::pad(int length, const std::string& padString)
 	{
 		std::string s;
 		for (int i = 0; i < length; i++)
@@ -181,7 +181,7 @@ namespace Picross
 		return s;
 	}
 
-	std::string TextGridFormatter::padBlock(int width, int height, std::string padString)
+	std::string TextGridFormatter::padBlock(int width, int height, const std::string& padString)
 	{
 		std::string s;
 		for (int i = 0; i < height; i++)
@@ -265,7 +265,7 @@ namespace Picross
 		return s;
 	}
 
-	std::string TextGridFormatter::renderHorizontalHints(std::vector<std::vector<int>> hints)
+	std::string TextGridFormatter::renderHorizontalHints(const std::vector<std::vector<int>>& hints)
 	{
 		// The max hint sequence length is needed to pad shorter hint sequence, in order for all to be the same size.
 		int maxHintLength = IterTools::maxIterableLength(hints);
@@ -290,7 +290,7 @@ namespace Picross
 		return s;
 	}
 
-	std::string TextGridFormatter::renderVerticalHints(std::vector<std::vector<int>> hints)
+	std::string TextGridFormatter::renderVerticalHints(const std::vector<std::vector<int>>& hints)
 	{
 		// As these hints need to be rendered vertically, the rendering becomes non-trivial.
 		// Step 1: stringify all hint sequences, inserting padding where necessary.
@@ -333,7 +333,7 @@ namespace Picross
 		return s;
 	}
 
-	std::string TextGridFormatter::renderPaddedHints(std::vector<int> hints, int maxHintLength)
+	std::string TextGridFormatter::renderPaddedHints(const std::vector<int>& hints, int maxHintLength)
 	{
 		std::string s;
 

@@ -43,17 +43,17 @@ class MicroShell
         void clearCommands();
         void addCommand(CommandPtr command, int index = -1);
         void removeCommand(int index);
-        void removeCommand(std::string name);
+        void removeCommand(const std::string& name);
         void setExitCommand(CommandPtr command);
 
     // Getter methods
         CommandPtr getCommand(int index);
-        CommandPtr getCommand(std::string name);
+        CommandPtr getCommand(const std::string& name);
         CommandPtr getExitCommand();
 
     // Useful checks
-        int indexOf(std::string name);
-        bool hasCommand(std::string name);
+        int indexOf(const std::string& name);
+        bool hasCommand(const std::string& name);
 
         // Run the shell.
         int run(CustomState& state, CLIStreams& streams = CLIInput::defaultStreams);
@@ -64,9 +64,9 @@ class MicroShell
         // Generate a docstring descriptive of all contained commands.
         std::string globalHelpString();
         // Generate the docstring for a given command.
-        std::string commandHelpString(std::string commandName);
+        std::string commandHelpString(const std::string& commandName);
         // Handle exit procedure.
-        int handleExit(std::string command, CustomState& state, CLIStreams& streams);
+        int handleExit(const std::string& command, CustomState& state, CLIStreams& streams);
 };
 
 template<typename CustomState>
@@ -105,7 +105,7 @@ void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr com
 }
 
 template<typename CustomState>
-void MicroShell<CustomState>::removeCommand(std::string name)
+void MicroShell<CustomState>::removeCommand(const std::string& name)
 {
     // Find the index of the command with the provided name.
     int index = indexOf(name);
@@ -141,7 +141,7 @@ void MicroShell<CustomState>::clearCommands()
 }
 
 template<typename CustomState>
-int MicroShell<CustomState>::indexOf(std::string name)
+int MicroShell<CustomState>::indexOf(const std::string& name)
 {
     // Find a command with given name.
     MicroShell<CustomState>::ChainIter it = std::find_if(_chain.begin(), _chain.end(), _lambda_commandNameIs(name));
@@ -151,7 +151,7 @@ int MicroShell<CustomState>::indexOf(std::string name)
 }
 
 template<typename CustomState>
-bool MicroShell<CustomState>::hasCommand(std::string name)
+bool MicroShell<CustomState>::hasCommand(const std::string& name)
 {
     // Command exists if a valid index is found.
     return indexOf(name) != -1;
@@ -177,7 +177,7 @@ typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand
 }
 
 template<typename CustomState>
-typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(std::string name)
+typename MicroShell<CustomState>::CommandPtr MicroShell<CustomState>::getCommand(const std::string& name)
 {
     // Try to fetch the command at provided index.
     int index = indexOf(name);
@@ -281,7 +281,7 @@ std::string MicroShell<CustomState>::globalHelpString()
 }
 
 template<typename CustomState>
-std::string MicroShell<CustomState>::commandHelpString(std::string commandName)
+std::string MicroShell<CustomState>::commandHelpString(const std::string& commandName)
 {
     // Find command.
     int index = indexOf(commandName);
@@ -302,7 +302,7 @@ std::string MicroShell<CustomState>::commandHelpString(std::string commandName)
 }
 
 template<typename CustomState>
-int MicroShell<CustomState>::handleExit(std::string command, CustomState& state, CLIStreams& streams)
+int MicroShell<CustomState>::handleExit(const std::string& command, CustomState& state, CLIStreams& streams)
 {
     // If not exit command was provided, just exit immediately.
     if (!_exitCommand)

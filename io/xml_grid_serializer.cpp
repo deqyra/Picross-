@@ -237,7 +237,7 @@ namespace Picross
         throw InvalidXMLGridError("Unexpected cell_t value could not be represented into a string.");
     }
 
-    tinyxml2::XMLElement* XMLGridSerialzer::findFirstChildOrThrow(tinyxml2::XMLElement* root, std::string name)
+    tinyxml2::XMLElement* XMLGridSerialzer::findFirstChildOrThrow(tinyxml2::XMLElement* root, const std::string& name)
     {
         tinyxml2::XMLElement* elt = root->FirstChildElement(name.c_str());
         if (!elt)

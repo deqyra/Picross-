@@ -25,7 +25,7 @@ namespace Picross
 
     }
 
-    int ShellCheckCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellCheckCommand::processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams)
     {
         // Expected syntax: see docstring in help().
 

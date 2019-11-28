@@ -25,7 +25,7 @@ namespace IterTools
 
     // Given an iterable of iterables, returns the maximum length of the contained iterables.
     template<typename Iterable>
-    int maxIterableLength(Iterable container)
+    int maxIterableLength(const Iterable& container)
     {
         return maxIterableLength(container.begin(), container.end());
     }
@@ -49,7 +49,7 @@ namespace IterTools
 
    // Given an iterable of iterables, returns the sum of all of their contents.
     template<typename T, typename Iterable>
-    T sum2NestedIterables(Iterable container)
+    T sum2NestedIterables(const Iterable& container)
     {
         return sum2NestedIterables<T>(container.begin(), container.end());
     }
@@ -72,7 +72,7 @@ namespace IterTools
 
     // Given an iterable with comparable values, returns the index of the element with the maximum value.
     template<typename Iterable>
-    int indexOfMaxElement(Iterable container)
+    int indexOfMaxElement(const Iterable& container)
     {
         return indexOfMaxElement(container.begin(), container.end());
     }

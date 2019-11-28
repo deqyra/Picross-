@@ -34,7 +34,7 @@ class CLIMenu
         
     private:    // Private methods
         // Generate display string for a given tooltip.
-        std::string optionString(int n, std::string tooltip);
+        std::string optionString(int n, const std::string& tooltip);
         // Generate display strings for all options.
         std::string allOptionsString();
 };
@@ -99,7 +99,7 @@ void CLIMenu<CustomState>::show(CustomState& state, CLIStreams& streams)
 }
 
 template<typename CustomState>
-std::string CLIMenu<CustomState>::optionString(int n, std::string tooltip)
+std::string CLIMenu<CustomState>::optionString(int n, const std::string& tooltip)
 {
     std::string s = std::to_string(n) + ". " + tooltip + "\n";
     return s;

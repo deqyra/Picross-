@@ -20,22 +20,22 @@ namespace Picross
             ShellHintsCommand();
             virtual ~ShellHintsCommand();
 
-            virtual int processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams);
+            virtual int processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams);
             virtual std::string name();
             virtual std::string description();
             virtual std::string help();
 
         private:    // Private methods
             // Handle hint modification based on command arguments.
-            int handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            int handleHintModification(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
             // Handle `hints generate` commands
-            int generateSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            int generateSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
             // Handle `hints clear` commands
-            int clearSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            int clearSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
             // Handle `hints <row|col>` commands
-            int directionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            int directionSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
             // Handle `hints <row|col> clear` commands
-            int clearDirectionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            int clearDirectionSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
     };
 }
 

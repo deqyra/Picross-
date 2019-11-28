@@ -16,7 +16,7 @@ namespace Picross
             ShellCommitCommand();
             virtual ~ShellCommitCommand();
 
-            virtual int processInput(std::string command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams);
+            virtual int processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams = CLIInput::defaultStreams);
             virtual std::string name();
             virtual std::string description();
             virtual std::string help();

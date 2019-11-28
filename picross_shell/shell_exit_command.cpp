@@ -20,7 +20,7 @@ namespace Picross
 
     }
 
-    int ShellExitCommand::processInput(std::string command, PicrossShellState& state, CLIStreams& streams)
+    int ShellExitCommand::processInput(const std::string& command, PicrossShellState& state, CLIStreams& streams)
     {
         // No argument checking: if exit was invoked, start the exit procedure.
         

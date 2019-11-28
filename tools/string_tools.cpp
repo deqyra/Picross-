@@ -228,7 +228,7 @@ namespace StringTools
         throw FileNotFoundError(path + ": file not found.");
     }
 
-	std::string multilineConcatenation(std::string first, std::string second)
+	std::string multilineConcatenation(const std::string& first, const std::string& second)
 	{
         // Step 1: split input strings into vectors of lines.
 		std::vector<std::string> firstTokens = StringTools::tokenizeString(first, '\n');
@@ -291,7 +291,7 @@ namespace StringTools
         str = result;        
     }
 
-    void parseIntRange(std::string input, char delimiter, int& lowBound, int& highBound, int min, int max, bool throwOnExceedingBounds)
+    void parseIntRange(const std::string& input, char delimiter, int& lowBound, int& highBound, int min, int max, bool throwOnExceedingBounds)
     {
         // Assuming ':' as delimiter, the expected format is like "-32:64".
         // ":64" and "-32:" are accepted, meaning either end is unbounded,
