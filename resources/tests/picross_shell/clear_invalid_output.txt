@@ -1,0 +1,3 @@
+clear: too few arguments.
+clear: range "aze" could not be parsed.
+clear: range "rty" could not be parsed.

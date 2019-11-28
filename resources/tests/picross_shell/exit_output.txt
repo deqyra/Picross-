@@ -1,0 +1,5 @@
+You have pending changes on your working grid. Exiting the shell will discard them.
+Use 'commit' to save those changes to the main grid.
+Do you want to exit the shell and discard changes? You have pending changes on your working grid. Exiting the shell will discard them.
+Use 'commit' to save those changes to the main grid.
+Do you want to exit the shell and discard changes? 

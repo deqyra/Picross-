@@ -1,0 +1,3 @@
+check: too few arguments.
+check: range "aze" could not be parsed.
+check: range "rty" could not be parsed.
