@@ -120,6 +120,7 @@ Bugs:
     ☐ Grid text formatting with hints doesn't properly handle display of 2-digit hints
     ✔ XML grid serializer fails to read grid with no cells
     ✔ Exceptions in the shell are only caught at main menu level
+    ☐ Changing some grid hints to empty hints possibly doesn't correctly clear the vector and results in formatting problems
 Project management:
     ✔ Set up a git repo
     ✔ Come up with tests

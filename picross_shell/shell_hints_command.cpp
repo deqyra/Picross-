@@ -119,7 +119,7 @@ namespace Picross
         // Check validity of index string.
         if (!StringTools::stringIsNum(indexString, false))
         {
-            streams.out() << "\"" << indexString << "\" is not a valid index value." << std::endl;
+            streams.out() << "hints: \"" << indexString << "\" is not a valid index value." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
         int index = std::stoi(indexString);

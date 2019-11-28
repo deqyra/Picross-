@@ -175,6 +175,10 @@
                                         tests/picross_cli/test_load_grid_command.cpp
                                         tests/picross_cli/test_save_grid_command.cpp
                                         tests/picross_cli/test_modify_grid_command.cpp
+                                        tests/picross_shell/test_commit_command.cpp
+                                        tests/picross_shell/test_display_command.cpp
+                                        tests/picross_shell/test_rollback_command.cpp
+                                        tests/picross_shell/test_hints_command.cpp
                                         tests/tools/cli/test_cli_input.cpp
                                         tests/tools/cli/test_cli_streams.cpp
                                         tests/tools/cli/cli_test_classes.cpp            tests/tools/cli/cli_test_classes.hpp

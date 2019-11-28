@@ -1,0 +1,6 @@
+hints: unknown argument "aze".
+hints: too few arguments after "v".
+hints: "aze" is not a valid index value.
+hints: hint values "aze" could not be parsed.
+hints: no arguments expected after "generate".
+hints: hint values "5;5" do not fit in grid of width 10.

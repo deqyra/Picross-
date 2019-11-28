@@ -1,0 +1,47 @@
+<grid width="10" height="5">
+    <hints>
+        <horizontal>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+        </horizontal>
+        <vertical>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+            <entry/>
+        </vertical>
+    </hints>
+    <content default="checked">
+        <cell row="0" col="0" state="cleared"/>
+        <cell row="0" col="1" state="cleared"/>
+        <cell row="0" col="2" state="cleared"/>
+        <cell row="0" col="3" state="cleared"/>
+        <cell row="1" col="0" state="cleared"/>
+        <cell row="1" col="1" state="cleared"/>
+        <cell row="1" col="2" state="cleared"/>
+        <cell row="1" col="7" state="cleared"/>
+        <cell row="1" col="8" state="cleared"/>
+        <cell row="1" col="9" state="cleared"/>
+        <cell row="2" col="0" state="cleared"/>
+        <cell row="2" col="4" state="cleared"/>
+        <cell row="2" col="9" state="cleared"/>
+        <cell row="3" col="9" state="cleared"/>
+        <cell row="4" col="0" state="cleared"/>
+        <cell row="4" col="1" state="cleared"/>
+        <cell row="4" col="2" state="cleared"/>
+        <cell row="4" col="4" state="cleared"/>
+        <cell row="4" col="5" state="cleared"/>
+        <cell row="4" col="6" state="cleared"/>
+        <cell row="4" col="7" state="cleared"/>
+        <cell row="4" col="9" state="cleared"/>
+    </content>
+</grid>

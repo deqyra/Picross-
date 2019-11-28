@@ -1,0 +1,2 @@
+display: unknown argument "azeazeaze".
+display: too many arguments.
