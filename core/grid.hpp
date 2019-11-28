@@ -16,8 +16,8 @@ namespace Picross
 			int _width;
 			int _height;
 			std::vector<cell_t> _content;			// 1D-array containing the "unfolded" grid, row-major indexed.
-			std::vector<std::vector<int>> _horizontalHints;
-			std::vector<std::vector<int>> _verticalHints;
+			std::vector<std::vector<int>> _rowHints;
+			std::vector<std::vector<int>> _colHints;
 
 		public:		// Public methods
 			Grid(int width, int height);
@@ -43,12 +43,15 @@ namespace Picross
 			void crossCell(int row, int col);
 			void clearCell(int row, int col);
 
-		// Tip modification methods.
+		// Hint modification methods.
 			void setRowHints(int row, std::vector<int> hints);
 			void setColHints(int col, std::vector<int> hints);
 			void setAllRowHints(std::vector<std::vector<int>> hints);
 			void setAllColHints(std::vector<std::vector<int>> hints);
 			void setHintsFromState();
+			void clearRowHints();
+			void clearColHints();
+			void clearAllHints();
 
 		// Useful checks.
 			bool isValidRow(int row, bool throwOnFail = false) const;

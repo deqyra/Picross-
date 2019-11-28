@@ -11,7 +11,6 @@
 
 // If you change this delimiter, don't forget to update the help() method.
 #define PICROSS_SHELL_HINTS_COMMAND_DELIMITER ';'
-#define PICROSS_SHELL_HINTS_COMMAND_NO_HINTS "none"
 
 namespace Picross
 {
@@ -29,6 +28,14 @@ namespace Picross
         private:    // Private methods
             // Handle hint modification based on command arguments.
             int handleHintModification(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            // Handle `hints generate` commands
+            int generateSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            // Handle `hints clear` commands
+            int clearSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            // Handle `hints <row|col>` commands
+            int directionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
+            // Handle `hints <row|col> clear` commands
+            int clearDirectionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams);
     };
 }
 

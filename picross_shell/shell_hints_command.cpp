@@ -36,72 +36,108 @@ namespace Picross
             streams.out() << "hints: too few arguments." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        else if (tokens.size() == 2)
+        else if (tokens[1] == "generate")   // Handle `hints generate ...` commands.
         {
-            // Processing for `hints generate`.
-            if (tokens[1] == "generate")
-            {
-                state.workingGrid().setHintsFromState();
-                return SHELL_COMMAND_SUCCESS;
-            }
-            // Processing for `hints <h|v>`: too few arguments.
-            else if (tokens[1] == "h" || tokens[1] == "v")
-            {
-                streams.out() << "hints: too few arguments after \"" << tokens[1] << "\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
-            else
-            {
-                streams.out() << "hints: unknown argument \"" << tokens[1] << "\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
+            return generateSubroutine(tokens, state, streams);
+        }
+        else if (tokens[1] == "clear")      // Handle `hints clear ...` commands.
+        {
+            return clearSubroutine(tokens, state, streams);
+        }
+        else if (tokens[1] == "row" || tokens[1] == "col")  // Handle `hints <row|col> ...` commands.
+        {
+            return directionSubroutine(tokens, state, streams);
+        }
+        else    // Unknown argument.
+        {
+            streams.out() << "hints: unknown argument \"" << tokens[1] << "\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+    }
+
+    int ShellHintsCommand::generateSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    {
+        // Guarantees: - tokens.size() >= 2
+        //             - tokens[1] == "generate"
+
+        if (tokens.size() > 2)  // Too many arguments.
+        {
+            streams.out() << "hints: no arguments expected after \"generate\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+
+        // Generate hints.
+        state.workingGrid().setHintsFromState();
+        return SHELL_COMMAND_SUCCESS;
+    }
+
+    int ShellHintsCommand::clearSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    {
+        // Guarantees: - tokens.size() >= 2
+        //             - tokens[1] == "clear"
+
+        if (tokens.size() > 2)  // Too many arguments.
+        {
+            streams.out() << "hints: no arguments expected after \"clear\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+
+        // Clear all hints.
+        state.workingGrid().clearAllHints();
+        return SHELL_COMMAND_SUCCESS;
+    }
+
+    int ShellHintsCommand::directionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    {
+        // Guarantees: - tokens.size() >= 2
+        //             - tokens[1] == "row" || tokens[1] == "col"
+
+        if (tokens.size() > 2)  // Too few arguments.
+        {
+            streams.out() << "hints: missing arguments after \"" + tokens[1] + "\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+        if (tokens[2] == "clear")       // Handle `hints <row|col> clear` commands.
+        {
+            clearDirectionSubroutine(tokens, state, streams);
         }
         else if (tokens.size() == 3)
         {
-            // Processing for `hints generate`: no argument expected after "generate".
-            if (tokens[1] == "generate")
-            {
-                streams.out() << "hints: no arguments expected after \"generate\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
-            // Processing for `hints <h|v>`: too few arguments.
-            else if (tokens[1] == "h" || tokens[1] == "v")
-            {
-                streams.out() << "hints: too few arguments after \"" << tokens[1] << "\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
-            else
-            {
-                streams.out() << "hints: unknown argument \"" << tokens[1] << "\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
+            streams.out() << "hints: unknown argument \"" + tokens[2] + "\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
         }
         else if (tokens.size() == 4)
         {
-            // Processing for `hints generate`: no argument expected after "generate".
-            if (tokens[1] == "generate")
-            {
-                streams.out() << "hints: no arguments expected after \"generate\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
-            // Processing for `hints <h|v>`.
-            else if (tokens[1] == "h" || tokens[1] == "v")
-            {
-                return handleHintModification(tokens, state, streams);
-            }
-            else
-            {
-                streams.out() << "hints: unknown argument \"" << tokens[1] << "\"." << std::endl;
-                return SHELL_COMMAND_BAD_ARGUMENTS;
-            }
+            return handleHintModification(tokens, state, streams);
         }
-        else // if (tokens.size() > 4)  // Too many arguments.
+        else
         {
             streams.out() << "hints: too many arguments." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        
-        state.mainGrid() = state.workingGrid();
+    }
+
+    int ShellHintsCommand::clearDirectionSubroutine(std::vector<std::string> tokens, PicrossShellState& state, CLIStreams& streams)
+    {
+        // Guarantees: - tokens.size() >= 2
+        //             - tokens[1] == "row" || tokens[1] == "col"
+        //             - tokens[2] == "clear"
+
+        if (tokens.size() > 3)  // Too many arguments.
+        {
+            streams.out() << "hints: no arguments expected after \"clear\"." << std::endl;
+            return SHELL_COMMAND_BAD_ARGUMENTS;
+        }
+
+        // Clear hints in either direction.
+        if (tokens[1] == "row")
+        {
+            state.workingGrid().clearRowHints();
+        }
+        else // if (tokens[1] == "col")
+        {
+            state.workingGrid().clearColHints();
+        }
         return SHELL_COMMAND_SUCCESS;
     }
 
@@ -117,7 +153,7 @@ namespace Picross
         std::string indexString = tokens[2];
         std::string valueString = tokens[3];
 
-        // Direction is certified to be either "h" or "v", otherwise this function wouldn't have been called (unknown argument).
+        // Direction is certified to be either "row" or "col", otherwise this function wouldn't have been called (unknown argument).
         // Check validity of index string.
         if (!StringTools::stringIsNum(indexString, false))
         {
@@ -127,28 +163,30 @@ namespace Picross
         int index = std::stoi(indexString);
         
         // If index is out of bounds, print a comprehensive error message.
-        if (direction == "h" && index >= state.workingGrid().getHeight())
+        if (direction == "row" && index >= state.workingGrid().getHeight())
         {
             streams.out() << "hints: index value " << index << " is out of bounds for grid of height " << state.workingGrid().getHeight() << "." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        if (direction == "v" && index >= state.workingGrid().getWidth())
+        if (direction == "col" && index >= state.workingGrid().getWidth())
         {
             streams.out() << "hints: index value " << index << " is out of bounds for grid of width " << state.workingGrid().getWidth() << "." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
-        // If hint sequence is "none", reset hints for given index in given direction.
-        if (valueString == PICROSS_SHELL_HINTS_COMMAND_NO_HINTS)
+        // If hint sequence is "clear", reset hints for given index in given direction.
+        if (valueString == "clear")
         {
-            if (direction == "v")
+            if (direction == "col")
             {
                 state.workingGrid().setColHints(index, {});
             }
-            if (direction == "h")
+            else // if (direction == "row")
             {
                 state.workingGrid().setRowHints(index, {});
             }
+
+            return SHELL_COMMAND_SUCCESS;
         }
 
         // Attempt to parse new hints.
@@ -171,23 +209,23 @@ namespace Picross
         }
 
         // Checked parsed hints validity: fit in current grid.
-        if (direction == "h" && !state.workingGrid().areValidRowHints(hints))
+        if (direction == "row" && !state.workingGrid().areValidRowHints(hints))
         {
             streams.out() << "hints: hint values \"" << valueString << "\" do not fit in grid of width " << state.workingGrid().getWidth() << "." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
-        if (direction == "v" && !state.workingGrid().areValidColHints(hints))
+        if (direction == "col" && !state.workingGrid().areValidColHints(hints))
         {
             streams.out() << "hints: hint values \"" << valueString << "\" do not fit in grid of height " << state.workingGrid().getHeight() << "." << std::endl;
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
         // Set hints.
-        if (direction == "h")
+        if (direction == "row")
         {
             state.workingGrid().setRowHints(index, hints);
         }
-        if (direction == "v")
+        if (direction == "col")
         {
             state.workingGrid().setColHints(index, hints);
         }
@@ -210,10 +248,15 @@ namespace Picross
         s += "hints - modify hints on the working grid.\n";
         s += "Syntax 1: hints generate\n";
         s += " - Automatically generate hints from current grid state.\n";
-        s += "Syntax 2: hints <h|v> <n> <values>\n";
-        s += " - <h|v>: determines the direction of hints to change: horizontal (row) or vertical (column).\n";
+        s += "Syntax 2: hints clear\n";
+        s += " - Clear all hints in the grid.\n";
+        s += "Syntax 3: hints <col|row> clear\n";
+        s += " - Clear all hints in the given direction.\n";
+        s += "Syntax 4: hints <col|row> <n> <values>\n";
+        s += " - <col|row>: determines the direction of hints to change.\n";
         s += " - `n`: 0-based index of the target row or column.\n";
         s += " - `values`: semicolon-separated positive integers representing the new hints.\n";
+        s += "If `values` is \"clear\", the hints for the given row or column are reset.\n";
         return s;
     }
 }

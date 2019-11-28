@@ -17,8 +17,8 @@ namespace Picross
 		_width(width),
 		_height(height),
 		_content(width * height, CELL_CLEARED),
-		_horizontalHints(height, std::vector<int>()),
-		_verticalHints(width, std::vector<int>())
+		_rowHints(height, std::vector<int>()),
+		_colHints(width, std::vector<int>())
 	{
 
 	}
@@ -27,8 +27,8 @@ namespace Picross
 		_width(width),
 		_height(height),
 		_content(width * height, CELL_CLEARED),
-		_horizontalHints(horizontalHints),
-		_verticalHints(verticalHints)
+		_rowHints(horizontalHints),
+		_colHints(verticalHints)
 	{
 		// Throw and cancel object creation if any hints are invalid.
 		// Catch all exceptions and throw a big one with the text of all of them.
@@ -36,20 +36,20 @@ namespace Picross
 		std::string exceptionText;
 
 		// Throw if provided hints are a different size from the grid dimensions.
-		if (_horizontalHints.size() != _height)
+		if (_rowHints.size() != _height)
 		{
-			std::string str = "Number of provided horizontal hint entries (" + std::to_string(_horizontalHints.size()) + ") is different from grid height (" + std::to_string(_height) + ").";
+			std::string str = "Number of provided horizontal hint entries (" + std::to_string(_rowHints.size()) + ") is different from grid height (" + std::to_string(_height) + ").";
 			throw InvalidGridHintsError(str);
 		}
 
-		if (_verticalHints.size() != _width)
+		if (_colHints.size() != _width)
 		{
-			std::string str = "Number of provided vertical hints entries (" + std::to_string(_verticalHints.size()) + ") is different from grid width (" + std::to_string(_width) + ").";
+			std::string str = "Number of provided vertical hints entries (" + std::to_string(_colHints.size()) + ") is different from grid width (" + std::to_string(_width) + ").";
 			throw InvalidGridHintsError(str);
 		}
 
 		// Check whether all hints are valid. Catch any exception along the way and aggregate all text.
-		for (auto it = _horizontalHints.begin(); it != _horizontalHints.end(); it++)
+		for (auto it = _rowHints.begin(); it != _rowHints.end(); it++)
 		{
 			try
 			{
@@ -63,7 +63,7 @@ namespace Picross
 			}
 		}
 
-		for (auto it = _verticalHints.begin(); it != _verticalHints.end(); it++)
+		for (auto it = _colHints.begin(); it != _colHints.end(); it++)
 		{
 			try
 			{
@@ -120,7 +120,7 @@ namespace Picross
 
 	std::vector<std::vector<int>> Grid::getAllRowHints() const
 	{
-		return _horizontalHints;
+		return _rowHints;
 	}
 
 	std::vector<int> Grid::getRowHints(int row) const
@@ -128,12 +128,12 @@ namespace Picross
 		// This will throw if the check fails (last parameter).
 		isValidRow(row, true);
 
-		return _horizontalHints[row];
+		return _rowHints[row];
 	}
 
 	std::vector<std::vector<int>> Grid::getAllColHints() const
 	{
-		return _verticalHints;
+		return _colHints;
 	}
 
 	std::vector<int> Grid::getColHints(int col) const
@@ -141,7 +141,7 @@ namespace Picross
 		// This will throw if the check fails (last parameter).
 		isValidCol(col, true);
 
-		return _verticalHints[col];
+		return _colHints[col];
 	}
 
 	cell_t Grid::getCell(int row, int col) const
@@ -223,7 +223,7 @@ namespace Picross
 		isValidRow(row, true);
 		areValidRowHints(hints, true);
 
-		_horizontalHints[row] = hints;
+		_rowHints[row] = hints;
 	}
 
 	void Grid::setColHints(int col, std::vector<int> hints)
@@ -232,7 +232,7 @@ namespace Picross
 		isValidCol(col, true);
 		areValidColHints(hints, true);
 
-		_verticalHints[col] = hints;
+		_colHints[col] = hints;
 	}
 
 	void Grid::setAllRowHints(std::vector<std::vector<int>> hints)
@@ -267,23 +267,48 @@ namespace Picross
 
 	void Grid::setHintsFromState()
 	{
-		std::vector<std::vector<int>> newHorizontalHints;
-		std::vector<std::vector<int>> newVerticalHints;
+		std::vector<std::vector<int>> newRowHints;
+		std::vector<std::vector<int>> newColHints;
 
 		// Fill those two new vectors with hints generated from current columns and rows.
 		for (int i = 0; i < _height; i++)
 		{
-			newHorizontalHints.push_back(hintsFromCells(getRow(i)));
+			newRowHints.push_back(hintsFromCells(getRow(i)));
 		}
 
 		for (int i = 0; i < _width; i++)
 		{
-			newVerticalHints.push_back(hintsFromCells(getCol(i)));
+			newColHints.push_back(hintsFromCells(getCol(i)));
 		}
 
 		// Assign those.
-		_horizontalHints = newHorizontalHints;
-		_verticalHints = newVerticalHints;
+		_rowHints = newRowHints;
+		_colHints = newColHints;
+	}
+
+	void Grid::clearRowHints()
+	{
+		// Reset row hints.
+		for (int i = 0; i < _height; i++)
+		{
+			_rowHints[i] = {};
+		}
+	}
+
+	void Grid::clearColHints()
+	{
+		// Reset column hints.
+		for (int i = 0; i < _width; i++)
+		{
+			_colHints[i] = {};
+		}
+	}
+
+	void Grid::clearAllHints()
+	{
+		// Reset all hints.
+		clearRowHints();
+		clearColHints();
 	}
 
 	bool Grid::isValidRow(int row, bool throwOnFail) const
@@ -322,7 +347,7 @@ namespace Picross
 	bool Grid::hintsAreConsistent() const
 	{
 		// Hints are consistent if the sum of horinzontal hints equals the sum of vertical hints. 
-		return IterTools::sum2NestedIterables<int>(_horizontalHints) == IterTools::sum2NestedIterables<int>(_verticalHints);
+		return IterTools::sum2NestedIterables<int>(_rowHints) == IterTools::sum2NestedIterables<int>(_colHints);
 	}
 
 	bool Grid::isSolved() const
@@ -330,7 +355,7 @@ namespace Picross
 		// Simply return false if any row/column doesn't satisfty its corresponding hints.
 		for (int i = 0; i < _height; i++)
 		{
-			if (!cellsSatisfyHints(getRow(i), _horizontalHints[i]))
+			if (!cellsSatisfyHints(getRow(i), _rowHints[i]))
 			{
 				return false;
 			}
@@ -338,7 +363,7 @@ namespace Picross
 
 		for (int j = 0; j < _width; j++)
 		{
-			if (!cellsSatisfyHints(getCol(j), _verticalHints[j]))
+			if (!cellsSatisfyHints(getCol(j), _colHints[j]))
 			{
 				return false;
 			}
@@ -406,8 +431,8 @@ namespace Picross
 		// Return false if any member is not equal in both grids.
 		if (lhs._width != rhs._width) return false;
 		if (lhs._height != rhs._height) return false;
-		if (lhs._horizontalHints != rhs._horizontalHints) return false;
-		if (lhs._verticalHints != rhs._verticalHints) return false;
+		if (lhs._rowHints != rhs._rowHints) return false;
+		if (lhs._colHints != rhs._colHints) return false;
 		if (lhs._content != rhs._content) return false;
 
 		return true;

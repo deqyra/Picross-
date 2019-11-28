@@ -111,6 +111,7 @@ Cleanup & enhancement:
         ☐ Tests for lambda maker
         ☐ Have Windows print UTF8 characters properly
         ☐ Ensure consistency of stream usage (err for exception printing only)
+        ✔ Refactor `hints` shell command into subcommands
         ✔ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Aliase templates where appropriate (shorten CLI* names)
         ✔ Have exhaustive #includes in all files
