@@ -12,7 +12,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ShellCommitCommand end-to-end")
+    TEST_CASE("ShellCommitCommand end-to-end", TAGS)
     {
         std::stringstream ss;
         CLIStreams s = CLIStreams(ss, ss, ss);

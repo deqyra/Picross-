@@ -11,7 +11,7 @@
 
 namespace Picross
 {
-    TEST_CASE("CLILoadGridCommand end-to-end")
+    TEST_CASE("CLILoadGridCommand end-to-end", TAGS)
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/load_grid_input.txt", std::ios::in);
         REQUIRE(f);

@@ -13,7 +13,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ShellDisplayCommand end-to-end")
+    TEST_CASE("ShellDisplayCommand end-to-end", TAGS)
     {
         std::stringstream ss;
         CLIStreams s = CLIStreams(ss, ss, ss);

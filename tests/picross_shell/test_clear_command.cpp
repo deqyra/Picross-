@@ -13,7 +13,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ShellClearCommand end-to-end")
+    TEST_CASE("ShellClearCommand end-to-end", TAGS)
     {
         std::stringstream ss;
         CLIStreams s = CLIStreams(ss, ss, ss);

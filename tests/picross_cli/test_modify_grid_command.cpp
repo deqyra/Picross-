@@ -13,7 +13,7 @@
 
 namespace Picross
 {
-    TEST_CASE("CLIModifyGridCommand end-to-end")
+    TEST_CASE("CLIModifyGridCommand end-to-end", TAGS)
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/modify_grid_input.txt", std::ios::in);
         REQUIRE(f);

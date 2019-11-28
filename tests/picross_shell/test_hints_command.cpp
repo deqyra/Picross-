@@ -12,7 +12,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ShellHintsCommand end-to-end")
+    TEST_CASE("ShellHintsCommand end-to-end", TAGS)
     {
         std::stringstream ss;
         CLIStreams s = CLIStreams(ss, ss, ss);

@@ -15,7 +15,7 @@ namespace Picross
         REQUIRE(state.grid() == Grid(0, 0));
     }
 
-    TEST_CASE("CLIState getters and setters")
+    TEST_CASE("CLIState getters and setters", TAGS)
     {
         PicrossCLIState state = PicrossCLIState();
         Grid g = Grid(5, 5);

@@ -11,7 +11,7 @@
 
 namespace Picross
 {
-    TEST_CASE("CLISaveGridCommand end-to-end")
+    TEST_CASE("CLISaveGridCommand end-to-end", TAGS)
     {
         std::ifstream f = std::ifstream("resources/tests/picross_cli/save_grid_input.txt", std::ios::in);
         REQUIRE(f);

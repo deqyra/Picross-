@@ -190,6 +190,7 @@
                                         tests/tools/cli/test_cli_menu_command.cpp
                                         tests/tools/cli/test_cli_command_sequence.cpp
                                         tests/tools/test_string_tools.cpp
+                                        tests/tools/test_iterable_tools.cpp
                                         tests/generate_static_grids.cpp                 tests/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
                                         tests/io/test_text_grid_formatter.cpp )

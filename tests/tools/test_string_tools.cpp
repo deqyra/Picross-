@@ -3,7 +3,7 @@
 #include <string>
 #include "../../tools/string_tools.hpp"
 
-#define TAGS "[string][utility]"
+#define TAGS "[string][tools]"
 
 namespace StringTools
 {

@@ -76,6 +76,22 @@ namespace IterTools
     {
         return indexOfMaxElement(container.begin(), container.end());
     }
+
+    template<typename Iterable, typename T>
+    void stripElementFromIterable(Iterable& container, T element)
+    {
+        // Find the element in the input container.
+        auto found = std::find(container.begin(), container.end(), element);
+
+        // While elements are found...
+        while (found != container.end())
+        {
+            // Erase that element and get the new position of the element that followed it.
+            found = container.erase(found);
+            // Find a new element from the current position.
+            found = std::find(found, container.end(), element);
+        }
+    }
 }
 
 #endif//TOOLS__ITERABLE_TOOLS_HPP

@@ -14,7 +14,7 @@
 
 namespace Picross
 {
-    TEST_CASE("ShellExitCommand end-to-end")
+    TEST_CASE("ShellExitCommand end-to-end", TAGS)
     {
         std::ifstream f = std::ifstream("resources/tests/picross_shell/exit_input.txt", std::ios::in);
         REQUIRE(f);
