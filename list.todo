@@ -116,11 +116,13 @@ Cleanup & enhancement:
         ✔ Remove empty constructors and destructors (unless virtual or required)
 Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
-    ☐ Grid text formatting with hints fails when either directional hints are all empty
+    ✔ Grid text formatting with hints fails when either directional hints are all empty
     ☐ Grid text formatting with hints doesn't properly handle display of 2-digit hints
     ✔ XML grid serializer fails to read grid with no cells
     ✔ Exceptions in the shell are only caught at main menu level
-    ☐ Changing some grid hints to empty hints possibly doesn't correctly clear the vector and results in formatting problems
+    ✔ Horizontal empty hints get an extra space upon being text-formatted
+    ☐ Setting hints as 0 in the shell effectively creates 0-hints in the grid
+    ☐ Cannot set hints to empty in shell (too few arguments after <direction>)
 Project management:
     ✔ Set up a git repo
     ✔ Come up with tests

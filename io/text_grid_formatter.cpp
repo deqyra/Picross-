@@ -282,7 +282,22 @@ namespace Picross
 			// Generate padding.
 			if (lengthDiff)
 			{
-				s += pad(lengthDiff * 2, " ");
+				// If there IS a length diff between the max hints and the current hints, AND the current
+				// hints are empty, there is a single-space offset to take care of, illustrated below:
+				//
+				// ═════╠
+				// 3 4 1║ [max hints]       size: 3; lengthDiff: 0; padLength: 0
+				// ═════╠
+				// <-->1║ [non-empty hints] size: 1; lengthDiff: 2; padLength: 4
+				// ═════╠
+				// <--->║ [empty hints]     size: 0; lengthDiff: 3; padLength: 5
+				// ═════╠
+				//
+				// The pad length calculation can be generalized to 2 * lengthDiff,
+				// except when the hints are empty, in which case it is (2 * lengthDiff) - 1.
+
+				int padLength = it->size() ? lengthDiff * 2 : (lengthDiff * 2) - 1;
+				s += pad(padLength, " ");
 			}
 	
 			// Concatenate contents of the hint sequence.
@@ -297,8 +312,8 @@ namespace Picross
 	std::string TextGridFormatter::renderVerticalHints(std::vector<std::vector<int>> hints)
 	{
 		// As these hints need to be rendered vertically, the rendering becomes non-trivial.
-		// Step 1: stringify all hint sequences, padding where necessary.
-		// Step 2: 
+		// Step 1: stringify all hint sequences, inserting padding where necessary.
+		// Step 2: "Verticalize" all stringified and padded hint sequences.
 
 		// The max hint sequence length is needed to pad shorter hint sequences, in order for all to be the same size.
 		int maxHintLength = IterTools::maxIterableLength(hints);

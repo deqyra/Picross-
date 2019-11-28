@@ -53,7 +53,6 @@ Now with an iterative solver.
 
 **Main additions:**
 
-- Iterative solver
 - `isSolved`, `undo` and `hintCoherence` shell commands (available through the `Modify grid` option of the grid manipulation menu)
 - More tests and comments
   
@@ -65,5 +64,4 @@ Now with an iterative solver.
 
 **Planned for next release:**
 
--  ¯\\\_(ツ)\_/¯
-
+- Iterative solver
