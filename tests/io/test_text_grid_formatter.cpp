@@ -1,6 +1,5 @@
 #include "../../lib/catch2/catch2.hpp"
 
-#include "../generate_static_grids.hpp"
 #include "../../io/text_grid_formatter.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 #include "../../core/grid.hpp"
@@ -12,17 +11,21 @@ namespace Picross
 {
     TEST_CASE("Grid text render without hints", TAGS)
     {
-        TextGridFormatter txt = TextGridFormatter();
-        Grid g = generate10x10PartialGrid(true);
+        XMLGridSerialzer xml = XMLGridSerialzer();
+        Grid g = xml.loadGridFromFile("resources/tests/io/10_10_partial.xml");
         std::string expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_no_hints.txt");
+
+        TextGridFormatter txt = TextGridFormatter();
         REQUIRE(txt.renderGrid(g) == expected);
     }
 
     TEST_CASE("Grid text render with hints", TAGS)
     {
-        TextGridFormatter txt = TextGridFormatter();
-        Grid g = generate10x10PartialGrid(true);
+        XMLGridSerialzer xml = XMLGridSerialzer();
+        Grid g = xml.loadGridFromFile("resources/tests/io/10_10_partial.xml");
         std::string expected = StringTools::readFileIntoString("resources/tests/io/10_10_partial_formatted_with_hints.txt");
+
+        TextGridFormatter txt = TextGridFormatter();
         REQUIRE(txt.renderGridWithHints(g) == expected);
     }
 
@@ -46,6 +49,11 @@ namespace Picross
 
     TEST_CASE("Complete grid with hints taking 2 digits")
     {
+        XMLGridSerialzer xml = XMLGridSerialzer();
+        Grid g = xml.loadGridFromFile("resources/tests/io/20_20_solved.xml");
+        std::string expected = StringTools::readFileIntoString("resources/tests/io/20_20_solved_formatted.txt");
 
+        TextGridFormatter txt = TextGridFormatter();
+        REQUIRE(txt.renderGridWithHints(g) == expected);
     }
 }
