@@ -104,12 +104,6 @@ Cleanup & enhancement:
         ✔ Better usage of std::endl (new line vs. buffer flushing)
         ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
         ✔ Make use of <algorithm>, <functional>, lambdas, etc where possible
-        ✔ Tests for CLI stuff
-        ✔ Tests for shell stuff
-        ☐ Tests for generic shell
-        ☐ Tests for lambda maker
-        ✔ Have Windows print UTF8 characters properly
-        ✔ Fix Catch2 for MinGW
         ✔ Ensure consistency of stream usage (err for exception printing only)
         ✔ Refactor `hints` shell command into subroutines
         ✔ Make CLI-related stuff its own library, with custom templated state et al
@@ -118,6 +112,13 @@ Cleanup & enhancement:
         ✔ Ensure syntactical coherence on reference and pointers (+ there should not be pointers anywhere)
         ✔ Ensure class members declaration order and syntactical coherence
         ✔ Remove empty constructors and destructors (unless virtual or required)
+        ✔ Tests for CLI stuff
+        ✔ Tests for shell stuff
+        ✔ Have Windows print UTF8 characters properly
+        ✔ Fix Catch2 for MinGW
+        ☐ Tests for generic shell
+        ☐ Tests for lambda maker
+        ☐ Investigate MSYS makefiles failing to run
 Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
     ✔ Grid text formatting with hints fails when either directional hints are all empty

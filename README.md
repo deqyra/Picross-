@@ -56,7 +56,7 @@ If CMake complains the same as above but for `g++`:
 
 #### CMake can generate MSYS makefiles but running those fails
 
-Not investigated yet.
+Please avoid using MSYS makefiles.
 
 #### MinGW linker complains about `vsnprintf` being defined multiple times
 
