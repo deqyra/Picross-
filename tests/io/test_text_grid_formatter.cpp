@@ -2,6 +2,7 @@
 
 #include "../generate_static_grids.hpp"
 #include "../../io/text_grid_formatter.hpp"
+#include "../../io/xml_grid_serializer.hpp"
 #include "../../core/grid.hpp"
 #include "../../tools/string_tools.hpp"
 
@@ -41,5 +42,10 @@ namespace Picross
         Grid g = Grid(10, 10);
         TextGridFormatter txt = TextGridFormatter();
         REQUIRE(txt.renderGridWithHints(g) == txt.renderGrid(g));
+    }
+
+    TEST_CASE("Complete grid with hints taking 2 digits")
+    {
+
     }
 }

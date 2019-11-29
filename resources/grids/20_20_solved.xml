@@ -1,0 +1,293 @@
+<grid width="20" height="20">
+    <hints>
+        <horizontal>
+            <entry>
+                <hintValue>10</hintValue>
+                <hintValue>9</hintValue>
+            </entry>
+            <entry>
+                <hintValue>9</hintValue>
+                <hintValue>10</hintValue>
+            </entry>
+            <entry>
+                <hintValue>15</hintValue>
+            </entry>
+            <entry>
+                <hintValue>18</hintValue>
+            </entry>
+            <entry>
+                <hintValue>13</hintValue>
+            </entry>
+            <entry>
+                <hintValue>7</hintValue>
+                <hintValue>7</hintValue>
+                <hintValue>4</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+            </entry>
+            <entry>
+                <hintValue>20</hintValue>
+            </entry>
+            <entry>
+                <hintValue>12</hintValue>
+            </entry>
+            <entry>
+                <hintValue>17</hintValue>
+            </entry>
+            <entry>
+                <hintValue>4</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>4</hintValue>
+            </entry>
+            <entry>
+                <hintValue>12</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>9</hintValue>
+                <hintValue>8</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>6</hintValue>
+                <hintValue>4</hintValue>
+            </entry>
+            <entry>
+                <hintValue>17</hintValue>
+            </entry>
+            <entry>
+                <hintValue>8</hintValue>
+                <hintValue>8</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>3</hintValue>
+                <hintValue>13</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry/>
+            <entry>
+                <hintValue>7</hintValue>
+                <hintValue>6</hintValue>
+                <hintValue>4</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>13</hintValue>
+            </entry>
+        </horizontal>
+        <vertical>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>4</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>8</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>8</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>8</hintValue>
+                <hintValue>8</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>6</hintValue>
+                <hintValue>10</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>5</hintValue>
+                <hintValue>7</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>17</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>1</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>9</hintValue>
+                <hintValue>6</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>17</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>11</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>6</hintValue>
+                <hintValue>10</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>13</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>5</hintValue>
+                <hintValue>4</hintValue>
+                <hintValue>6</hintValue>
+                <hintValue>1</hintValue>
+            </entry>
+            <entry>
+                <hintValue>6</hintValue>
+                <hintValue>10</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>4</hintValue>
+                <hintValue>6</hintValue>
+                <hintValue>5</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>1</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>2</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+            <entry>
+                <hintValue>2</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>3</hintValue>
+                <hintValue>2</hintValue>
+            </entry>
+        </vertical>
+    </hints>
+    <content default="checked">
+        <cell row="0" col="10" state="cleared"/>
+        <cell row="1" col="9" state="cleared"/>
+        <cell row="2" col="0" state="cleared"/>
+        <cell row="2" col="1" state="cleared"/>
+        <cell row="2" col="2" state="cleared"/>
+        <cell row="2" col="18" state="cleared"/>
+        <cell row="2" col="19" state="cleared"/>
+        <cell row="3" col="0" state="cleared"/>
+        <cell row="3" col="19" state="cleared"/>
+        <cell row="4" col="0" state="cleared"/>
+        <cell row="4" col="1" state="cleared"/>
+        <cell row="4" col="2" state="cleared"/>
+        <cell row="4" col="3" state="cleared"/>
+        <cell row="4" col="17" state="cleared"/>
+        <cell row="4" col="18" state="cleared"/>
+        <cell row="4" col="19" state="cleared"/>
+        <cell row="5" col="7" state="cleared"/>
+        <cell row="5" col="15" state="cleared"/>
+        <cell row="6" col="2" state="cleared"/>
+        <cell row="6" col="6" state="cleared"/>
+        <cell row="6" col="9" state="cleared"/>
+        <cell row="6" col="13" state="cleared"/>
+        <cell row="6" col="16" state="cleared"/>
+        <cell row="8" col="0" state="cleared"/>
+        <cell row="8" col="1" state="cleared"/>
+        <cell row="8" col="2" state="cleared"/>
+        <cell row="8" col="3" state="cleared"/>
+        <cell row="8" col="4" state="cleared"/>
+        <cell row="8" col="5" state="cleared"/>
+        <cell row="8" col="18" state="cleared"/>
+        <cell row="8" col="19" state="cleared"/>
+        <cell row="9" col="0" state="cleared"/>
+        <cell row="9" col="18" state="cleared"/>
+        <cell row="9" col="19" state="cleared"/>
+        <cell row="10" col="4" state="cleared"/>
+        <cell row="10" col="10" state="cleared"/>
+        <cell row="10" col="15" state="cleared"/>
+        <cell row="11" col="12" state="cleared"/>
+        <cell row="11" col="17" state="cleared"/>
+        <cell row="12" col="9" state="cleared"/>
+        <cell row="12" col="18" state="cleared"/>
+        <cell row="13" col="2" state="cleared"/>
+        <cell row="13" col="7" state="cleared"/>
+        <cell row="13" col="14" state="cleared"/>
+        <cell row="13" col="19" state="cleared"/>
+        <cell row="14" col="0" state="cleared"/>
+        <cell row="14" col="1" state="cleared"/>
+        <cell row="14" col="2" state="cleared"/>
+        <cell row="15" col="0" state="cleared"/>
+        <cell row="15" col="9" state="cleared"/>
+        <cell row="15" col="18" state="cleared"/>
+        <cell row="16" col="0" state="cleared"/>
+        <cell row="16" col="4" state="cleared"/>
+        <cell row="16" col="18" state="cleared"/>
+        <cell row="17" col="0" state="cleared"/>
+        <cell row="17" col="1" state="cleared"/>
+        <cell row="17" col="2" state="cleared"/>
+        <cell row="17" col="3" state="cleared"/>
+        <cell row="17" col="4" state="cleared"/>
+        <cell row="17" col="5" state="cleared"/>
+        <cell row="17" col="6" state="cleared"/>
+        <cell row="17" col="7" state="cleared"/>
+        <cell row="17" col="8" state="cleared"/>
+        <cell row="17" col="9" state="cleared"/>
+        <cell row="17" col="10" state="cleared"/>
+        <cell row="17" col="11" state="cleared"/>
+        <cell row="17" col="12" state="cleared"/>
+        <cell row="17" col="13" state="cleared"/>
+        <cell row="17" col="14" state="cleared"/>
+        <cell row="17" col="15" state="cleared"/>
+        <cell row="17" col="16" state="cleared"/>
+        <cell row="17" col="17" state="cleared"/>
+        <cell row="17" col="18" state="cleared"/>
+        <cell row="17" col="19" state="cleared"/>
+        <cell row="18" col="7" state="cleared"/>
+        <cell row="18" col="14" state="cleared"/>
+        <cell row="18" col="15" state="cleared"/>
+        <cell row="19" col="2" state="cleared"/>
+        <cell row="19" col="6" state="cleared"/>
+    </content>
+</grid>
