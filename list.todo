@@ -110,7 +110,8 @@ Cleanup & enhancement:
         ✔ Tests for shell stuff
         ☐ Tests for generic shell
         ☐ Tests for lambda maker
-        ☐ Have Windows print UTF8 characters properly
+        ✔ Have Windows print UTF8 characters properly
+        ✔ Fix Catch2 for MinGW
         ✔ Ensure consistency of stream usage (err for exception printing only)
         ✔ Refactor `hints` shell command into subroutines
         ✔ Make CLI-related stuff its own library, with custom templated state et al

@@ -11431,9 +11431,9 @@ namespace Floating {
             ret << ", ";
             write(ret, step(m_target, static_cast<double>( INFINITY), m_ulps));
         } else {
-            write(ret, step(static_cast<float>(m_target), -INFINITY, m_ulps));
+            write(ret, step(static_cast<float>(m_target), static_cast<float>(-INFINITY), m_ulps));
             ret << ", ";
-            write(ret, step(static_cast<float>(m_target),  INFINITY, m_ulps));
+            write(ret, step(static_cast<float>(m_target),  static_cast<float>(INFINITY), m_ulps));
         }
         ret << "])";
 
