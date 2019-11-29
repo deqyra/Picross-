@@ -39,7 +39,7 @@ namespace Picross
 			TextGridFormatter(std::string checkedChar, std::string emptyChar, std::string crossedChar);
 
 		// Rendering
-			std::string renderGrid(const Grid& grid, bool emptyCrossedCells = false);
+			std::string renderGrid(const Grid& grid, bool emptyCrossedCells = false, int cellWidth = 1);
 			std::string renderGridWithHints(const Grid& grid, bool emptyCrossedCells = false);
 			
 		// Cell character customization
@@ -51,23 +51,23 @@ namespace Picross
 		private:	// Private methods
 		// Render-related utilities
 			// Returns a string containing `length` times `padString`.
-			std::string pad(int length, const std::string& padString);
+			static std::string pad(int length, const std::string& padString);
 			// Returns a string containing `height` lines, each containing `width` times `padString`.
-			std::string padBlock(int width, int height, const std::string& padString);
+			static std::string padBlock(int width, int height, const std::string& padString);
 
 			// Renders the top line of a grid into a string.
-			std::string renderTopLine(int width);
+			std::string renderTopLine(int width, int cellWidth);
 			// Renders the provided grid row into a string.
-			std::string renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells = false);
+			std::string renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells, int cellWidth);
 			// Renders an interline of a grid into a string.
-			std::string renderInterline(int width);
+			std::string renderInterline(int width, int cellWidth);
 			// Renders the bottom line of a grid into a string.
-			std::string renderBottomLine(int width);
+			std::string renderBottomLine(int width, int cellWidth);
 
 			// Renders the horizontal hints of a grid into a string.
 			std::string renderHorizontalHints(const std::vector<std::vector<int>>& hints);
 			// Renders the vertical hints of a grid into a string.
-			std::string renderVerticalHints(const std::vector<std::vector<int>>& hints);
+			std::string renderVerticalHints(const std::vector<std::vector<int>>& hints, int charWidth);
 			// Renders hints into a string, including necessary padding depending on the given max hint length.
 			std::string renderPaddedHints(const std::vector<int>& hints, int maxHintLength);
 	};

@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
+#include <cmath>
 
 namespace Picross
 {
@@ -25,25 +27,25 @@ namespace Picross
 
 	}
 
-	std::string TextGridFormatter::renderGrid(const Grid& grid, bool emptyCrossedCells)
+	std::string TextGridFormatter::renderGrid(const Grid& grid, bool emptyCrossedCells, int cellWidth)
 	{
 		int width = grid.getWidth();
 		int height = grid.getHeight();
 
 		std::string s;
 		// First line.
-		s += renderTopLine(width);
+		s += renderTopLine(width, cellWidth);
 
 		// All rows and interlines (except the last row).
 		for (int i = 0; i < height - 1; i++)
 		{
-			s += renderRow(grid.getRow(i), emptyCrossedCells);
-			s += renderInterline(width);
+			s += renderRow(grid.getRow(i), emptyCrossedCells, cellWidth);
+			s += renderInterline(width, cellWidth);
 		}
 
 		// Last row and bottom line.
-		s += renderRow(grid.getRow(height - 1));
-		s += renderBottomLine(width);
+		s += renderRow(grid.getRow(height - 1), emptyCrossedCells, cellWidth);
+		s += renderBottomLine(width, cellWidth);
 
 		return s;
 	}
@@ -60,7 +62,7 @@ namespace Picross
 		int width = grid.getWidth();
 		int height = grid.getHeight();
 
-		// Calculate necessary character paddings.
+		// Calculate necessary character paddings (to render a pad block, top left of the final render).
 		int hPadding = IterTools::maxIterableLength(grid.getAllRowHints()) * 2 - 1;
 		int vPadding = IterTools::maxIterableLength(grid.getAllColHints()) * 2 - 1;
 
@@ -68,11 +70,32 @@ namespace Picross
 		if (hPadding == -1) hPadding = 0;
 		if (vPadding == -1) vPadding = 0;
 
+		// Lambda which takes in a vector of ints and returns the max int from it.
+		auto lambda_maxElement = [] (const std::vector<int>& vec) -> int
+		{
+			// Find the max element.
+			auto it = std::max_element(vec.begin(), vec.end());
+			// Return it (or 0 if the vector was empty).
+			return it != vec.end() ? (*it) : 0;
+		};
+
+		// Retrieve the largest hint in each column of the grid.
+		std::vector<int> maxColHints = std::vector<int>();
+		maxColHints.reserve(grid.getWidth());
+		auto allColHints = grid.getAllColHints();
+		std::transform(allColHints.begin(), allColHints.end(), maxColHints.begin(), lambda_maxElement);
+		// Now find the max hint from all the max col hints.
+		int maxHint = *(std::max_element(maxColHints.begin(), maxColHints.end()));
+
+		// Given the biggest column hint in all the grid, find how much char width is needed to display it.
+		// This char width will be passed to rendering subroutines to adapt display.
+		int charWidth = floor(log10(maxHint)) + 1;
+
 		// Separately render all four aforementioned blocks.
 		std::string paddingBlock = padBlock(hPadding, vPadding, " ");
-		std::string vHintsStr = renderVerticalHints(grid.getAllColHints());
+		std::string vHintsStr = renderVerticalHints(grid.getAllColHints(), charWidth);
 		std::string hHintsStr = renderHorizontalHints(grid.getAllRowHints());
-		std::string gridStr = renderGrid(grid, emptyCrossedCells);
+		std::string gridStr = renderGrid(grid, emptyCrossedCells, charWidth);
 
 		// In all blocks (if appropriate), remove the final \n to negate useless newline concatenation.
 		if (paddingBlock.length()) paddingBlock.pop_back();
@@ -191,7 +214,7 @@ namespace Picross
 		return s;
 	}
 
-	std::string TextGridFormatter::renderTopLine(int width)
+	std::string TextGridFormatter::renderTopLine(int width, int cellWidth)
 	{
 		// The top line looks like this:
 		// ╔═╦═╦═╦═╦═ ... ╦═╦═╦═╦═╦═╗
@@ -201,14 +224,14 @@ namespace Picross
 
 		for (int i = 0; i < width - 1; i++)
 		{
-			s += HORIZONTAL_CHAR + TOP_CROSS_CHAR;
+			s += pad(cellWidth, HORIZONTAL_CHAR) + TOP_CROSS_CHAR;
 		}
-		s += HORIZONTAL_CHAR + TOP_RIGHT_CHAR + '\n';
+		s += pad(cellWidth, HORIZONTAL_CHAR) + TOP_RIGHT_CHAR + '\n';
 
 		return s;
 	}
 
-	std::string TextGridFormatter::renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells)
+	std::string TextGridFormatter::renderRow(const std::vector<cell_t>& row, bool emptyCrossedCells, int cellWidth)
 	{
 		// A row looks like this:
 		// ║■║ ║■║ ║ ║ ... ║×║×║×║ ║
@@ -224,14 +247,14 @@ namespace Picross
 			{
 				contentChar = getCharacter(CELL_CLEARED);
 			}
-			s += contentChar + VERTICAL_CHAR;
+			s += pad(cellWidth, contentChar) + VERTICAL_CHAR;
 		}
 		s += '\n';
 
 		return s;
 	}
 
-	std::string TextGridFormatter::renderInterline(int width)
+	std::string TextGridFormatter::renderInterline(int width, int cellWidth)
 	{
 		// An interline looks like this:
 		// ╠═╬═╬═╬═╬═╬═ ... ╬═╬═╬═╬═╣
@@ -241,14 +264,14 @@ namespace Picross
 
 		for (int i = 0; i < width - 1; i++)
 		{
-			s += HORIZONTAL_CHAR + MIDDLE_CROSS_CHAR;
+			s += pad(cellWidth, HORIZONTAL_CHAR) + MIDDLE_CROSS_CHAR;
 		}
-		s += HORIZONTAL_CHAR + RIGHT_CROSS_CHAR + '\n';
+		s += pad(cellWidth, HORIZONTAL_CHAR) + RIGHT_CROSS_CHAR + '\n';
 
 		return s;
 	}
 
-	std::string TextGridFormatter::renderBottomLine(int width)
+	std::string TextGridFormatter::renderBottomLine(int width, int cellWidth)
 	{
 		// The bottom line looks like this:
 		// ╚═╩═╩═╩═╩═ ... ╩═╩═╩═╩═╩═╝
@@ -258,117 +281,118 @@ namespace Picross
 
 		for (int i = 0; i < width - 1; i++)
 		{
-			s += HORIZONTAL_CHAR + BOTTOM_CROSS_CHAR;
+			s += pad(cellWidth, HORIZONTAL_CHAR) + BOTTOM_CROSS_CHAR;
 		}
-		s += HORIZONTAL_CHAR + BOTTOM_RIGHT_CHAR + '\n';
+		s += pad(cellWidth, HORIZONTAL_CHAR) + BOTTOM_RIGHT_CHAR + '\n';
 
 		return s;
 	}
 
-	std::string TextGridFormatter::renderHorizontalHints(const std::vector<std::vector<int>>& hints)
+	std::string TextGridFormatter::renderHorizontalHints(const std::vector<std::vector<int>>& hintVectors)
 	{
-		// The max hint sequence length is needed to pad shorter hint sequence, in order for all to be the same size.
-		int maxHintLength = IterTools::maxIterableLength(hints);
-		// As hints are separated by a space, compute the needed string length.
-		int strLength = maxHintLength * 2 - 1;
-		// Exceptional case: hints are ALL empty, resulting in length -1. Set it back to 0.
-		if (strLength == -1) strLength = 0;
+		std::vector<std::string> stringifiedHints;
+		int maxStringLength = 0;
+
+		for (auto it = hintVectors.begin(); it != hintVectors.end(); it++)
+		{
+			std::string stringifiedVector = StringTools::iterableToString(*it);
+			if (stringifiedVector.length() > maxStringLength)
+			{
+				maxStringLength = stringifiedVector.length();
+			}
+			stringifiedHints.push_back(stringifiedVector);
+		}
 
 		std::string s;
-		for (auto it = hints.begin(); it != hints.end(); it++)
+		for (auto it = stringifiedHints.begin(); it != stringifiedHints.end(); it++)
 		{
 			// Generate a separator string like:
 			// ══════════ ... ═════════
-			s += pad(strLength, HORIZONTAL_CHAR) + '\n';
+			s += pad(maxStringLength, HORIZONTAL_CHAR) + '\n';
 
-			// Concatenate the padded hints
-			s += renderPaddedHints(*it, maxHintLength) + '\n';
+			// Concatenate the padded hints.
+			int padLength = maxStringLength - it->length();
+			s += pad(padLength, " ") + *it + '\n';
 		}
 		// Generate bottom separator string.
-		s += pad(strLength, HORIZONTAL_CHAR) + '\n';
+		s += pad(maxStringLength, HORIZONTAL_CHAR) + '\n';
 
 		return s;
 	}
 
-	std::string TextGridFormatter::renderVerticalHints(const std::vector<std::vector<int>>& hints)
+	std::string TextGridFormatter::renderVerticalHints(const std::vector<std::vector<int>>& hintVectors, int charWidth)
 	{
-		// As these hints need to be rendered vertically, the rendering becomes non-trivial.
-		// Step 1: stringify all hint sequences, inserting padding where necessary.
-		// Step 2: "Verticalize" all stringified and padded hint sequences.
+		int maxHintSequenceLength = IterTools::maxIterableLength(hintVectors);
 
-		// The max hint sequence length is needed to pad shorter hint sequences, in order for all to be the same size.
-		int maxHintLength = IterTools::maxIterableLength(hints);
-		int strLength = (maxHintLength * 2) - 1;
-		// Exceptional case: hints are ALL empty, resulting in length -1. Set it back to 0.
-		if (strLength == -1) strLength = 0;
-
-		std::vector<std::string> strHints;
-		for (auto it = hints.begin(); it != hints.end(); it++)
+		// Lambda which turns an int hint into a space-padded stringified hint.
+		auto lambda_stringifyAndPadHint = [charWidth] (const int& hint) -> std::string
 		{
-			strHints.push_back(renderPaddedHints(*it, maxHintLength));
-		}
-		// At this point, strHints contains stringified hints like so:
-		// "  3 4 1"
-		// "2 2 2 1"
-		// "    6 3"
-		// All of these strings are guaranteed to be the same size, which is strLength.
+			std::string s = std::to_string(hint);
+			int padLength = s.length() - charWidth;
+
+			if (padLength > 0)
+			{
+				s = pad(padLength, " ") + s;
+			}
+
+			return s;
+		};
+
+		// Lambda which turns a vector of int hints into a vector of space-padded stringified hints.
+		auto lambda_intHintVectorToStringHintVector = [lambda_stringifyAndPadHint, maxHintSequenceLength, charWidth] (const std::vector<int>& hints) -> std::vector<std::string>
+		{
+			// Allocate space for string hints.
+			std::vector<std::string> res;
+			res.reserve(maxHintSequenceLength);
+
+			// Calculate how many empty strings need to be generated and prepended to the final vector.
+			// This is so the hints, once rendered, will all be the same size vertically, like so:
+			// ║2║ ║ ║ ║1║
+   			// ║ ║ ║ ║ ║ ║
+   			// ║1║ ║4║ ║5║
+			int hintSequenceLengthDiff = maxHintSequenceLength - hints.size();
+
+			// Generate empty strings and prepend them to the final vector.
+			for (int i = 0; i < hintSequenceLengthDiff; i++)
+			{
+				res.push_back(pad(charWidth, " "));
+			}
+
+			// Transform int hints into space-padded string hints and append them to the final vector.
+			std::transform(hints.begin(), hints.end(), res.begin() + hintSequenceLengthDiff, lambda_stringifyAndPadHint);
+			return res;
+		};
+
+		// Allocate space for stringified hint vectors.
+		std::vector<std::vector<std::string>> stringifiedHints = std::vector<std::vector<std::string>>();
+		stringifiedHints.reserve(hintVectors.size());
+		// Transform int hint vectors into padded string hint vectors.
+		std::transform(hintVectors.begin(), hintVectors.end(), stringifiedHints.begin(), lambda_intHintVectorToStringHintVector);
 
 		std::string s;
-		// "Verticalize" all previously stringified hints, inserting vertical separators where needed.
-		for (int i = 0; i < strLength; i++)
+		// For every row of hints across hint vectors...
+		for (int i = 0; i < maxHintSequenceLength; i++)
 		{
-			// Print a single stringified hint character from all hints, separated by the vertical separator, like so:
-			// ║1║2║ ║4║5║ ║7║8║ ║9║
-			//
-			// Padding is included in the stringified hints, so one row out of two is like the following:
-			// ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║
-
-			for (auto it = strHints.begin(); it != strHints.end(); it++)
+			// Render the actual row across the vectors, like so:
+			// ║2║ ║ ║ ║1║
+			for (auto it = stringifiedHints.begin(); it != stringifiedHints.end(); it++)
 			{
 				s += VERTICAL_CHAR + it->at(i);
 			}
 			s += VERTICAL_CHAR + '\n';
+
+			// If the last hasn't been reached yet, also render an interline row, like so:
+   			// ║ ║ ║ ║ ║ ║
+			if (i < maxHintSequenceLength - 1)
+			{
+				for (int i = 0; i < stringifiedHints.size(); i++)
+				{
+					s += VERTICAL_CHAR + pad(charWidth, " ");
+				}
+				s += VERTICAL_CHAR + '\n';
+			}
 		}
 
-		return s;
-	}
-
-	std::string TextGridFormatter::renderPaddedHints(const std::vector<int>& hints, int maxHintLength)
-	{
-		std::string s;
-
-		// Compute the length difference between the max hint sequence length and this hint sequence.
-		int lengthDiff = maxHintLength - hints.size();
-		// Generate padding.
-		if (lengthDiff)
-		{
-			// Compute the needed space-padding length.
-			int padLength = hints.size() ? lengthDiff * 2 : (lengthDiff * 2) - 1;
-
-			// If there IS a length diff between the max hints and the current hints, AND the current
-			// hints are empty, there is a single-space offset to take care of, illustrated below:
-			//
-			// ═════╠
-			// 3 4 1║ [max hints]       size: 3; lengthDiff: 0; padLength: 0
-			// ═════╠
-			// <-->1║ [non-empty hints] size: 1; lengthDiff: 2; padLength: 4
-			// ═════╠
-			// <--->║ [empty hints]     size: 0; lengthDiff: 3; padLength: 5
-			// ═════╠
-			//
-			// The pad length calculation can be generalized to 2 * lengthDiff,
-			// except when the hints are empty, in which case it is (2 * lengthDiff) - 1.
-			// All of this gives the statement above.
-
-			// A potential problem with the above is when maxHintLength is 0, which would give -1 for padLength.
-			// However, in such a case, lengthDiff is always 0 (unless something has gone horrribly wrong),
-			// and thus this whole block has been ignored.
-
-			s += pad(padLength, " ");
-		}
-
-		// Concatenate contents of the hint sequence.
-		s += StringTools::iterableToString(hints);
 		return s;
 	}
 }
