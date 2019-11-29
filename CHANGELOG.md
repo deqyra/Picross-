@@ -54,13 +54,17 @@ Now with an iterative solver.
 **Main additions:**
 
 - `isSolved`, `undo` and `hintCoherence` shell commands (available through the `Modify grid` option of the grid manipulation menu)
+- Upgraded `hints` shell command
 - More tests and comments
   
 **Bug fixes:**
 
 - XML deserializer now accepts XML grids with no content
 - Text formatter now properly renders grids with no vertical or horizontal hints
+- Text formatter now properly renders grids with hints of any character width
 - Failproof exception handling
+- Tests don't fail to compile anymore with MinGW
+- Windows console now prints all characters properly
 
 **Planned for next release:**
 
