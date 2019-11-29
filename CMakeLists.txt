@@ -45,7 +45,7 @@
                         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources ./resources )
 
 # Header configuration variables
-    set( PROJECT_VERSION "1.0" )
+    set( PROJECT_VERSION "1.1" )
     set( PROJECT_NAME "PICROSS ENGINE" )
 
     # Copyright notice generation
