@@ -96,7 +96,7 @@ Cleanup & enhancement:
         ✔ Make sure all polymorphically derived classes have a virtual destructor
         ✔ Reorganize all kinds of utils in the "tools" folder
         ✔ Ensure all argument copies are compiler-made when needed
-        ☐ Also ensure heavy objects are otherwise passed as const references
+        ✔ Also ensure heavy objects are otherwise passed as const references
         ☐ User wiki on GitHub
         ☐ Tech wiki on GitHub (?)
         ✔ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
@@ -105,14 +105,14 @@ Cleanup & enhancement:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)
         ✔ Cross-platform handling of new lines (+ fix hardcoded \n's)
-        ☐ Make use of <algorithm>, <functional>, lambdas, etc where possible
+        ✔ Make use of <algorithm>, <functional>, lambdas, etc where possible
         ✔ Tests for CLI stuff
         ✔ Tests for shell stuff
         ☐ Tests for generic shell
         ☐ Tests for lambda maker
         ☐ Have Windows print UTF8 characters properly
         ✔ Ensure consistency of stream usage (err for exception printing only)
-        ✔ Refactor `hints` shell command into subcommands
+        ✔ Refactor `hints` shell command into subroutines
         ✔ Make CLI-related stuff its own library, with custom templated state et al
         ✔ Aliase templates where appropriate (shorten CLI* names)
         ✔ Have exhaustive #includes in all files
@@ -122,7 +122,7 @@ Cleanup & enhancement:
 Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
     ✔ Grid text formatting with hints fails when either directional hints are all empty
-    ☐ Grid text formatting with hints doesn't properly handle display of 2-digit hints
+    ✔ Grid text formatting with hints doesn't properly handle display of 2-digit hints
     ✔ XML grid serializer fails to read grid with no cells
     ✔ Exceptions in the shell are only caught at main menu level
     ✔ Horizontal empty hints get an extra space upon being text-formatted

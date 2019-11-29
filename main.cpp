@@ -28,11 +28,19 @@ using PicrossMenuCommand = MenuCommand<PicrossCLIState>;
 using PicrossCommandSequence = CommandSequence<PicrossCLIState>;
 using PicrossCLIMenu = CLIMenu<PicrossCLIState>;
 
+#ifdef _WIN32
+	#include <windows.h>
+#endif
+
 // Build CLI app structure and run it.
 void runCLIApp();
 
 int main(int argc, char** argv)
 {
+	#ifdef _WIN32
+		SetConsoleOutputCP(65001);
+	#endif
+
 	runCLIApp();
 	return 0;
 }
