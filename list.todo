@@ -76,8 +76,6 @@ User interaction:
                     ☐ $ isSolved                                # Tells whether the grid is solved in its current state
                     ☐ $ hintCoherence                           # Tells whether the hints of the grid are coherent in their current state
                     ✔ $ exit                                    # Exit
-    Shell toolkit:
-        ☐ Think about it
 Solving:
     ✔ Generic solver
     ☐ Iterative solver

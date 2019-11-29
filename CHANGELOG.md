@@ -49,12 +49,11 @@ This is done through displaying a shell to the user, who can then input commands
 
 # [PicrossEngine v1.1](https://github.com/deqyra/PicrossEngine/releases/tag/v1.1)
 
-Now with an iterative solver.  
+Some bug fixes as well as a whole lot of general code enhancement.  
 
 **Main additions:**
 
-- `isSolved`, `undo` and `hintCoherence` shell commands (available through the `Modify grid` option of the grid manipulation menu)
-- Upgraded `hints` shell command
+- Upgraded `hints` shell command: grid hints can now be reset and otherwise manipulated in a bunch of ways
 - More tests and comments
   
 **Bug fixes:**
@@ -69,3 +68,4 @@ Now with an iterative solver.
 **Planned for next release:**
 
 - Iterative solver
+- Ease-of-life improvements to the CLI menus and grid modification shell

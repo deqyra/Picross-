@@ -11,7 +11,6 @@ A small CLI program aiming at allowing the user to create picross (nonogram) gri
 - ✔ Save/load XML games  
 - ✔ CLI display capabilities  
 - ✔ Interactive CLI app  
-- ☐ Shell toolkit kind of thing  
 - ☐ Iterative solver  
 - ☐ Inferring solver  
 
@@ -63,20 +62,10 @@ Not investigated yet.
 
 Open the MinGW installation manager and install packages `mingw32-libmingwex-*`.
 
-#### Tests fail on Windows with MinGW
-
-This has not yet been investigated. It does not keep you from using the executable.
-
 #### Windows executable produced with MinGW displays an error dialog
 
 "The procedure entry point ... could not be located in the dynamic link library ..."  
 Copy `C:\MinGW\bin\libstdc++-6.dll` (or similar) into the same folder as the executable. If you don't have it, one is provided in the [v1.0 release](https://github.com/deqyra/PicrossEngine/releases/tag/v1.0).
-
-#### Displaying a grid in the Windows console prints gibberish
-
-This is because the Windows console, unlike most systems, is not simply a file which you can write a stream of bytes to. Instead, it is a special device that requires special API calls. Characters that are over 1-byte-wide get "split" between API calls and the end result is that gibberish.  
-Although I don't want to meddle too much with platform-specific code, I will try to find a solution at some point.  
-As a temporary workaround, you can use a [WSL system](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to compile the project for Unix and run it from there.
 
 **If you encounter an issue that is not filed here, please open an issue and I will have a look.  
 If you have a solution, please edit this README and open a pull request with your changes.**
