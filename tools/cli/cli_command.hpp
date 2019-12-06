@@ -25,7 +25,7 @@ CLICommand<CustomState>::~CLICommand()
 }
 
 // Command exit codes
-inline static const int COMMAND_SUCCESS = 0;
-inline static const int COMMAND_FAILURE = -1;
+inline static const int CLI_COMMAND_SUCCESS = 0;
+inline static const int CLI_COMMAND_FAILURE = -1;
 
 #endif//TOOLS__CLI__CLI_COMMAND_HPP

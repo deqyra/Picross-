@@ -69,7 +69,7 @@ namespace Picross
         // Retrieve modified grid.
         cliState = shellStateToCLIState(shellState);
 
-        return COMMAND_SUCCESS;
+        return CLI_COMMAND_SUCCESS;
     }
 
     PicrossCLIState CLIModifyGridCommand::shellStateToCLIState(PicrossShellState& shellState)

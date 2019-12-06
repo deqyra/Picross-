@@ -71,11 +71,11 @@ int CommandSequence<CustomState>::run(CustomState& state, CLIStreams& streams)
             streams.err() << "Exception thrown:\n";
             streams.err() << e.what() << '\n';
             streams.out() << "Command sequence \"" + _tooltip + "\" aborted." << std::endl;
-            return COMMAND_FAILURE;
+            return CLI_COMMAND_FAILURE;
         }
 
         // If the command failed (but didn't throw)...
-        if (status != COMMAND_SUCCESS)
+        if (status != CLI_COMMAND_SUCCESS)
         {
             // Log error and return prematurely.
             streams.out() << "Command \"" + (*it)->getTooltip() + "\" returned with value " + std::to_string(status) + "\n";
@@ -84,7 +84,7 @@ int CommandSequence<CustomState>::run(CustomState& state, CLIStreams& streams)
         }
     }
 
-    return COMMAND_SUCCESS;
+    return CLI_COMMAND_SUCCESS;
 }
 
 #endif//TOOLS__CLI__COMMAND_SEQUENCE_HPP

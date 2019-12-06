@@ -48,7 +48,7 @@ template<typename CustomState>
 int MenuCommand<CustomState>::run(CustomState& state, CLIStreams& streams)
 {
     _innerMenu.show(state, streams);
-    return COMMAND_SUCCESS;
+    return CLI_COMMAND_SUCCESS;
 }
 
 #endif//TOOLS__CLI__MENU_COMMAND_HPP

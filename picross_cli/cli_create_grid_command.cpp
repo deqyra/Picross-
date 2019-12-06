@@ -50,7 +50,7 @@ namespace Picross
             // Create the grid.
             state.grid() = Grid(width, height, hHints, vHints);
             streams.out() << "Grid creation successful." << std::endl;
-            return COMMAND_SUCCESS;
+            return CLI_COMMAND_SUCCESS;
         }
         catch(const std::exception& e)
         {
@@ -59,7 +59,7 @@ namespace Picross
             streams.err() << e.what() << '\n';
             streams.out() << "Grid could not be created." << std::endl;
 
-            return COMMAND_FAILURE;
+            return CLI_COMMAND_FAILURE;
         }
     }
 

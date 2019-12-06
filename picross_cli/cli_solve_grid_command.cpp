@@ -43,12 +43,12 @@ namespace Picross
             // In case of exit, return immediately.
             if (input == 0)
             {
-                return COMMAND_SUCCESS;
+                return CLI_COMMAND_SUCCESS;
             }
 
             // Otherwise, solve.
             bool result = handleSolving(solvers[input], state, streams);
-            return result ? COMMAND_SUCCESS : COMMAND_FAILURE;            
+            return result ? CLI_COMMAND_SUCCESCLI_COMMAND_FAILURELURE;            
         }
         else
         {
@@ -56,7 +56,7 @@ namespace Picross
             streams.out() << "No solvers available!" << std::endl;
         }
 
-        return COMMAND_SUCCESS;
+        return CLI_COMMAND_SUCCESS;
     }
 
     void CLISolveCommand::showSolvers(std::vector<CLISolveCommand::SolverPtr>& solvers, CLIStreams& streams)

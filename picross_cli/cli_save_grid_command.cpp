@@ -39,7 +39,7 @@ namespace Picross
             writer.saveGridToFile(state.grid(), path);
             streams.out() << "Grid successfully saved." << std::endl;
 
-            return COMMAND_SUCCESS;
+            return CLI_COMMAND_SUCCESS;
         }
         catch(const std::exception& e)
         {
@@ -48,7 +48,7 @@ namespace Picross
             streams.err() << e.what() << '\n';
             streams.out() << "Grid could not be saved." << std::endl;
 
-            return COMMAND_FAILURE;
+            return CLI_COMMAND_FAILURE;
         }
     }
 }
