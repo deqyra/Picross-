@@ -16,6 +16,7 @@
 #include "../picross_shell/shell_display_command.hpp"
 #include "../picross_shell/shell_hints_command.hpp"
 #include "../picross_shell/shell_is_solved_command.hpp"
+#include "../picross_shell/shell_hint_coherence_command.hpp"
 #include "../picross_shell/shell_exit_command.hpp"
 
 #include <string>
@@ -102,6 +103,7 @@ namespace Picross
         shell.addCommand(std::make_shared<ShellDisplayCommand>());
         shell.addCommand(std::make_shared<ShellHintsCommand>());
         shell.addCommand(std::make_shared<ShellIsSolvedCommand>());
+        shell.addCommand(std::make_shared<ShellHintCoherenceCommand>());
         shell.setExitCommand(std::make_shared<ShellExitCommand>());
         return shell;
     }

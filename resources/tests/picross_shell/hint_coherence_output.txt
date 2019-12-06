@@ -1,0 +1,2 @@
+true
+false: sum of row hints is 28, sum of column hints is 29.

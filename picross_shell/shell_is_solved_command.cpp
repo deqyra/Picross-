@@ -32,7 +32,7 @@ namespace Picross
             return SHELL_COMMAND_BAD_ARGUMENTS;
         }
 
-        // Revert changes on the working grid.
+        // Display the solved state of the grid.
         streams.out() << (state.workingGrid().isSolved() ? "true" : "false") << std::endl;
         return SHELL_COMMAND_SUCCESS;
     }

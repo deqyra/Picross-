@@ -73,7 +73,7 @@ User interaction:
                     ✔ $ commit                                  # Write changes to current grid
                     ✔ $ rollback                                # Discard changes and revert state back to last saved grid
                     ☐ $ undo                                    # Undo the last change on the grid
-                    ☐ $ isSolved                                # Tells whether the grid is solved in its current state
+                    ✔ $ isSolved                                # Tells whether the grid is solved in its current state
                     ☐ $ hintCoherence                           # Tells whether the hints of the grid are coherent in their current state
                     ✔ $ exit                                    # Exit
 Solving:
