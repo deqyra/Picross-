@@ -41,7 +41,7 @@ class MicroShell
 
     // Command chain manipulation methods
         void clearCommands();
-        void addCommand(CommandPtr command, int index = -1);
+        void addCommand(CommandPtr command);
         void removeCommand(int index);
         void removeCommand(const std::string& name);
         void setExitCommand(CommandPtr command);
@@ -78,7 +78,7 @@ MicroShell<CustomState>::MicroShell() :
 }
 
 template<typename CustomState>
-void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr command, int index)
+void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr command)
 {
     // Do not accept several commands with the same name, nor any command named 'exit' or 'help'.
     if (hasCommand(command->name()) || command->name() == EXIT_KEYWORD || command->name() == HELP_KEYWORD)
@@ -87,21 +87,7 @@ void MicroShell<CustomState>::addCommand(MicroShell<CustomState>::CommandPtr com
         throw std::invalid_argument(s.c_str());
     }
 
-    // If index is -1 (default), insert new command at the back.
-    if (index == - 1)
-    {
-        _chain.push_back(command);
-    }
-    else
-    {
-        // Else try to insert at given index.
-        if (_chain.begin() + index >= _chain.end())
-        {
-            std::string s = "MicroShell<" + std::to_string(typeid(CustomState).name()) + ">: Index " + std::to_string(index) + " is out of bounds, cannot add command.";
-            throw IndexOutOfBoundsError(s);
-        }
-        _chain.insert(_chain.begin() + index, command);
-    }
+    _chain.push_back(command);
 }
 
 template<typename CustomState>
@@ -229,7 +215,6 @@ int MicroShell<CustomState>::processInput(const std::string& input, CustomState&
         // Otherwise, display an informative list of commands.
         else
         {
-
             streams.out() << globalHelpString() << std::endl;
         }
 
@@ -262,7 +247,7 @@ int MicroShell<CustomState>::processInput(const std::string& input, CustomState&
         streams.err() << e.what() << '\n';
         streams.out() << "Warning shell state may be corrupted.\n";
         streams.out() << "Resuming normally..." << std::endl;
-        return COMMAND_FAILURE;
+        return SHELL_COMMAND_FAILURE;
     }    
 }
 
