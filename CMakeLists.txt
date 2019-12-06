@@ -177,6 +177,7 @@
                                         tests/picross_cli/test_load_grid_command.cpp
                                         tests/picross_cli/test_save_grid_command.cpp
                                         tests/picross_cli/test_modify_grid_command.cpp
+                                        tests/picross_cli/test_display_grid_command.cpp
                                         tests/picross_shell/test_commit_command.cpp
                                         tests/picross_shell/test_display_command.cpp
                                         tests/picross_shell/test_rollback_command.cpp
