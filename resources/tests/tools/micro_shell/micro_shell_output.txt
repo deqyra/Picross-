@@ -7,6 +7,6 @@ $ 'TestShellCommand1' help:
 TestShellCommand1: no arguments expected.
 $ 'TestShellCommand2' help:
 TestShellCommand2: no arguments expected.
-$ TestCommand1 was run.
+$ TestShellCommand1 was run.
 $ TestShellCommand2 was run.
 $ TestShellExitCommand was run.

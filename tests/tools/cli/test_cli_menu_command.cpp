@@ -20,8 +20,8 @@ TEST_CASE("MenuCommand end-to-end", TAGS)
     CLIStreams s = CLIStreams(f, ss, ss);
     TestCLIState state = TestCLIState();
 
-    TestMenu menu = makeBasicTestMenu();
-    TestMenuCommand menuCommand = TestMenuCommand(menu);
+    TestCLIMenu menu = makeBasicTestMenu();
+    TestCLIMenuCommand menuCommand = TestCLIMenuCommand(menu);
     menuCommand.run(state, s);
 
     std::string expected = StringTools::readFileIntoString("resources/tests/tools/cli/menu_output.txt");

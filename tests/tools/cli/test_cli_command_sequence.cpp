@@ -20,13 +20,13 @@ TEST_CASE("CommandSequence end-to-end", TAGS)
     CLIStreams s = CLIStreams(f, ss, ss);
     TestCLIState state = TestCLIState();
 
-    TestCommandSequence commandSequence = makeBasicTestCommandSequence();
+    TestCLICommandSequence commandSequence = makeBasicTestCommandSequence();
 
     commandSequence.run(state, s);
 
     std::string expected = StringTools::readFileIntoString("resources/tests/tools/cli/menu_output.txt");
-    expected += "TestCommand1 was run.\n"
-                "TestCommand2 was run.\n";
+    expected += "TestCLICommand1 was run.\n"
+                "TestCLICommand2 was run.\n";
 
     std::string str = ss.str();
 

@@ -22,7 +22,7 @@ class TestShellCommand1 : public TestShellCommand
         virtual std::string help() {return "TestShellCommand1: no arguments expected.";}
         virtual int processInput(const std::string& command, TestShellState& state, CLIStreams& streams = CLIInput::defaultStreams)
         {
-            streams.out() << "TestCommand1 was run.\n";
+            streams.out() << "TestShellCommand1 was run.\n";
             return SHELL_COMMAND_SUCCESS;
         }
 };

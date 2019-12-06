@@ -7,25 +7,25 @@
 #include "../../../tools/cli/menu_command.hpp"
 #include "../../../tools/cli/command_sequence.hpp"
 
-TestMenu makeBasicTestMenu()
+TestCLIMenu makeBasicTestMenu()
 {
-    std::vector<TestCommandPtr> commands = {
-        std::make_shared<TestCommand1>(),
-        std::make_shared<TestCommand2>()
+    std::vector<TestCLICommandPtr> commands = {
+        std::make_shared<TestCLICommand1>(),
+        std::make_shared<TestCLICommand2>()
     };
 
-    return TestMenu(commands, "Test menu", "Exit", std::make_shared<TestExitCommand>());
+    return TestCLIMenu(commands, "Test menu", "Exit", std::make_shared<TestCLIExitCommand>());
 }
 
-TestCommandSequence makeBasicTestCommandSequence()
+TestCLICommandSequence makeBasicTestCommandSequence()
 {
-    TestMenu testMenu = makeBasicTestMenu();
+    TestCLIMenu testMenu = makeBasicTestMenu();
     
-    std::vector<TestCommandPtr> sequenceCommands = {
-        std::make_shared<TestMenuCommand>(testMenu),
-        std::make_shared<TestCommand1>(),
-        std::make_shared<TestCommand2>()
+    std::vector<TestCLICommandPtr> sequenceCommands = {
+        std::make_shared<TestCLIMenuCommand>(testMenu),
+        std::make_shared<TestCLICommand1>(),
+        std::make_shared<TestCLICommand2>()
     };
 
-    return TestCommandSequence(sequenceCommands, "Test sequence");
+    return TestCLICommandSequence(sequenceCommands, "Test sequence");
 }

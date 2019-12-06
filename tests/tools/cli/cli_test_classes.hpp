@@ -10,40 +10,40 @@
 
 class TestCLIState {};
 
-using TestMenu = CLIMenu<TestCLIState>;
-using TestCommand = CLICommand<TestCLIState>;
-using TestCommandPtr = std::shared_ptr<TestCommand>;
-using TestMenuCommand = MenuCommand<TestCLIState>;
-using TestCommandSequence = CommandSequence<TestCLIState>;
+using TestCLIMenu = CLIMenu<TestCLIState>;
+using TestCLICommand = CLICommand<TestCLIState>;
+using TestCLICommandPtr = std::shared_ptr<TestCLICommand>;
+using TestCLIMenuCommand = MenuCommand<TestCLIState>;
+using TestCLICommandSequence = CommandSequence<TestCLIState>;
 
-class TestCommand1 : public TestCommand
+class TestCLICommand1 : public TestCLICommand
 {
     public:
-        TestCommand1() : TestCommand() {}
-        virtual std::string getTooltip() {return "TestCommand1";}
+        TestCLICommand1() : TestCLICommand() {}
+        virtual std::string getTooltip() {return "TestCLICommand1";}
         virtual int run(TestCLIState& state, CLIStreams& streams)
         {
-            streams.out() << "TestCommand1 was run.\n";
+            streams.out() << "TestCLICommand1 was run.\n";
             return 0;
         }
 };
 
-class TestCommand2 : public TestCommand
+class TestCLICommand2 : public TestCLICommand
 {
     public:
-        TestCommand2() : TestCommand() {}
-        virtual std::string getTooltip() {return "TestCommand2";}
+        TestCLICommand2() : TestCLICommand() {}
+        virtual std::string getTooltip() {return "TestCLICommand2";}
         virtual int run(TestCLIState& state, CLIStreams& streams)
         {
-            streams.out() << "TestCommand2 was run.\n";
+            streams.out() << "TestCLICommand2 was run.\n";
             return 0;
         }
 };
 
-class TestExitCommand : public TestCommand
+class TestCLIExitCommand : public TestCLICommand
 {
     public:
-        TestExitCommand() : TestCommand() {}
+        TestCLIExitCommand() : TestCLICommand() {}
         virtual std::string getTooltip() {return "Exit";}
         virtual int run(TestCLIState& state, CLIStreams& streams)
         {
@@ -52,7 +52,7 @@ class TestExitCommand : public TestCommand
         }
 };
 
-TestMenu makeBasicTestMenu();
-TestCommandSequence makeBasicTestCommandSequence();
+TestCLIMenu makeBasicTestMenu();
+TestCLICommandSequence makeBasicTestCommandSequence();
 
 #endif//TESTS__TOOLS__CLI__CLI_TEST_CLASSES_HPP
