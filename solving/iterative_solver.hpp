@@ -2,9 +2,11 @@
 #define SOLVING__ITERATIVE_SOLVER_HPP
 
 #include <string>
+#include <vector>
 
 #include "solver.hpp"
 #include "../core/grid.hpp"
+#include "../core/cell_t.hpp"
 
 namespace Picross
 {

@@ -39,6 +39,8 @@ namespace Picross
 			cell_t getCell(int row, int col) const;
 			void setCell(int row, int col, cell_t val);
 			void setCellRange(int i0, int in, int j0, int jn, cell_t val);
+			void setRow(int row, std::vector<cell_t> array);
+			void setCol(int col, std::vector<cell_t> array);
 			void checkCell(int row, int col);
 			void crossCell(int row, int col);
 			void clearCell(int row, int col);

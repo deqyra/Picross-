@@ -10,6 +10,7 @@
 #include "exceptions/invalid_grid_hints_error.hpp"
 #include "../tools/exceptions/index_out_of_bounds_error.hpp"
 #include "../tools/iterable_tools.hpp"
+#include "../tools/exceptions/unmatched_array_size_error.hpp"
 
 namespace Picross
 {
@@ -192,6 +193,57 @@ namespace Picross
 			}
 		}
 	}
+
+	void Grid::setRow(int row, std::vector<cell_t> array)
+	{
+		// Auto-throw on invalid row index.
+		isValidRow(row, true);
+
+		// Check length of provided array.
+		if (array.size() != _width)
+		{
+			std::string s = "setRow: passed array has size " + std::to_string(array.size()) + " but grid has width " + std::to_string(_width) + ".";
+			throw UnmatchedArraySizeError(s);
+		}
+
+		for (int i = 0; i  < array.size(); i++)
+		{
+			// Auto-throw on invalid cell value.
+			isValidCellValue(array[i], true);
+		}
+
+		// Copy all cell values into row.
+		for (int i; i < _width; i++)
+		{
+			setCell(row, i, array[i]);
+		}
+	}
+
+	void Grid::setCol(int col, std::vector<cell_t> array)
+	{
+		// Auto-throw on invalid col index.
+		isValidCol(col, true);
+
+		// Check length of provided array.
+		if (array.size() != _height)
+		{
+			std::string s = "setCol: passed array has size " + std::to_string(array.size()) + " but grid has height " + std::to_string(_height) + ".";
+			throw UnmatchedArraySizeError(s);
+		}
+
+		for (int i = 0; i  < array.size(); i++)
+		{
+			// Auto-throw on invalid cell value.
+			isValidCellValue(array[i], true);
+		}
+
+		// Copy all cell values into col.
+		for (int i; i < _height; i++)
+		{
+			setCell(i, col, array[i]);
+		}
+	}
+
 
 	void Grid::checkCell(int row, int col)
 	{
