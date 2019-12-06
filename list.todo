@@ -60,7 +60,7 @@ User interaction:
                 -> copy grid and solve copy
                 -> display solved grid
                 -> ask to save in current state
-            ☐ Display grid command
+            ✔ Display grid command
             ✔ Modify grid command
                 Micro shell interpreting subcommands:
                     ✔ $ check <x> <y>                           # Check cell at coordinates (x;y)
