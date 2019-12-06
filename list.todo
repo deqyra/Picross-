@@ -116,8 +116,8 @@ Cleanup & enhancement:
         ✔ Tests for shell stuff
         ✔ Have Windows print UTF8 characters properly
         ✔ Fix Catch2 for MinGW
-        ☐ Tests for generic shell
-        ☐ Tests for lambda maker
+        ✔ Tests for generic shell
+        ✔ Tests for lambda maker
         ☐ Investigate MSYS makefiles failing to run
 Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)

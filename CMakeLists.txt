@@ -192,6 +192,7 @@
                                         tests/tools/cli/test_cli_command_sequence.cpp
                                         tests/tools/test_string_tools.cpp
                                         tests/tools/test_iterable_tools.cpp
+                                        tests/tools/test_lambda_maker.cpp
                                         tests/tools/micro_shell/test_micro_shell.cpp    tests/tools/micro_shell/shell_test_classes.hpp
                                         tests/generate_static_grids.cpp                 tests/generate_static_grids.hpp
                                         tests/io/test_xml_grid_serializer.cpp
