@@ -24,7 +24,7 @@ namespace Picross
         return "Display grid";
     }
 
-    int CLIDisplayGridCommand::run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams)
+    int CLIDisplayGridCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
         TextGridFormatter txt = TextGridFormatter();
         streams.out() << txt.renderGridWithHints(state.grid());

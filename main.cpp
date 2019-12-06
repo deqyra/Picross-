@@ -8,6 +8,7 @@
 #include "tools/cli/menu_command.hpp"
 #include "picross_cli/picross_cli_state.hpp"
 #include "picross_cli/cli_create_grid_command.hpp"
+#include "picross_cli/cli_display_grid_command.hpp"
 #include "picross_cli/cli_load_grid_command.hpp"
 #include "picross_cli/cli_solve_grid_command.hpp"
 #include "picross_cli/cli_save_grid_command.hpp"
@@ -20,6 +21,7 @@ using Picross::CLISolveCommand;
 using Picross::CLIModifyGridCommand;
 using Picross::CLISaveGridCommand;
 using Picross::CLILoadGridCommand;
+using Picross::CLIDisplayGridCommand;
 using Picross::CLICreateGridCommand;
 
 using PicrossCLICommand = CLICommand<PicrossCLIState>;
@@ -49,8 +51,9 @@ void runCLIApp()
 {
 	// Commands available from the "Manipulate grid" menu:
 	std::vector<PicrossCommandPtr> manipulateGridMenuCommands = {
-		std::make_shared<CLISolveCommand>(),						// Attempt to solve the grid using a solver
+		std::make_shared<CLIDisplayGridCommand>(),					// Display the grid
 		std::make_shared<CLIModifyGridCommand>(),					// Modify the grid manually
+		std::make_shared<CLISolveCommand>(),						// Attempt to solve the grid using a solver
 		std::make_shared<CLISaveGridCommand>()						// Save the grid to disk
 	};
 

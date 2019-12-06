@@ -48,7 +48,7 @@ namespace Picross
 
             // Otherwise, solve.
             bool result = handleSolving(solvers[input], state, streams);
-            return result ? CLI_COMMAND_SUCCESCLI_COMMAND_FAILURELURE;            
+            return result ? CLI_COMMAND_SUCCESS : CLI_COMMAND_FAILURE;            
         }
         else
         {

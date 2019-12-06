@@ -125,6 +125,7 @@
         add_library( ${CLI_LIB_NAME} ${STATIC_OR_SHARED}
                     picross_cli/picross_cli_state.cpp           picross_cli/picross_cli_state.hpp
                     picross_cli/cli_create_grid_command.cpp     picross_cli/cli_create_grid_command.hpp
+                    picross_cli/cli_display_grid_command.cpp     picross_cli/cli_display_grid_command.hpp
                     picross_cli/cli_load_grid_command.cpp       picross_cli/cli_load_grid_command.hpp
                     picross_cli/cli_save_grid_command.cpp       picross_cli/cli_save_grid_command.hpp
                     picross_cli/cli_modify_grid_command.cpp     picross_cli/cli_modify_grid_command.hpp
