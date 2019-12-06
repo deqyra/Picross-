@@ -147,6 +147,7 @@
                     picross_shell/shell_check_command.cpp       picross_shell/shell_check_command.hpp
                     picross_shell/shell_cross_command.cpp       picross_shell/shell_cross_command.hpp
                     picross_shell/shell_clear_command.cpp       picross_shell/shell_clear_command.hpp
+                    picross_shell/shell_is_solved_command.cpp   picross_shell/shell_is_solved_command.hpp
                     picross_shell/picross_shell_state.cpp       picross_shell/picross_shell_state.hpp
                     picross_shell/cell_manip_for_commands.cpp   picross_shell/cell_manip_for_commands.hpp )
         target_link_libraries( ${SHELL_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} ${IO_LIB_NAME} )
@@ -185,6 +186,7 @@
                                         tests/picross_shell/test_check_command.cpp
                                         tests/picross_shell/test_cross_command.cpp
                                         tests/picross_shell/test_clear_command.cpp
+                                        tests/picross_shell/test_is_solved_command.cpp
                                         tests/picross_shell/test_exit_command.cpp
                                         tests/tools/cli/test_cli_input.cpp
                                         tests/tools/cli/test_cli_streams.cpp
