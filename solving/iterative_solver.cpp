@@ -52,6 +52,6 @@ namespace Picross
 
     std::vector<cell_t> solveArray(std::vector<cell_t> array, std::vector<int> hints)
     {
-
+        
     }
 }

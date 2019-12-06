@@ -9,6 +9,7 @@
 #include "../../core/exceptions/invalid_grid_hints_error.hpp"
 #include "../../core/exceptions/invalid_cell_value_error.hpp"
 #include "../../tools/exceptions/index_out_of_bounds_error.hpp"
+#include "../../tools/exceptions/unmatched_array_size_error.hpp"
 #include "../../io/xml_grid_serializer.hpp"
 
 #define TAGS "[core][grid]"
@@ -151,6 +152,26 @@ namespace Picross
                     REQUIRE(g.getCell(i, j) == CELL_CHECKED);
                 }
             }
+        }
+
+        SECTION("Row and col setter")
+        {
+            std::vector<cell_t> values = {
+                CELL_CHECKED,
+                CELL_CLEARED,
+                CELL_CROSSED,
+                CELL_CHECKED,
+                CELL_CLEARED
+            };
+
+            g.setRow(0, values);
+            REQUIRE(g.getRow(0) == values);
+
+            g.setCol(0, values);
+            REQUIRE(g.getCol(0) == values);
+
+            values.push_back(CELL_CROSSED);
+            REQUIRE_THROWS_AS(g.setCol(0, values), UnmatchedArraySizeError);
         }
     }
 
