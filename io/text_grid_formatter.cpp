@@ -12,17 +12,7 @@
 namespace Picross
 {
 	TextGridFormatter::TextGridFormatter() :
-		_checkedChar(_defaultCheckedChar),
-		_clearedChar(_defaultClearedChar),
-		_crossedChar(_defaultCrossedChar)
-	{
-
-	}
-
-	TextGridFormatter::TextGridFormatter(std::string checkedChar, std::string emptyChar, std::string crossedChar) :
-		_checkedChar(checkedChar),
-		_clearedChar(emptyChar),
-		_crossedChar(crossedChar)
+		_dislayStrings(CELL_T_ORDERED_STRINGS)
 	{
 
 	}
@@ -107,82 +97,31 @@ namespace Picross
 
 	std::string TextGridFormatter::getCharacter(cell_t cellContent)
 	{
+		// Auto-throw if value is invalid.
+		isValidCellValue(cellContent, true);
 		// Return the character used to represent a particular state in a cell.
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				return _checkedChar;
-				break;
-			case CELL_CLEARED:
-				return _clearedChar;
-				break;
-			case CELL_CROSSED:
-				return _crossedChar;
-				break;
-			default:
-				// Auto throw if character is not valid.
-				isValidCellValue(cellContent, true);
-				// Otherwise the cell state might just not be recognized.
-				std::string s = "TextGridFormatter: unhandled cell value: " + cellValueToString(cellContent) + ".\n";
-				throw UnrecognizedCellValueError(s);
-		}
+		return _dislayStrings[cellContent];
 	}
 
 	void TextGridFormatter::setCharacter(cell_t cellContent, std::string newChar)
 	{
-		if (newChar.length() != 1)
-		{
-			std::string s = "TextGridFormatter replacement characters must be 1 in length, cannot accept \"" + newChar + "\".\n";
-			throw UnrecognizedCellValueError(s);
-		}
-		
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				_checkedChar = newChar;
-				break;
-			case CELL_CLEARED:
-				_clearedChar = newChar;
-				break;
-			case CELL_CROSSED:
-				_crossedChar = newChar;
-				break;
-			default:
-				// Auto throw if character is not valid.
-				isValidCellValue(cellContent, true);
-				// Otherwise the cell state might just not be recognized.
-				std::string s = "TextGridFormatter: unhandled cell value: " + cellValueToString(cellContent) + ".\n";
-				throw UnrecognizedCellValueError(s);
-		}
+		// Auto-throw if value is invalid.
+		isValidCellValue(cellContent, true);
+		// Set the character used to represent a particular state in a cell.
+		_dislayStrings[cellContent] = newChar;
 	}
 
 	void TextGridFormatter::resetCharacter(cell_t cellContent)
 	{
-		switch(cellContent)
-		{
-			case CELL_CHECKED:
-				_checkedChar = _defaultCheckedChar;
-				break;
-			case CELL_CLEARED:
-				_clearedChar = _defaultClearedChar;
-				break;
-			case CELL_CROSSED:
-				_crossedChar = _defaultCrossedChar;
-				break;
-			default:
-				// Auto throw if character is not valid.
-				isValidCellValue(cellContent, true);
-				// Otherwise the cell state might just not be recognized.
-				std::string s = "TextGridFormatter: unhandled cell value: " + cellValueToString(cellContent) + ".\n";
-				throw UnrecognizedCellValueError(s);
-		}
+		// Auto-throw if value is invalid.
+		isValidCellValue(cellContent, true);
+		// Reset the character used to represent a particular state in a cell.
+		_dislayStrings[cellContent] = CELL_T_ORDERED_STRINGS[cellContent];
 	}
 
 	void TextGridFormatter::resetAllCharacters()
 	{
-		_checkedChar = _defaultCheckedChar;
-		_clearedChar = _defaultClearedChar;
-		_crossedChar = _defaultCrossedChar;
+		_dislayStrings = CELL_T_ORDERED_STRINGS;
 	}
 
 	int TextGridFormatter::findCharWidthFromColHintSequences(const std::vector<std::vector<int>>& hintVectors)

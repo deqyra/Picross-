@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "../core/grid.hpp"
 #include "../core/cell_t.hpp"
@@ -31,17 +32,24 @@ namespace Picross
         while (!solved && !stalled)
         {
             // Iterate.
+            std::cout << "ITERATION:" << std::endl;
             for (int i = 0; i < grid.getHeight(); i++)
             {
+                std::cout << "    Row " << i << ":" << std::endl;
                 std::vector<cell_t> result = solveArray(grid.getRow(i), grid.getRowHints(i));
+                std::cout << "    " << StringTools::iterableToString(result, "|") << std::endl;
                 grid.setRow(i, result);
             }
 
             for (int j = 0; j < grid.getWidth(); j++)
             {
-                std::vector<cell_t> result = solveArray(grid.getCol(j), grid.getRowHints(j));
+                std::cout << "    Col " << j << ":" << std::endl;
+                std::vector<cell_t> result = solveArray(grid.getCol(j), grid.getColHints(j));
+                std::cout << "    " << StringTools::iterableToString(result, "|") << std::endl;
                 grid.setCol(j, result);
             }
+
+            std::cout << grid << std::endl << std::endl << std::endl << std::endl;
 
             // Update loop control.
             solved = grid.isSolved();
@@ -63,10 +71,23 @@ namespace Picross
             return std::vector<cell_t>(length, CELL_CROSSED);
         }
 
-        // Generate a new array to work on.
-        std::vector<cell_t> result = std::vector<cell_t>(length, CELL_CLEARED);
         // Calculate the difference between the minimum required space and the total length of the array.
         int diff = length - minSpace;
+        
+        // Generate a new array to work on.
+        std::vector<cell_t> result;
+        // If the hints fit exactly in the length of the array, then cells that are not checked are CROSSED.
+        if (minSpace == length)
+        {
+            result = std::vector<cell_t>(length, CELL_CROSSED);
+        }
+        // Otherwise they are simply empty.
+        else
+        {
+            result = std::vector<cell_t>(length, CELL_CLEARED);
+        }
+        
+        // The following algorithm works when the hints fit exactly as well as when they don't.
 
         // Skip the first `diff` cells, at it is an area of uncertainty.
         // Set the beginning index at the cell after the first `diff` ones.
@@ -86,7 +107,7 @@ namespace Picross
             index += nCheck;
 
             // `diff` + 1 cells need to be skipped before the next hints, just update the index.
-            index = diff + 1;
+            index += diff + 1;
         }
 
         // Note: all of the above operation could be considered risky, as the index value is never checked on before being used.

@@ -11,6 +11,7 @@
 #include "../tools/exceptions/index_out_of_bounds_error.hpp"
 #include "../tools/iterable_tools.hpp"
 #include "../tools/exceptions/unmatched_array_size_error.hpp"
+#include "../io/text_grid_formatter.hpp"
 
 namespace Picross
 {
@@ -494,4 +495,12 @@ namespace Picross
 	{
 		return !(lhs == rhs);
 	}
+}
+
+std::ostream& operator<<(std::ostream& os, Picross::Grid const& grid)
+{
+    // Print the input grid with hints.
+    Picross::TextGridFormatter txt = Picross::TextGridFormatter();
+    os << txt.renderGridWithHints(grid);
+    return os;
 }

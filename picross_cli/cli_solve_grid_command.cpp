@@ -48,7 +48,7 @@ namespace Picross
             }
 
             // Otherwise, solve.
-            bool result = handleSolving(solvers[input], state, streams);
+            bool result = handleSolving(solvers[input - 1], state, streams);
             return result ? CLI_COMMAND_SUCCESS : CLI_COMMAND_FAILURE;            
         }
         else
@@ -89,6 +89,8 @@ namespace Picross
         try
         {
             solver->solve(grid);
+            TextGridFormatter formatter;
+            streams.out() << formatter.renderGridWithHints(grid, true);
         }
         catch (const std::exception& e)
         {

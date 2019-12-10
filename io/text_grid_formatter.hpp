@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <array>
 
 // Grid display characters
 #define TOP_LEFT_CHAR (std::string)"╔"
@@ -26,17 +27,10 @@ namespace Picross
 	{
 		private:	// Attributes
 		// Cell display characters
-			inline static const std::string _defaultCheckedChar = "■";
-			inline static const std::string _defaultClearedChar = " ";
-			inline static const std::string _defaultCrossedChar = "×";
-
-			std::string _checkedChar;
-			std::string _clearedChar;
-			std::string _crossedChar;
+			std::array<std::string, CELL_T_VALUE_COUNT> _dislayStrings;
 
 		public:		// Public methods
 			TextGridFormatter();
-			TextGridFormatter(std::string checkedChar, std::string emptyChar, std::string crossedChar);
 
 		// Rendering
 			std::string renderGrid(const Grid& grid, bool emptyCrossedCells = false, int cellWidth = 1);

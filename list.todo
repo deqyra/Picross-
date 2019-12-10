@@ -99,6 +99,9 @@ Cleanup & enhancement:
         ☐ Tech wiki on GitHub (?)
         ✔ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
         ☐ Refactor all "informative error logging" in exception logging blocks
+        ☐ Include context where appriopriate in thrown exceptions
+        ☐ Replace constant size arrays with std::arrays
+        ☐ Have stdArray template parameters automatically deduced in test_cell_t.cpp
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)

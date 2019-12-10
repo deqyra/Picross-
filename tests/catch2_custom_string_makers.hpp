@@ -3,7 +3,6 @@
 
 #include "../lib/catch2/catch2.hpp"
 #include "../core/grid.hpp"
-#include "../io/grid_streams.hpp"
 
 namespace Catch
 {

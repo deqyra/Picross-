@@ -74,4 +74,7 @@ namespace Picross
 	};
 }
 
+// Allows feeding grids to std::ostreams.
+std::ostream& operator<<(std::ostream& os, Picross::Grid const& grid);
+
 #endif//CORE__GRID_HPP

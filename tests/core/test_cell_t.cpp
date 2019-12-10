@@ -12,7 +12,7 @@ namespace Picross
     {
         SECTION("Valid values")
         {
-            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
+            auto values = GENERATE(stdArray<cell_t, CELL_T_VALUE_COUNT>(CELL_T_ORDERED_VALUES));
             REQUIRE(isValidCellValue(values));
         }
 
@@ -28,7 +28,7 @@ namespace Picross
     {
         SECTION("Valid values")
         {
-            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
+            auto values = GENERATE(stdArray<cell_t, CELL_T_VALUE_COUNT>(CELL_T_ORDERED_VALUES));
 
             using Catch::Matchers::StartsWith;
             REQUIRE_THAT(cellValueName(values), StartsWith("CELL_"));
@@ -45,7 +45,7 @@ namespace Picross
     {
         SECTION("Valid values")
         {
-            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
+            auto values = GENERATE(stdArray<cell_t, CELL_T_VALUE_COUNT>(CELL_T_ORDERED_VALUES));
             REQUIRE_NOTHROW(cellValueToInt(values));
         }
 
@@ -60,14 +60,14 @@ namespace Picross
     {
         SECTION("Valid values")
         {
-            auto values = GENERATE(array(CELL_T_ORDERED_VALUES, CELL_T_VALUE_COUNT));
-            REQUIRE_NOTHROW(cellValueToString(values));
+            auto values = GENERATE(stdArray<cell_t, CELL_T_VALUE_COUNT>(CELL_T_ORDERED_VALUES));
+            REQUIRE_NOTHROW(cellNumericValueToString(values));
         }
 
         SECTION("Invalid values")
         {
             auto values = GENERATE(-1, CELL_T_VALUE_COUNT);
-            REQUIRE_NOTHROW(cellValueToString(values));
+            REQUIRE_NOTHROW(cellNumericValueToString(values));
         }
     }
 }
