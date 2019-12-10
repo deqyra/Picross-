@@ -18,7 +18,7 @@ namespace Picross
             virtual void solve(Grid& grid);
 
         private:
-            std::vector<cell_t> solveArray(std::vector<cell_t> array, std::vector<int> hints);
+            std::vector<cell_t> trivialArraySolving(std::vector<cell_t> array, std::vector<int> hints);
     };
 }
 

@@ -7,6 +7,7 @@
 #include "../core/grid.hpp"
 #include "../core/cell_t.hpp"
 #include "../core/utility.hpp"
+#include "exceptions/solving_error.hpp"
 
 namespace Picross
 {
@@ -24,32 +25,55 @@ namespace Picross
     {
         Grid lastState = grid;
 
+        //
+        // Start off with basic solving.
+        //
+        std::cout << "BASIC SOLVING ATTEMPT..." << std::endl;
+        
+        // First trivially solve the grid's rows.
+        for (int i = 0; i < grid.getHeight(); i++)
+        {
+            std::vector<cell_t> result = trivialArraySolving(grid.getRow(i), grid.getRowHints(i));
+            grid.setRow(i, result);
+        }
+        std::cout << "SOLVED ROWS:" << std::endl;
+
+        // Create a copy of the grid, and solve the grid's columns in it.
+        Grid colCopy = grid;
+        for (int j = 0; j < colCopy.getWidth(); j++)
+        {
+            std::vector<cell_t> result = trivialArraySolving(colCopy.getCol(j), colCopy.getColHints(j));
+            colCopy.setCol(j, result);
+        }
+        std::cout << "SOLVED ROWS:" << std::endl;
+
+        // Attempt to merge column solving result back into the main grid.
+        std::cout << "MERGED RESULTS:" << std::endl;
+        try
+        {
+            grid.merge(colCopy, true);
+        }
+        catch(const std::exception& e)
+        {
+            std::string s = "IterativeSolver: row and column hints give contradictory information. Grid cannot be solved.";
+            throw SolvingError(s);
+        }
+        
+        std::cout << grid << std::endl << std::endl << std::endl << std::endl;
+
+        //
+        // If the grid was not solved by this alone, start iterating
+        //
+
         // Whether the grid is solved.
-        bool solved = false;
+        bool solved = grid.isSolved();
         // Whether the solving is stalled (no changes after a full iteration).
         bool stalled = false;
 
         while (!solved && !stalled)
         {
             // Iterate.
-            std::cout << "ITERATION:" << std::endl;
-            for (int i = 0; i < grid.getHeight(); i++)
-            {
-                std::cout << "    Row " << i << ":" << std::endl;
-                std::vector<cell_t> result = solveArray(grid.getRow(i), grid.getRowHints(i));
-                std::cout << "    " << StringTools::iterableToString(result, "|") << std::endl;
-                grid.setRow(i, result);
-            }
-
-            for (int j = 0; j < grid.getWidth(); j++)
-            {
-                std::cout << "    Col " << j << ":" << std::endl;
-                std::vector<cell_t> result = solveArray(grid.getCol(j), grid.getColHints(j));
-                std::cout << "    " << StringTools::iterableToString(result, "|") << std::endl;
-                grid.setCol(j, result);
-            }
-
-            std::cout << grid << std::endl << std::endl << std::endl << std::endl;
+            break;
 
             // Update loop control.
             solved = grid.isSolved();
@@ -59,7 +83,7 @@ namespace Picross
         }
     }
 
-    std::vector<cell_t> IterativeSolver::solveArray(std::vector<cell_t> array, std::vector<int> hints)
+    std::vector<cell_t> IterativeSolver::trivialArraySolving(std::vector<cell_t> array, std::vector<int> hints)
     {
         // Get the minimum cell space required to satisfy the hints
         int minSpace = minimumSpaceFromHints(hints);

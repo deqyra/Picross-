@@ -33,6 +33,13 @@ namespace Picross
 
     int CLISolveCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
+        // If the hints of the grid aren't consistent, no need to even bother trying to solve it.
+        if (!state.grid().hintsAreConsistent())
+        {
+            streams.out() << "Hints of grid in state are not coherent, cannot solve grid." << std::endl;
+            return CLI_COMMAND_SUCCESS;
+        }
+
         std::vector<SolverPtr> solvers = instantiateSolvers();
 
         if (solvers.size())
@@ -51,12 +58,9 @@ namespace Picross
             bool result = handleSolving(solvers[input - 1], state, streams);
             return result ? CLI_COMMAND_SUCCESS : CLI_COMMAND_FAILURE;            
         }
-        else
-        {
-            // Print an informative message if no solvers are available.
-            streams.out() << "No solvers available!" << std::endl;
-        }
 
+        // Print an informative message if no solvers are available.
+        streams.out() << "No solvers available!" << std::endl;
         return CLI_COMMAND_SUCCESS;
     }
 
