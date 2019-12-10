@@ -26,6 +26,8 @@ namespace Picross
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
 
         private:    // Private methods
+            // Instantiate available solvers.
+            std::vector<std::shared_ptr<Solver>> instantiateSolvers();
             // Print available solvers in a numbered list.
             void showSolvers(std::vector<SolverPtr>& solvers, CLIStreams& streams);
             // Solve the grid using a solver.

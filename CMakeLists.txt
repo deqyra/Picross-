@@ -111,8 +111,7 @@
     # Build solver lib
         add_library( ${SOLVER_LIB_NAME} ${STATIC_OR_SHARED}
                     solving/solver.cpp                      solving/solver.hpp
-                    solving/iterative_solver.cpp            solving/iterative_solver.hpp
-                    solving/utility.cpp                     solving/utility.hpp)
+                    solving/iterative_solver.cpp            solving/iterative_solver.hpp )
         target_link_libraries( ${SOLVER_LIB_NAME} PUBLIC ${CORE_LIB_NAME} )
 
     # Build IO lib

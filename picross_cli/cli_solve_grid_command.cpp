@@ -9,8 +9,9 @@
 #include "../tools/cli/cli_input.hpp"
 #include "picross_cli_state.hpp"
 #include "../solving/solver.hpp"
-#include "../solving/utility.hpp"
 #include "../io/text_grid_formatter.hpp"
+
+#include "../solving/iterative_solver.hpp"
 
 namespace Picross
 {
@@ -32,13 +33,13 @@ namespace Picross
 
     int CLISolveCommand::run(PicrossCLIState& state, CLIStreams& streams)
     {
-        std::vector<SolverPtr> solvers = instantiateAllSolvers();
+        std::vector<SolverPtr> solvers = instantiateSolvers();
 
         if (solvers.size())
         {
             // Allow choosing from available solvers if any.
             showSolvers(solvers, streams);
-            int input = CLIInput::askForBoundedInput<int>("Please make a choice: ", 0, SOLVER_COUNT, streams);
+            int input = CLIInput::askForBoundedInput<int>("Please make a choice: ", 0, solvers.size(), streams);
 
             // In case of exit, return immediately.
             if (input == 0)
@@ -57,6 +58,13 @@ namespace Picross
         }
 
         return CLI_COMMAND_SUCCESS;
+    }
+
+    std::vector<std::shared_ptr<Solver>> CLISolveCommand::instantiateSolvers()
+    {
+        return {
+            std::make_shared<IterativeSolver>()
+        };
     }
 
     void CLISolveCommand::showSolvers(std::vector<CLISolveCommand::SolverPtr>& solvers, CLIStreams& streams)
