@@ -90,6 +90,7 @@
                     tools/exceptions/index_out_of_bounds_error.cpp      tools/exceptions/index_out_of_bounds_error.hpp
                     tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp 
                     tools/exceptions/range_bounds_exceeded_error.cpp    tools/exceptions/range_bounds_exceeded_error.hpp 
+                    tools/exceptions/unmatched_array_size_error.cpp     tools/exceptions/unmatched_array_size_error.hpp 
                     tools/cli/cli_input.hpp                             tools/cli/cli_input.cpp
                     tools/cli/cli_streams.cpp                           tools/cli/cli_streams.hpp
                                                                         tools/cli/cli_command.hpp
@@ -110,6 +111,7 @@
     # Build solver lib
         add_library( ${SOLVER_LIB_NAME} ${STATIC_OR_SHARED}
                     solving/solver.cpp                      solving/solver.hpp
+                    solving/iterative_solver.cpp            solving/iterative_solver.hpp
                     solving/utility.cpp                     solving/utility.hpp)
         target_link_libraries( ${SOLVER_LIB_NAME} PUBLIC ${CORE_LIB_NAME} )
 

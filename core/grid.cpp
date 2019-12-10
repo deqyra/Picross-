@@ -213,7 +213,7 @@ namespace Picross
 		}
 
 		// Copy all cell values into row.
-		for (int i; i < _width; i++)
+		for (int i = 0; i < _width; i++)
 		{
 			setCell(row, i, array[i]);
 		}
@@ -238,7 +238,7 @@ namespace Picross
 		}
 
 		// Copy all cell values into col.
-		for (int i; i < _height; i++)
+		for (int i = 0; i < _height; i++)
 		{
 			setCell(i, col, array[i]);
 		}
