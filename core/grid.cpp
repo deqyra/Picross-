@@ -270,6 +270,25 @@ namespace Picross
 		_content[(row * _width) + col] = CELL_CLEARED;
 	}
 
+	void Grid::merge(const Grid& other, int mergingPolicy)
+	{
+		if ((other._height != _height) || (other._width != _width))
+		{
+			std::string s = "Grid of dimensions (" + std::to_string(other._height) + ", " + std::to_string(other._width) + ") cannot be merged into grid of dimension (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
+			throw UnmatchedArraySizeError(s);
+		}
+
+		for (int i = 0; i < _height; i++)
+		{
+			for (int j = 0; j < _width; j++)
+			{
+				// May throw depending on the merging policy.
+				cell_t newValue = mergeSingleCell(getCell(i, j), other.getCell(i, j), mergingPolicy);
+				setCell(i, j, newValue);
+			}
+		}
+	}
+
 	void Grid::setRowHints(int row, std::vector<int> hints)
 	{
 		// These checks will throw on fails (last parameter).
@@ -400,7 +419,7 @@ namespace Picross
 	bool Grid::hintsAreConsistent() const
 	{
 		// Hints are consistent if the sum of horinzontal hints equals the sum of vertical hints. 
-		return IterTools::sum2NestedIterables<int>(_rowHints) == IterTools::sum2NestedIterables<int>(_colHints);
+		return rowHintSum() == colHintSum();
 	}
 
 	bool Grid::isSolved() const
@@ -424,6 +443,17 @@ namespace Picross
 
 		return true;
 	}
+
+	int Grid::rowHintSum() const
+	{
+		return IterTools::sum2NestedIterables<int>(_rowHints);
+	}
+
+	int Grid::colHintSum() const
+	{
+		return IterTools::sum2NestedIterables<int>(_colHints);
+	}
+
 
     cell_t Grid::mostPresentState() const
     {

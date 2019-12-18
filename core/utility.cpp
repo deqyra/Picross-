@@ -6,6 +6,7 @@
 
 #include "cell_t.hpp"
 #include "grid.hpp"
+#include "exceptions/conflicting_merge_error.hpp"
 #include "../tools/string_tools.hpp"
 
 namespace Picross
@@ -23,8 +24,9 @@ namespace Picross
         // String example for sequence {5, 2, 3}:
         // "xxxxx xx xxx" <- length = (5 + 1) + (2 + 1) + 3 = 12
 
-        // One too many space is added at the last iteration of the loop, remove it.
-		return space - 1;
+        // One too many space is added at the last iteration of the loop, remove it (only if a non-zero space was calculated).
+        if (space) space--;
+		return space;
 	}
 
     bool cellsSatisfyHints(const std::vector<cell_t>& cells, const std::vector<int>& hints)
@@ -61,5 +63,35 @@ namespace Picross
         }
 
         return hints;
+    }
+
+    cell_t mergeSingleCell(cell_t destination, cell_t source, int mergingPolicy)
+    {
+        // If the source is cleared, keep whatever is in destination.
+        if (source == CELL_CLEARED) return destination;
+        // If the destination is cleared, put whatever is in source.
+        if (destination == CELL_CLEARED) return source;
+        // If both are equal, keep that value.
+        if (destination == source) return destination;
+
+        // Now there are only two cases left:
+        // - source is checked, destination is crossed
+        // - source is crossed, destination is checked
+
+        // If the policy is to throw on any conflict, do so.
+        switch (mergingPolicy)
+        {
+            case MERGING_POLICY_THROW_ON_CONFLICTS:
+                throw ConflictingMergeError("Cannot merge checked and crossed cells.");
+                break;
+            case MERGING_POLICY_OVERWRITE:
+                return source;
+                break;
+            case MERGING_POLICY_PRESERVE:
+                return destination;
+                break;
+            default:
+                throw std::invalid_argument("mergeSingleCell: unknown policy " + std::to_string(mergingPolicy));
+        }
     }
 }

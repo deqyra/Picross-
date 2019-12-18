@@ -105,12 +105,14 @@
                     core/utility.cpp                                            core/utility.hpp
                     core/exceptions/invalid_cell_value_error.cpp                core/exceptions/invalid_cell_value_error.hpp
                     core/exceptions/invalid_grid_hints_error.cpp                core/exceptions/invalid_grid_hints_error.hpp
+                    core/exceptions/conflicting_merge_error.cpp                 core/exceptions/conflicting_merge_error.hpp
                     core/exceptions/unrecognized_cell_value_error.cpp           core/exceptions/unrecognized_cell_value_error.hpp )
                     target_link_libraries( ${CORE_LIB_NAME} PUBLIC ${TOOLS_LIB_NAME} )
 
     # Build solver lib
         add_library( ${SOLVER_LIB_NAME} ${STATIC_OR_SHARED}
                     solving/solver.cpp                      solving/solver.hpp
+                    solving/exceptions/solving_error.cpp    solving/exceptions/solving_error.hpp
                     solving/iterative_solver.cpp            solving/iterative_solver.hpp )
         target_link_libraries( ${SOLVER_LIB_NAME} PUBLIC ${CORE_LIB_NAME} )
 
@@ -126,7 +128,7 @@
         add_library( ${CLI_LIB_NAME} ${STATIC_OR_SHARED}
                     picross_cli/picross_cli_state.cpp           picross_cli/picross_cli_state.hpp
                     picross_cli/cli_create_grid_command.cpp     picross_cli/cli_create_grid_command.hpp
-                    picross_cli/cli_display_grid_command.cpp     picross_cli/cli_display_grid_command.hpp
+                    picross_cli/cli_display_grid_command.cpp    picross_cli/cli_display_grid_command.hpp
                     picross_cli/cli_load_grid_command.cpp       picross_cli/cli_load_grid_command.hpp
                     picross_cli/cli_save_grid_command.cpp       picross_cli/cli_save_grid_command.hpp
                     picross_cli/cli_modify_grid_command.cpp     picross_cli/cli_modify_grid_command.hpp

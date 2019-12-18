@@ -38,9 +38,7 @@ namespace Picross
         }
         else
         {
-            int rowSum = IterTools::sum2NestedIterables<int>(state.workingGrid().getAllRowHints());
-            int colSum = IterTools::sum2NestedIterables<int>(state.workingGrid().getAllColHints());
-            streams.out() << "false: sum of row hints is " << rowSum << ", sum of column hints is " << colSum << "." << std::endl;
+            streams.out() << "false: sum of row hints is " << state.workingGrid().rowHintSum() << ", sum of column hints is " << state.workingGrid().colHintSum() << "." << std::endl;
         }
         
         return SHELL_COMMAND_SUCCESS;

@@ -20,6 +20,9 @@ namespace Picross
 
     // Generates the vector of hints that is satisfied by the provided cells.
     std::vector<int> hintsFromCells(const std::vector<cell_t>& cells);
+
+    // Returns the outcome of a merging attempt given a source value, a destination value and a merging policy.
+    cell_t mergeSingleCell(cell_t destination, cell_t source, int mergingPolicy);
 }
 
 #endif//CORE__UTILITY_HPP

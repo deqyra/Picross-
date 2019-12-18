@@ -99,9 +99,15 @@ Cleanup & enhancement:
         ☐ Tech wiki on GitHub (?)
         ✔ Refactor CreateGridCommand::hintsArePositiveNonZero and PicrossShellHintsCommand::hintsArePositiveNonZero
         ☐ Refactor all "informative error logging" in exception logging blocks
-        ☐ Include context where appriopriate in thrown exceptions
+        ☐ Include context where appriopriate in thrown exceptions (catch and re-throw in upper calls where appropriate)
+        ☐ Improve exception handling chain and traceback
         ☐ Replace constant size arrays with std::arrays
         ☐ Have stdArray template parameters automatically deduced in test_cell_t.cpp
+        ☐ Tests for Grid::merge
+        ☐ Tests for Grid::row|colHintSum
+        ☐ Tests for IterativeSolver
+        ☐ Tests for std::to_string(Picross::cell_t)
+        ☐ Tests for mergeSingleCell
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)

@@ -6,11 +6,12 @@
 #include <memory>
 #include <iostream>
 
-#include "../tools/cli/cli_input.hpp"
 #include "picross_cli_state.hpp"
-#include "../solving/solver.hpp"
 #include "../io/text_grid_formatter.hpp"
+#include "../tools/cli/cli_input.hpp"
+#include "../tools/iterable_tools.hpp"
 
+#include "../solving/solver.hpp"
 #include "../solving/iterative_solver.hpp"
 
 namespace Picross
@@ -36,7 +37,8 @@ namespace Picross
         // If the hints of the grid aren't consistent, no need to even bother trying to solve it.
         if (!state.grid().hintsAreConsistent())
         {
-            streams.out() << "Hints of grid in state are not coherent, cannot solve grid." << std::endl;
+            streams.out() << "Sum of row hints is " << state.grid().rowHintSum() << ", sum of column hints is " << state.grid().colHintSum() << ".\n";
+            streams.out() << "Hints are not coherent, cannot solve grid." << std::endl;
             return CLI_COMMAND_SUCCESS;
         }
 

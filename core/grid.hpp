@@ -9,6 +9,9 @@
 namespace Picross
 {
 	inline static const int GRID_MAX_SIZE = 20;
+	inline static const int MERGING_POLICY_THROW_ON_CONFLICTS = 0;
+	inline static const int MERGING_POLICY_OVERWRITE = 1;
+	inline static const int MERGING_POLICY_PRESERVE = 2;
 	
 	class Grid
 	{
@@ -45,6 +48,8 @@ namespace Picross
 			void crossCell(int row, int col);
 			void clearCell(int row, int col);
 
+			void merge(const Grid& other, int mergingPolicy = MERGING_POLICY_THROW_ON_CONFLICTS);
+
 		// Hint modification methods.
 			void setRowHints(int row, std::vector<int> hints);
 			void setColHints(int col, std::vector<int> hints);
@@ -61,6 +66,8 @@ namespace Picross
 			bool isValidCell(int row, int col, bool throwOnFail = false) const;
 			bool hintsAreConsistent() const;
 			bool isSolved() const;
+			int rowHintSum() const;
+			int colHintSum() const;
 		
 		// Return the cell value which is most present within a grid.
 			cell_t mostPresentState() const;
