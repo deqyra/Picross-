@@ -108,6 +108,10 @@ Cleanup & enhancement:
         ☐ Tests for IterativeSolver
         ☐ Tests for std::to_string(Picross::cell_t)
         ☐ Tests for mergeSingleCell
+        ☐ Array analysis tools for solving
+        ☐ Export a D2Array from Picross::Grid
+        ☐ Have Picross::Grid use D2Array
+        ☐ Use D2Array for analysis tools
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)

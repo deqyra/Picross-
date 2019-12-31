@@ -105,9 +105,9 @@ namespace Picross
 
     std::vector<cell_t> IterativeSolver::arrayIteration(std::vector<cell_t> array, const std::vector<int>& hints)
     {
-        array = arrayTrivialCrossing(array, hints);
-        array = arrayForceCrossing(array, hints);
-        array = arrayGluing(array, hints);
+        array = arrayTrivialCross(array, hints);
+        array = arrayForceCross(array, hints);
+        array = arrayGlue(array, hints);
         array = arrayJoin(array, hints);
         array = arraySplit(array, hints);
 
@@ -176,17 +176,17 @@ namespace Picross
         return result;
     }
 
-    std::vector<cell_t> IterativeSolver::arrayTrivialCrossing(std::vector<cell_t> array, std::vector<int> hints)
+    std::vector<cell_t> IterativeSolver::arrayTrivialCross(std::vector<cell_t> array, std::vector<int> hints)
     {
 
     }
 
-    std::vector<cell_t> IterativeSolver::arrayForceCrossing(std::vector<cell_t> array, std::vector<int> hints)
+    std::vector<cell_t> IterativeSolver::arrayForceCross(std::vector<cell_t> array, std::vector<int> hints)
     {
 
     }
 
-    std::vector<cell_t> IterativeSolver::arrayGluing(std::vector<cell_t> array, std::vector<int> hints)
+    std::vector<cell_t> IterativeSolver::arrayGlue(std::vector<cell_t> array, std::vector<int> hints)
     {
 
     }
