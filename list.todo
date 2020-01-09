@@ -79,6 +79,9 @@ User interaction:
 Solving:
     ✔ Generic solver
     ☐ Iterative solver
+    ☐ Depth-first solver
+    ☐ Backtracking solver
+    ☐ Genetic solver
     ☐ Inference engine
 Cleanup & enhancement:
     Important:
@@ -108,6 +111,11 @@ Cleanup & enhancement:
         ☐ Tests for IterativeSolver
         ☐ Tests for std::to_string(Picross::cell_t)
         ☐ Tests for mergeSingleCell
+        ☐ Write Array2D<T>
+        ☐ Write ArrayAnalysis
+        ☐ Find a way to transparently integrate and wrap Array2D<cell_t> into Grid
+        ☐ Replace shared_ptrs with unique_ptrs where appropriate
+        ☐ Use namespaces instead of all-static-methods classes
     Nice:
         ✔ Generalize bounded input method (used in CLIMenu and SolveCommand)
         ✔ Better usage of std::endl (new line vs. buffer flushing)
@@ -128,6 +136,7 @@ Cleanup & enhancement:
         ✔ Tests for generic shell
         ✔ Tests for lambda maker
         ☐ Investigate MSYS makefiles failing to run
+        ☐ Flatly align nested namespaces, indicate end by a comment after closing brace
 Bugs:
     ADD TESTS FOR EACH CASE BEFORE MARKING RESOLVED (if applicable)
     ✔ Grid text formatting with hints fails when either directional hints are all empty

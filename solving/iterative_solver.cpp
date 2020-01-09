@@ -115,7 +115,7 @@ namespace Picross
     }
 
     //
-    // SOLVING UTILITIES
+    // SOLVING ROUTINES
     //
 
     std::vector<cell_t> IterativeSolver::arrayTrivialChecking(std::vector<cell_t> array, std::vector<int> hints)

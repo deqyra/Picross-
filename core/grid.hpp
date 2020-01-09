@@ -8,7 +8,7 @@
 
 namespace Picross
 {
-	inline static const int GRID_MAX_SIZE = 20;
+	inline static const int GRID_MAX_SIZE = 100;
 	inline static const int MERGING_POLICY_THROW_ON_CONFLICTS = 0;
 	inline static const int MERGING_POLICY_OVERWRITE = 1;
 	inline static const int MERGING_POLICY_PRESERVE = 2;
