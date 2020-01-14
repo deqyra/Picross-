@@ -15,10 +15,14 @@
 
 namespace Picross
 {
+	const std::function<bool(const cell_t&)> Grid::_throwingCellChecker = [] (const cell_t& val) {
+		return isValidCellValue(val, true);
+	};
+
 	Grid::Grid(int width, int height) :
 		_width(width),
 		_height(height),
-		_content(width * height, CELL_CLEARED),
+		_innerGrid(height, width, CELL_CLEARED),
 		_rowHints(height, std::vector<int>()),
 		_colHints(width, std::vector<int>())
 	{
@@ -28,7 +32,7 @@ namespace Picross
 	Grid::Grid(int width, int height, std::vector<std::vector<int>> horizontalHints, std::vector<std::vector<int>> verticalHints) :
 		_width(width),
 		_height(height),
-		_content(width * height, CELL_CLEARED),
+		_innerGrid(height, width, CELL_CLEARED),
 		_rowHints(horizontalHints),
 		_colHints(verticalHints)
 	{
@@ -97,27 +101,12 @@ namespace Picross
 
 	std::vector<cell_t> Grid::getRow(int row) const
 	{
-		// This will throw if the check fails (last parameter).
-		isValidRow(row, true);
-
-		auto begin = _content.begin() + (_width * row);
-		return std::vector<cell_t>(begin, begin + _width);
+		return _innerGrid.getRow(row);
 	}
 
 	std::vector<cell_t> Grid::getCol(int col) const
 	{
-		// This will throw if the check fails (last parameter).
-		isValidCol(col, true);
-
-		std::vector<cell_t> columnVector(_height, CELL_CLEARED);
-
-		auto it = _content.begin() + col;
-		for (int i = 0; i < _height; i++)
-		{
-			columnVector[i] = (*it);
-			it += _width;
-		}
-		return columnVector;
+		return _innerGrid.getCol(col);
 	}
 
 	std::vector<std::vector<int>> Grid::getAllRowHints() const
@@ -148,126 +137,42 @@ namespace Picross
 
 	cell_t Grid::getCell(int row, int col) const
 	{
-		// This will throw if the check fails (last parameter).
-		isValidCell(row, col, true);
-
-		return _content[(row * _width) + col];
+		return _innerGrid.getCell(row, col);
 	}
 
 	void Grid::setCell(int row, int col, cell_t val)
 	{
-		// This will throw if the checks fail (last parameter).
-		isValidCell(row, col, true);
-		isValidCellValue(val, true);
-
-		_content[(row * _width) + col] = val;
+		_innerGrid.setCell(row, col, val, _throwingCellChecker);
 	}
 
 	void Grid::setCellRange(int i0, int in, int j0, int jn, cell_t val)
 	{
-		// This will throw if the checks fail (last parameter).
-		isValidCellValue(val, true);
-
-		// Throw if given range is invalid.
-		if (!isValidRow(i0) || !isValidRow(in) || !isValidCol(j0) || !isValidCol(jn))
-		{
-			std::string s = "Range (" + std::to_string(i0) + ":" + std::to_string(in) + " ; " + std::to_string(j0) + ":" + std::to_string(jn) + ") is out of bound for grid of dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
-			throw IndexOutOfBoundsError(s.c_str());
-		}
-
-		// Swap range extents if wrongly ordered.
-		if (i0 > in)
-		{
-			std::swap(i0, in);
-		}
-		if (j0 > jn)
-		{
-			std::swap(j0, jn);
-		}
-
-		// Set given value for all cells in range.
-		for (int i = i0; i <= in; i++)
-		{
-			for (int j = j0; j <= jn; j++)
-			{
-				_content[(i * _width) + j] = val;
-			}
-		}
+		_innerGrid.setCellRange(i0, in, j0, jn, val, _throwingCellChecker);
 	}
 
 	void Grid::setRow(int row, std::vector<cell_t> array)
 	{
-		// Auto-throw on invalid row index.
-		isValidRow(row, true);
-
-		// Check length of provided array.
-		if (array.size() != _width)
-		{
-			std::string s = "setRow: passed array has size " + std::to_string(array.size()) + " but grid has width " + std::to_string(_width) + ".";
-			throw UnmatchedArraySizeError(s);
-		}
-
-		for (int i = 0; i  < array.size(); i++)
-		{
-			// Auto-throw on invalid cell value.
-			isValidCellValue(array[i], true);
-		}
-
-		// Copy all cell values into row.
-		for (int i = 0; i < _width; i++)
-		{
-			setCell(row, i, array[i]);
-		}
+		_innerGrid.setRow(row, array, _throwingCellChecker);
 	}
 
 	void Grid::setCol(int col, std::vector<cell_t> array)
 	{
-		// Auto-throw on invalid col index.
-		isValidCol(col, true);
-
-		// Check length of provided array.
-		if (array.size() != _height)
-		{
-			std::string s = "setCol: passed array has size " + std::to_string(array.size()) + " but grid has height " + std::to_string(_height) + ".";
-			throw UnmatchedArraySizeError(s);
-		}
-
-		for (int i = 0; i  < array.size(); i++)
-		{
-			// Auto-throw on invalid cell value.
-			isValidCellValue(array[i], true);
-		}
-
-		// Copy all cell values into col.
-		for (int i = 0; i < _height; i++)
-		{
-			setCell(i, col, array[i]);
-		}
+		_innerGrid.setCol(col, array, _throwingCellChecker);
 	}
-
 
 	void Grid::checkCell(int row, int col)
 	{
-		// This will throw if the checks fail (last parameter).
-		isValidCell(row, col, true);
-
-		_content[(row * _width) + col] = CELL_CHECKED;
+		_innerGrid.setCell(row, col, CELL_CHECKED, _throwingCellChecker);
 	}
 
 	void Grid::crossCell(int row, int col)
 	{
-		// This will throw if the checks fail (last parameter).
-		isValidCell(row, col, true);
-
-		_content[(row * _width) + col] = CELL_CROSSED;
+		_innerGrid.setCell(row, col, CELL_CROSSED, _throwingCellChecker);
 	}
 
 	void Grid::clearCell(int row, int col)
 	{
-		// This will throw if the checks fail (last parameter).
-		isValidCell(row, col, true);
-
-		_content[(row * _width) + col] = CELL_CLEARED;
+		_innerGrid.setCell(row, col, CELL_CLEARED, _throwingCellChecker);
 	}
 
 	void Grid::merge(const Grid& other, int mergingPolicy)
@@ -385,35 +290,17 @@ namespace Picross
 
 	bool Grid::isValidRow(int row, bool throwOnFail) const
 	{
-		bool valid = row >= 0 && row < _height;
-		if (throwOnFail && !valid)
-		{
-			std::string s = "Invalid row " + std::to_string(row) + " for grid with height " + std::to_string(_height) + ".";
-			throw IndexOutOfBoundsError(s);
-		}
-		return valid;
+		return _innerGrid.isValidRow(row, throwOnFail);
 	}
 
 	bool Grid::isValidCol(int col, bool throwOnFail) const
 	{
-		bool valid = col >= 0 && col < _width;
-		if (throwOnFail && !valid)
-		{
-			std::string s = "Invalid column " + std::to_string(col) + " for grid with width " + std::to_string(_width) + ".";
-			throw IndexOutOfBoundsError(s);
-		}
-		return valid;
+		return _innerGrid.isValidCol(col, throwOnFail);
 	}
 
 	bool Grid::isValidCell(int row, int col, bool throwOnFail) const
 	{
-		bool valid = isValidRow(row) && isValidCol(col);
-		if (throwOnFail && !valid)
-		{
-			std::string s = "Invalid cell (" + std::to_string(row) + ", " + std::to_string(col) + ") for grid with dimensions (" + std::to_string(_height) + ", " + std::to_string(_width) + ").";
-			throw IndexOutOfBoundsError(s);
-		}
-		return valid;
+		return _innerGrid.isValidCell(row, col, throwOnFail);
 	}
 
 	bool Grid::hintsAreConsistent() const
@@ -516,7 +403,7 @@ namespace Picross
 		if (lhs._height != rhs._height) return false;
 		if (lhs._rowHints != rhs._rowHints) return false;
 		if (lhs._colHints != rhs._colHints) return false;
-		if (lhs._content != rhs._content) return false;
+		if (lhs._innerGrid != rhs._innerGrid) return false;
 
 		return true;
 	}

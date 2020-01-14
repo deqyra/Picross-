@@ -3,8 +3,10 @@
 
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "cell_t.hpp"
+#include "../tools/array_2d.hpp"
 
 namespace Picross
 {
@@ -16,11 +18,13 @@ namespace Picross
 	class Grid
 	{
 		private:	// Attributes
+			Array2D<cell_t> _innerGrid;
 			int _width;
 			int _height;
-			std::vector<cell_t> _content;			// 1D-array containing the "unfolded" grid, row-major indexed.
 			std::vector<std::vector<int>> _rowHints;
 			std::vector<std::vector<int>> _colHints;
+
+			static const std::function<bool(const cell_t&)> _throwingCellChecker;
 
 		public:		// Public methods
 			Grid(int width, int height);

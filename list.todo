@@ -111,9 +111,10 @@ Cleanup & enhancement:
         ☐ Tests for IterativeSolver
         ☐ Tests for std::to_string(Picross::cell_t)
         ☐ Tests for mergeSingleCell
-        ☐ Write Array2D<T>
+        ✔ Write Array2D<T>
+        ✔ Rewrite Picross::Grid to use Array2D<cell_t>
         ☐ Write ArrayAnalysis
-        ☐ Find a way to transparently integrate and wrap Array2D<cell_t> into Grid
+        ☐ Find a _better_ way to transparently integrate and wrap Array2D<cell_t> into Grid
         ☐ Replace shared_ptrs with unique_ptrs where appropriate
         ☐ Use namespaces instead of all-static-methods classes
     Nice:

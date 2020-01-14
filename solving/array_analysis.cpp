@@ -7,11 +7,8 @@
 
 namespace Picross
 {
-namespace ArrayAnalysis
-{
     Array2D<bool> matchCellsToHints(std::vector<cell_t> array, std::vector<int> hints)
     {
 
     }
-} // namespace ArrayAnalysis
 } // namespace Picross

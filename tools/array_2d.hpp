@@ -2,10 +2,19 @@
 #define TOOLS__ARRAY_2D_HPP
 
 #include <vector>
+#include <functional>
 #include <stdexcept>
 
 #include "exceptions/unmatched_array_size_error.hpp"
 #include "exceptions/index_out_of_bounds_error.hpp"
+
+template<typename T>
+class Array2D;
+
+template<typename T>
+bool operator==(const Array2D<T>& lhs, const Array2D<T>& rhs);
+template<typename T>
+bool operator!=(const Array2D<T>& lhs, const Array2D<T>& rhs);
 
 template<typename T>
 class Array2D
@@ -15,12 +24,11 @@ class Array2D
         unsigned int _height;
         std::vector<T> _content;
 
-        const std::function<bool(const T&)> _defaultValidityCheck = [] (const T&) {
-            return true;
-        };
+        static const std::function<bool(const T&)> _defaultValidityCheck;
 
     public:     // Public methods
         Array2D(unsigned int height, unsigned int width);
+        Array2D(unsigned int height, unsigned int width, T defaultValue);
 
         unsigned int getHeight() const;
         unsigned int getWidth() const;
@@ -40,6 +48,14 @@ class Array2D
         bool isValidRow(int row, bool throwOnFail = false) const;
         bool isValidCol(int col, bool throwOnFail = false) const;
         bool isValidCell(int row, int col, bool throwOnFail = false) const;
+
+        friend bool operator==<>(const Array2D<T>& lhs, const Array2D<T>& rhs);
+        friend bool operator!=<>(const Array2D<T>& lhs, const Array2D<T>& rhs);
+};
+
+template<typename T>
+const std::function<bool(const T&)> Array2D<T>::_defaultValidityCheck = [] (const T&) {
+    return true;
 };
 
 template<typename T>
@@ -52,13 +68,22 @@ Array2D<T>::Array2D(unsigned int height, unsigned int width) :
 }
 
 template<typename T>
-int Array2D<T>::getHeight() const
+Array2D<T>::Array2D(unsigned int height, unsigned int width, T defaultValue) :
+    _height(height),
+    _width(width),
+    _content(width * height, defaultValue)
+{
+
+}
+
+template<typename T>
+unsigned int Array2D<T>::getHeight() const
 {
 	return _height;
 }
 
 template<typename T>
-int Array2D<T>::getWidth() const
+unsigned int Array2D<T>::getWidth() const
 {
 	return _width;
 }
@@ -70,7 +95,7 @@ std::vector<T> Array2D<T>::getRow(int row) const
     isValidRow(row, true);
 
     auto begin = _content.begin() + (_width * row);
-    return std::vector<cell_t>(begin, begin + _width);
+    return std::vector<T>(begin, begin + _width);
 }
 
 template<typename T>
@@ -79,7 +104,7 @@ std::vector<T> Array2D<T>::getCol(int col) const
     // This will throw if the check fails (last parameter).
     isValidCol(col, true);
 
-    std::vector<cell_t> columnVector(_height, CELL_CLEARED);
+    std::vector<T> columnVector(_height, T());
 
     auto it = _content.begin() + col;
     for (int i = 0; i < _height; i++)
@@ -212,7 +237,7 @@ void Array2D<T>::setCol(int col, std::vector<T> array, std::function<bool(const 
 }
 
 template<typename T>
-bool Array2D<T>::isValidRow(int row, bool throwOnFail = false) const
+bool Array2D<T>::isValidRow(int row, bool throwOnFail) const
 {
     bool valid = row >= 0 && row < _height;
     if (throwOnFail && !valid)
@@ -224,7 +249,7 @@ bool Array2D<T>::isValidRow(int row, bool throwOnFail = false) const
 }
 
 template<typename T>
-bool Array2D<T>::isValidCol(int col, bool throwOnFail = false) const
+bool Array2D<T>::isValidCol(int col, bool throwOnFail) const
 {
     bool valid = col >= 0 && col < _width;
     if (throwOnFail && !valid)
@@ -236,7 +261,7 @@ bool Array2D<T>::isValidCol(int col, bool throwOnFail = false) const
 }
 
 template<typename T>
-bool Array2D<T>::isValidCell(int row, int col, bool throwOnFail = false) const
+bool Array2D<T>::isValidCell(int row, int col, bool throwOnFail) const
 {
     bool valid = isValidRow(row) && isValidCol(col);
     if (throwOnFail && !valid)
@@ -245,6 +270,22 @@ bool Array2D<T>::isValidCell(int row, int col, bool throwOnFail = false) const
         throw IndexOutOfBoundsError(s);
     }
     return valid;
+}
+
+template<typename T>
+bool operator==(const Array2D<T>& lhs, const Array2D<T>& rhs)
+{
+    if (lhs._width != rhs._width) return false;
+    if (lhs._height != rhs._height) return false;
+    if (lhs._content != rhs._content) return false;
+
+    return true;
+}
+
+template<typename T>
+bool operator!=(const Array2D<T>& lhs, const Array2D<T>& rhs)
+{
+    return !(lhs == rhs);
 }
 
 #endif//TOOLS__ARRAY_2D_HPP

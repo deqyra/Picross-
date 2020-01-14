@@ -9,7 +9,7 @@
 
 namespace Picross
 {
-    bool isValidCellValue(cell_t val, bool throwOnFail)
+    bool isValidCellValue(const cell_t& val, bool throwOnFail)
     {
 		// Look through all registered values.
 		auto it = std::find(std::begin(CELL_T_ORDERED_VALUES), std::end(CELL_T_ORDERED_VALUES), val);
