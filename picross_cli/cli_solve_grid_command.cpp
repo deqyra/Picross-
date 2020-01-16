@@ -129,4 +129,4 @@ namespace Picross
 
         return true;
     }
-}
+} // namespace Picross

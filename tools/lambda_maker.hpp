@@ -58,6 +58,6 @@ namespace LambdaMaker
             return element > low && element < high;
         };
     }
-}
+} // namespace LambdaMaker
 
 #endif//TOOLS__LAMBDA_MAKER_HPP

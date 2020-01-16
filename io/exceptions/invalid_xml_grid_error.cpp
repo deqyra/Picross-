@@ -4,4 +4,4 @@
 namespace Picross
 {
     DEFINE_BASIC_EXCEPTION(InvalidXMLGridError)
-}
+} // namespace Picross

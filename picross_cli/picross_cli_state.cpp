@@ -16,4 +16,4 @@ namespace Picross
     {
         return _grid;
     }
-}
+} // namespace Picross

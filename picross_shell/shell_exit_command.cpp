@@ -52,5 +52,4 @@ namespace Picross
         s += "No arguments.\n";
         return s;
     }
-
-}
+} // namespace Picross

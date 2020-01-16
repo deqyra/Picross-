@@ -23,6 +23,6 @@ namespace tinyxml2
     };
 
     std::string xmlErrorToString(XMLError err);
-}
+} // namespace tinyxml2
 
 #endif//IO__TINYXML2_ERROR_HPP

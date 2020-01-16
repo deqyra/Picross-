@@ -14,7 +14,7 @@ namespace std
     {
         return val;
     }
-}
+} // namespace std
 
 namespace StringTools
 {
@@ -432,4 +432,4 @@ namespace StringTools
             throw std::invalid_argument(str.c_str());
         }
     }
-}
+} // namespace StringTools

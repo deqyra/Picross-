@@ -74,5 +74,4 @@ namespace Picross
         s += " - `nohints`: when specified, hints are not printed on the side of the grid.";
         return s;
     }
-
-}
+} // namespace Picross

@@ -91,8 +91,8 @@
                     tools/exceptions/file_not_found_error.cpp           tools/exceptions/file_not_found_error.hpp 
                     tools/exceptions/range_bounds_exceeded_error.cpp    tools/exceptions/range_bounds_exceeded_error.hpp 
                     tools/exceptions/unmatched_array_size_error.cpp     tools/exceptions/unmatched_array_size_error.hpp 
-                    tools/cli/cli_input.hpp                             tools/cli/cli_input.cpp
                     tools/cli/cli_streams.cpp                           tools/cli/cli_streams.hpp
+                                                                        tools/cli/cli_input.hpp
                                                                         tools/cli/cli_command.hpp
                                                                         tools/cli/cli_menu.hpp
                                                                         tools/cli/menu_command.hpp

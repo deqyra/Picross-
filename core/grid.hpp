@@ -83,7 +83,7 @@ namespace Picross
 			friend bool operator==(const Grid& lhs, const Grid& rhs);
 			friend bool operator!=(const Grid& lhs, const Grid& rhs);
 	};
-}
+} // namespace Picross
 
 // Allows feeding grids to std::ostreams.
 std::ostream& operator<<(std::ostream& os, Picross::Grid const& grid);

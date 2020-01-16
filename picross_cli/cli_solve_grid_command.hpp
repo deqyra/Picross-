@@ -33,6 +33,6 @@ namespace Picross
             // Solve the grid using a solver.
             bool handleSolving(SolverPtr solver, PicrossCLIState& state, CLIStreams& streams);
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_CLI__CLI_SOLVE_COMMAND_HPP

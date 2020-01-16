@@ -30,6 +30,6 @@ namespace Picross
             PicrossShellState CLIStateToShellState(PicrossCLIState& cliState);
             PicrossShell instantiateMicroShell();
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_CLI__CLI_MODIFY_GRID_COMMAND_HPP

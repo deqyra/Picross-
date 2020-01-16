@@ -16,6 +16,7 @@
 namespace Picross
 {
 	const std::function<bool(const cell_t&)> Grid::_throwingCellChecker = [] (const cell_t& val) {
+		// Returns true (valid) or throws (invalid).
 		return isValidCellValue(val, true);
 	};
 
@@ -412,7 +413,7 @@ namespace Picross
 	{
 		return !(lhs == rhs);
 	}
-}
+} // namespace Picross
 
 std::ostream& operator<<(std::ostream& os, Picross::Grid const& grid)
 {

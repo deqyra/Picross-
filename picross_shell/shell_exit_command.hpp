@@ -21,6 +21,6 @@ namespace Picross
             virtual std::string description();
             virtual std::string help();
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_SHELL__SHELL_EXIT_COMMAND_HPP

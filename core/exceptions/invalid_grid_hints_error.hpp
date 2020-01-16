@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(InvalidGridHintsError)
-}
+} // namespace Picross
 
 #endif//CORE__EXCEPTIONS__INVALID_GRID_HINTS_ERROR

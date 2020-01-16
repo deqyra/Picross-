@@ -14,6 +14,6 @@ namespace Picross
             virtual std::string name() = 0;
             virtual void solve(Grid& grid) = 0;
     };
-}
+} // namespace Picross
 
 #endif//SOLVING__SOLVER_HPP

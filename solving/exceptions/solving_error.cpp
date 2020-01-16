@@ -4,5 +4,5 @@
 namespace Picross
 {
     DEFINE_BASIC_EXCEPTION(SolvingError)
-}
+} // namespace Picross
 

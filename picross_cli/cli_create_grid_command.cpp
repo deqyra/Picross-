@@ -114,4 +114,4 @@ namespace Picross
 
         return allHints;
     }
-}
+} // namespace Picross

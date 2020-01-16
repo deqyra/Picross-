@@ -94,4 +94,4 @@ namespace Picross
                 throw std::invalid_argument("mergeSingleCell: unknown policy " + std::to_string(mergingPolicy));
         }
     }
-}
+} // namespace Picross

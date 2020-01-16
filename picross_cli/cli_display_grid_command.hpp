@@ -19,6 +19,6 @@ namespace Picross
             virtual std::string getTooltip();
             virtual int run(PicrossCLIState& state, CLIStreams& streams = CLIInput::defaultStreams);
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_CLI__CLI_DISPLAY_GRID_COMMAND_HPP

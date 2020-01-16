@@ -11,6 +11,6 @@ namespace Catch
     {
         static std::string convert(Picross::Grid const& grid);
     };
-}
+} // namespace Catch
 
 #endif//TESTS__CATCH2_CUSTOM_STRING_FORMATTERS

@@ -57,4 +57,4 @@ namespace Picross
 
         return SHELL_COMMAND_SUCCESS;
     }
-}
+} // namespace Picross

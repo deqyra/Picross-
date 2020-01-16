@@ -51,7 +51,7 @@ namespace Picross
 		isValidCellValue(val, true);
 		return CELL_T_ORDERED_STRINGS[val];
 	}
-}
+} // namespace Picross
 
 namespace std
 {
@@ -59,4 +59,4 @@ namespace std
 	{
 		return Picross::cellValueToString(val);
 	}
-}
+} // namespace std

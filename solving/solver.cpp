@@ -6,4 +6,4 @@ namespace Picross
     {
         
     }
-}
+} // namespace Picross

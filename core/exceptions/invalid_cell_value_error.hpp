@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(InvalidCellValueError)
-}
+} // namespace Picross
 
 #endif//CORE__EXCEPTIONS__INVALID_CELL_VALUE_ERROR_HPP

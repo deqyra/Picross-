@@ -56,11 +56,11 @@ namespace Picross
 
     // Gives the string representation of a numeric cell value.
     std::string cellValueToString(cell_t val);
-}
+} // namespace Picross
 
 namespace std
 {
     string to_string(Picross::cell_t val);
-}
+} // namespace std
 
 #endif//CORE__CELL_T

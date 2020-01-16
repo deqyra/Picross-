@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(InvalidXMLGridError)
-}
+} // namespace Picross
 
 #endif//IO__INVALID_XML_GRID_ERROR

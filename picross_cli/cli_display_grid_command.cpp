@@ -31,4 +31,4 @@ namespace Picross
 
         return CLI_COMMAND_SUCCESS;
     }
-}
+} // namespace Picross

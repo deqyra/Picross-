@@ -11,6 +11,6 @@ namespace Picross
 {
     // Handles input parsing and cell modification for several very similar shell commands.
     int handleCellManipForCommand(const std::vector<std::string>& tokens, cell_t value, const std::string& commandName, PicrossShellState& state, CLIStreams& streams);
-}
+} // namespace Picross
 
 #endif//PICROSS_SHELL__CELL_MANIP_FOR_COMMANDS_HPP

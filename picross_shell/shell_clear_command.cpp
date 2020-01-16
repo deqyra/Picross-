@@ -72,5 +72,4 @@ namespace Picross
         s += "`:` will expand to the whole range (continuing the above example, `0:9`).\n";
         return s;
     }
-
-}
+} // namespace Picross

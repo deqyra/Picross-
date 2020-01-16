@@ -107,4 +107,4 @@ namespace Picross
         shell.setExitCommand(std::make_shared<ShellExitCommand>());
         return shell;
     }
-}
+} // namespace Picross

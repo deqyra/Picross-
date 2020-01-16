@@ -16,6 +16,6 @@ namespace Picross
             PicrossCLIState();
             Grid& grid();
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_CLI__CLI_PICROSS_CLI_STATE_HPP

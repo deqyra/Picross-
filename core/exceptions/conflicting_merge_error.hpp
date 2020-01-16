@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(ConflictingMergeError);
-}
+} // namespace Picross
 
 #endif//CORE__EXCEPTIONS__CONFLICTING_MERGE_ERROR_HPP

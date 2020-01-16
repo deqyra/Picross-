@@ -92,6 +92,6 @@ namespace IterTools
             found = std::find(found, container.end(), element);
         }
     }
-}
+} // namespace IterTools
 
 #endif//TOOLS__ITERABLE_TOOLS_HPP

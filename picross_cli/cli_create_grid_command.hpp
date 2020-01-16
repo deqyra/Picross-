@@ -22,6 +22,6 @@ namespace Picross
             // Handle user input for all hints in a certain direction.
             std::vector<std::vector<int>> handleHintSequenceInput(int sequenceLength, int maxHintSpace, const std::string& numberedPrefixNoun, CLIStreams& streams);
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_CLI__CLI_CREATE_GRID_COMMAND_HPP

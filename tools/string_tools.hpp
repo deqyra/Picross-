@@ -7,7 +7,7 @@
 namespace std
 {
     std::string to_string(std::string val);
-}
+} // namespace std
 
 namespace StringTools
 {
@@ -90,6 +90,6 @@ namespace StringTools
     {
         return iterableToString(container.begin(), container.end(), delimiter, opening, closing, elementPrefix, elementSuffix);
     }
-}
+} // namespace StringTools
 
 #endif//TOOLS__STRING_TOOLS_HPP

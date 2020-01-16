@@ -99,6 +99,6 @@ namespace Picross
         std::string value = std::string(res);
         return value;
     }
-}
+} // namespace Picross
 
 #endif//IO__XML_GRID_SERIALIZER_HPP

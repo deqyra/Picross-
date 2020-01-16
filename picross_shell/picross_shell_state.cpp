@@ -19,4 +19,4 @@ namespace Picross
     {
         return _workingGrid;
     }
-}
+} // namespace Picross

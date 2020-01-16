@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(SolvingError)
-}
+} // namespace Picross
 
 #endif//SOLVING__EXCEPTIONS__SOLVING_ERROR_HPP

@@ -78,6 +78,6 @@ namespace Picross
 			// Stringify a single hint and pad it so the final string length matches the requested char width.
 			static std::string stringifyAndPadHint(const int& hint, int charWidth);
 	};
-}
+} // namespace Picross
 
 #endif//IO__TEXT_GRID_FORMATTER_HPP

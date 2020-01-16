@@ -246,4 +246,4 @@ namespace Picross
         }
         return elt;
     }
-}
+} // namespace Picross

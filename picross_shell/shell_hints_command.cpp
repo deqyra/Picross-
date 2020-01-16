@@ -260,4 +260,4 @@ namespace Picross
         s += "If `values` is \"clear\", the hints for the given row or column are reset.\n";
         return s;
     }
-}
+} // namespace Picross

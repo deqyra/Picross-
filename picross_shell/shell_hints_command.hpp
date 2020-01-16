@@ -37,6 +37,6 @@ namespace Picross
             // Handle `hints <row|col> clear` commands
             int clearDirectionSubroutine(const std::vector<std::string>& tokens, PicrossShellState& state, CLIStreams& streams);
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_SHELL__SHELL_HINTS_COMMAND_HPP

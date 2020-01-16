@@ -11,4 +11,4 @@ namespace Catch
         Picross::TextGridFormatter txt = Picross::TextGridFormatter();
         return txt.renderGridWithHints(grid);
     }
-}
+} // namespace Catch

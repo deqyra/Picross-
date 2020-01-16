@@ -105,4 +105,4 @@ namespace tinyxml2
                 return "Unknow XML error";
         }
     }
-}
+} // namespace tinyxml2

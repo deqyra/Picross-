@@ -17,6 +17,6 @@ namespace Picross
             Grid& mainGrid();
             Grid& workingGrid();
     };
-}
+} // namespace Picross
 
 #endif//PICROSS_SHELL__PICROSS_SHELL_STATE_HPP

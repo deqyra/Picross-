@@ -4,4 +4,4 @@
 namespace Picross
 {
     DEFINE_BASIC_EXCEPTION(UnrecognizedCellValueError)
-}
+} // namespace Picross

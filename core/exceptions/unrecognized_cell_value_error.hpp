@@ -6,6 +6,6 @@
 namespace Picross
 {
     DECLARE_BASIC_EXCEPTION(UnrecognizedCellValueError)
-}
+} // namespace Picross
 
 #endif//CORE__EXCEPTIONS__UNRECOGNIZED_CELL_VALUE_ERROR

@@ -7,8 +7,13 @@
 
 namespace Picross
 {
+namespace ArrayAnalysis
+{
     Array2D<bool> matchCellsToHints(std::vector<cell_t> array, std::vector<int> hints)
     {
+        Array2D<bool> belongEntries = Array2D<bool>(array.size(), hints.size(), false);
+
 
     }
+} // namespace ArrayAnalysis
 } // namespace Picross
