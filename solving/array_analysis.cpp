@@ -71,7 +71,7 @@ namespace ArrayAnalysis
                 if ((maxRightIndex - maxLeftIndex) + 1 < hintVal) continue;
 
                 // If control reaches here, all conditions for belonging have passed.
-                // The current cell may belong to the current clue;
+                // The current cell (i-th) may belong to the current clue (n-th).
                 matchEntries.setCell(i, n, true);
             }
         }
@@ -138,6 +138,7 @@ namespace ArrayAnalysis
     {
         int nCells = matchEntries.getHeight();
         std::vector<int> result = std::vector<int>();
+        std::vector<int> hintValues = std::vector<int>();
 
         // For each row (corresponding to a single cell)...
         for (int i = 0; i < nCells; i++)
@@ -154,9 +155,13 @@ namespace ArrayAnalysis
         return result;
     }
 
-    void removeFalsePositiveMatches(Array2D<bool>& matchEntries)
+    void removeFalsePositiveMatches(Array2D<bool>& matchEntries, const std::vector<int>& hints)
     {
         std::vector<int> singleHintCells = findIndicesOfSingleHintCells(matchEntries);
+        for (auto it = singleHintCells.begin(); it != singleHintCells.end(); it++)
+        {
+            int index = *it;
+        }
     }
 } // namespace ArrayAnalysis
 } // namespace Picross
