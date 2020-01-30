@@ -114,6 +114,7 @@ Cleanup & enhancement:
         ✔ Write Array2D<T>
         ✔ Rewrite Picross::Grid to use Array2D<cell_t>
         ☐ Write ArrayAnalysis
+        ☐ Add simple error detection to ArrayAnalysis
         ☐ Find a _better_ way to transparently integrate and wrap Array2D<cell_t> into Grid (?)
         ✔ Use namespaces instead of all-static-methods classes
     Nice:

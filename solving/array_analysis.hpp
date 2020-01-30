@@ -19,9 +19,11 @@ namespace ArrayAnalaysis
     // Given an input array and a cell index, find the boundaries of the group of checked cells containing that index.
     void findGroupBoundaries(const std::vector<cell_t>& array, int index, int& leftBoundIndex, int& rightBoundINdex);
     // Given a 2D array indicating cell-hint matches, returns the list of cell indices that were matched to only one hint.
-    std::vector<int> findIndicesOfSingleHintCells(const Array2D<bool>& matchEntries);
+    Array2D<int> findUniquelyMatchedCellsAndHints(const Array2D<bool>& matchEntries, const std::vector<int> hints);
     // Some processing to detect and remove false positives from match entries.
     void removeFalsePositiveMatches(Array2D<bool>& matchEntries);
+    // Find and return indices of all cells matched to a certain hint.
+    std::vector<int> findCellsMatchedToHint(Array2D<bool>& matchEntries, int hintIndex);
 } // namespace ArrayAnalaysis
 } // namespace Picross
 

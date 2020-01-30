@@ -49,7 +49,7 @@ namespace ArrayAnalysis
                 maxLeftIndex = std::max(maxLeftIndex, leftCross + 1);
                 maxRightIndex = std::min(maxRightIndex, rightCross - 1);
 
-                // Check whether cell i is within allowed coordinates for clue n
+                // Check whether cell i is within allowed coordinates for hint n
                 if ((i < maxLeftIndex) || (i > maxRightIndex)) continue;
 
                 int leftBoundIndex;
@@ -71,7 +71,7 @@ namespace ArrayAnalysis
                 if ((maxRightIndex - maxLeftIndex) + 1 < hintVal) continue;
 
                 // If control reaches here, all conditions for belonging have passed.
-                // The current cell (i-th) may belong to the current clue (n-th).
+                // The current cell (i-th) may belong to the current hint (n-th).
                 matchEntries.setCell(i, n, true);
             }
         }
@@ -134,34 +134,72 @@ namespace ArrayAnalysis
         rightBoundINdex = (itRight - begin) - 1;
     }
 
-    std::vector<int> findIndicesOfSingleHintCells(const Array2D<bool>& matchEntries)
+    Array2D<int> findUniquelyMatchedCellsAndHints(const Array2D<bool>& matchEntries, const std::vector<int> hints)
     {
         int nCells = matchEntries.getHeight();
-        std::vector<int> result = std::vector<int>();
-        std::vector<int> hintValues = std::vector<int>();
+        int nHints = matchEntries.getWidth();
+        std::vector<int> cellIndices = std::vector<int>();
+        std::vector<int> hintIndices = std::vector<int>();
 
         // For each row (corresponding to a single cell)...
         for (int i = 0; i < nCells; i++)
         {
+            int lastHintIndex = -1;
+            int count = 0;
             // Retrieve the belonging entries for that cell.
             std::vector<bool> hintEntries = matchEntries.getRow(i);
-            // Count how many hints it was matched to (value = true).
-            int matchedHints = std::count(hintEntries.begin(), hintEntries.end(), true);
-            
-            // If exactly 1, add the cell index to result.
-            if (matchedHints == 1) result.push_back(i);
+            for (int j = 0; j < nHints; j++)
+            {
+                if (matchEntries.getCell(i, j))
+                {
+                    lastHintIndex = j;
+                    count++;
+                }
+            }
+
+            // If the cell was matched to exactly 1 hint, record both the cell and hint indices.
+            if (count == 1)
+            {
+                cellIndices.push_back(i);
+                hintIndices.push_back(lastHintIndex);
+            }
         }
 
+        // At this point, both cellIndices and hintIndices have the same length.
+        // Store them in an Array2D and return it.
+        Array2D<int> result = Array2D<int>(2, cellIndices.size());
+        result.setRow(0, cellIndices);
+        result.setRow(1, hintIndices);
         return result;
     }
 
     void removeFalsePositiveMatches(Array2D<bool>& matchEntries, const std::vector<int>& hints)
     {
-        std::vector<int> singleHintCells = findIndicesOfSingleHintCells(matchEntries);
-        for (auto it = singleHintCells.begin(); it != singleHintCells.end(); it++)
+        Array2D<int> singleHintCells = findUniquelyMatchedCellsAndHints(matchEntries, hints);
+        
+        int nUniqueCells = singleHintCells.getWidth();
+        for (int i = 0; i < nUniqueCells; i++)
         {
-            int index = *it;
+            int cellIndex = singleHintCells.getCell(0, i);
+            int hintIndex = singleHintCells.getCell(1, i);
+            int hintValue = hints[hintIndex];
+            std::vector<int> other = findCellsMatchedToHint(matchEntries, hintIndex);
         }
+    }
+
+    std::vector<int> findCellsMatchedToHint(Array2D<bool>& matchEntries, int hintIndex)
+    {
+        std::vector<bool> matchesForHint = matchEntries.getCol(hintIndex);
+        std::vector<int> cellIndices;
+        for (int i = 0; i < matchesForHint.size(); i++)
+        {
+            if (matchesForHint[i])
+            {
+                cellIndices.push_back(i);
+            }
+        }
+
+        return cellIndices;
     }
 } // namespace ArrayAnalysis
 } // namespace Picross
