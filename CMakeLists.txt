@@ -1,5 +1,5 @@
 # CMake configuration
-    cmake_minimum_required( VERSION 3.1...3.15 )
+    cmake_minimum_required( VERSION 3.8...3.15 )
 
     if( ${CMAKE_VERSION} VERSION_LESS 3.12 )
         cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} )
@@ -67,7 +67,7 @@
     project( ${PROJECT_TARGET_NAME} VERSION ${PROJECT_VERSION}
                                     DESCRIPTION "A Picross grid solver"
                                     LANGUAGES CXX)
-
+    
 # C++ standard version
     # C++17 requires at least gcc 7 to be compiled
     set( CMAKE_CXX_STANDARD 17 )
